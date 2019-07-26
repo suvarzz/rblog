@@ -1,9 +1,9 @@
 ---
-title: "My website"
-author: "Mark Boltengagen"
-date: 2019-07-26
+title: "Hello R Markdown"
+author: "Frida Gomam"
+date: 2015-07-23T21:13:14-05:00
 categories: ["R"]
-tags: ["Statistics", "Bioinformatics", "Epigenetics"]
+tags: ["R Markdown", "plot", "regression"]
 ---
 
 ```{r setup, include=FALSE}
