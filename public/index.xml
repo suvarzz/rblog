@@ -6,19 +6,10 @@
     <description>Recent content on Statistics and Bioinformatics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://suvar.netlify.com/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Home</title>
-      <link>https://suvar.netlify.com/home/</link>
-      <pubDate>Fri, 26 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://suvar.netlify.com/home/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>About Hugo</title>
