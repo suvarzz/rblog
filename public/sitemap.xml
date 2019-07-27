@@ -3,6 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://suvar.netlify.com/categories/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/dplyr_combine_data/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/categories/r/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/tags/r/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/tags/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/tags/dplyr/</loc>
+    <lastmod>2019-07-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://suvar.netlify.com/tags/basic-elements/</loc>
     <lastmod>2018-04-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -20,12 +67,6 @@
   </url>
   
   <url>
-    <loc>https://suvar.netlify.com/categories/</loc>
-    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://suvar.netlify.com/categories/development/</loc>
     <lastmod>2018-04-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -33,24 +74,6 @@
   
   <url>
     <loc>https://suvar.netlify.com/tags/html/</loc>
-    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/post/</loc>
-    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/</loc>
-    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/tags/</loc>
     <lastmod>2018-04-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

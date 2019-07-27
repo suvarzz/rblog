@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dplyr on Statistics and Bioinformatics</title>
+    <link>https://suvar.netlify.com/tags/dplyr/</link>
+    <description>Recent content in dplyr on Statistics and Bioinformatics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://suvar.netlify.com/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Combining data</title>
+      <link>https://suvar.netlify.com/post/dplyr_combine_data/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://suvar.netlify.com/post/dplyr_combine_data/</guid>
+      <description> Dplyr data combining library(dplyr)  a = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), x2=c(1,2,3)) b = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;D&#39;), x3=c(&#39;T&#39;,&#39;F&#39;,&#39;T&#39;)) a b left_join(a, b, by=&#39;x1&#39;)  </description>
+    </item>
+    
+  </channel>
+</rss>

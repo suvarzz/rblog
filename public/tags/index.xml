@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Statistics and Bioinformatics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://suvar.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R</title>
+      <link>https://suvar.netlify.com/tags/r/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://suvar.netlify.com/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dplyr</title>
+      <link>https://suvar.netlify.com/tags/dplyr/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://suvar.netlify.com/tags/dplyr/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Basic Elements</title>
