@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dplyr on Statistics and Bioinformatics</title>
-    <link>https://suvar.netlify.com/tags/dplyr/</link>
-    <description>Recent content in dplyr on Statistics and Bioinformatics</description>
+    <title>dplyr on A Hugo website</title>
+    <link>/tags/dplyr/</link>
+    <description>Recent content in dplyr on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://suvar.netlify.com/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Combining data</title>
-      <link>https://suvar.netlify.com/post/dplyr_combine_data/</link>
+      <title>Dplyr data combining</title>
+      <link>/2019/07/27/dplyr-data-combining/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://suvar.netlify.com/post/dplyr_combine_data/</guid>
-      <description> Dplyr data combining library(dplyr)  a = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), x2=c(1,2,3)) b = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;D&#39;), x3=c(&#39;T&#39;,&#39;F&#39;,&#39;T&#39;)) a b left_join(a, b, by=&#39;x1&#39;)  </description>
+      <guid>/2019/07/27/dplyr-data-combining/</guid>
+      <description> Dplyr data combining library(dplyr) a = data.frame(x1=c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;), x2=c(1,2,3)) b = data.frame(x1=c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;D&amp;#39;), x3=c(&amp;#39;T&amp;#39;,&amp;#39;F&amp;#39;,&amp;#39;T&amp;#39;)) a ## x1 x2 ## 1 A 1 ## 2 B 2 ## 3 C 3 b ## x1 x3 ## 1 A T ## 2 B F ## 3 D T left_join(a, b, by=&amp;#39;x1&amp;#39;) ## Warning: Column `x1` joining factors with different levels, coercing to ## character vector ## x1 x2 x3 ## 1 A 1 T ## 2 B 2 F ## 3 C 3 &amp;lt;NA&amp;gt;  </description>
     </item>
     
   </channel>

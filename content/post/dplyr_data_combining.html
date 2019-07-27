@@ -1,0 +1,36 @@
+---
+categories:
+- R
+date: "2019-07-27"
+description: Dplyr data combining
+tags:
+- R
+- dplyr
+title: Dplyr data combining
+---
+
+
+
+<div id="dplyr-data-combining" class="section level1">
+<h1>Dplyr data combining</h1>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre class="r"><code>a = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), x2=c(1,2,3))
+b = data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;D&#39;), x3=c(&#39;T&#39;,&#39;F&#39;,&#39;T&#39;))
+a</code></pre>
+<pre><code>##   x1 x2
+## 1  A  1
+## 2  B  2
+## 3  C  3</code></pre>
+<pre class="r"><code>b</code></pre>
+<pre><code>##   x1 x3
+## 1  A  T
+## 2  B  F
+## 3  D  T</code></pre>
+<pre class="r"><code>left_join(a, b, by=&#39;x1&#39;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2   x3
+## 1  A  1    T
+## 2  B  2    F
+## 3  C  3 &lt;NA&gt;</code></pre>
+</div>
