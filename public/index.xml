@@ -12,13 +12,12 @@
     
     
     <item>
-      <title>Basic Statistics</title>
-      <link>https://suvar.netlify.com/post/firstpost/</link>
+      <title>Home</title>
+      <link>https://suvar.netlify.com/home/</link>
       <pubDate>Fri, 26 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://suvar.netlify.com/post/firstpost/</guid>
-      <description> Basic Statistic Here is my first R markdown post
- </description>
+      <guid>https://suvar.netlify.com/home/</guid>
+      <description></description>
     </item>
     
     <item>

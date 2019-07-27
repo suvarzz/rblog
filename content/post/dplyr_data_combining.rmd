@@ -1,0 +1,20 @@
+---
+categories:
+- R
+date: "2019-07-27"
+description: Dplyr data combining
+tags:
+- R
+- dplyr
+title: Dplyr data combining
+---
+
+# Dplyr data combining
+
+```{R}
+a = data.frame(x1=c('A','B','C'), x2=c(1,2,3))
+b = data.frame(x1=c('A','B','D'), x3=c('T','F','T'))
+a
+b
+left_join(a, b, by='x1')
+```
