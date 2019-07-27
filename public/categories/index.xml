@@ -6,9 +6,28 @@
     <description>Recent content in Categories on Statistics and Bioinformatics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Mon, 16 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://suvar.netlify.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Development</title>
+      <link>https://suvar.netlify.com/categories/development/</link>
+      <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://suvar.netlify.com/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://suvar.netlify.com/categories/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://suvar.netlify.com/categories/golang/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
