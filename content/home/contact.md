@@ -15,3 +15,5 @@ autolink = true
 email_form = 1
 +++
 
+You can contact me using this form:
+

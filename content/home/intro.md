@@ -31,10 +31,8 @@ subtitle = ""
  css_class = ""
 +++
 
-Welcome to the **personal demo** of Academic. Other demos available include:
+Welcome to my website!
 
-- [**Project Demo** (Academic's actual site)](https://sourcethemes.com/academic/)
+Here you will find post related to my interests.
 
-**Over 100,000 [Amazing Websites](https://sourcethemes.com/academic/#expo) have Already Been Built with Academic**
-
-**[Join](https://sourcethemes.com/academic/docs/install/) the Most Empowered Hugo Community**
+Mainly about epigenetics, statistics, bioinformatics and programming.
