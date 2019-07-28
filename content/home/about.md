@@ -1,13 +1,11 @@
 +++
 # About widget.
-widget = "about"  # See https://sourcethemes.com/academic/docs/page-builder/
-headless = true  # This file represents a page section.
-active = true  # Activate this widget? true/false
-weight = 20  # Order that this section will appear in.
+widget = "about"
+headless = true
+active = true
+weight = 60
 
-title = "About"
-
-# Choose the user profile to display from `content/authors/`
+title = "Biography"
 
 author = "admin"
 +++

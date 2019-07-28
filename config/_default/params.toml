@@ -2,7 +2,6 @@
 # Documentation: https://sourcethemes.com/academic/
 
 # Color theme.
-#   Choose from `default`, `ocean`, `forest`, `dark`, `apogee`, `1950s`, `coffee`, `rose`, `strawberry`, `mr_robot`.
 color_theme = "default"
 # Enable users to switch between day and night mode?
 day_night = true
@@ -15,14 +14,14 @@ font = "default"
 description = ""
 
 # Default image for social sharing and search engines. Place image in `static/img/` folder and specify image name here.
-sharing_image = ""
+sharing_image = "static/img/bitmap.jpg"
 
 # Twitter username (without @). Used when a vistor shares your site on Twitter.
 twitter = ""
 
 # Diplay a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = ""
+logo = "static/img/bitmap.jpg"
 
 # Enable source code highlighting? true/false
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
@@ -32,7 +31,7 @@ highlight_languages = ["r"]  # Add support for highlighting additional languages
 
 # Enable LaTeX math rendering? true/false
 #   If false, you can enable math on a per page basis as needed.
-math = true
+math = false
 
 # Enable diagram rendering? true/false
 #   If false, you can enable diagrams on a per page basis as needed.
@@ -59,36 +58,15 @@ time_format = "3:04 PM"
 
 # Enter contact details (optional). To hide a field, clear it to "".
 email = "m.boltengagen@gmail.com"
-phone = "+4917694943939"
-address = "Berlin, Germany"
-
-# Office hours: use `<br>` to insert a line break, or set to "" to remove office hours
-#office_hours = """Monday 10:00 to 13:00<br>
-#                Wednesday 09:00 to 10:00"""
-
-# Enter an optional link for booking appointments (e.g. calendly.com).
-#appointment_url = "https://calendly.com"
-
+address = "Berlin"
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  {icon = "twitter", icon_pack = "fab", name = "Twitter", link = "https://twitter.com/Twitter"},
-  {icon = "skype", icon_pack = "fab", name = "Skype", link = "skype:echo123?call"},
- # {icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
- # {icon = "comments", icon_pack = "fas", name = "Discuss on Forum", link = "https://discourse.gohugo.io"},
-  {icon = "telegram", icon_pack = "fab", name = "Telegram", link = "https://telegram.me/@suvarlab"},
+  {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/suvarlab"},
+  {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/@suvarlab"},
   ]
 
 # Display a map.
-# To show your address on a map in the contact widget, you need to enter your latitude, longitude and choose
-# a map provider below.
-# To use Google Maps, set `map = 1` and enter your API key that can be obtained here:
-#   https://developers.google.com/maps/documentation/javascript/get-api-key
-# To use OpenStreetMap tiles, set `map = 2`.
-# To use OpenStreetMap on a high traffic site, set `map = 3` and enter your API key that can be obtained here:
-#   https://www.mapbox.com/studio/account/tokens
-# To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
-#
 # Map provider:
 #   0: No map
 #   1: Google Maps
@@ -96,8 +74,8 @@ contact_links = [
 #   3: OpenStreetMap (Mapbox)
 map = 2
 map_api_key = ""
-latitude = "52.516363"
-longitude = "13.378839"
+latitude = "52.516325"
+longitude = "13.378854"
 zoom = 15
 
 ############################
@@ -159,7 +137,7 @@ sharing = true
   engine = 0
 
   # Which page types are commentable?
-  commentable = {page = true, post = true, docs = true}
+  commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = true}
 
   # Configuration of Disqus.
   [comments.disqus]

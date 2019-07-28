@@ -1,19 +1,19 @@
 ---
 authors:
 - admin
-bio: My research interests include epigenetics and single-cell technologies.
+bio: My research interests include epigenetics and computational biology.
 education:
   courses:
-  - course: PhD in Molecular Biology: Innsbruck Medical University: 2015
-
+  - course: PhD in Molecular Biology
+    institution: Innsbruck Medical University
+    year: 2015
 email: ""
 interests:
 - Epigenetics
-- Computational biology
-
+- Computational Biology
 name: Mark Boltengagen
 organizations:
-- name: Humboldt University
+- name: Oxford Brookes University
   url: ""
 role: Researcher
 social:
@@ -32,4 +32,4 @@ user_groups:
 - Visitors
 ---
 
-Mark Boltengagen is a researcher of epigenetic processes in invertebrates. His research interests include epigenetics, computational biology and single-cell approaches.
+Mark Boltengagen is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.

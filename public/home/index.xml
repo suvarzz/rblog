@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes | Math Biology and Marathon</title>
+    <link>https://suvar.netlify.com/home/</link>
+      <atom:link href="https://suvar.netlify.com/home/index.xml" rel="self" type="application/rss+xml" />
+    <description>Homes</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>https://suvar.netlify.com/img/static/img/logo.svg.png</url>
+      <title>Homes</title>
+      <link>https://suvar.netlify.com/home/</link>
+    </image>
+    
+    <item>
+      <title>Math Biology and Marathon</title>
+      <link>https://suvar.netlify.com/home/02_intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/02_intro/</guid>
+      <description>&lt;p&gt;Welcome to the &lt;strong&gt;personal demo&lt;/strong&gt; of Academic. Other demos available include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Project Demo&lt;/strong&gt; (Academic&amp;rsquo;s actual site)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Over 100,000 &lt;a href=&#34;https://sourcethemes.com/academic/#expo&#34; target=&#34;_blank&#34;&gt;Amazing Websites&lt;/a&gt; have Already Been Built with Academic&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/&#34; target=&#34;_blank&#34;&gt;Join&lt;/a&gt; the Most Empowered Hugo Community&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>https://suvar.netlify.com/home/03_posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/03_posts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interesting Publications</title>
+      <link>https://suvar.netlify.com/home/04_publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/04_publications/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Quickly discover relevant content by &lt;a href=&#34;https://suvar.netlify.com/publication/&#34; target=&#34;_blank&#34;&gt;filtering publications&lt;/a&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Biography</title>
+      <link>https://suvar.netlify.com/home/06_about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/06_about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Popular Topics</title>
+      <link>https://suvar.netlify.com/home/05_tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/05_tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://suvar.netlify.com/home/07_contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/07_contact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://suvar.netlify.com/home/01_index/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/home/01_index/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
