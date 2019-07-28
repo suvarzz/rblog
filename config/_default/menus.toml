@@ -1,7 +1,7 @@
 # Navigation Links
 
 [[main]]
-  name = "Intro"
+  name = "Home"
   url = "#intro"
   weight = 10
 

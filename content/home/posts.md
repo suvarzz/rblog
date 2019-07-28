@@ -1,5 +1,5 @@
 +++
-# A Recent Blog Posts section created with the Pages widget.
+# A Recent Blog Posts.
 # This section displays recent blog posts from `content/post/`.
 
 widget = "pages" 
