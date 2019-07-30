@@ -7,12 +7,17 @@ math: false
 tags: ["Epigenetics", "PcG", "Trx"]
 categories: ["Epigenetics"]
 bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
 # Polycomb group PcG proteins
 **Polycomb group** (PcG) proteins generally maintain gene repression, whereas **Trithorax group** (TrxG) proteins maintain the active gene expression.  
 
-PcG and TrxG proteins were initially isolated in _Drosophila_ as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning.  
+PcG and TrxG proteins were initially isolated in _Drosophila_ as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning during embryonic development.  
+
+In mammals, PRCs are targeted to a subset of CpG islands (CGIs) at the promoters of developmental genes and prevent unscheduled cellular differentiation.  
 
 # PRC1
 PcG proteins form Polycomb repressive complex 1 (PRC1) and Polycomb repressive complex 2 (PRC2). PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.  
@@ -62,6 +67,10 @@ Nuclear architecture by PRC1 complex is disscussed in the recent review [@illing
 We currently lack a clear understanding of the hierarchical recruitment of PcG and TrxG proteins to PRE/TREs, and elucidating these recruitment mechanisms is thus an area of active research.  
 
 3. What determines the active (TRE) versus repressed (PRE) state?
+
+4. What factors d which PRC1 targets will physically interact?
+
+5. What is the impact of stoichiometry of PRC1 subunits during development?
 
 This page summarizes several recent reviews [@geisler_trithorax_2015] to aggregate information in this actively studied area of research.
 

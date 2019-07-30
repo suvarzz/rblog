@@ -1,0 +1,13 @@
+---
+title: "Title"
+author: Mark Boltengagen
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: true
+math: false
+tags: ["R"]
+categories: ["R"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+---

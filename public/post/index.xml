@@ -19,11 +19,25 @@
       <guid>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#polycomb-group-pcg-proteins&#34;&gt;Polycomb group PcG proteins&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prc1&#34;&gt;PRC1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prc2&#34;&gt;PRC2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pho-complex&#34;&gt;Pho-complex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#trxg-complex-components&#34;&gt;TrxG complex components&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pcgtrxg-response-elements&#34;&gt;PcG/TrxG response elements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nuclear-architecture&#34;&gt;Nuclear architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#open-questions&#34;&gt;Open questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#cited-literature&#34;&gt;Cited literature&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;div id=&#34;polycomb-group-pcg-proteins&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Polycomb group PcG proteins&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Polycomb group&lt;/strong&gt; (PcG) proteins generally maintain gene repression, whereas &lt;strong&gt;Trithorax group&lt;/strong&gt; (TrxG) proteins maintain the active gene expression.&lt;/p&gt;
-&lt;p&gt;PcG and TrxG proteins were initially isolated in &lt;em&gt;Drosophila&lt;/em&gt; as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning.&lt;/p&gt;
+&lt;p&gt;PcG and TrxG proteins were initially isolated in &lt;em&gt;Drosophila&lt;/em&gt; as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning during embryonic development.&lt;/p&gt;
+&lt;p&gt;In mammals, PRCs are targeted to a subset of CpG islands (CGIs) at the promoters of developmental genes and prevent unscheduled cellular differentiation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;prc1&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;PRC1&lt;/h1&gt;
@@ -66,6 +80,8 @@
 &lt;li&gt;&lt;p&gt;How PcG and TrxG proteins are recruited to these elements?&lt;br /&gt;
 We currently lack a clear understanding of the hierarchical recruitment of PcG and TrxG proteins to PRE/TREs, and elucidating these recruitment mechanisms is thus an area of active research.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;What determines the active (TRE) versus repressed (PRE) state?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What factors d which PRC1 targets will physically interact?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What is the impact of stoichiometry of PRC1 subunits during development?&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This page summarizes several recent reviews &lt;span class=&#34;citation&#34;&gt;(Geisler and Paro 2015)&lt;/span&gt; to aggregate information in this actively studied area of research.&lt;/p&gt;
 &lt;/div&gt;
