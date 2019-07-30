@@ -1,0 +1,63 @@
+---
+title: "Polycomb and Trithorax group proteins"
+author: "Mark Boltengagen"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: true
+math: false
+tags: ["Epigenetics", "PcG", "Trx"]
+categories: ["Epigenetics"]
+bibliography: [references.bib]
+---
+
+# Polycomb group PcG proteins
+**Polycomb group** (PcG) proteins generally maintain gene repression, whereas **Trithorax group** (TrxG) proteins maintain the active gene expression.  
+
+PcG and TrxG proteins were initially isolated in _Drosophila_ as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning.  
+
+# PRC1
+PcG proteins form Polycomb repressive complex 1 (PRC1) and Polycomb repressive complex 2 (PRC2).  
+
+PRC1 is composed of the core components **Polycomb** (Pc), **Polyhomeotic** (Ph), **Posterior sex combs** (Psc) and **Sex combs extra**.  
+
+Pc can bind the H3K27me3 that facilitate anchoring the complex to chromatin.  
+
+Psc and Sce form a heterodimer, which enhances the E3 ubiquitin ligase activity of the complex. This activity is provided by the Sce subunit of 
+
+PRC1, which monoubiquitylates H2AK118 (K119 in mammals). This ubiquitylation event is thought to restrict RNA polymerase II (Pol II) elongation, but was also shown to recruit PRC2 members.  
+
+Ph subunit is able to bind itself that promotes spreading of PRC1 complex.  
+
+# PRC2
+PRC2 core complex is composed of **Enhancer of zeste** E(z), **Suppressor of zeste 12** Su(z)12, **Extra sex combs** (Esc) and **p55** (Nurf55 or Caf1).  
+
+E(z) methylate H3K27.
+
+Esc bind H3K27me3 and facilitates multimerization of complex.
+
+PRC1-mediated events are also thought to compact chromatin to limit the access of activating factors and the Psc subunit in particular has been linked to this function.
+
+p55 is present in a number of chromatin remodeling complexes and interacts with Su(z)12, H3 and H4. The loss of loss of p55 appears to have little consequence on PRC2 activity.  
+
+# Pho-complex
+The first complex, referred to as Pho repressive complex (PhoRC), is composed of Pho and Sfmbt. A second Pho-containing complex has also been described (Pho-INO80) that, in addition to Pho, contains the INO80 nucleosome remodeling complex (Klymenko, 2006).
+Pho binds DNA in a sequence-specific manner and help to recruit PcG complexes to their response elements (Grossniklaus and Paro, 2014).   
+
+
+# TrxG complex components
+
+TrxG include the COMPASS, COMPASS-like, TAC1 and ASH1 complexes, and SET domain HMTs
+
+# PcG/TrxG response elements
+In Drosophila, the genomic nucleation sites of PcG- and TrxG-mediated epigenetic memory have been referred to as PcG/TrxG response elements (PRE/TREs).  
+
+# Open questions
+1. Although some PRE/TRE-like elements have been identified, it is unclear if all of the properties of the Drosophila PRE/TRE (e.g. epigenetic memory) are maintained in the mammalian system.  
+
+2. How PcG and TrxG proteins are recruited to these elements?  
+We currently lack a clear understanding of the hierarchical recruitment of PcG and TrxG proteins to PRE/TREs, and elucidating these recruitment mechanisms is thus an area of active research.  
+
+3. What determines the active (TRE) versus repressed (PRE) state?
+
+This page summarizes several recent reviews [@geisler_trithorax_2015] to aggregate information in this actively studied area of research.
+
+# Cited literature

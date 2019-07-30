@@ -18,6 +18,8 @@ copyright = ""
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-144846434-1"
 
+disqusShortname = "suvar-1"
+
 ############################
 ## Advanced options below ##
 ############################
