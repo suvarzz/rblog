@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PcG | </title>
+    <link>https://suvar.netlify.com/tags/pcg/</link>
+      <atom:link href="https://suvar.netlify.com/tags/pcg/index.xml" rel="self" type="application/rss+xml" />
+    <description>PcG</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://suvar.netlify.com/img/icon-192.png</url>
+      <title>PcG</title>
+      <link>https://suvar.netlify.com/tags/pcg/</link>
+    </image>
+    
+    <item>
+      <title>Polycomb and Trithorax group proteins</title>
+      <link>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</guid>
+      <description>
+
+
+&lt;div id=&#34;polycomb-group-pcg-proteins&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Polycomb group PcG proteins&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Polycomb group&lt;/strong&gt; (PcG) proteins generally maintain gene repression, whereas &lt;strong&gt;Trithorax group&lt;/strong&gt; (TrxG) proteins maintain the active gene expression.&lt;/p&gt;
+&lt;p&gt;PcG and TrxG proteins were initially isolated in &lt;em&gt;Drosophila&lt;/em&gt; as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prc1&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;PRC1&lt;/h1&gt;
+&lt;p&gt;PcG proteins form Polycomb repressive complex 1 (PRC1) and Polycomb repressive complex 2 (PRC2). PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.&lt;/p&gt;
+&lt;p&gt;PRC1 is composed of the core components &lt;strong&gt;Polycomb&lt;/strong&gt; (Pc), &lt;strong&gt;Polyhomeotic&lt;/strong&gt; (Ph), &lt;strong&gt;Posterior sex combs&lt;/strong&gt; (Psc) and &lt;strong&gt;Sex combs extra&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Pc can bind the H3K27me3 that facilitate anchoring the complex to chromatin.&lt;/p&gt;
+&lt;p&gt;Psc and Sce form a heterodimer, which enhances the E3 ubiquitin ligase activity of the complex. This activity is provided by the Sce subunit of&lt;/p&gt;
+&lt;p&gt;PRC1, which monoubiquitylates H2AK118 (K119 in mammals). This ubiquitylation event is thought to restrict RNA polymerase II (Pol II) elongation, but was also shown to recruit PRC2 members.&lt;/p&gt;
+&lt;p&gt;Ph subunit is able to bind itself that promotes spreading of PRC1 complex.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prc2&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;PRC2&lt;/h1&gt;
+&lt;p&gt;PRC2 core complex is composed of &lt;strong&gt;Enhancer of zeste&lt;/strong&gt; E(z), &lt;strong&gt;Suppressor of zeste 12&lt;/strong&gt; Su(z)12, &lt;strong&gt;Extra sex combs&lt;/strong&gt; (Esc) and &lt;strong&gt;p55&lt;/strong&gt; (Nurf55 or Caf1).&lt;/p&gt;
+&lt;p&gt;E(z) methylate H3K27.&lt;/p&gt;
+&lt;p&gt;Esc bind H3K27me3 and facilitates multimerization of complex.&lt;/p&gt;
+&lt;p&gt;PRC1-mediated events are also thought to compact chromatin to limit the access of activating factors and the Psc subunit in particular has been linked to this function.&lt;/p&gt;
+&lt;p&gt;p55 is present in a number of chromatin remodeling complexes and interacts with Su(z)12, H3 and H4. The loss of loss of p55 appears to have little consequence on PRC2 activity.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pho-complex&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Pho-complex&lt;/h1&gt;
+&lt;p&gt;The first complex, referred to as Pho repressive complex (PhoRC), is composed of Pho and Sfmbt. A second Pho-containing complex has also been described (Pho-INO80) that, in addition to Pho, contains the INO80 nucleosome remodeling complex (Klymenko, 2006). Pho binds DNA in a sequence-specific manner and help to recruit PcG complexes to their response elements (Grossniklaus and Paro, 2014).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;trxg-complex-components&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;TrxG complex components&lt;/h1&gt;
+&lt;p&gt;TrxG include the COMPASS, COMPASS-like, TAC1 and ASH1 complexes, and SET domain HMTs.&lt;/p&gt;
+&lt;p&gt;Common subunits for COMPASS and COMPASS-like complexes include Ash2, Dpy30 (Dpy-30L1), Hcf1 (Hcf), Rbbp5 and Wds.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pcgtrxg-response-elements&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;PcG/TrxG response elements&lt;/h1&gt;
+&lt;p&gt;In Drosophila, the genomic nucleation sites of PcG- and TrxG-mediated epigenetic memory have been referred to as PcG/TrxG response elements (PRE/TREs).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;nuclear-architecture&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Nuclear architecture&lt;/h1&gt;
+&lt;p&gt;Nuclear architecture by PRC1 complex is disscussed in the recent review &lt;span class=&#34;citation&#34;&gt;(Illingworth 2019)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;open-questions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Open questions&lt;/h1&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Although some PRE/TRE-like elements have been identified, it is unclear if all of the properties of the Drosophila PRE/TRE (e.g. epigenetic memory) are maintained in the mammalian system.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;How PcG and TrxG proteins are recruited to these elements?&lt;br /&gt;
+We currently lack a clear understanding of the hierarchical recruitment of PcG and TrxG proteins to PRE/TREs, and elucidating these recruitment mechanisms is thus an area of active research.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What determines the active (TRE) versus repressed (PRE) state?&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This page summarizes several recent reviews &lt;span class=&#34;citation&#34;&gt;(Geisler and Paro 2015)&lt;/span&gt; to aggregate information in this actively studied area of research.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cited-literature&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;Cited literature&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-geisler_trithorax_2015&#34;&gt;
+&lt;p&gt;Geisler, Sarah J., and Renato Paro. 2015. “Trithorax and Polycomb Group-Dependent Regulation: A Tale of Opposing Activities.” &lt;em&gt;Development&lt;/em&gt; 142 (17): 2876–87. doi:&lt;a href=&#34;https://doi.org/10.1242/dev.120030&#34;&gt;10.1242/dev.120030&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-illingworth_chromatin_2019&#34;&gt;
+&lt;p&gt;Illingworth, Robert S. 2019. “Chromatin Folding and Nuclear Architecture: PRC1 Function in 3d.” &lt;em&gt;Current Opinion in Genetics &amp;amp; Development&lt;/em&gt; 55 (July): 82–90. doi:&lt;a href=&#34;https://doi.org/10.1016/j.gde.2019.06.006&#34;&gt;10.1016/j.gde.2019.06.006&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
