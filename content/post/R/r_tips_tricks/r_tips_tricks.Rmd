@@ -1,0 +1,21 @@
+---
+title: "R tips and coding tricks"
+author: "Mark Boltengagen"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R"]
+categories: ["R"]
+---
+
+Here you can find some simple interesting concepts for coding in R.
+
+### How to select all numeric columns in a data frame?
+```{R}
+df = data.frame(x = c(1:3),
+                y = c('A','B','C'),
+                z = c(0.1, 0.2, 0.3))
+df
+# Select all numeric columns
+df[sapply(df,is.numeric)]
+```
