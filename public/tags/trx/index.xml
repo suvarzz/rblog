@@ -5,7 +5,7 @@
     <link>https://suvar.netlify.com/tags/trx/</link>
       <atom:link href="https://suvar.netlify.com/tags/trx/index.xml" rel="self" type="application/rss+xml" />
     <description>Trx</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 31 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://suvar.netlify.com/img/icon-192.png</url>
       <title>Trx</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Polycomb and Trithorax group proteins</title>
       <link>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</guid>
       <description>
 
@@ -25,10 +25,12 @@
 &lt;li&gt;&lt;a href=&#34;#prc1&#34;&gt;PRC1&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#prc2&#34;&gt;PRC2&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pho-complex&#34;&gt;Pho-complex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mechanisms-of-inactivation-of-gene-expression&#34;&gt;Mechanisms of inactivation of gene expression&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#trxg-complex-components&#34;&gt;TrxG complex components&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pcgtrxg-response-elements&#34;&gt;PcG/TrxG response elements&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#nuclear-architecture&#34;&gt;Nuclear architecture&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#open-questions&#34;&gt;Open questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#glossary&#34;&gt;Glossary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#cited-literature&#34;&gt;Cited literature&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -38,10 +40,11 @@
 &lt;p&gt;&lt;strong&gt;Polycomb group&lt;/strong&gt; (PcG) proteins generally maintain gene repression, whereas &lt;strong&gt;Trithorax group&lt;/strong&gt; (TrxG) proteins maintain the active gene expression.&lt;/p&gt;
 &lt;p&gt;PcG and TrxG proteins were initially isolated in &lt;em&gt;Drosophila&lt;/em&gt; as factors involved in maintaining the expression patterns of HOX genes, which encode transcription factors that are important determinants of patterning during embryonic development.&lt;/p&gt;
 &lt;p&gt;In mammals, PRCs are targeted to a subset of CpG islands (CGIs) at the promoters of developmental genes and prevent unscheduled cellular differentiation.&lt;/p&gt;
+&lt;p&gt;In &lt;em&gt;drosophila&lt;/em&gt; PcG proteins form &lt;em&gt;Polycomb repressive complex 1&lt;/em&gt; (&lt;strong&gt;PRC1&lt;/strong&gt;), &lt;em&gt;Polycomb repressive complex 2&lt;/em&gt; (&lt;strong&gt;PRC2&lt;/strong&gt;) and &lt;em&gt;Pleiohomeotic&lt;/em&gt; (Pho) &lt;em&gt;repressive complex&lt;/em&gt; (&lt;strong&gt;PhoRC&lt;/strong&gt;). PRC2 and PRC1 are recruited to chromatin by PhoRC which directly binds &lt;em&gt;polycomb response elements&lt;/em&gt; (&lt;strong&gt;PREs&lt;/strong&gt;).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;prc1&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;PRC1&lt;/h2&gt;
-&lt;p&gt;PcG proteins form Polycomb repressive complex 1 (PRC1) and Polycomb repressive complex 2 (PRC2). PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.&lt;/p&gt;
+&lt;p&gt;PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.&lt;/p&gt;
 &lt;p&gt;PRC1 is composed of the core components &lt;strong&gt;Polycomb&lt;/strong&gt; (Pc), &lt;strong&gt;Polyhomeotic&lt;/strong&gt; (Ph), &lt;strong&gt;Posterior sex combs&lt;/strong&gt; (Psc) and &lt;strong&gt;Sex combs extra&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Pc can bind the H3K27me3 that facilitate anchoring the complex to chromatin.&lt;/p&gt;
 &lt;p&gt;Psc and Sce form a heterodimer, which enhances the E3 ubiquitin ligase activity of the complex. This activity is provided by the Sce subunit of&lt;/p&gt;
@@ -59,6 +62,10 @@
 &lt;div id=&#34;pho-complex&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Pho-complex&lt;/h2&gt;
 &lt;p&gt;The first complex, referred to as Pho repressive complex (PhoRC), is composed of Pho and Sfmbt. A second Pho-containing complex has also been described (Pho-INO80) that, in addition to Pho, contains the INO80 nucleosome remodeling complex (Klymenko, 2006). Pho binds DNA in a sequence-specific manner and help to recruit PcG complexes to their response elements (Grossniklaus and Paro, 2014).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mechanisms-of-inactivation-of-gene-expression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mechanisms of inactivation of gene expression&lt;/h2&gt;
+&lt;p&gt;After the initial recruitment of PRC2 and PRC1 by Pho protein, Enhancer of zeste &lt;strong&gt;E(z)&lt;/strong&gt;, a member of PRC2, methylate H3 histone (H3K27me3) at both PREs and along the gene body. This modification is then recognized by Pc, a member of PRC1, which, in turn, ubiquitylates H2A119 via Sex combs extra (&lt;strong&gt;Sce&lt;/strong&gt;), another PRC1 member, and stabilizes PRC2. The accumulation of PRC1 and PRC2 within gene bodies results in the compaction of local nucleosomes and the further silencing of the inactive genes.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;trxg-complex-components&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;TrxG complex components&lt;/h2&gt;
@@ -84,6 +91,18 @@ We currently lack a clear understanding of the hierarchical recruitment of PcG a
 &lt;li&gt;&lt;p&gt;What is the impact of stoichiometry of PRC1 subunits during development?&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This page summarizes several recent reviews &lt;span class=&#34;citation&#34;&gt;(Geisler and Paro 2015)&lt;/span&gt; to aggregate information in this actively studied area of research.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;glossary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Glossary&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;PRC1&lt;/strong&gt; - Polycomb Repressive Complex 1&lt;br /&gt;
+&lt;strong&gt;PRC2&lt;/strong&gt; - Polycomb Repressive Complex 2&lt;br /&gt;
+&lt;strong&gt;Pho&lt;/strong&gt; - Pleiohomeotic&lt;br /&gt;
+&lt;strong&gt;PhoRC&lt;/strong&gt; - Pleiohomeotic Repressive Complex&lt;br /&gt;
+&lt;strong&gt;PREs&lt;/strong&gt; - Polycomb Response Elements&lt;br /&gt;
+&lt;strong&gt;Psc&lt;/strong&gt; - Posterior Sex Combs&lt;br /&gt;
+&lt;strong&gt;E(z)&lt;/strong&gt; - Enhancer of zeste&lt;br /&gt;
+&lt;strong&gt;Su(z)12&lt;/strong&gt; - Suppressor of zeste 12&lt;br /&gt;
+&lt;strong&gt;Esc&lt;/strong&gt; - Extra sex combs&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;cited-literature&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;Cited literature&lt;/h2&gt;

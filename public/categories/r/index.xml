@@ -5,7 +5,7 @@
     <link>https://suvar.netlify.com/categories/r/</link>
       <atom:link href="https://suvar.netlify.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 31 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://suvar.netlify.com/img/icon-192.png</url>
       <title>R</title>
@@ -15,7 +15,7 @@
     <item>
       <title>R tips and coding tricks</title>
       <link>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</guid>
       <description>
 
@@ -37,7 +37,6 @@ df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
 ## 1 1 0.1
 ## 2 2 0.2
 ## 3 3 0.3&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;{{ template “_internal/disqus.html&amp;quot; . }}&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -45,7 +44,7 @@ df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Simple Markov process</title>
       <link>https://suvar.netlify.com/post/r/simple_markov_process/simple_markov_process/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/post/r/simple_markov_process/simple_markov_process/</guid>
       <description>
 

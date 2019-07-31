@@ -19,5 +19,3 @@ df
 # Select all numeric columns
 df[sapply(df,is.numeric)]
 ```
-
-{{ template "_internal/disqus.html" . }}

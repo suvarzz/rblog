@@ -19,8 +19,10 @@ PcG and TrxG proteins were initially isolated in _Drosophila_ as factors involve
 
 In mammals, PRCs are targeted to a subset of CpG islands (CGIs) at the promoters of developmental genes and prevent unscheduled cellular differentiation.  
 
+In _drosophila_ PcG proteins form _Polycomb repressive complex 1_ (**PRC1**), _Polycomb repressive complex 2_ (**PRC2**) and _Pleiohomeotic_ (Pho) _repressive complex_ (**PhoRC**). PRC2 and PRC1 are recruited to chromatin by PhoRC which directly binds _polycomb response elements_ (**PREs**).  
+
 ## PRC1
-PcG proteins form Polycomb repressive complex 1 (PRC1) and Polycomb repressive complex 2 (PRC2). PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.  
+PRC1 ubiquitinylates histone H2AK119 (H2AK118 in Drosophila) and alter chromatin structure whereas PRC2 trimethylates histone H3K27.  
 
 PRC1 is composed of the core components **Polycomb** (Pc), **Polyhomeotic** (Ph), **Posterior sex combs** (Psc) and **Sex combs extra**.  
 
@@ -47,6 +49,8 @@ p55 is present in a number of chromatin remodeling complexes and interacts with 
 The first complex, referred to as Pho repressive complex (PhoRC), is composed of Pho and Sfmbt. A second Pho-containing complex has also been described (Pho-INO80) that, in addition to Pho, contains the INO80 nucleosome remodeling complex (Klymenko, 2006).
 Pho binds DNA in a sequence-specific manner and help to recruit PcG complexes to their response elements (Grossniklaus and Paro, 2014).   
 
+## Mechanisms of inactivation of gene expression
+After the initial recruitment of PRC2 and PRC1 by Pho protein, Enhancer of zeste **E(z)**, a member of PRC2, methylate H3 histone (H3K27me3) at both PREs and along the gene body. This modification is then recognized by Pc, a member of PRC1, which, in turn, ubiquitylates H2A119 via Sex combs extra (**Sce**), another PRC1 member, and stabilizes PRC2. The accumulation of PRC1 and PRC2 within gene bodies results in the compaction of local nucleosomes and the further silencing of the inactive genes.
 
 ## TrxG complex components
 
@@ -73,5 +77,16 @@ We currently lack a clear understanding of the hierarchical recruitment of PcG a
 5. What is the impact of stoichiometry of PRC1 subunits during development?
 
 This page summarizes several recent reviews [@geisler_trithorax_2015] to aggregate information in this actively studied area of research.
+
+## Glossary
+**PRC1** - Polycomb Repressive Complex 1  
+**PRC2** - Polycomb Repressive Complex 2  
+**Pho** - Pleiohomeotic  
+**PhoRC** - Pleiohomeotic Repressive Complex  
+**PREs** - Polycomb Response Elements  
+**Psc** - Posterior Sex Combs  
+**E(z)** - Enhancer of zeste  
+**Su(z)12** - Suppressor of zeste 12  
+**Esc** - Extra sex combs
 
 ## Cited literature
