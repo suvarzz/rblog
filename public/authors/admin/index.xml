@@ -2,33 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mark Goldberg</title>
-    <link>/authors/admin/</link>
-      <atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/authors/admin/</link>
+      <atom:link href="https://suvar.netlify.com/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Mark Goldberg</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Mark Goldberg</title>
-      <link>/authors/admin/</link>
+      <link>https://suvar.netlify.com/authors/admin/</link>
     </image>
     
     <item>
-      <title>Name of the paper</title>
-      <link>/publication/template_paper/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/template_paper/</guid>
-      <description>
-
-
-&lt;p&gt;Summary of the paper and comments&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title></title>
-      <link>/authors/admin/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/admin/</guid>
+      <link>https://suvar.netlify.com/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/authors/admin/</guid>
       <description>&lt;p&gt;Mark Goldberg is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.&lt;/p&gt;
 </description>
     </item>

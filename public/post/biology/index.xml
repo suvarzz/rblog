@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Biology | Mark Goldberg</title>
-    <link>/post/biology/</link>
-      <atom:link href="/post/biology/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/post/biology/</link>
+      <atom:link href="https://suvar.netlify.com/post/biology/index.xml" rel="self" type="application/rss+xml" />
     <description>Biology</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Biology</title>
-      <link>/post/biology/</link>
+      <link>https://suvar.netlify.com/post/biology/</link>
     </image>
     
     <item>
       <title>Polycomb and Trithorax group proteins</title>
-      <link>/post/biology/pcg_trx/pcg_trx/</link>
+      <link>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/biology/pcg_trx/pcg_trx/</guid>
+      <guid>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
