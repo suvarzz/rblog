@@ -24,13 +24,5 @@
 </description>
     </item>
     
-    <item>
-      <title>Hello</title>
-      <link>/post/hello/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/hello/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

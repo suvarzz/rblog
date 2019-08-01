@@ -460,14 +460,6 @@ boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Hello</title>
-      <link>/post/hello/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/hello/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Hopfield Neural Network</title>
       <link>/post/statistics/hopfield_network/hopfield_network/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
