@@ -2,8 +2,8 @@
 title: "Cross-validation and bootstrap"
 author: "Mark Goldberg"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-draft: false
-math: false
+draft: true
+math: true
 tags: ["R", "Statistics", "Cross-validation", "Bootstrap"]
 categories: ["Statistics"]
 #bibliography: [bib.bib]

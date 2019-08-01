@@ -2,7 +2,7 @@
 title: "Spline model"
 author: "Mark Goldberg"
 date: '2019-08-01'
-draft: true
+draft: false
 math: true
 tags: ["R", "Splines", "Regression"]
 categories: ["R", "Statistics"]
@@ -146,7 +146,7 @@ lines(x = tbl$df, y = tbl$MSE.train, col = grey(0.3), lwd = 2)
 abline(h = res.sd, lty = 2, col = grey(0.4), lwd = 2)
 
 # add legend
-legend(&#39;topright&#39;, legend = c(&#39;обучающая&#39;, &#39;тестовая&#39;),
+legend(&#39;topright&#39;, legend = c(&#39;train&#39;, &#39;test&#39;),
        pch = c(NA, 16), 
        col = c(grey(0.2), &#39;red&#39;),  
        lty = c(1, 1), lwd = c(2, 2), cex = 1.2)

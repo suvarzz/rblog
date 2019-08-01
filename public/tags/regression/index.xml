@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regression | Mark Goldberg</title>
+    <link>https://suvar.netlify.com/tags/regression/</link>
+      <atom:link href="https://suvar.netlify.com/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    <description>Regression</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://suvar.netlify.com/img/logo.png</url>
+      <title>Regression</title>
+      <link>https://suvar.netlify.com/tags/regression/</link>
+    </image>
+    
+    <item>
+      <title>Spline model</title>
+      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#generate-dataset-from-a-given-function&#34;&gt;Generate dataset from a given function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#split-data-for-train-and-test&#34;&gt;Split data for train and test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagram-of-the-given-function-and-generated-datasets&#34;&gt;Diagram of the given function and generated datasets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-a-model-using-splines&#34;&gt;Build a model using splines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagram-of-mse-for-train-and-test-data&#34;&gt;Diagram of MSE for train and test data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-optimal-model-and-plot-for-the-model&#34;&gt;Build optimal model and plot for the model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliograpy&#34;&gt;Bibliograpy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this example we will generate data from a given function and then build a model using splines and estimate quality of the model.&lt;/p&gt;
+&lt;div id=&#34;generate-dataset-from-a-given-function&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Generate dataset from a given function&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# parameters to generate a dataset
+n.all &amp;lt;- 100             # number of observations
+train.percent &amp;lt;- 0.85    # portion of the data for training
+res.sd &amp;lt;- 1              # standard deviation of noise
+x.min &amp;lt;- 5               # min limit of the data
+x.max &amp;lt;- 105             # max limit of the data
+
+# generate x
+set.seed(1)       # to get reproducible results by randomizer
+x &amp;lt;- runif(x.min, x.max, n = n.all)
+
+# noise from normal destibution
+set.seed(1)
+res &amp;lt;- rnorm(mean = 0, sd = res.sd, n = n.all)
+
+# generate y using a given function
+y.func &amp;lt;- function(x) {4 - 2e-02*x + 5.5e-03*x^2 - 4.9e-05*x^3}
+
+# add noise
+y &amp;lt;- y.func(x) + res&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;split-data-for-train-and-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Split data for train and test&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split dataset for training and test
+set.seed(1)
+# generate vector of chosen x for train data
+inTrain &amp;lt;- sample(seq_along(x), size = train.percent*n.all)
+
+# train data set
+x.train &amp;lt;- x[inTrain]
+y.train &amp;lt;- y[inTrain]
+
+# test data set
+x.test &amp;lt;- x[-inTrain]
+y.test &amp;lt;- y[-inTrain]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagram-of-the-given-function-and-generated-datasets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Diagram of the given function and generated datasets&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# lines of generated data for plot
+x.line &amp;lt;- seq(x.min, x.max, length = n.all)
+y.line &amp;lt;- y.func(x.line)
+
+# PLOT
+# generate plot by train data
+par(mar = c(4, 4, 1, 1)) # reduce margins (optional)
+plot(x.train, y.train,
+     main = &amp;#39;Generated data and original function&amp;#39;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &amp;#39;X&amp;#39;, ylab = &amp;#39;Y&amp;#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add points of test data
+points(x.test, y.test, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;, pch = 21)
+
+# add the given function
+lines(x.line, y.line, lwd = 2, lty = 2)
+
+# add legend
+legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;, &amp;#39;f(X)&amp;#39;),
+       pch = c(16, 16, NA), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
+       lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build a model using splines&lt;/h2&gt;
+&lt;p&gt;We will compair sevaral models with degree of freedoms (df) from 2 to 40, where 2 correspond to a linear model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;max.df &amp;lt;- 40                       # max degree of freedom (df)
+# 
+tbl &amp;lt;- data.frame(df = 2:max.df)   # data frame for writing errors
+tbl$MSE.train &amp;lt;- 0                 # column 1: errors of train data
+tbl$MSE.test &amp;lt;- 0                  # сcolumn 2: errors of test data
+
+# generate models using for cycle
+for (i in 2:max.df) {
+    mod &amp;lt;- smooth.spline(x = x.train, y = y.train, df = i)
+    
+    # predicted values for train and test data using built model
+    y.model.train &amp;lt;- predict(mod, data.frame(x = x.train))$y[, 1]
+    y.model.test &amp;lt;- predict(mod, data.frame(x = x.test))$y[, 1]
+    
+    # MSE errors for train and test data
+    MSE &amp;lt;- c(sum((y.train - y.model.train)^2) / length(x.train),
+             sum((y.test - y.model.test)^2) / length(x.test))
+    
+    # write errors to the previously created data frame
+    tbl[tbl$df == i, c(&amp;#39;MSE.train&amp;#39;, &amp;#39;MSE.test&amp;#39;)] &amp;lt;- MSE
+}
+
+# view first rows of the table
+head(tbl, 4)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   df MSE.train MSE.test
+## 1  2 3.7188566 2.885166
+## 2  3 1.4463925 1.635813
+## 3  4 0.8938817 1.239533
+## 4  5 0.7668250 1.038918&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagram-of-mse-for-train-and-test-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Diagram of MSE for train and test data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot MSE from our table
+plot(x = tbl$df, y = tbl$MSE.test,
+     main = &amp;quot;Changes of MSE from degrees of freedom&amp;quot;,
+     type = &amp;#39;l&amp;#39;, col = &amp;#39;red&amp;#39;, lwd = 2,
+     xlab = &amp;#39;spline degree of freedom&amp;#39;, ylab = &amp;#39;MSE&amp;#39;,
+     ylim = c(min(tbl$MSE.train, tbl$MSE.test), 
+              max(tbl$MSE.train, tbl$MSE.test)),
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add 
+points(x = tbl$df, y = tbl$MSE.test,
+       pch = 21, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;)
+lines(x = tbl$df, y = tbl$MSE.train, col = grey(0.3), lwd = 2)
+# minimal MSE
+abline(h = res.sd, lty = 2, col = grey(0.4), lwd = 2)
+
+# add legend
+legend(&amp;#39;topright&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;),
+       pch = c(NA, 16), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;),  
+       lty = c(1, 1), lwd = c(2, 2), cex = 1.2)
+
+# df of minimal MSE for test data
+min.MSE.test &amp;lt;- min(tbl$MSE.test)
+df.min.MSE.test &amp;lt;- tbl[tbl$MSE.test == min.MSE.test, &amp;#39;df&amp;#39;]
+
+# optimal df for precise model and maximal simplicity
+df.my.MSE.test &amp;lt;- 6
+my.MSE.test &amp;lt;- tbl[tbl$df == df.my.MSE.test, &amp;#39;MSE.test&amp;#39;]
+
+# show the optimal solution
+abline(v = df.my.MSE.test, 
+       lty = 2, lwd = 2)
+points(x = df.my.MSE.test, y = my.MSE.test, 
+       pch = 15, col = &amp;#39;blue&amp;#39;)
+mtext(df.my.MSE.test, 
+      side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mod.MSE.test &amp;lt;- smooth.spline(x = x.train, y = y.train, df = df.my.MSE.test)
+
+# predict data for 250 x&amp;#39;s to get smoothed curve
+x.model.plot &amp;lt;- seq(x.min, x.max, length = 250)
+y.model.plot &amp;lt;- predict(mod.MSE.test, data.frame(x = x.model.plot))$y[, 1]
+
+# plot train data
+par(mar = c(4, 4, 1, 1))
+plot(x.train, y.train,
+     main = &amp;quot;Initial data and the best fit model&amp;quot;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &amp;#39;X&amp;#39;, ylab = &amp;#39;Y&amp;#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add test data
+points(x.test, y.test, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;, pch = 21)
+
+# function
+lines(x.line, y.line,lwd = 2, lty = 2)
+
+# add model
+lines(x.model.plot, y.model.plot, lwd = 2, col = &amp;#39;blue&amp;#39;)
+
+# legend
+legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;, &amp;#39;f(X)&amp;#39;, &amp;#39;model&amp;#39;),
+       pch = c(16, 16, NA, NA), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
+       lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliograpy&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://faculty.marshall.usc.edu/gareth-james/&#34;&gt;An Introduction to Statistical Learning by Gareth James&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

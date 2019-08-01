@@ -2,10 +2,10 @@
 title: "Cross-validation and bootstrap"
 author: "Mark Goldberg"
 date: '2019-08-01'
-draft: false
-math: false
-tags: ["Epigenetics", "PcG", "Trx"]
-categories: ["Epigenetics"]
+draft: true
+math: true
+tags: ["R", "Statistics", "Cross-validation", "Bootstrap"]
+categories: ["Statistics"]
 #bibliography: [bib.bib]
 output:
   blogdown::html_page:
@@ -326,7 +326,6 @@ boot(Auto, boot.fn, 1000)</code></pre>
 ## t1* 39.9358610  0.0269563085 0.859851825
 ## t2* -0.1578447 -0.0002906457 0.007402954</code></pre>
 <p>В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.</p>
-<p><strong>2</strong> Оценить стандартные ошибки параметров модели регрессии методом бутстрепа. Сравнить с оценками стандартных ошибок параметров по МНК.</p>
 <p><em>Источники</em></p>
 <ol style="list-style-type: decimal">
 <li><em>James G., Witten D., Hastie T. and Tibshirani R.</em> An Introduction to Statistical Learning with Applications in R. URL: <a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf</a></li>

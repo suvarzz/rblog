@@ -13,336 +13,6 @@
     </image>
     
     <item>
-      <title>Cross-validation and bootstrap</title>
-      <link>https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#cross-validation&#34;&gt;Cross validation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#validation-sample&#34;&gt;Validation sample&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#-----loocv&#34;&gt;Перекрёстная проверка по отдельным наблюдениям (LOOCV)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#k---&#34;&gt;k-кратная перекрёстная проверка&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;Бутстреп&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#---&#34;&gt;Точность оценки статистичестического параметра&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#---&#34;&gt;Точность оценки параметра регрессии&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;From the following examples we will learn: 1. 2. 3. Model: linear regression, kNN Dataset: Auto {ISLR}&lt;/p&gt;
-&lt;p&gt;В практических примерах ниже показано:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;как оценить точность модели методом перекрёстной выборки;&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;методом проверочной выборки;&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;методом перекрёстной проверки по отдельным наблюдениям (LOOCV);&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;методом k-кратной перекрёстной проверки;&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;как применять бутстреп для оценки точности статистического параметра и оценок параметров модели&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;Модели&lt;/em&gt;: линейная регрессия, kNN.&lt;br /&gt;
-&lt;em&gt;Данные&lt;/em&gt;: &lt;code&gt;Auto {ISLR}&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)        # datasets Auto
-library(&amp;#39;GGally&amp;#39;)      # matrix diagrams&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;boot&amp;#39;)            # cross-validation&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data exploration
-head(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   mpg cylinders displacement horsepower weight acceleration year origin
-## 1  18         8          307        130   3504         12.0   70      1
-## 2  15         8          350        165   3693         11.5   70      1
-## 3  18         8          318        150   3436         11.0   70      1
-## 4  16         8          304        150   3433         12.0   70      1
-## 5  17         8          302        140   3449         10.5   70      1
-## 6  15         8          429        198   4341         10.0   70      1
-##                        name
-## 1 chevrolet chevelle malibu
-## 2         buick skylark 320
-## 3        plymouth satellite
-## 4             amc rebel sst
-## 5               ford torino
-## 6          ford galaxie 500&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    392 obs. of  9 variables:
-##  $ mpg         : num  18 15 18 16 17 15 14 14 14 15 ...
-##  $ cylinders   : num  8 8 8 8 8 8 8 8 8 8 ...
-##  $ displacement: num  307 350 318 304 302 429 454 440 455 390 ...
-##  $ horsepower  : num  130 165 150 150 140 198 220 215 225 190 ...
-##  $ weight      : num  3504 3693 3436 3433 3449 ...
-##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
-##  $ year        : num  70 70 70 70 70 70 70 70 70 70 ...
-##  $ origin      : num  1 1 1 1 1 1 1 1 1 1 ...
-##  $ name        : Factor w/ 304 levels &amp;quot;amc ambassador brougham&amp;quot;,..: 49 36 231 14 161 141 54 223 241 2 ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can check correlation of various parameters using &lt;code&gt;ggpairs(Auto[, -9])&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;We will check the correlation between mpg ~ horsepower&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Auto$horsepower, Auto$mpg,
-     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;,
-     pch = 21,
-     col = rgb(0, 0, 1, alpha = 0.4),
-     bg = rgb(0, 0, 1, alpha = 0.4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;div id=&#34;cross-validation&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Cross validation&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;validation-sample&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Validation sample&lt;/h2&gt;
-&lt;p&gt;Split data to train and test sets and build model using train data.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- nrow(Auto)                  # number of observation
-train.percent &amp;lt;- 0.5             # portion of train data
-attach(Auto)                     # to call mpg &amp;amp; horsepower instead of Auto$mpg &amp;amp; Auto$horsepower&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
-## 
-##     mpg&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data into train and test
-set.seed(1)
-inTrain &amp;lt;- sample(n, n * train.percent)
-
-# plot train data
-plot(horsepower[inTrain], mpg[inTrain],
-     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
-     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
-# add test data
-points(horsepower[-inTrain], mpg[-inTrain],
-       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
-legend(&amp;#39;topright&amp;#39;, pch = c(16, 16), col = c(&amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;), legend = c(&amp;#39;test&amp;#39;, &amp;#39;train&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Build models for validataion of accuracy:&lt;br /&gt;
-&lt;span class=&#34;math display&#34;&gt;\[
-\hat{mpg} = f(horsepower)
-\]&lt;/span&gt; &lt;strong&gt;Linear model&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fit linear model for train data
-fit.lm.1 &amp;lt;- lm(mpg ~ horsepower, subset = inTrain)
-
-# MSE of test data
-mean((mpg[-inTrain] - predict(fit.lm.1, Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 26.14142&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Строим &lt;strong&gt;квадратичную модель&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# присоединить таблицу с данными: названия стоблцов будут доступны напрямую
-attach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
-## 
-##     mpg&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
-fit.lm.2 &amp;lt;- lm(mpg ~ poly(horsepower, 2), 
-               subset = inTrain)
-# считаем MSE на тестовой выборке
-mean((mpg[-inTrain] - predict(fit.lm.2,
-                              Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 19.82259&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# отсоединить таблицу с данными
-detach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Строим &lt;strong&gt;кубическую модель&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# присоединить таблицу с данными: названия стоблцов будут доступны напрямую
-attach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
-## 
-##     mpg&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
-fit.lm.3 &amp;lt;- lm(mpg ~ poly(horsepower, 3), 
-               subset = inTrain)
-# считаем MSE на тестовой выборке
-mean((mpg[-inTrain] - predict(fit.lm.3,
-                              Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 19.78252&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# отсоединить таблицу с данными
-detach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;-----loocv&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Перекрёстная проверка по отдельным наблюдениям (LOOCV)&lt;/h3&gt;
-&lt;p&gt;Это самый затратный в вычислительном плане метод, но и самый надёжный в плане оценки ошибки вне выборки. Попробуем применить его к линейной модели.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
-fit.glm &amp;lt;- glm(mpg ~ horsepower, data = Auto)
-# считаем LOOCV-ошибку
-cv.err &amp;lt;- cv.glm(Auto, fit.glm)
-# результат: первое число -- по формуле LOOCV-ошибки,
-#  второе -- с поправкой на смещение
-cv.err$delta[1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 24.23151&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Теперь оценим точность полиномиальных моделей, меняя степень, в которой стоит регрессор.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# вектор с LOOCV-ошибками
-cv.err.loocv &amp;lt;- rep(0, 5)
-names(cv.err.loocv) &amp;lt;- 1:5
-# цикл по степеням полиномов
-for (i in 1:5){
-  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.loocv[i] &amp;lt;- cv.glm(Auto, fit.glm)$delta[1]
-}
-# результат
-cv.err.loocv&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
-## 24.23151 19.24821 19.33498 19.42443 19.03321&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;k---&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;k-кратная перекрёстная проверка&lt;/h3&gt;
-&lt;p&gt;K-кратная кросс-валидация – компромисс между методом проверочной выборки и LOOCV. Оценка ошибки вне выборки ближе к правде, по сравнению с проверочной выборкой, а объём вычислений меньше, чем при LOOCV. Проведём 10-кратную кросс-валидацию моделей разных степеней.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# оценим точность полиномиальных моделей, меняя степень
-# вектор с ошибками по 10-кратной кросс-валидации
-cv.err.k.fold &amp;lt;- rep(0, 5)
-names(cv.err.k.fold) &amp;lt;- 1:5
-# цикл по степеням полиномов
-for (i in 1:5){
-  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.k.fold[i] &amp;lt;- cv.glm(Auto, fit.glm,
-                             K = 10)$delta[1]
-}
-# результат
-cv.err.k.fold&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
-## 24.19329 19.29416 19.49610 19.61828 19.15289&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Для сравнения напомним результаты расчёта MSE методом проверочной выборки:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;err.test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        1        2        3 
-## 26.14142 19.82259 19.78252&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Опираясь на результаты расчётов с кросс-валидацией, можно заключить, что на самом деле ошибка вне выборки у линейной модели выше, чем показывала MSE на тестовой выборке. А модели со степенями 2 и 3 на самом деле точнее, чем показывала MSE без перекрёстной проверки.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Бутстреп&lt;/h2&gt;
-&lt;div id=&#34;---&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Точность оценки статистичестического параметра&lt;/h3&gt;
-&lt;p&gt;Пример с инвестиционным портфелем из двух активов: &lt;code&gt;Portfolio {ISLR}&lt;/code&gt;. В наборе данных две переменных: * &lt;code&gt;X&lt;/code&gt; – доход от актива X,&lt;br /&gt;
-* &lt;code&gt;Y&lt;/code&gt; – доход от актива Y.&lt;br /&gt;
-Портфель инвестиций состоит из активов &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; и &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, долю актива &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; обозначим как &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. Минимум дасперсии доходности:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\mathrm{Var}(\alpha X + (1 - \alpha) Y) \rightarrow \mathrm{min}
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;– достигается при значении параметра:&lt;br /&gt;
-&lt;span class=&#34;math display&#34;&gt;\[
-\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
-\]&lt;/span&gt; Данных для оценки &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_X^2}\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_Y^2}\)&lt;/span&gt; и &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_{XY}}\)&lt;/span&gt; немного (100 наблюдений), поэтому применим бутстреп.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(Portfolio)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##            X          Y
-## 1 -0.8952509 -0.2349235
-## 2 -1.5624543 -0.8851760
-## 3 -0.4170899  0.2718880
-## 4  1.0443557 -0.7341975
-## 5 -0.3155684  0.8419834
-## 6 -1.7371238 -2.0371910&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Portfolio)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    100 obs. of  2 variables:
-##  $ X: num  -0.895 -1.562 -0.417 1.044 -0.316 ...
-##  $ Y: num  -0.235 -0.885 0.272 -0.734 0.842 ...&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# функция для вычисления искомого параметра
-alpha.fn &amp;lt;- function(data, index){
-  X = data$X[index]
-  Y = data$Y[index]
-  (var(Y) - cov(X, Y)) / (var(X) + var(Y) - 2*cov(X, Y))
-}
-# рассчитать alpha по всем 100 наблюдениям
-alpha.fn(Portfolio, 1:100)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.5758321&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# создать бутстреп-выборку и повторно вычислить alpha
-set.seed(1)
-alpha.fn(Portfolio, sample(100, 100, replace = T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.5963833&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# теперь -- многократное повторение предыдущей операции
-boot(Portfolio, alpha.fn, R = 1000)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Portfolio, statistic = alpha.fn, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##      original        bias    std. error
-## t1* 0.5758321 -7.315422e-05  0.08861826&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Бутстреп повторяет расчёт параметра много раз, делая повторные выборки из наших 100 наблюдений. В итоге этим методом можно вычислить стандартную ошибку параметра, не опираясь на допущения о законе распределении параметра. В нашем случае &lt;span class=&#34;math inline&#34;&gt;\(\alpha = 0.576\)&lt;/span&gt; со стандартной ошибкой &lt;span class=&#34;math inline&#34;&gt;\(s_{\hat{\alpha}} = 0.089\)&lt;/span&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;---&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Точность оценки параметра регрессии&lt;/h3&gt;
-&lt;p&gt;При построении модели регрессии проблемы в остатках приводят к неверной оценке ошибок параметров. Обойти эту проблему можно, применив для расчёта этих ошибок бутстреп.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Оценивание точности линейной регрессионной модели ----------------------------
-# оценить стандартные ошибки параметров модели 
-#  mpg = beta_0 + beta_1 * horsepower с помощью бутстрепа,
-#  сравнить с оценками ошибок по МНК
-# функция для расчёта коэффициентов ПЛР по выборке из данных
-boot.fn &amp;lt;- function(data, index){
-  coef(lm(mpg ~ horsepower, data = data, subset = index))
-}
-boot.fn(Auto, 1:n)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
-##  39.9358610  -0.1578447&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# пример применения функции к бутстреп-выборке
-set.seed(1)
-boot.fn(Auto, sample(n, n, replace = T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
-##  38.7387134  -0.1481952&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# применяем функцию boot для вычисления стандартных ошибок параметров
-#  (1000 выборок с повторами)
-boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Auto, statistic = boot.fn, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##       original        bias    std. error
-## t1* 39.9358610  0.0296667441 0.860440524
-## t2* -0.1578447 -0.0003113047 0.007411218&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# сравним с МНК
-attach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
-## 
-##     mpg&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(mpg ~ horsepower))$coef&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##               Estimate  Std. Error   t value      Pr(&amp;gt;|t|)
-## (Intercept) 39.9358610 0.717498656  55.65984 1.220362e-187
-## horsepower  -0.1578447 0.006445501 -24.48914  7.031989e-81&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;detach(Auto)
-# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
-# вычислим оценки параметров квадратичной модели регрессии
-boot.fn.2 &amp;lt;- function(data, index){
-  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
-}
-# применим функцию к 1000 бутсреп-выборкам
-set.seed(1)
-boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Auto, statistic = boot.fn, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##       original        bias    std. error
-## t1* 39.9358610  0.0269563085 0.859851825
-## t2* -0.1578447 -0.0002906457 0.007402954&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt; Оценить стандартные ошибки параметров модели регрессии методом бутстрепа. Сравнить с оценками стандартных ошибок параметров по МНК.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Источники&lt;/em&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;em&gt;James G., Witten D., Hastie T. and Tibshirani R.&lt;/em&gt; An Introduction to Statistical Learning with Applications in R. URL: &lt;a href=&#34;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&#34;&gt;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Polycomb and Trithorax group proteins</title>
       <link>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
@@ -575,6 +245,209 @@ sm&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;sources&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Sources&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.bodowinter.com&#34;&gt;Bodo Winter website&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spline model</title>
+      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#generate-dataset-from-a-given-function&#34;&gt;Generate dataset from a given function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#split-data-for-train-and-test&#34;&gt;Split data for train and test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagram-of-the-given-function-and-generated-datasets&#34;&gt;Diagram of the given function and generated datasets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-a-model-using-splines&#34;&gt;Build a model using splines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagram-of-mse-for-train-and-test-data&#34;&gt;Diagram of MSE for train and test data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-optimal-model-and-plot-for-the-model&#34;&gt;Build optimal model and plot for the model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliograpy&#34;&gt;Bibliograpy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this example we will generate data from a given function and then build a model using splines and estimate quality of the model.&lt;/p&gt;
+&lt;div id=&#34;generate-dataset-from-a-given-function&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Generate dataset from a given function&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# parameters to generate a dataset
+n.all &amp;lt;- 100             # number of observations
+train.percent &amp;lt;- 0.85    # portion of the data for training
+res.sd &amp;lt;- 1              # standard deviation of noise
+x.min &amp;lt;- 5               # min limit of the data
+x.max &amp;lt;- 105             # max limit of the data
+
+# generate x
+set.seed(1)       # to get reproducible results by randomizer
+x &amp;lt;- runif(x.min, x.max, n = n.all)
+
+# noise from normal destibution
+set.seed(1)
+res &amp;lt;- rnorm(mean = 0, sd = res.sd, n = n.all)
+
+# generate y using a given function
+y.func &amp;lt;- function(x) {4 - 2e-02*x + 5.5e-03*x^2 - 4.9e-05*x^3}
+
+# add noise
+y &amp;lt;- y.func(x) + res&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;split-data-for-train-and-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Split data for train and test&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split dataset for training and test
+set.seed(1)
+# generate vector of chosen x for train data
+inTrain &amp;lt;- sample(seq_along(x), size = train.percent*n.all)
+
+# train data set
+x.train &amp;lt;- x[inTrain]
+y.train &amp;lt;- y[inTrain]
+
+# test data set
+x.test &amp;lt;- x[-inTrain]
+y.test &amp;lt;- y[-inTrain]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagram-of-the-given-function-and-generated-datasets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Diagram of the given function and generated datasets&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# lines of generated data for plot
+x.line &amp;lt;- seq(x.min, x.max, length = n.all)
+y.line &amp;lt;- y.func(x.line)
+
+# PLOT
+# generate plot by train data
+par(mar = c(4, 4, 1, 1)) # reduce margins (optional)
+plot(x.train, y.train,
+     main = &amp;#39;Generated data and original function&amp;#39;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &amp;#39;X&amp;#39;, ylab = &amp;#39;Y&amp;#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add points of test data
+points(x.test, y.test, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;, pch = 21)
+
+# add the given function
+lines(x.line, y.line, lwd = 2, lty = 2)
+
+# add legend
+legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;, &amp;#39;f(X)&amp;#39;),
+       pch = c(16, 16, NA), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
+       lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build a model using splines&lt;/h2&gt;
+&lt;p&gt;We will compair sevaral models with degree of freedoms (df) from 2 to 40, where 2 correspond to a linear model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;max.df &amp;lt;- 40                       # max degree of freedom (df)
+# 
+tbl &amp;lt;- data.frame(df = 2:max.df)   # data frame for writing errors
+tbl$MSE.train &amp;lt;- 0                 # column 1: errors of train data
+tbl$MSE.test &amp;lt;- 0                  # сcolumn 2: errors of test data
+
+# generate models using for cycle
+for (i in 2:max.df) {
+    mod &amp;lt;- smooth.spline(x = x.train, y = y.train, df = i)
+    
+    # predicted values for train and test data using built model
+    y.model.train &amp;lt;- predict(mod, data.frame(x = x.train))$y[, 1]
+    y.model.test &amp;lt;- predict(mod, data.frame(x = x.test))$y[, 1]
+    
+    # MSE errors for train and test data
+    MSE &amp;lt;- c(sum((y.train - y.model.train)^2) / length(x.train),
+             sum((y.test - y.model.test)^2) / length(x.test))
+    
+    # write errors to the previously created data frame
+    tbl[tbl$df == i, c(&amp;#39;MSE.train&amp;#39;, &amp;#39;MSE.test&amp;#39;)] &amp;lt;- MSE
+}
+
+# view first rows of the table
+head(tbl, 4)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   df MSE.train MSE.test
+## 1  2 3.7188566 2.885166
+## 2  3 1.4463925 1.635813
+## 3  4 0.8938817 1.239533
+## 4  5 0.7668250 1.038918&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagram-of-mse-for-train-and-test-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Diagram of MSE for train and test data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot MSE from our table
+plot(x = tbl$df, y = tbl$MSE.test,
+     main = &amp;quot;Changes of MSE from degrees of freedom&amp;quot;,
+     type = &amp;#39;l&amp;#39;, col = &amp;#39;red&amp;#39;, lwd = 2,
+     xlab = &amp;#39;spline degree of freedom&amp;#39;, ylab = &amp;#39;MSE&amp;#39;,
+     ylim = c(min(tbl$MSE.train, tbl$MSE.test), 
+              max(tbl$MSE.train, tbl$MSE.test)),
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add 
+points(x = tbl$df, y = tbl$MSE.test,
+       pch = 21, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;)
+lines(x = tbl$df, y = tbl$MSE.train, col = grey(0.3), lwd = 2)
+# minimal MSE
+abline(h = res.sd, lty = 2, col = grey(0.4), lwd = 2)
+
+# add legend
+legend(&amp;#39;topright&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;),
+       pch = c(NA, 16), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;),  
+       lty = c(1, 1), lwd = c(2, 2), cex = 1.2)
+
+# df of minimal MSE for test data
+min.MSE.test &amp;lt;- min(tbl$MSE.test)
+df.min.MSE.test &amp;lt;- tbl[tbl$MSE.test == min.MSE.test, &amp;#39;df&amp;#39;]
+
+# optimal df for precise model and maximal simplicity
+df.my.MSE.test &amp;lt;- 6
+my.MSE.test &amp;lt;- tbl[tbl$df == df.my.MSE.test, &amp;#39;MSE.test&amp;#39;]
+
+# show the optimal solution
+abline(v = df.my.MSE.test, 
+       lty = 2, lwd = 2)
+points(x = df.my.MSE.test, y = my.MSE.test, 
+       pch = 15, col = &amp;#39;blue&amp;#39;)
+mtext(df.my.MSE.test, 
+      side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mod.MSE.test &amp;lt;- smooth.spline(x = x.train, y = y.train, df = df.my.MSE.test)
+
+# predict data for 250 x&amp;#39;s to get smoothed curve
+x.model.plot &amp;lt;- seq(x.min, x.max, length = 250)
+y.model.plot &amp;lt;- predict(mod.MSE.test, data.frame(x = x.model.plot))$y[, 1]
+
+# plot train data
+par(mar = c(4, 4, 1, 1))
+plot(x.train, y.train,
+     main = &amp;quot;Initial data and the best fit model&amp;quot;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &amp;#39;X&amp;#39;, ylab = &amp;#39;Y&amp;#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add test data
+points(x.test, y.test, col = &amp;#39;red&amp;#39;, bg = &amp;#39;red&amp;#39;, pch = 21)
+
+# function
+lines(x.line, y.line,lwd = 2, lty = 2)
+
+# add model
+lines(x.model.plot, y.model.plot, lwd = 2, col = &amp;#39;blue&amp;#39;)
+
+# legend
+legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;test&amp;#39;, &amp;#39;f(X)&amp;#39;, &amp;#39;model&amp;#39;),
+       pch = c(16, 16, NA, NA), 
+       col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
+       lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliograpy&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://faculty.marshall.usc.edu/gareth-james/&#34;&gt;An Introduction to Statistical Learning by Gareth James&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

@@ -1,5 +1,5 @@
 ---
-title: Statistics
+title: Math
 
 # View.
 #   1 = List
