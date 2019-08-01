@@ -1,0 +1,25 @@
+---
+title: "Heart rate zones"
+subtitle: ""
+author: "Mark Goldberg"
+date: "2019-08-01"
+lastmod: '`r format(Sys.time(), "%Y-%m-%d")`'
+#weight: 1
+draft: "true"
+math: "true"
+tags: ["Sport", "Marathon"]
+categories: ["Sport"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Here you can learn how to better understand training heart rate zones - tutorial for beginners."
+---
+
+### What is heart zones
+
+### Calculator
+
+### Does fat burning zone exists?
+
+### Bibliography
