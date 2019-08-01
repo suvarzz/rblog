@@ -5,5 +5,7 @@
 # Upload with $ ~/github/update_web.sh
 
 setwd("~/github/rblog")
-blogdown::build_site()
+blogdown::serve_site()
+#blogdown::hugo_build()
+#blogdown::build_site()
 system('hugo server -D')

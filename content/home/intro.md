@@ -33,6 +33,6 @@ subtitle = ""
 
 Welcome to my website!
 
-Here you will find post related to my interests.
+Here you will find posts related to my interests:
 
-Mainly about epigenetics, statistics, bioinformatics and programming.
+Epigenetics, Statistics, Bioinformatics, Programming and Sport.

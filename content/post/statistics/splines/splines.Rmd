@@ -10,6 +10,7 @@ categories: ["R", "Statistics"]
 output:
   blogdown::html_page:
     toc: true
+summary: 'Practical example showing how to generate data set using given function, how to split data, buld spline model on train data and how to use test data to find optimal parameters of the model.'
 ---
 
 In this example we will generate data from a given function and then build a model using splines and estimate quality of the model.

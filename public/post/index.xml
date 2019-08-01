@@ -2,15 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/post/</link>
-      <atom:link href="https://suvar.netlify.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Posts</title>
-      <link>https://suvar.netlify.com/post/</link>
+      <link>/post/</link>
     </image>
+    
+    <item>
+      <title>XXX</title>
+      <link>/post/template/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/template/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Hello</title>
+      <link>/post/hello/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/hello/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

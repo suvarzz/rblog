@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/post/programming/</link>
-      <atom:link href="https://suvar.netlify.com/post/programming/index.xml" rel="self" type="application/rss+xml" />
+    <link>/post/programming/</link>
+      <atom:link href="/post/programming/index.xml" rel="self" type="application/rss+xml" />
     <description>Programming</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Programming</title>
-      <link>https://suvar.netlify.com/post/programming/</link>
+      <link>/post/programming/</link>
     </image>
     
     <item>
       <title>R tips and coding tricks</title>
-      <link>https://suvar.netlify.com/post/programming/r_tips_tricks/r_tips_tricks/</link>
+      <link>/post/programming/r_tips_tricks/r_tips_tricks/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/programming/r_tips_tricks/r_tips_tricks/</guid>
+      <guid>/post/programming/r_tips_tricks/r_tips_tricks/</guid>
       <description>
 
 

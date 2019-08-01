@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Regression | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/tags/regression/</link>
-      <atom:link href="https://suvar.netlify.com/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/regression/</link>
+      <atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     <description>Regression</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Regression</title>
-      <link>https://suvar.netlify.com/tags/regression/</link>
+      <link>/tags/regression/</link>
     </image>
     
     <item>
       <title>Spline model</title>
-      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
+      <link>/post/statistics/splines/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
+      <guid>/post/statistics/splines/splines/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -98,7 +98,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
        lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build a model using splines&lt;/h2&gt;
@@ -172,7 +172,7 @@ points(x = df.my.MSE.test, y = my.MSE.test,
        pch = 15, col = &amp;#39;blue&amp;#39;)
 mtext(df.my.MSE.test, 
       side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
@@ -206,7 +206,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
        lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliograpy&lt;/h2&gt;

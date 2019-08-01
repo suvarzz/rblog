@@ -2,77 +2,133 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/tags/</link>
-      <atom:link href="https://suvar.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Tags</title>
-      <link>https://suvar.netlify.com/tags/</link>
+      <link>/tags/</link>
     </image>
     
     <item>
-      <title>Epigenetics</title>
-      <link>https://suvar.netlify.com/tags/epigenetics/</link>
+      <title>Bootstrap</title>
+      <link>/tags/bootstrap/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/epigenetics/</guid>
+      <guid>/tags/bootstrap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cross-validation</title>
+      <link>/tags/cross-validation/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/cross-validation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Epigenetics</title>
+      <link>/tags/epigenetics/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/epigenetics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hopfield </title>
+      <link>/tags/hopfield/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/hopfield/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hypothesis testing</title>
+      <link>/tags/hypothesis-testing/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/hypothesis-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markov process</title>
-      <link>https://suvar.netlify.com/tags/markov-process/</link>
+      <link>/tags/markov-process/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/markov-process/</guid>
+      <guid>/tags/markov-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural Network</title>
+      <link>/tags/neural-network/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/neural-network/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PcG</title>
-      <link>https://suvar.netlify.com/tags/pcg/</link>
+      <link>/tags/pcg/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/pcg/</guid>
+      <guid>/tags/pcg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://suvar.netlify.com/tags/r/</link>
+      <link>/tags/r/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/r/</guid>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Regression</title>
-      <link>https://suvar.netlify.com/tags/regression/</link>
+      <link>/tags/regression/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/regression/</guid>
+      <guid>/tags/regression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Splines</title>
-      <link>https://suvar.netlify.com/tags/splines/</link>
+      <link>/tags/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/splines/</guid>
+      <guid>/tags/splines/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Statistics</title>
-      <link>https://suvar.netlify.com/tags/statistics/</link>
+      <link>/tags/statistics/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/statistics/</guid>
+      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trx</title>
-      <link>https://suvar.netlify.com/tags/trx/</link>
+      <link>/tags/trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/trx/</guid>
+      <guid>/tags/trx/</guid>
       <description></description>
     </item>
     

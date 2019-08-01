@@ -1,7 +1,10 @@
 ---
-title: "TITLE"
+title: "XXX"
+subtitle: ""
 author: "Mark Goldberg"
-date: '`r format(Sys.time(), "%Y-%m-%d")`'
+date: "2019-08-01"
+lastmod: '`r format(Sys.time(), "%Y-%m-%d")`'
+weight: 1
 draft: true
 math: true
 tags: ["R"]
@@ -10,4 +13,5 @@ categories: ["R"]
 output:
   blogdown::html_page:
     toc: true
+summary: ""
 ---
