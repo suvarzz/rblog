@@ -3,7 +3,7 @@ title: "XXX"
 subtitle: ""
 author: "Mark Goldberg"
 date: "2019-08-01"
-lastmod: '2019-08-01'
+lastmod: '`r format(Sys.time(), "%Y-%m-%d")`'
 weight: 1
 draft: true
 math: true
@@ -15,7 +15,3 @@ output:
     toc: true
 summary: ""
 ---
-
-
-
-
