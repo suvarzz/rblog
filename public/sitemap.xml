@@ -3,94 +3,109 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://suvar.netlify.com/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://suvar.netlify.com/post/biology/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/categories/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/tags/epigenetics/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/categories/epigenetics/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://suvar.netlify.com/tags/epigenetics/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <loc>https://suvar.netlify.com/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/tags/markov-process/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/tags/pcg/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://suvar.netlify.com/post/epigenetics/pcg_trx/pcg_trx/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <loc>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://suvar.netlify.com/post/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/categories/r/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://suvar.netlify.com/post/programming/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/tags/r/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/post/r/simple_markov_process/simple_markov_process/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://suvar.netlify.com/categories/statistics/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <loc>https://suvar.netlify.com/categories/r/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/programming/r_tips_tricks/r_tips_tricks/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/tags/statistics/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://suvar.netlify.com/categories/statistics/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/statistics/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://suvar.netlify.com/tags/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/tags/trx/</loc>
-    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,12 +119,20 @@
   </url>
   
   <url>
+    <loc>https://suvar.netlify.com/post/</loc>
+  </url>
+  
+  <url>
     <loc>https://suvar.netlify.com/publication_types/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://suvar.netlify.com/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>https://suvar.netlify.com/post/sport/</loc>
   </url>
   
 </urlset>

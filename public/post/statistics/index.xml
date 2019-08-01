@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics | Mark Goldberg</title>
+    <link>https://suvar.netlify.com/post/statistics/</link>
+      <atom:link href="https://suvar.netlify.com/post/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Statistics</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://suvar.netlify.com/img/logo.png</url>
+      <title>Statistics</title>
+      <link>https://suvar.netlify.com/post/statistics/</link>
+    </image>
+    
+    <item>
+      <title>Cross-validation and bootstrap</title>
+      <link>https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#cross-validation&#34;&gt;Cross validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#validation-sample&#34;&gt;Validation sample&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#-----loocv&#34;&gt;Перекрёстная проверка по отдельным наблюдениям (LOOCV)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#k---&#34;&gt;k-кратная перекрёстная проверка&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;Бутстреп&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#---&#34;&gt;Точность оценки статистичестического параметра&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#---&#34;&gt;Точность оценки параметра регрессии&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;From the following examples we will learn: 1. 2. 3. Model: linear regression, kNN Dataset: Auto {ISLR}&lt;/p&gt;
+&lt;p&gt;В практических примерах ниже показано:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;как оценить точность модели методом перекрёстной выборки;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;методом проверочной выборки;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;методом перекрёстной проверки по отдельным наблюдениям (LOOCV);&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;методом k-кратной перекрёстной проверки;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;как применять бутстреп для оценки точности статистического параметра и оценок параметров модели&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Модели&lt;/em&gt;: линейная регрессия, kNN.&lt;br /&gt;
+&lt;em&gt;Данные&lt;/em&gt;: &lt;code&gt;Auto {ISLR}&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)        # datasets Auto
+library(&amp;#39;GGally&amp;#39;)      # matrix diagrams&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;boot&amp;#39;)            # cross-validation&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data exploration
+head(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   mpg cylinders displacement horsepower weight acceleration year origin
+## 1  18         8          307        130   3504         12.0   70      1
+## 2  15         8          350        165   3693         11.5   70      1
+## 3  18         8          318        150   3436         11.0   70      1
+## 4  16         8          304        150   3433         12.0   70      1
+## 5  17         8          302        140   3449         10.5   70      1
+## 6  15         8          429        198   4341         10.0   70      1
+##                        name
+## 1 chevrolet chevelle malibu
+## 2         buick skylark 320
+## 3        plymouth satellite
+## 4             amc rebel sst
+## 5               ford torino
+## 6          ford galaxie 500&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    392 obs. of  9 variables:
+##  $ mpg         : num  18 15 18 16 17 15 14 14 14 15 ...
+##  $ cylinders   : num  8 8 8 8 8 8 8 8 8 8 ...
+##  $ displacement: num  307 350 318 304 302 429 454 440 455 390 ...
+##  $ horsepower  : num  130 165 150 150 140 198 220 215 225 190 ...
+##  $ weight      : num  3504 3693 3436 3433 3449 ...
+##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
+##  $ year        : num  70 70 70 70 70 70 70 70 70 70 ...
+##  $ origin      : num  1 1 1 1 1 1 1 1 1 1 ...
+##  $ name        : Factor w/ 304 levels &amp;quot;amc ambassador brougham&amp;quot;,..: 49 36 231 14 161 141 54 223 241 2 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can check correlation of various parameters using &lt;code&gt;ggpairs(Auto[, -9])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We will check the correlation between mpg ~ horsepower&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Auto$horsepower, Auto$mpg,
+     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;,
+     pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4),
+     bg = rgb(0, 0, 1, alpha = 0.4))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;cross-validation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Cross validation&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;validation-sample&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Validation sample&lt;/h2&gt;
+&lt;p&gt;Split data to train and test sets and build model using train data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- nrow(Auto)                  # number of observation
+train.percent &amp;lt;- 0.5             # portion of train data
+attach(Auto)                     # to call mpg &amp;amp; horsepower instead of Auto$mpg &amp;amp; Auto$horsepower&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
+## 
+##     mpg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data into train and test
+set.seed(1)
+inTrain &amp;lt;- sample(n, n * train.percent)
+
+# plot train data
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+legend(&amp;#39;topright&amp;#39;, pch = c(16, 16), col = c(&amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;), legend = c(&amp;#39;test&amp;#39;, &amp;#39;train&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Build models for validataion of accuracy:&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[
+\hat{mpg} = f(horsepower)
+\]&lt;/span&gt; &lt;strong&gt;Linear model&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fit linear model for train data
+fit.lm.1 &amp;lt;- lm(mpg ~ horsepower, subset = inTrain)
+
+# MSE of test data
+mean((mpg[-inTrain] - predict(fit.lm.1, Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 26.14142&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Строим &lt;strong&gt;квадратичную модель&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# присоединить таблицу с данными: названия стоблцов будут доступны напрямую
+attach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
+## 
+##     mpg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
+fit.lm.2 &amp;lt;- lm(mpg ~ poly(horsepower, 2), 
+               subset = inTrain)
+# считаем MSE на тестовой выборке
+mean((mpg[-inTrain] - predict(fit.lm.2,
+                              Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 19.82259&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# отсоединить таблицу с данными
+detach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Строим &lt;strong&gt;кубическую модель&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# присоединить таблицу с данными: названия стоблцов будут доступны напрямую
+attach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
+## 
+##     mpg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
+fit.lm.3 &amp;lt;- lm(mpg ~ poly(horsepower, 3), 
+               subset = inTrain)
+# считаем MSE на тестовой выборке
+mean((mpg[-inTrain] - predict(fit.lm.3,
+                              Auto[-inTrain, ]))^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 19.78252&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# отсоединить таблицу с данными
+detach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;-----loocv&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Перекрёстная проверка по отдельным наблюдениям (LOOCV)&lt;/h3&gt;
+&lt;p&gt;Это самый затратный в вычислительном плане метод, но и самый надёжный в плане оценки ошибки вне выборки. Попробуем применить его к линейной модели.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# подгонка линейной модели на обучающей выборке
+fit.glm &amp;lt;- glm(mpg ~ horsepower, data = Auto)
+# считаем LOOCV-ошибку
+cv.err &amp;lt;- cv.glm(Auto, fit.glm)
+# результат: первое число -- по формуле LOOCV-ошибки,
+#  второе -- с поправкой на смещение
+cv.err$delta[1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 24.23151&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Теперь оценим точность полиномиальных моделей, меняя степень, в которой стоит регрессор.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# вектор с LOOCV-ошибками
+cv.err.loocv &amp;lt;- rep(0, 5)
+names(cv.err.loocv) &amp;lt;- 1:5
+# цикл по степеням полиномов
+for (i in 1:5){
+  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.loocv[i] &amp;lt;- cv.glm(Auto, fit.glm)$delta[1]
+}
+# результат
+cv.err.loocv&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
+## 24.23151 19.24821 19.33498 19.42443 19.03321&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;k---&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;k-кратная перекрёстная проверка&lt;/h3&gt;
+&lt;p&gt;K-кратная кросс-валидация – компромисс между методом проверочной выборки и LOOCV. Оценка ошибки вне выборки ближе к правде, по сравнению с проверочной выборкой, а объём вычислений меньше, чем при LOOCV. Проведём 10-кратную кросс-валидацию моделей разных степеней.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# оценим точность полиномиальных моделей, меняя степень
+# вектор с ошибками по 10-кратной кросс-валидации
+cv.err.k.fold &amp;lt;- rep(0, 5)
+names(cv.err.k.fold) &amp;lt;- 1:5
+# цикл по степеням полиномов
+for (i in 1:5){
+  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.k.fold[i] &amp;lt;- cv.glm(Auto, fit.glm,
+                             K = 10)$delta[1]
+}
+# результат
+cv.err.k.fold&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
+## 24.19329 19.29416 19.49610 19.61828 19.15289&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Для сравнения напомним результаты расчёта MSE методом проверочной выборки:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;err.test&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        1        2        3 
+## 26.14142 19.82259 19.78252&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Опираясь на результаты расчётов с кросс-валидацией, можно заключить, что на самом деле ошибка вне выборки у линейной модели выше, чем показывала MSE на тестовой выборке. А модели со степенями 2 и 3 на самом деле точнее, чем показывала MSE без перекрёстной проверки.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Бутстреп&lt;/h2&gt;
+&lt;div id=&#34;---&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Точность оценки статистичестического параметра&lt;/h3&gt;
+&lt;p&gt;Пример с инвестиционным портфелем из двух активов: &lt;code&gt;Portfolio {ISLR}&lt;/code&gt;. В наборе данных две переменных: * &lt;code&gt;X&lt;/code&gt; – доход от актива X,&lt;br /&gt;
+* &lt;code&gt;Y&lt;/code&gt; – доход от актива Y.&lt;br /&gt;
+Портфель инвестиций состоит из активов &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; и &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, долю актива &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; обозначим как &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. Минимум дасперсии доходности:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\mathrm{Var}(\alpha X + (1 - \alpha) Y) \rightarrow \mathrm{min}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;– достигается при значении параметра:&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[
+\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
+\]&lt;/span&gt; Данных для оценки &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_X^2}\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_Y^2}\)&lt;/span&gt; и &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_{XY}}\)&lt;/span&gt; немного (100 наблюдений), поэтому применим бутстреп.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(Portfolio)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            X          Y
+## 1 -0.8952509 -0.2349235
+## 2 -1.5624543 -0.8851760
+## 3 -0.4170899  0.2718880
+## 4  1.0443557 -0.7341975
+## 5 -0.3155684  0.8419834
+## 6 -1.7371238 -2.0371910&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Portfolio)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    100 obs. of  2 variables:
+##  $ X: num  -0.895 -1.562 -0.417 1.044 -0.316 ...
+##  $ Y: num  -0.235 -0.885 0.272 -0.734 0.842 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# функция для вычисления искомого параметра
+alpha.fn &amp;lt;- function(data, index){
+  X = data$X[index]
+  Y = data$Y[index]
+  (var(Y) - cov(X, Y)) / (var(X) + var(Y) - 2*cov(X, Y))
+}
+# рассчитать alpha по всем 100 наблюдениям
+alpha.fn(Portfolio, 1:100)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.5758321&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# создать бутстреп-выборку и повторно вычислить alpha
+set.seed(1)
+alpha.fn(Portfolio, sample(100, 100, replace = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.5963833&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# теперь -- многократное повторение предыдущей операции
+boot(Portfolio, alpha.fn, R = 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Portfolio, statistic = alpha.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original        bias    std. error
+## t1* 0.5758321 -7.315422e-05  0.08861826&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Бутстреп повторяет расчёт параметра много раз, делая повторные выборки из наших 100 наблюдений. В итоге этим методом можно вычислить стандартную ошибку параметра, не опираясь на допущения о законе распределении параметра. В нашем случае &lt;span class=&#34;math inline&#34;&gt;\(\alpha = 0.576\)&lt;/span&gt; со стандартной ошибкой &lt;span class=&#34;math inline&#34;&gt;\(s_{\hat{\alpha}} = 0.089\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;---&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Точность оценки параметра регрессии&lt;/h3&gt;
+&lt;p&gt;При построении модели регрессии проблемы в остатках приводят к неверной оценке ошибок параметров. Обойти эту проблему можно, применив для расчёта этих ошибок бутстреп.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Оценивание точности линейной регрессионной модели ----------------------------
+# оценить стандартные ошибки параметров модели 
+#  mpg = beta_0 + beta_1 * horsepower с помощью бутстрепа,
+#  сравнить с оценками ошибок по МНК
+# функция для расчёта коэффициентов ПЛР по выборке из данных
+boot.fn &amp;lt;- function(data, index){
+  coef(lm(mpg ~ horsepower, data = data, subset = index))
+}
+boot.fn(Auto, 1:n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
+##  39.9358610  -0.1578447&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# пример применения функции к бутстреп-выборке
+set.seed(1)
+boot.fn(Auto, sample(n, n, replace = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
+##  38.7387134  -0.1481952&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# применяем функцию boot для вычисления стандартных ошибок параметров
+#  (1000 выборок с повторами)
+boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0296667441 0.860440524
+## t2* -0.1578447 -0.0003113047 0.007411218&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# сравним с МНК
+attach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 3):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
+## 
+##     mpg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(mpg ~ horsepower))$coef&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Estimate  Std. Error   t value      Pr(&amp;gt;|t|)
+## (Intercept) 39.9358610 0.717498656  55.65984 1.220362e-187
+## horsepower  -0.1578447 0.006445501 -24.48914  7.031989e-81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;detach(Auto)
+# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
+# вычислим оценки параметров квадратичной модели регрессии
+boot.fn.2 &amp;lt;- function(data, index){
+  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
+}
+# применим функцию к 1000 бутсреп-выборкам
+set.seed(1)
+boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0269563085 0.859851825
+## t2* -0.1578447 -0.0002906457 0.007402954&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt; Оценить стандартные ошибки параметров модели регрессии методом бутстрепа. Сравнить с оценками стандартных ошибок параметров по МНК.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Источники&lt;/em&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;em&gt;James G., Witten D., Hastie T. and Tibshirani R.&lt;/em&gt; An Introduction to Statistical Learning with Applications in R. URL: &lt;a href=&#34;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&#34;&gt;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simple Markov process</title>
+      <link>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</guid>
+      <description>
+
+
+&lt;p&gt;Here, we will consider a simple example of Markov process with implementation in R.&lt;br /&gt;
+The following example is taken from &lt;a href=&#34;http://www.bodowinter.com&#34;&gt;Bodo Winter website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;Markov process&lt;/strong&gt; is characterized by (1) &lt;strong&gt;a finite set of states&lt;/strong&gt; and (2) &lt;strong&gt;fixed transition probabilities between the states&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Let’s consider an example. Assume you have a classroom, with students who could be either in the state &lt;strong&gt;alert&lt;/strong&gt; or in the state &lt;strong&gt;bored&lt;/strong&gt;. And then, at any given time point, there’s a certain probability of an alert student becoming bored (say 0.2), and there’s a probability of a bored student becoming alert (say 0.25).&lt;/p&gt;
+&lt;p&gt;Let’s say there are 20 alert and 80 bored students in a particular class. This is your initial condition at time point &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;. Given the transition probabilities above, what’s the number of alert and bored students at the next point in time, &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;?&lt;br /&gt;
+Multiply 20 by 0.2 (=4) and these will be the alert students that turn bored.&lt;br /&gt;
+And then multiply 80 by 0.25 (=20) and these will be the bored students that turn alert.&lt;br /&gt;
+So, at &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;, there’s going to be 20-4+20 alert students. And there’s going to be 80+4-20 bored students. Before, 80% of the students were bored and now, only 64% of the students are bored. Conversely, 36% are alert.&lt;/p&gt;
+&lt;p&gt;A handy way of representing this Markov process is by defining a transition probability matrix:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;A&lt;/th&gt;
+&lt;th&gt;B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;A&lt;span class=&#34;math inline&#34;&gt;\(_{t+1}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;0.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;B&lt;span class=&#34;math inline&#34;&gt;\(_{t+1}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;0.2&lt;/td&gt;
+&lt;td&gt;0.75&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;What this matrix says is: A proportion of 0.8 of the people who are in state A (alert) will also be at state A at time point &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;. And, a proportion of 0.25 of the people who are in state B (bored) will switch to alert at t+1. This is what the first row says. The next row is simply one minus the probabilities of the first row, because probabilities (or proportions) have to add up to 1. Now think about multiplying this matrix with the initial proportions of alert and bored students that we had above. 0.8 are bored and 0.2 are alert. In linear algebra this would look the following way:&lt;/p&gt;
+&lt;div&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{bmatrix}
+ 0.8 &amp;amp; 0.25 \\
+ 0.2 &amp;amp; 0.75
+\end{bmatrix}\times\begin{bmatrix}
+ 0.2 \\
+ 0.8
+\end{bmatrix} = \begin{bmatrix}
+ 0.8\times0.2 + 0.25\times0.8 \\
+ 0.2\times0.2 + 0.75\times0.8
+\end{bmatrix} = \begin{bmatrix}
+0.36 \\
+0.64
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The results of these calculations are exactly the proportions that we saw above: 36% alert student and 64% bored students.&lt;/p&gt;
+&lt;p&gt;Now, you might ask yourself: What happens if this process continues? What happens at &lt;span class=&#34;math inline&#34;&gt;\(t+2\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(t+3\)&lt;/span&gt; etc.? Will it be the case that at one point there are no bored students any more? Let’s simulate this in R and find out! Let’s call this &lt;strong&gt;tpm&lt;/strong&gt; for &lt;strong&gt;transition probability matrix&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tpm = matrix(c(0.8,0.25, 0.2,0.75), nrow=2, byrow=TRUE)
+colnames(tpm) = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;)
+rownames(tpm) = c(&amp;#39;At+1&amp;#39;, &amp;#39;Bt+1&amp;#39;)
+tpm&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        A    B
+## At+1 0.8 0.25
+## Bt+1 0.2 0.75&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again this matrix shows that 0.8 students who were in state A at time point t will still be in state A at &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;. And 0.25 students who were in state B at time point t will be in state A at &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;. The second row has a similar interpretation for alert and bored students becoming bored at &lt;span class=&#34;math inline&#34;&gt;\(t+1\)&lt;/span&gt;. Remember that Markov processes assume fixed transition probabilities. This means that in the simulation that we’ll be doing, we leave the transition probability matrix unchanged. However, we will define a vector of the actual proportions – and these are allowed to change. In time, we expect more and more students to become alert, because the transition probability from B to A (which, to remind you, was 0.25) is higher than from A to B (which was 0.2).&lt;/p&gt;
+&lt;p&gt;Let’s start our simulation by setting the initial condition as 0.1 students are alert and 0.9 students are bored and define a matrix called &lt;strong&gt;sm&lt;/strong&gt; (short for &lt;strong&gt;student matrix&lt;/strong&gt;):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sm = as.matrix(c(0.1, 0.9))
+rownames(sm)= c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;)
+sm&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [,1]
+## A  0.1
+## B  0.9&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let’s repeat by looping:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for(i in 1:10){
+    sm = tpm %*% sm
+    }&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, we’re looping 10 times and on each iteration, we multiply the matrix &lt;strong&gt;tpm&lt;/strong&gt; with the student matrix &lt;strong&gt;sm&lt;/strong&gt;. We take this result and store it in &lt;strong&gt;sm&lt;/strong&gt;. This means that at the next iteration, our fixed &lt;strong&gt;transition probability matrix&lt;/strong&gt; will be multiplied by a different student matrix, allowing for the proportions to slowly change over time.&lt;br /&gt;
+R operator ’%*%’ is used for matrix multiplication&lt;/p&gt;
+&lt;p&gt;Outcome of our ten loop iterations:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sm&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]
+## At+1 0.5544017
+## Bt+1 0.4455983&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, after 10 iterations of the Markov process, we now have about 55% alert students and 45% bored ones. What is interesting to me is that even though 80% of the people who are alert at one time point remain alert at the next time point, the process only converged on 55% alert and 45% bored after 10 iterations.&lt;/p&gt;
+&lt;p&gt;Let’s reset our initial condition to (0.1 alert and 0.9 bored students) and run a thousand iterations.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for(i in 1:1000){
+    sm = tpm %*% sm
+    }
+sm&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]
+## At+1 0.5555556
+## Bt+1 0.4444444&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A 1000 iterations, and we seem to be zoning in onto ~55% and ~44%. This phenomenon is called &lt;strong&gt;Markov convergence&lt;/strong&gt;. You could run even more iterations, and your outcome would get closer and closer to 0.5555 (to infinity). So, the model converges on an equilibrium. However, this is not a fixed equilibrium. It’s not the case that the Markov process comes to a hold or that nobody changes states between alertness and boredness any more. The equilibrium that we’re dealing with here is a statistical equilibrium, where the proportions of alert and bored students remain the same. but there still is constant change (at each time step, 0.2 alert students become bored and 0.25 bored students become alert). Markov models always converge to a statistical equilibrium if the conditions (1) and (2) above are met, and if you can get from any state within your Markov model to any other state (in the case of just two states, that clearly is the case). What’s so cool about this is that it is, at first sight, fairly counterintuitive.&lt;/p&gt;
+&lt;p&gt;At least when I thought about the transition probabilities for the first time, I somehow expected all students to become alert but as we saw, that’s not the case. Moreover, this process is not sensitive to initial conditions. That means that when you start with any proportion of alert or bored students (even extreme ones such as 0.0001 alert students), the process will reach the statistical equilibrium – albeit sometimes a little faster or slower. You can play around with different values for the &lt;strong&gt;sm&lt;/strong&gt; object to explore this property of Markov convergence. Another interesting thing is that the process is impervious to intervention: Say, you introduced something that made more students alert – the Markov model would quickly get back to equilibrium. So Markov processes are essentially ahistorical processes: history doesn’t matter. Even with extreme initial conditions or extreme interventions, the process quickly converges to the equilibrium defined by the transition probabilities. The only way to persistently change the system is to change the transition probabilities. Finally, what I find so cool about Markov processes is their computational simplicity.&lt;/p&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Sources&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.bodowinter.com&#34;&gt;Bodo Winter website&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

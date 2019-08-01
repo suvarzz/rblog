@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags | </title>
+    <title>Tags | Mark Goldberg</title>
     <link>https://suvar.netlify.com/tags/</link>
       <atom:link href="https://suvar.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 31 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Tags</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Epigenetics</title>
       <link>https://suvar.netlify.com/tags/epigenetics/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/epigenetics/</guid>
       <description></description>
     </item>
@@ -23,7 +23,7 @@
     <item>
       <title>Markov process</title>
       <link>https://suvar.netlify.com/tags/markov-process/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/markov-process/</guid>
       <description></description>
     </item>
@@ -31,7 +31,7 @@
     <item>
       <title>PcG</title>
       <link>https://suvar.netlify.com/tags/pcg/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/pcg/</guid>
       <description></description>
     </item>
@@ -39,7 +39,7 @@
     <item>
       <title>R</title>
       <link>https://suvar.netlify.com/tags/r/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/r/</guid>
       <description></description>
     </item>
@@ -47,7 +47,7 @@
     <item>
       <title>Statistics</title>
       <link>https://suvar.netlify.com/tags/statistics/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/statistics/</guid>
       <description></description>
     </item>
@@ -55,7 +55,7 @@
     <item>
       <title>Trx</title>
       <link>https://suvar.netlify.com/tags/trx/</link>
-      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/tags/trx/</guid>
       <description></description>
     </item>

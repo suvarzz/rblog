@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming | Mark Goldberg</title>
+    <link>https://suvar.netlify.com/post/programming/</link>
+      <atom:link href="https://suvar.netlify.com/post/programming/index.xml" rel="self" type="application/rss+xml" />
+    <description>Programming</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://suvar.netlify.com/img/logo.png</url>
+      <title>Programming</title>
+      <link>https://suvar.netlify.com/post/programming/</link>
+    </image>
+    
+    <item>
+      <title>R tips and coding tricks</title>
+      <link>https://suvar.netlify.com/post/programming/r_tips_tricks/r_tips_tricks/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/post/programming/r_tips_tricks/r_tips_tricks/</guid>
+      <description>
+
+
+&lt;p&gt;Here you can find some simple interesting concepts for coding in R.&lt;/p&gt;
+&lt;div id=&#34;how-to-select-all-numeric-columns-in-a-data-frame&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How to select all numeric columns in a data frame?&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df = data.frame(x = c(1:3),
+                y = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;),
+                z = c(0.1, 0.2, 0.3))
+df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x y   z
+## 1 1 A 0.1
+## 2 2 B 0.2
+## 3 3 C 0.3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select all numeric columns
+df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x   z
+## 1 1 0.1
+## 2 2 0.2
+## 3 3 0.3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

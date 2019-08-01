@@ -1,9 +1,9 @@
 ---
-title: "Title"
-author: Mark Boltengagen
+title: "TITLE"
+author: "Mark Goldberg"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 draft: true
-math: false
+math: true
 tags: ["R"]
 categories: ["R"]
 #bibliography: [bib.bib]

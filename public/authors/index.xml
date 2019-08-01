@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors | </title>
+    <title>Authors | Mark Goldberg</title>
     <link>https://suvar.netlify.com/authors/</link>
       <atom:link href="https://suvar.netlify.com/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
@@ -17,7 +17,7 @@
       <link>https://suvar.netlify.com/authors/admin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://suvar.netlify.com/authors/admin/</guid>
-      <description>&lt;p&gt;Mark Boltengagen is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.&lt;/p&gt;
+      <description>&lt;p&gt;Mark Goldberg is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.&lt;/p&gt;
 </description>
     </item>
     

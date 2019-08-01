@@ -1,0 +1,208 @@
+---
+title: "Spline model"
+author: "Mark Goldberg"
+date: '2019-08-01'
+draft: true
+math: true
+tags: ["R", "Splines", "Regression"]
+categories: ["R", "Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#generate-dataset-from-a-given-function">Generate dataset from a given function</a></li>
+<li><a href="#split-data-for-train-and-test">Split data for train and test</a></li>
+<li><a href="#diagram-of-the-given-function-and-generated-datasets">Diagram of the given function and generated datasets</a></li>
+<li><a href="#build-a-model-using-splines">Build a model using splines</a></li>
+<li><a href="#diagram-of-mse-for-train-and-test-data">Diagram of MSE for train and test data</a></li>
+<li><a href="#build-optimal-model-and-plot-for-the-model">Build optimal model and plot for the model</a></li>
+<li><a href="#bibliograpy">Bibliograpy</a></li>
+</ul>
+</div>
+
+<p>In this example we will generate data from a given function and then build a model using splines and estimate quality of the model.</p>
+<div id="generate-dataset-from-a-given-function" class="section level2">
+<h2>Generate dataset from a given function</h2>
+<pre class="r"><code># parameters to generate a dataset
+n.all &lt;- 100             # number of observations
+train.percent &lt;- 0.85    # portion of the data for training
+res.sd &lt;- 1              # standard deviation of noise
+x.min &lt;- 5               # min limit of the data
+x.max &lt;- 105             # max limit of the data
+
+# generate x
+set.seed(1)       # to get reproducible results by randomizer
+x &lt;- runif(x.min, x.max, n = n.all)
+
+# noise from normal destibution
+set.seed(1)
+res &lt;- rnorm(mean = 0, sd = res.sd, n = n.all)
+
+# generate y using a given function
+y.func &lt;- function(x) {4 - 2e-02*x + 5.5e-03*x^2 - 4.9e-05*x^3}
+
+# add noise
+y &lt;- y.func(x) + res</code></pre>
+</div>
+<div id="split-data-for-train-and-test" class="section level2">
+<h2>Split data for train and test</h2>
+<pre class="r"><code># split dataset for training and test
+set.seed(1)
+# generate vector of chosen x for train data
+inTrain &lt;- sample(seq_along(x), size = train.percent*n.all)
+
+# train data set
+x.train &lt;- x[inTrain]
+y.train &lt;- y[inTrain]
+
+# test data set
+x.test &lt;- x[-inTrain]
+y.test &lt;- y[-inTrain]</code></pre>
+</div>
+<div id="diagram-of-the-given-function-and-generated-datasets" class="section level2">
+<h2>Diagram of the given function and generated datasets</h2>
+<pre class="r"><code># lines of generated data for plot
+x.line &lt;- seq(x.min, x.max, length = n.all)
+y.line &lt;- y.func(x.line)
+
+# PLOT
+# generate plot by train data
+par(mar = c(4, 4, 1, 1)) # reduce margins (optional)
+plot(x.train, y.train,
+     main = &#39;Generated data and original function&#39;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &#39;X&#39;, ylab = &#39;Y&#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add points of test data
+points(x.test, y.test, col = &#39;red&#39;, bg = &#39;red&#39;, pch = 21)
+
+# add the given function
+lines(x.line, y.line, lwd = 2, lty = 2)
+
+# add legend
+legend(&#39;topleft&#39;, legend = c(&#39;train&#39;, &#39;test&#39;, &#39;f(X)&#39;),
+       pch = c(16, 16, NA), 
+       col = c(grey(0.2), &#39;red&#39;, &#39;black&#39;),  
+       lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="build-a-model-using-splines" class="section level2">
+<h2>Build a model using splines</h2>
+<p>We will compair sevaral models with degree of freedoms (df) from 2 to 40, where 2 correspond to a linear model.</p>
+<pre class="r"><code>max.df &lt;- 40                       # max degree of freedom (df)
+# 
+tbl &lt;- data.frame(df = 2:max.df)   # data frame for writing errors
+tbl$MSE.train &lt;- 0                 # column 1: errors of train data
+tbl$MSE.test &lt;- 0                  # сcolumn 2: errors of test data
+
+# generate models using for cycle
+for (i in 2:max.df) {
+    mod &lt;- smooth.spline(x = x.train, y = y.train, df = i)
+    
+    # predicted values for train and test data using built model
+    y.model.train &lt;- predict(mod, data.frame(x = x.train))$y[, 1]
+    y.model.test &lt;- predict(mod, data.frame(x = x.test))$y[, 1]
+    
+    # MSE errors for train and test data
+    MSE &lt;- c(sum((y.train - y.model.train)^2) / length(x.train),
+             sum((y.test - y.model.test)^2) / length(x.test))
+    
+    # write errors to the previously created data frame
+    tbl[tbl$df == i, c(&#39;MSE.train&#39;, &#39;MSE.test&#39;)] &lt;- MSE
+}
+
+# view first rows of the table
+head(tbl, 4)</code></pre>
+<pre><code>##   df MSE.train MSE.test
+## 1  2 3.7188566 2.885166
+## 2  3 1.4463925 1.635813
+## 3  4 0.8938817 1.239533
+## 4  5 0.7668250 1.038918</code></pre>
+</div>
+<div id="diagram-of-mse-for-train-and-test-data" class="section level2">
+<h2>Diagram of MSE for train and test data</h2>
+<pre class="r"><code># plot MSE from our table
+plot(x = tbl$df, y = tbl$MSE.test,
+     main = &quot;Changes of MSE from degrees of freedom&quot;,
+     type = &#39;l&#39;, col = &#39;red&#39;, lwd = 2,
+     xlab = &#39;spline degree of freedom&#39;, ylab = &#39;MSE&#39;,
+     ylim = c(min(tbl$MSE.train, tbl$MSE.test), 
+              max(tbl$MSE.train, tbl$MSE.test)),
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add 
+points(x = tbl$df, y = tbl$MSE.test,
+       pch = 21, col = &#39;red&#39;, bg = &#39;red&#39;)
+lines(x = tbl$df, y = tbl$MSE.train, col = grey(0.3), lwd = 2)
+# minimal MSE
+abline(h = res.sd, lty = 2, col = grey(0.4), lwd = 2)
+
+# add legend
+legend(&#39;topright&#39;, legend = c(&#39;обучающая&#39;, &#39;тестовая&#39;),
+       pch = c(NA, 16), 
+       col = c(grey(0.2), &#39;red&#39;),  
+       lty = c(1, 1), lwd = c(2, 2), cex = 1.2)
+
+# df of minimal MSE for test data
+min.MSE.test &lt;- min(tbl$MSE.test)
+df.min.MSE.test &lt;- tbl[tbl$MSE.test == min.MSE.test, &#39;df&#39;]
+
+# optimal df for precise model and maximal simplicity
+df.my.MSE.test &lt;- 6
+my.MSE.test &lt;- tbl[tbl$df == df.my.MSE.test, &#39;MSE.test&#39;]
+
+# show the optimal solution
+abline(v = df.my.MSE.test, 
+       lty = 2, lwd = 2)
+points(x = df.my.MSE.test, y = my.MSE.test, 
+       pch = 15, col = &#39;blue&#39;)
+mtext(df.my.MSE.test, 
+      side = 1, line = -1, at = df.my.MSE.test, col = &#39;blue&#39;, cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="build-optimal-model-and-plot-for-the-model" class="section level2">
+<h2>Build optimal model and plot for the model</h2>
+<pre class="r"><code>mod.MSE.test &lt;- smooth.spline(x = x.train, y = y.train, df = df.my.MSE.test)
+
+# predict data for 250 x&#39;s to get smoothed curve
+x.model.plot &lt;- seq(x.min, x.max, length = 250)
+y.model.plot &lt;- predict(mod.MSE.test, data.frame(x = x.model.plot))$y[, 1]
+
+# plot train data
+par(mar = c(4, 4, 1, 1))
+plot(x.train, y.train,
+     main = &quot;Initial data and the best fit model&quot;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &#39;X&#39;, ylab = &#39;Y&#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add test data
+points(x.test, y.test, col = &#39;red&#39;, bg = &#39;red&#39;, pch = 21)
+
+# function
+lines(x.line, y.line,lwd = 2, lty = 2)
+
+# add model
+lines(x.model.plot, y.model.plot, lwd = 2, col = &#39;blue&#39;)
+
+# legend
+legend(&#39;topleft&#39;, legend = c(&#39;train&#39;, &#39;test&#39;, &#39;f(X)&#39;, &#39;model&#39;),
+       pch = c(16, 16, NA, NA), 
+       col = c(grey(0.2), &#39;red&#39;, &#39;black&#39;, &#39;blue&#39;),  
+       lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="bibliograpy" class="section level2">
+<h2>Bibliograpy</h2>
+<p><a href="http://faculty.marshall.usc.edu/gareth-james/">An Introduction to Statistical Learning by Gareth James</a></p>
+</div>

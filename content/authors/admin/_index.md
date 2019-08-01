@@ -11,7 +11,7 @@ email: ""
 interests:
 - Epigenetics
 - Computational Biology
-name: Mark Boltengagen
+name: Mark Goldberg
 organizations:
 - name: Oxford Brookes University
   url: ""
@@ -23,13 +23,10 @@ social:
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/suvarlab
-- icon: github
-  icon_pack: fab
-  link: https://github.com/suvarzz
 superuser: true
 user_groups:
 - Researchers
 - Visitors
 ---
 
-Mark Boltengagen is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.
+Mark Goldberg is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.
