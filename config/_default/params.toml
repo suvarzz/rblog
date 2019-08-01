@@ -55,14 +55,11 @@ time_format = "3:04 PM"
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "goldberg84@yahoo.com"
-address = "Berlin"
+email = ""
+#address = "Berlin, Germany"
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
-contact_links = [
-  {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/suvarlab"},
-  {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/@suvarlab"},
-  ]
+contact_links = []
 
 # Display a map.
 # Map provider:

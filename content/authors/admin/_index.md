@@ -11,6 +11,8 @@ email: ""
 interests:
 - Epigenetics
 - Computational Biology
+- Statistics
+- Long-distance running
 name: Mark Goldberg
 organizations:
 - name: Oxford Brookes University
@@ -23,6 +25,9 @@ social:
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/suvarlab
+- icon: telegram
+  icon_pack: fab
+  link: https://telegram.me/@suvarlab
 superuser: true
 user_groups:
 - Researchers
