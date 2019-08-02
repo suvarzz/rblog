@@ -2,21 +2,640 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/categories/statistics/</link>
-      <atom:link href="https://suvar.netlify.com/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/statistics/</link>
+      <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Statistics</title>
-      <link>https://suvar.netlify.com/categories/statistics/</link>
+      <link>/categories/statistics/</link>
     </image>
     
     <item>
-      <title>Simple Markov process</title>
-      <link>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</link>
+      <title>Cross-validation and bootstrap</title>
+      <link>/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#validation-sample&#34;&gt;Validation sample&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#leave-one-out-cross-validation-loocv&#34;&gt;Leave-one-out cross-validation (LOOCV)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#k-cross-validation&#34;&gt;k-cross-validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bootstrap&#34;&gt;Bootstrap&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#presition-estimation-of-model-parameter&#34;&gt;Presition estimation of model parameter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#---&#34;&gt;Точность оценки параметра регрессии&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV).&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Model&lt;/em&gt;: linear regression, kNN &lt;em&gt;Dataset&lt;/em&gt;: &lt;code&gt;Auto {ISLR}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We want to build models and compare this models:&lt;br /&gt;
+mpg ~ f(horsepower) &lt;code&gt;Auto&lt;/code&gt; dataset, where&lt;br /&gt;
+&lt;strong&gt;mpg&lt;/strong&gt; - miles per gallon&lt;br /&gt;
+&lt;strong&gt;horsepower&lt;/strong&gt; - engine horsepower&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)        # datasets Auto
+attach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(horsepower, mpg,
+     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4),
+     bg = rgb(0, 0, 1, alpha = 0.4))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;validation-sample&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Validation sample&lt;/h3&gt;
+&lt;p&gt;Split data to train and test sets and build model using train data.&lt;/p&gt;
+&lt;p&gt;Make random vector for data subsetting:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- nrow(Auto)         # number of observation
+train.percent &amp;lt;- 0.5    # portion of train data
+
+# split data into train and test
+set.seed(1)
+inTrain &amp;lt;- sample(n, n*train.percent)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plot data&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot train data
+par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+legend(&amp;#39;topright&amp;#39;, pch = c(16, 16), col = c(&amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;), legend = c(&amp;#39;test&amp;#39;, &amp;#39;train&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let’s buld models for train data using &lt;strong&gt;polynomial linear regression&lt;/strong&gt; using vaious polinomial degrees and estimate MSE for each of these models using test data:&lt;br /&gt;
+1. &lt;strong&gt;Linear&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)&lt;/span&gt;.&lt;br /&gt;
+2. &lt;strong&gt;Squared&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)&lt;/span&gt;.&lt;br /&gt;
+3. &lt;strong&gt;Cubic&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;models &amp;lt;- lapply(1:3, function(n) {
+  fit.lm &amp;lt;- lm(mpg ~ poly(horsepower, n), data=Auto, subset=inTrain)
+  })
+
+# keep MSE for each model
+err.test &amp;lt;- sapply(1:3, function(n) {
+  mean((mpg[-inTrain] - predict(models[[n]], Auto[-inTrain, ]))^2)
+})
+names(err.test) &amp;lt;- c(&amp;#39;lm1&amp;#39;, &amp;#39;lm2&amp;#39;, &amp;#39;lm3&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Q: Do our modeles fit the formulas shown before?&lt;/p&gt;
+&lt;p&gt;Plot models&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+
+colors=c(&amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;)
+x1 &amp;lt;- data.frame(horsepower=seq(min(horsepower), max(horsepower), length = 200))
+for (i in 1:3) {
+    y2 &amp;lt;- predict(models[[i]], newdata=x1)
+    lines(x1$horsepower, y2, col=colors[i], lwd=c(2,2,2))
+}
+legend(&amp;#39;topright&amp;#39;, lty=c(1,1,1),
+       col = c(&amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;),
+       legend = c(&amp;#39;x&amp;#39;, &amp;#39;x^2&amp;#39;, &amp;#39;x^3&amp;#39;), lwd=c(2,2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;leave-one-out-cross-validation-loocv&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Leave-one-out cross-validation (LOOCV)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;GGally&amp;#39;)      # matrix diagrams
+library(&amp;#39;boot&amp;#39;)        # cross-validation&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fit model for train data
+fit.glm &amp;lt;- glm(mpg ~ horsepower, data = Auto)
+# LOOCV-error
+cv.err &amp;lt;- cv.glm(Auto, fit.glm)
+cv.err$delta[1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 24.23151&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Estimate the precision of polynomial models by changing power.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# vector of LOOCV-errors
+cv.err.loocv &amp;lt;- rep(0, 5)
+names(cv.err.loocv) &amp;lt;- 1:5
+# repeat by powers of polynomes
+for (i in 1:5){
+  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.loocv[i] &amp;lt;- cv.glm(Auto, fit.glm)$delta[1]
+}
+# result
+cv.err.loocv&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
+## 24.23151 19.24821 19.33498 19.42443 19.03321&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;k-cross-validation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;k-cross-validation&lt;/h3&gt;
+&lt;p&gt;K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.&lt;br /&gt;
+We will make 10-time validation.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cv.err.k.fold &amp;lt;- rep(0, 5)
+names(cv.err.k.fold) &amp;lt;- 1:5
+# repeat for power of polynomes
+for (i in 1:5){
+  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.k.fold[i] &amp;lt;- cv.glm(Auto, fit.glm,
+                             K = 10)$delta[1]
+}
+# result
+cv.err.k.fold&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5 
+## 24.19329 19.29416 19.49610 19.61828 19.15289&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Compare with previous result:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;err.test&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      lm1      lm2      lm3 
+## 26.14142 19.82259 19.78252&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Опираясь на результаты расчётов с кросс-валидацией, можно заключить, что на самом деле ошибка вне выборки у линейной модели выше, чем показывала MSE на тестовой выборке. А модели со степенями 2 и 3 на самом деле точнее, чем показывала MSE без перекрёстной проверки.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bootstrap&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bootstrap&lt;/h2&gt;
+&lt;div id=&#34;presition-estimation-of-model-parameter&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Presition estimation of model parameter&lt;/h3&gt;
+&lt;p&gt;Пример с инвестиционным портфелем из двух активов: &lt;code&gt;Portfolio {ISLR}&lt;/code&gt;. В наборе данных две переменных: * &lt;code&gt;X&lt;/code&gt; – income from X,&lt;br /&gt;
+* &lt;code&gt;Y&lt;/code&gt; – income from Y.&lt;br /&gt;
+We have &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, the portion of &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; is &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. Min of income dispersion:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\mathrm{Var}(\alpha X + (1 - \alpha) Y) \rightarrow \mathrm{min}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;– parameter:&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[
+\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
+\]&lt;/span&gt; Данных для оценки &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_X^2}\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_Y^2}\)&lt;/span&gt; и &lt;span class=&#34;math inline&#34;&gt;\(\hat{\sigma_{XY}}\)&lt;/span&gt; немного (100 наблюдений), поэтому применим бутстреп.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(Portfolio)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            X          Y
+## 1 -0.8952509 -0.2349235
+## 2 -1.5624543 -0.8851760
+## 3 -0.4170899  0.2718880
+## 4  1.0443557 -0.7341975
+## 5 -0.3155684  0.8419834
+## 6 -1.7371238 -2.0371910&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Portfolio)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    100 obs. of  2 variables:
+##  $ X: num  -0.895 -1.562 -0.417 1.044 -0.316 ...
+##  $ Y: num  -0.235 -0.885 0.272 -0.734 0.842 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# функция для вычисления искомого параметра
+alpha.fn &amp;lt;- function(data, index){
+  X = data$X[index]
+  Y = data$Y[index]
+  (var(Y) - cov(X, Y)) / (var(X) + var(Y) - 2*cov(X, Y))
+}
+# рассчитать alpha по всем 100 наблюдениям
+alpha.fn(Portfolio, 1:100)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.5758321&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# создать бутстреп-выборку и повторно вычислить alpha
+set.seed(1)
+alpha.fn(Portfolio, sample(100, 100, replace = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.5963833&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# теперь -- многократное повторение предыдущей операции
+boot(Portfolio, alpha.fn, R = 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Portfolio, statistic = alpha.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original        bias    std. error
+## t1* 0.5758321 -7.315422e-05  0.08861826&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Бутстреп повторяет расчёт параметра много раз, делая повторные выборки из наших 100 наблюдений. В итоге этим методом можно вычислить стандартную ошибку параметра, не опираясь на допущения о законе распределении параметра. В нашем случае &lt;span class=&#34;math inline&#34;&gt;\(\alpha = 0.576\)&lt;/span&gt; со стандартной ошибкой &lt;span class=&#34;math inline&#34;&gt;\(s_{\hat{\alpha}} = 0.089\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;---&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Точность оценки параметра регрессии&lt;/h3&gt;
+&lt;p&gt;При построении модели регрессии проблемы в остатках приводят к неверной оценке ошибок параметров. Обойти эту проблему можно, применив для расчёта этих ошибок бутстреп.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Оценивание точности линейной регрессионной модели ----------------------------
+# оценить стандартные ошибки параметров модели 
+#  mpg = beta_0 + beta_1 * horsepower с помощью бутстрепа,
+#  сравнить с оценками ошибок по МНК
+# функция для расчёта коэффициентов ПЛР по выборке из данных
+boot.fn &amp;lt;- function(data, index){
+  coef(lm(mpg ~ horsepower, data = data, subset = index))
+}
+boot.fn(Auto, 1:n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
+##  39.9358610  -0.1578447&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# пример применения функции к бутстреп-выборке
+set.seed(1)
+boot.fn(Auto, sample(n, n, replace = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
+##  38.7387134  -0.1481952&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# применяем функцию boot для вычисления стандартных ошибок параметров
+#  (1000 выборок с повторами)
+boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0296667441 0.860440524
+## t2* -0.1578447 -0.0003113047 0.007411218&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# сравним с МНК
+attach(Auto)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from package:ggplot2:
+## 
+##     mpg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from Auto (pos = 6):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(mpg ~ horsepower))$coef&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Estimate  Std. Error   t value      Pr(&amp;gt;|t|)
+## (Intercept) 39.9358610 0.717498656  55.65984 1.220362e-187
+## horsepower  -0.1578447 0.006445501 -24.48914  7.031989e-81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;detach(Auto)
+# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
+# вычислим оценки параметров квадратичной модели регрессии
+boot.fn.2 &amp;lt;- function(data, index){
+  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
+}
+# применим функцию к 1000 бутсреп-выборкам
+set.seed(1)
+boot(Auto, boot.fn, 1000)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0269563085 0.859851825
+## t2* -0.1578447 -0.0002906457 0.007402954&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Literature&lt;/em&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;em&gt;James G., Witten D., Hastie T. and Tibshirani R.&lt;/em&gt; An Introduction to Statistical Learning with Applications in R. URL: &lt;a href=&#34;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&#34;&gt;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hopfield Neural Network</title>
+      <link>/post/statistics/hopfield_network/hopfield_network/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/hopfield_network/hopfield_network/</guid>
+      <description>
+
+
+&lt;p&gt;Here is an example of python code.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+
+# Patterns
+x1 = [1, -1, -1, -1, 1, -1, -1, -1, 1]
+x2 = [-1, -1, 1, -1, 1, -1, 1, -1, -1]
+
+L = []
+L.append(x1)
+L.append(x2)
+
+# Function to find weight from list of vectors (lists)
+def wts(l):
+    # length of the first element in input list
+    # Would be great to check that all elements have the same length
+    ln = len(l[1])
+    # Weight matrix filled with zeros
+    W = np.zeros((ln, ln))
+    # add x @ x.T for all vectors in input list
+    for i in range(len(l)):
+        L[i] = np.reshape(np.array(L[i]), (ln, 1))
+        W = W + L[i] @ L[i].T
+    # fill main diagonal with zeros
+    np.fill_diagonal(W, 0)
+    return W
+
+W = wts(L)
+
+### TEST
+# test vector
+t = (-1, -1, 1, -1, 1, -1, -1, 1, -1)
+
+def wvec(vec, W):
+    vec = np.reshape(np.array(vec), (len(vec), 1))
+    vec = W @ vec
+    vec = np.ndarray.round(np.tanh(vec))
+    return vec
+
+vec = wvec(t, W)
+
+for i in L:
+    if np.array_equal(vec, i):
+        print(&amp;quot;Pattern detected&amp;quot;, i)
+    else:
+        print(&amp;quot;Pattern not detected&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Pattern not detected
+## Pattern detected [[-1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [-1]]&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hypothesis testing</title>
+      <link>/post/statistics/hypothesis_testing/hypothesis_testing_r/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</guid>
+      <guid>/post/statistics/hypothesis_testing/hypothesis_testing_r/</guid>
+      <description>
+
+
+&lt;p&gt;Null hypothesis (H&lt;sub&gt;0&lt;/sub&gt;):&lt;br /&gt;
+1. H&lt;sub&gt;0&lt;/sub&gt;: m = μ&lt;br /&gt;
+2. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; μ&lt;br /&gt;
+3. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; μ&lt;/p&gt;
+&lt;p&gt;Alternative hypotheses (H&lt;sub&gt;a&lt;/sub&gt;): 1. H&lt;sub&gt;a&lt;/sub&gt;:m ≠ μ (different)&lt;br /&gt;
+2. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;gt; μ (greater)&lt;br /&gt;
+3. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;lt; μ (less)&lt;/p&gt;
+&lt;p&gt;Note: Hypothesis 1. are called &lt;strong&gt;two-tailed tests&lt;/strong&gt; and hypotheses 2. &amp;amp; 3. are called &lt;strong&gt;one-tailed tests&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The p-value is the probability that the observed data could happen, under the condition that the null hypothesis is true.&lt;/p&gt;
+&lt;p&gt;Note: p-value is not the probability that the null hypothesis is true.&lt;br /&gt;
+Note: Absence of evidence ⧧ evidence of absence.&lt;/p&gt;
+&lt;p&gt;Cutoffs for hypothesis testing *p &amp;lt; 0.05, **p &amp;lt; 0.01, ***p &amp;lt; 0.001. If p value is less than significance level alpha (0.05), the hull hypothesies is rejected.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;not rejected (‘negative’)&lt;/th&gt;
+&lt;th&gt;rejected (‘positive’)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; true&lt;/td&gt;
+&lt;td&gt;True negative (specificity)&lt;/td&gt;
+&lt;td&gt;False Positive (Type I error)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; false&lt;/td&gt;
+&lt;td&gt;False Negative (Type II error)&lt;/td&gt;
+&lt;td&gt;True positive (sensitivity)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Type II errors are usually more dangerous.&lt;/p&gt;
+&lt;div id=&#34;t-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;t-test&lt;/h1&gt;
+&lt;div id=&#34;t-test-and-normal-distribution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;t-test and normal distribution&lt;/h2&gt;
+&lt;p&gt;t-distribution assumes that the observations are &lt;strong&gt;independent&lt;/strong&gt; and that they follow a &lt;strong&gt;normal distribution&lt;/strong&gt;. If the data are &lt;strong&gt;dependent&lt;/strong&gt;, then p-values will likely be totally wrong (e.g., for positive correlation, too optimistic). Type II errors?&lt;br /&gt;
+It is good to test if observations are normally distributed. Otherwise we assume that data is normally distributed.&lt;br /&gt;
+Independence of observations is usually not testable, but can be reasonably assumed if the data collection process was random without replacement.&lt;/p&gt;
+&lt;p&gt;FIXME: I do not understand this. Deviation data from normalyty will lead to type-I errors. I data is deviated from normal distribution, use &lt;strong&gt;Wilcoxon test&lt;/strong&gt; or &lt;strong&gt;permutation tests&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-sample-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;One-sample t-test&lt;/h2&gt;
+&lt;p&gt;One-sample t-test is used to compare the mean of one sample to a known standard (or theoretical/hypothetical) mean (μ).&lt;br /&gt;
+t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t = \frac{m - \mu}{s/\sqrt{n}}\)&lt;/span&gt;, where&lt;br /&gt;
+&lt;strong&gt;m&lt;/strong&gt; is the sample &lt;strong&gt;mean&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;n&lt;/strong&gt; is the sample &lt;strong&gt;size&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;s&lt;/strong&gt; is the sample &lt;strong&gt;standard deviation&lt;/strong&gt; with n−1 degrees of freedom&lt;br /&gt;
+&lt;strong&gt;μ&lt;/strong&gt; is the &lt;strong&gt;theoretical value&lt;/strong&gt;&lt;br /&gt;
+Q: And what should I do with this t-statistics?&lt;br /&gt;
+Q: What is the difference between t-test and ANOVA?&lt;br /&gt;
+Q: What is the smallest sample size which can be tested by t-test?&lt;br /&gt;
+Q: Show diagrams explaining why p-value of one-sided is smaller than two-sided tests.&lt;/p&gt;
+&lt;p&gt;R example:&lt;br /&gt;
+We want to test if N is different from given mean μ=0:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;N = c(-0.01, 0.65, -0.17, 1.77, 0.76, -0.16, 0.88, 1.09, 0.96, 0.25)
+t.test(N, mu = 0, alternative = &amp;quot;less&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.9931
+## alternative hypothesis: true mean is less than 0
+## 95 percent confidence interval:
+##      -Inf 0.964019
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;two.sided&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.01383
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  0.1552496 1.0487504
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;greater&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.006916
+## alternative hypothesis: true mean is greater than 0
+## 95 percent confidence interval:
+##  0.239981      Inf
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;FIXME: why it accepts all alternatives at the same time (less and greater?)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;two-samples-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Two samples t-test&lt;/h2&gt;
+&lt;p&gt;Do two different samples have the same mean?&lt;br /&gt;
+H&lt;sub&gt;0&lt;/sub&gt;:&lt;br /&gt;
+1. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; = 0&lt;br /&gt;
+2. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; 0&lt;br /&gt;
+3. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; 0&lt;/p&gt;
+&lt;p&gt;H&lt;sub&gt;a&lt;/sub&gt;:&lt;br /&gt;
+1. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; ≠ 0 (different)&lt;br /&gt;
+2. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;gt; 0 (greater)&lt;br /&gt;
+3. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;lt; 0 (less)&lt;/p&gt;
+&lt;p&gt;The paired sample t-test has four main assumptions:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The dependent variable must be &lt;strong&gt;continuous&lt;/strong&gt; (interval/ratio).&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The observations are &lt;strong&gt;independent&lt;/strong&gt; of one another.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variable should be approximately &lt;strong&gt;normally distributed&lt;/strong&gt;.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variable should not contain any &lt;strong&gt;outliers&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Continuous data can take on any value within a range (income, height, weight, etc.). The opposite of continuous data is discrete data, which can only take on a few values (Low, Medium, High, etc.). Occasionally, discrete data can be used to approximate a continuous scale, such as with &lt;strong&gt;Likert-type scales&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t=\frac{y - x}{SE}\)&lt;/span&gt;, where y and x are the samples means. SE is the standard error for the difference. If H&lt;sub&gt;0&lt;/sub&gt; is correct, test statistic follows a t-distribution with n+m-2 degrees of freedom (n, m the number of observations in each sample).&lt;/p&gt;
+&lt;p&gt;To apply t-test samples must be tested if they have equal variance:&lt;br /&gt;
+equal variance (homoscedastic). Type 3 means two samples, unequal variance (heteroscedastic).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;### t-test
+a = c(175, 168, 168, 190, 156, 181, 182, 175, 174, 179)
+b = c(185, 169, 173, 173, 188, 186, 175, 174, 179, 180)
+
+# test homogeneity of variances using Fisher’s F-test
+var.test(a,b)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  F test to compare two variances
+## 
+## data:  a and b
+## F = 2.1028, num df = 9, denom df = 9, p-value = 0.2834
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.5223017 8.4657950
+## sample estimates:
+## ratio of variances 
+##           2.102784&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# variance is homogene (can use var.equal=T in t.test)
+
+# t-test
+t.test(a,b, 
+       var.equal=TRUE,   # variance is homogene (tested by var.test(a,b)) 
+       paired=FALSE)     # samples are independent&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Two Sample t-test
+## 
+## data:  a and b
+## t = -0.94737, df = 18, p-value = 0.356
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -10.93994   4.13994
+## sample estimates:
+## mean of x mean of y 
+##     174.8     178.2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary-of-r-functions-for-t-tests&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summary of R functions for t-tests&lt;/h1&gt;
+&lt;p&gt;One-sample t-test&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(x, mu = 0, alternative = c(&amp;quot;two.sided&amp;quot;, &amp;quot;less&amp;quot;, &amp;quot;greater&amp;quot;), paired = FALSE, var.equal = FALSE, conf.level = 0.95)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;what-is-that&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is that?&lt;/h2&gt;
+&lt;p&gt;one-way ANOVA or 2-way ANOVA with &lt;strong&gt;Bonferroni multiple comparison&lt;/strong&gt; or &lt;strong&gt;Dunnett’s post-test&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;non-parametric-tests&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Non-parametric tests&lt;/h1&gt;
+&lt;div id=&#34;mann-whitney-u-rank-sum-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mann-Whitney U Rank Sum Test&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The dependent variable is ordinal or continuous.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The data consist of a randomly selected sample of independent observations from two independent groups.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variables for the two independent groups share a similar shape.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wilcoxon-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Wilcoxon test&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;Wilcoxon&lt;/strong&gt; is a &lt;strong&gt;non-parametric test&lt;/strong&gt; which works on normal and non-normal data. However, we usually prefer not to use it if we can assume that the data is normally distributed. The non-parametric test comes with less statistical power, this is a price that one has to pay for more flexible assumptions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tests-for-categorical-variables&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Tests for categorical variables&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Categorical variable&lt;/strong&gt; can take fixed number of possible values, assigning each individual or other unit of observation to a particular group or nominal category on the basis of some qualitative property.&lt;/p&gt;
+&lt;div id=&#34;chi-squared-tests&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Chi-squared tests&lt;/h2&gt;
+&lt;p&gt;The chi-squared test is most suited to large datasets. As a general rule, the chi-squared test is appropriate if at least 80% of the cells have an expected frequency of 5 or greater. In addition, none of the cells should have an expected frequency less than 1. If the expected values are very small, categories may be combined (if it makes sense to do so) to create fewer larger categories. Alternatively, Fisher’s exact test can be used.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(83,35), c(92,43))
+data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
+## [1,]   83   35
+## [2,]   92   43&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;chisq.test(data, correct=F)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Pearson&amp;#39;s Chi-squared test
+## 
+## data:  data
+## X-squared = 0.14172, df = 1, p-value = 0.7066&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;chisq.test(testor,correct=F) ## Fisher’s Exact test R Example:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Group&lt;/th&gt;
+&lt;th&gt;TumourShrinkage-No&lt;/th&gt;
+&lt;th&gt;TumourShrinkage-Yes&lt;/th&gt;
+&lt;th&gt;Total&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1 Treatment&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2 Placebo&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3 Total&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The &lt;strong&gt;null hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;no association&lt;/strong&gt; between treatment and tumour shrinkage.&lt;br /&gt;
+The &lt;strong&gt;alternative hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;some association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(8,3), c(9,4))
+data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
+## [1,]    8    3
+## [2,]    9    4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fisher.test(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Fisher&amp;#39;s Exact Test for Count Data
+## 
+## data:  data
+## p-value = 1
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##   0.1456912 10.6433317
+## sample estimates:
+## odds ratio 
+##   1.176844&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output Fisher’s exact test tells us that the probability of observing such an extreme combination of frequencies is high, our p-value is 1.000 which is clearly greater than 0.05. In this case, there is &lt;strong&gt;no evidence of an association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multiple-testing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Multiple testing&lt;/h1&gt;
+&lt;p&gt;When performing a large number of tests, the type I error is inflated: for α=0.05 and performing n tests, the probability of no false positive result is: 0.095 x 0.95 x … (n-times) &amp;lt;&amp;lt;&amp;lt; 0.095&lt;br /&gt;
+The larger the number of tests performed, the higher the probability of a false rejection!&lt;br /&gt;
+Many data analysis approaches in genomics rely on itemby-item (i.e. multiple) testing:&lt;br /&gt;
+Microarray or RNA-Seq expression profiles of “normal” vs “perturbed” samples: gene-by-gene&lt;br /&gt;
+ChIP-chip: locus-by-locus&lt;br /&gt;
+RNAi and chemical compound screens&lt;br /&gt;
+Genome-wide association studies: marker-by-marker&lt;br /&gt;
+QTL analysis: marker-by-marker and trait-by-trait&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;False positive rate&lt;/strong&gt; (FPR) - the proportion of false positives among all resulst.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;False discovery rate&lt;/strong&gt; (FDR) - the proportion of false positives among all significant results.&lt;/p&gt;
+&lt;p&gt;Example: 20,000 genes, 100 hits, 10 of them wrong.&lt;br /&gt;
+FPR: 0.05%&lt;br /&gt;
+FDR: 10%&lt;/p&gt;
+&lt;div id=&#34;the-bonferroni-correction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Bonferroni correction&lt;/h2&gt;
+&lt;p&gt;The Bonferroni correction sets the significance cut-off at α/n.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Sources&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.sthda.com/english/wiki/one-sample-t-test-in-r&#34;&gt;One-Sample T-test in R&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simple Markov process</title>
+      <link>/post/statistics/markov_process/simple_markov_process/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/markov_process/simple_markov_process/</guid>
       <description>
 
 
@@ -116,9 +735,9 @@ sm&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Spline model</title>
-      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
+      <link>/post/statistics/splines/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
+      <guid>/post/statistics/splines/splines/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -200,7 +819,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
        lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build a model using splines&lt;/h2&gt;
@@ -274,7 +893,7 @@ points(x = df.my.MSE.test, y = my.MSE.test,
        pch = 15, col = &amp;#39;blue&amp;#39;)
 mtext(df.my.MSE.test, 
       side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
@@ -308,7 +927,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
        lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliograpy&lt;/h2&gt;

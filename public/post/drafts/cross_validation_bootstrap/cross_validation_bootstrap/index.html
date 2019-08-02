@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV).">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/">
+  <meta property="og:title" content="Cross-validation and bootstrap | Mark Goldberg">
+  <meta property="og:description" content="From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV)."><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-02T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-02T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Cross-validation and bootstrap | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/sport/"><span>Sport</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Cross-validation and bootstrap</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-02 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-02 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 2, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/statistics/">Statistics</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/&amp;text=Cross-validation%20and%20bootstrap" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/&amp;t=Cross-validation%20and%20bootstrap" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Cross-validation%20and%20bootstrap&amp;body=/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/&amp;title=Cross-validation%20and%20bootstrap" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Cross-validation%20and%20bootstrap%20/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap/&amp;title=Cross-validation%20and%20bootstrap" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#validation-sample">Validation sample</a></li>
+<li><a href="#leave-one-out-cross-validation-loocv">Leave-one-out cross-validation (LOOCV)</a></li>
+<li><a href="#k-cross-validation">k-cross-validation</a></li>
+<li><a href="#bootstrap">Bootstrap</a><ul>
+<li><a href="#presition-estimation-of-model-parameter">Presition estimation of model parameter</a></li>
+<li><a href="#---">Точность оценки параметра регрессии</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV).</p>
+<p><em>Model</em>: linear regression, kNN <em>Dataset</em>: <code>Auto {ISLR}</code></p>
+<p>We want to build models and compare this models:<br />
+mpg ~ f(horsepower) <code>Auto</code> dataset, where<br />
+<strong>mpg</strong> - miles per gallon<br />
+<strong>horsepower</strong> - engine horsepower</p>
+<pre class="r"><code>library(&#39;ISLR&#39;)        # datasets Auto
+attach(Auto)</code></pre>
+<pre class="r"><code>plot(horsepower, mpg,
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4),
+     bg = rgb(0, 0, 1, alpha = 0.4))</code></pre>
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div id="validation-sample" class="section level3">
+<h3>Validation sample</h3>
+<p>Split data to train and test sets and build model using train data.</p>
+<p>Make random vector for data subsetting:</p>
+<pre class="r"><code>n &lt;- nrow(Auto)         # number of observation
+train.percent &lt;- 0.5    # portion of train data
+
+# split data into train and test
+set.seed(1)
+inTrain &lt;- sample(n, n*train.percent)</code></pre>
+<p>Plot data</p>
+<pre class="r"><code># plot train data
+par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+legend(&#39;topright&#39;, pch = c(16, 16), col = c(&#39;blue&#39;, &#39;red&#39;), legend = c(&#39;test&#39;, &#39;train&#39;))</code></pre>
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Let’s buld models for train data using <strong>polynomial linear regression</strong> using vaious polinomial degrees and estimate MSE for each of these models using test data:<br />
+1. <strong>Linear</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)</span>.<br />
+2. <strong>Squared</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)</span>.<br />
+3. <strong>Cubic</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)</span>.</p>
+<pre class="r"><code>models &lt;- lapply(1:3, function(n) {
+  fit.lm &lt;- lm(mpg ~ poly(horsepower, n), data=Auto, subset=inTrain)
+  })
+
+# keep MSE for each model
+err.test &lt;- sapply(1:3, function(n) {
+  mean((mpg[-inTrain] - predict(models[[n]], Auto[-inTrain, ]))^2)
+})
+names(err.test) &lt;- c(&#39;lm1&#39;, &#39;lm2&#39;, &#39;lm3&#39;)</code></pre>
+<p>Q: Do our modeles fit the formulas shown before?</p>
+<p>Plot models</p>
+<pre class="r"><code>par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+
+colors=c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;)
+x1 &lt;- data.frame(horsepower=seq(min(horsepower), max(horsepower), length = 200))
+for (i in 1:3) {
+    y2 &lt;- predict(models[[i]], newdata=x1)
+    lines(x1$horsepower, y2, col=colors[i], lwd=c(2,2,2))
+}
+legend(&#39;topright&#39;, lty=c(1,1,1),
+       col = c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;),
+       legend = c(&#39;x&#39;, &#39;x^2&#39;, &#39;x^3&#39;), lwd=c(2,2,2))</code></pre>
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="leave-one-out-cross-validation-loocv" class="section level3">
+<h3>Leave-one-out cross-validation (LOOCV)</h3>
+<pre class="r"><code>library(&#39;GGally&#39;)      # matrix diagrams
+library(&#39;boot&#39;)        # cross-validation</code></pre>
+<pre class="r"><code># fit model for train data
+fit.glm &lt;- glm(mpg ~ horsepower, data = Auto)
+# LOOCV-error
+cv.err &lt;- cv.glm(Auto, fit.glm)
+cv.err$delta[1]</code></pre>
+<pre><code>## [1] 24.23151</code></pre>
+<p>Estimate the precision of polynomial models by changing power.</p>
+<pre class="r"><code># vector of LOOCV-errors
+cv.err.loocv &lt;- rep(0, 5)
+names(cv.err.loocv) &lt;- 1:5
+# repeat by powers of polynomes
+for (i in 1:5){
+  fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.loocv[i] &lt;- cv.glm(Auto, fit.glm)$delta[1]
+}
+# result
+cv.err.loocv</code></pre>
+<pre><code>##        1        2        3        4        5 
+## 24.23151 19.24821 19.33498 19.42443 19.03321</code></pre>
+</div>
+<div id="k-cross-validation" class="section level3">
+<h3>k-cross-validation</h3>
+<p>K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.<br />
+We will make 10-time validation.</p>
+<pre class="r"><code>cv.err.k.fold &lt;- rep(0, 5)
+names(cv.err.k.fold) &lt;- 1:5
+# repeat for power of polynomes
+for (i in 1:5){
+  fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.k.fold[i] &lt;- cv.glm(Auto, fit.glm,
+                             K = 10)$delta[1]
+}
+# result
+cv.err.k.fold</code></pre>
+<pre><code>##        1        2        3        4        5 
+## 24.19329 19.29416 19.49610 19.61828 19.15289</code></pre>
+<p>Compare with previous result:</p>
+<pre class="r"><code>err.test</code></pre>
+<pre><code>##      lm1      lm2      lm3 
+## 26.14142 19.82259 19.78252</code></pre>
+<p>Опираясь на результаты расчётов с кросс-валидацией, можно заключить, что на самом деле ошибка вне выборки у линейной модели выше, чем показывала MSE на тестовой выборке. А модели со степенями 2 и 3 на самом деле точнее, чем показывала MSE без перекрёстной проверки.</p>
+</div>
+<div id="bootstrap" class="section level2">
+<h2>Bootstrap</h2>
+<div id="presition-estimation-of-model-parameter" class="section level3">
+<h3>Presition estimation of model parameter</h3>
+<p>Пример с инвестиционным портфелем из двух активов: <code>Portfolio {ISLR}</code>. В наборе данных две переменных: * <code>X</code> – income from X,<br />
+* <code>Y</code> – income from Y.<br />
+We have <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, the portion of <span class="math inline">\(X\)</span> is <span class="math inline">\(\alpha\)</span>. Min of income dispersion:</p>
+<p><span class="math display">\[
+\mathrm{Var}(\alpha X + (1 - \alpha) Y) \rightarrow \mathrm{min}
+\]</span></p>
+<p>– parameter:<br />
+<span class="math display">\[
+\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
+\]</span> Данных для оценки <span class="math inline">\(\hat{\sigma_X^2}\)</span>, <span class="math inline">\(\hat{\sigma_Y^2}\)</span> и <span class="math inline">\(\hat{\sigma_{XY}}\)</span> немного (100 наблюдений), поэтому применим бутстреп.</p>
+<pre class="r"><code>head(Portfolio)</code></pre>
+<pre><code>##            X          Y
+## 1 -0.8952509 -0.2349235
+## 2 -1.5624543 -0.8851760
+## 3 -0.4170899  0.2718880
+## 4  1.0443557 -0.7341975
+## 5 -0.3155684  0.8419834
+## 6 -1.7371238 -2.0371910</code></pre>
+<pre class="r"><code>str(Portfolio)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
+##  $ X: num  -0.895 -1.562 -0.417 1.044 -0.316 ...
+##  $ Y: num  -0.235 -0.885 0.272 -0.734 0.842 ...</code></pre>
+<pre class="r"><code># функция для вычисления искомого параметра
+alpha.fn &lt;- function(data, index){
+  X = data$X[index]
+  Y = data$Y[index]
+  (var(Y) - cov(X, Y)) / (var(X) + var(Y) - 2*cov(X, Y))
+}
+# рассчитать alpha по всем 100 наблюдениям
+alpha.fn(Portfolio, 1:100)</code></pre>
+<pre><code>## [1] 0.5758321</code></pre>
+<pre class="r"><code># создать бутстреп-выборку и повторно вычислить alpha
+set.seed(1)
+alpha.fn(Portfolio, sample(100, 100, replace = T))</code></pre>
+<pre><code>## [1] 0.5963833</code></pre>
+<pre class="r"><code># теперь -- многократное повторение предыдущей операции
+boot(Portfolio, alpha.fn, R = 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Portfolio, statistic = alpha.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original        bias    std. error
+## t1* 0.5758321 -7.315422e-05  0.08861826</code></pre>
+<p>Бутстреп повторяет расчёт параметра много раз, делая повторные выборки из наших 100 наблюдений. В итоге этим методом можно вычислить стандартную ошибку параметра, не опираясь на допущения о законе распределении параметра. В нашем случае <span class="math inline">\(\alpha = 0.576\)</span> со стандартной ошибкой <span class="math inline">\(s_{\hat{\alpha}} = 0.089\)</span>.</p>
+</div>
+<div id="---" class="section level3">
+<h3>Точность оценки параметра регрессии</h3>
+<p>При построении модели регрессии проблемы в остатках приводят к неверной оценке ошибок параметров. Обойти эту проблему можно, применив для расчёта этих ошибок бутстреп.</p>
+<pre class="r"><code># Оценивание точности линейной регрессионной модели ----------------------------
+# оценить стандартные ошибки параметров модели 
+#  mpg = beta_0 + beta_1 * horsepower с помощью бутстрепа,
+#  сравнить с оценками ошибок по МНК
+# функция для расчёта коэффициентов ПЛР по выборке из данных
+boot.fn &lt;- function(data, index){
+  coef(lm(mpg ~ horsepower, data = data, subset = index))
+}
+boot.fn(Auto, 1:n)</code></pre>
+<pre><code>## (Intercept)  horsepower 
+##  39.9358610  -0.1578447</code></pre>
+<pre class="r"><code># пример применения функции к бутстреп-выборке
+set.seed(1)
+boot.fn(Auto, sample(n, n, replace = T))</code></pre>
+<pre><code>## (Intercept)  horsepower 
+##  38.7387134  -0.1481952</code></pre>
+<pre class="r"><code># применяем функцию boot для вычисления стандартных ошибок параметров
+#  (1000 выборок с повторами)
+boot(Auto, boot.fn, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0296667441 0.860440524
+## t2* -0.1578447 -0.0003113047 0.007411218</code></pre>
+<pre class="r"><code># сравним с МНК
+attach(Auto)</code></pre>
+<pre><code>## The following object is masked from package:ggplot2:
+## 
+##     mpg</code></pre>
+<pre><code>## The following objects are masked from Auto (pos = 6):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year</code></pre>
+<pre class="r"><code>summary(lm(mpg ~ horsepower))$coef</code></pre>
+<pre><code>##               Estimate  Std. Error   t value      Pr(&gt;|t|)
+## (Intercept) 39.9358610 0.717498656  55.65984 1.220362e-187
+## horsepower  -0.1578447 0.006445501 -24.48914  7.031989e-81</code></pre>
+<pre class="r"><code>detach(Auto)
+# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
+# вычислим оценки параметров квадратичной модели регрессии
+boot.fn.2 &lt;- function(data, index){
+  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
+}
+# применим функцию к 1000 бутсреп-выборкам
+set.seed(1)
+boot(Auto, boot.fn, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0269563085 0.859851825
+## t2* -0.1578447 -0.0002906457 0.007402954</code></pre>
+<p>В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.</p>
+<p><em>Literature</em></p>
+<ol style="list-style-type: decimal">
+<li><em>James G., Witten D., Hastie T. and Tibshirani R.</em> An Introduction to Statistical Learning with Applications in R. URL: <a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf</a></li>
+</ol>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/statistics/">Statistics</a>
+  
+  <a class="badge badge-light" href="/tags/cross-validation/">Cross-validation</a>
+  
+  <a class="badge badge-light" href="/tags/bootstrap/">Bootstrap</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing_r/">Hypothesis testing</a></li>
+          
+          <li><a href="/post/statistics/markov_process/simple_markov_process/">Simple Markov process</a></li>
+          
+          <li><a href="/post/statistics/anova/anova/">ANOVA</a></li>
+          
+          <li><a href="/post/programming/r_tips_tricks/r_tips_tricks/">R tips and coding tricks</a></li>
+          
+          <li><a href="/post/statistics/splines/splines/">Spline model</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

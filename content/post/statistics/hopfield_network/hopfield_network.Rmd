@@ -2,7 +2,7 @@
 title: "Hopfield Neural Network"
 author: "Mark Boltengagen"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-draft: "true"
+draft: true
 math: true
 tags: ["Python", "Hopfield ", "Neural Network", "Machine Learning"]
 categories: ["Statistics", "Python"]

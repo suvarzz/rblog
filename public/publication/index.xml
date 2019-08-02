@@ -2,15 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/publication/</link>
-      <atom:link href="https://suvar.netlify.com/publication/index.xml" rel="self" type="application/rss+xml" />
+    <link>/publication/</link>
+      <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Publications</title>
-      <link>https://suvar.netlify.com/publication/</link>
+      <link>/publication/</link>
     </image>
+    
+    <item>
+      <title>Name of the paper</title>
+      <link>/publication/template_paper/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/template_paper/</guid>
+      <description>
+
+
+&lt;p&gt;Summary of the paper and comments&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>

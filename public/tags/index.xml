@@ -2,77 +2,149 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/tags/</link>
-      <atom:link href="https://suvar.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Tags</title>
-      <link>https://suvar.netlify.com/tags/</link>
+      <link>/tags/</link>
     </image>
     
     <item>
-      <title>Epigenetics</title>
-      <link>https://suvar.netlify.com/tags/epigenetics/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/epigenetics/</guid>
+      <title>Bootstrap</title>
+      <link>/tags/bootstrap/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/bootstrap/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Markov process</title>
-      <link>https://suvar.netlify.com/tags/markov-process/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/markov-process/</guid>
+      <title>Cross-validation</title>
+      <link>/tags/cross-validation/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/cross-validation/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>PcG</title>
-      <link>https://suvar.netlify.com/tags/pcg/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/pcg/</guid>
+      <title>Hopfield </title>
+      <link>/tags/hopfield/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/hopfield/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural Network</title>
+      <link>/tags/neural-network/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/neural-network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://suvar.netlify.com/tags/r/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Regression</title>
-      <link>https://suvar.netlify.com/tags/regression/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Splines</title>
-      <link>https://suvar.netlify.com/tags/splines/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/splines/</guid>
+      <link>/tags/r/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Statistics</title>
-      <link>https://suvar.netlify.com/tags/statistics/</link>
+      <link>/tags/statistics/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Epigenetics</title>
+      <link>/tags/epigenetics/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/statistics/</guid>
+      <guid>/tags/epigenetics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hypothesis testing</title>
+      <link>/tags/hypothesis-testing/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/hypothesis-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marathon</title>
+      <link>/tags/marathon/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/marathon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Markov process</title>
+      <link>/tags/markov-process/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/markov-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PcG</title>
+      <link>/tags/pcg/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/pcg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Regression</title>
+      <link>/tags/regression/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Splines</title>
+      <link>/tags/splines/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/splines/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sport</title>
+      <link>/tags/sport/</link>
+      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/sport/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trx</title>
-      <link>https://suvar.netlify.com/tags/trx/</link>
+      <link>/tags/trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/tags/trx/</guid>
+      <guid>/tags/trx/</guid>
       <description></description>
     </item>
     

@@ -1,7 +1,7 @@
 ---
 title: "Cross-validation and bootstrap"
 author: "Mark Goldberg"
-date: '2019-08-01'
+date: '2019-08-02'
 draft: true
 math: true
 tags: ["R", "Statistics", "Cross-validation", "Bootstrap"]
@@ -10,94 +10,48 @@ categories: ["Statistics"]
 output:
   blogdown::html_page:
     toc: true
+summary: "From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV)."
 ---
 
 
 <div id="TOC">
 <ul>
-<li><a href="#cross-validation">Cross validation</a></li>
-<li><a href="#validation-sample">Validation sample</a><ul>
-<li><a href="#-----loocv">Перекрёстная проверка по отдельным наблюдениям (LOOCV)</a></li>
-<li><a href="#k---">k-кратная перекрёстная проверка</a></li>
-</ul></li>
-<li><a>Бутстреп</a><ul>
-<li><a href="#---">Точность оценки статистичестического параметра</a></li>
+<li><a href="#validation-sample">Validation sample</a></li>
+<li><a href="#leave-one-out-cross-validation-loocv">Leave-one-out cross-validation (LOOCV)</a></li>
+<li><a href="#k-cross-validation">k-cross-validation</a></li>
+<li><a href="#bootstrap">Bootstrap</a><ul>
+<li><a href="#presition-estimation-of-model-parameter">Presition estimation of model parameter</a></li>
 <li><a href="#---">Точность оценки параметра регрессии</a></li>
 </ul></li>
 </ul>
 </div>
 
-<p>From the following examples we will learn: 1. 2. 3. Model: linear regression, kNN Dataset: Auto {ISLR}</p>
-<p>В практических примерах ниже показано:</p>
-<ul>
-<li>как оценить точность модели методом перекрёстной выборки;<br />
-</li>
-<li>методом проверочной выборки;<br />
-</li>
-<li>методом перекрёстной проверки по отдельным наблюдениям (LOOCV);<br />
-</li>
-<li>методом k-кратной перекрёстной проверки;<br />
-</li>
-<li>как применять бутстреп для оценки точности статистического параметра и оценок параметров модели</li>
-</ul>
-<p><em>Модели</em>: линейная регрессия, kNN.<br />
-<em>Данные</em>: <code>Auto {ISLR}</code></p>
+<p>From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV).</p>
+<p><em>Model</em>: linear regression, kNN <em>Dataset</em>: <code>Auto {ISLR}</code></p>
+<p>We want to build models and compare this models:<br />
+mpg ~ f(horsepower) <code>Auto</code> dataset, where<br />
+<strong>mpg</strong> - miles per gallon<br />
+<strong>horsepower</strong> - engine horsepower</p>
 <pre class="r"><code>library(&#39;ISLR&#39;)        # datasets Auto
-library(&#39;GGally&#39;)      # matrix diagrams</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre class="r"><code>library(&#39;boot&#39;)            # cross-validation</code></pre>
-<pre class="r"><code># data exploration
-head(Auto)</code></pre>
-<pre><code>##   mpg cylinders displacement horsepower weight acceleration year origin
-## 1  18         8          307        130   3504         12.0   70      1
-## 2  15         8          350        165   3693         11.5   70      1
-## 3  18         8          318        150   3436         11.0   70      1
-## 4  16         8          304        150   3433         12.0   70      1
-## 5  17         8          302        140   3449         10.5   70      1
-## 6  15         8          429        198   4341         10.0   70      1
-##                        name
-## 1 chevrolet chevelle malibu
-## 2         buick skylark 320
-## 3        plymouth satellite
-## 4             amc rebel sst
-## 5               ford torino
-## 6          ford galaxie 500</code></pre>
-<pre class="r"><code>str(Auto)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    392 obs. of  9 variables:
-##  $ mpg         : num  18 15 18 16 17 15 14 14 14 15 ...
-##  $ cylinders   : num  8 8 8 8 8 8 8 8 8 8 ...
-##  $ displacement: num  307 350 318 304 302 429 454 440 455 390 ...
-##  $ horsepower  : num  130 165 150 150 140 198 220 215 225 190 ...
-##  $ weight      : num  3504 3693 3436 3433 3449 ...
-##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
-##  $ year        : num  70 70 70 70 70 70 70 70 70 70 ...
-##  $ origin      : num  1 1 1 1 1 1 1 1 1 1 ...
-##  $ name        : Factor w/ 304 levels &quot;amc ambassador brougham&quot;,..: 49 36 231 14 161 141 54 223 241 2 ...</code></pre>
-<p>You can check correlation of various parameters using <code>ggpairs(Auto[, -9])</code></p>
-<p>We will check the correlation between mpg ~ horsepower</p>
-<pre class="r"><code>plot(Auto$horsepower, Auto$mpg,
-     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;,
-     pch = 21,
+attach(Auto)</code></pre>
+<pre class="r"><code>plot(horsepower, mpg,
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
      col = rgb(0, 0, 1, alpha = 0.4),
      bg = rgb(0, 0, 1, alpha = 0.4))</code></pre>
-<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div id="cross-validation" class="section level2">
-<h2>Cross validation</h2>
-</div>
-<div id="validation-sample" class="section level2">
-<h2>Validation sample</h2>
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div id="validation-sample" class="section level3">
+<h3>Validation sample</h3>
 <p>Split data to train and test sets and build model using train data.</p>
-<pre class="r"><code>n &lt;- nrow(Auto)                  # number of observation
-train.percent &lt;- 0.5             # portion of train data
-attach(Auto)                     # to call mpg &amp; horsepower instead of Auto$mpg &amp; Auto$horsepower</code></pre>
-<pre><code>## The following object is masked from package:ggplot2:
-## 
-##     mpg</code></pre>
-<pre class="r"><code># split data into train and test
-set.seed(1)
-inTrain &lt;- sample(n, n * train.percent)
+<p>Make random vector for data subsetting:</p>
+<pre class="r"><code>n &lt;- nrow(Auto)         # number of observation
+train.percent &lt;- 0.5    # portion of train data
 
-# plot train data
+# split data into train and test
+set.seed(1)
+inTrain &lt;- sample(n, n*train.percent)</code></pre>
+<p>Plot data</p>
+<pre class="r"><code># plot train data
+par(mar = c(4, 4, 0.5, 1))
 plot(horsepower[inTrain], mpg[inTrain],
      xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
      col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
@@ -105,115 +59,98 @@ plot(horsepower[inTrain], mpg[inTrain],
 points(horsepower[-inTrain], mpg[-inTrain],
        pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
 legend(&#39;topright&#39;, pch = c(16, 16), col = c(&#39;blue&#39;, &#39;red&#39;), legend = c(&#39;test&#39;, &#39;train&#39;))</code></pre>
-<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>Build models for validataion of accuracy:<br />
-<span class="math display">\[
-\hat{mpg} = f(horsepower)
-\]</span> <strong>Linear model</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)</span>.</p>
-<pre class="r"><code># fit linear model for train data
-fit.lm.1 &lt;- lm(mpg ~ horsepower, subset = inTrain)
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Let’s buld models for train data using <strong>polynomial linear regression</strong> using vaious polinomial degrees and estimate MSE for each of these models using test data:<br />
+1. <strong>Linear</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)</span>.<br />
+2. <strong>Squared</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)</span>.<br />
+3. <strong>Cubic</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)</span>.</p>
+<pre class="r"><code>models &lt;- lapply(1:3, function(n) {
+  fit.lm &lt;- lm(mpg ~ poly(horsepower, n), data=Auto, subset=inTrain)
+  })
 
-# MSE of test data
-mean((mpg[-inTrain] - predict(fit.lm.1, Auto[-inTrain, ]))^2)</code></pre>
-<pre><code>## [1] 26.14142</code></pre>
-<p>Строим <strong>квадратичную модель</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)</span>.</p>
-<pre class="r"><code># присоединить таблицу с данными: названия стоблцов будут доступны напрямую
-attach(Auto)</code></pre>
-<pre><code>## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year</code></pre>
-<pre><code>## The following object is masked from package:ggplot2:
-## 
-##     mpg</code></pre>
-<pre class="r"><code># подгонка линейной модели на обучающей выборке
-fit.lm.2 &lt;- lm(mpg ~ poly(horsepower, 2), 
-               subset = inTrain)
-# считаем MSE на тестовой выборке
-mean((mpg[-inTrain] - predict(fit.lm.2,
-                              Auto[-inTrain, ]))^2)</code></pre>
-<pre><code>## [1] 19.82259</code></pre>
-<pre class="r"><code># отсоединить таблицу с данными
-detach(Auto)</code></pre>
-<p>Строим <strong>кубическую модель</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)</span>.</p>
-<pre class="r"><code># присоединить таблицу с данными: названия стоблцов будут доступны напрямую
-attach(Auto)</code></pre>
-<pre><code>## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year</code></pre>
-<pre><code>## The following object is masked from package:ggplot2:
-## 
-##     mpg</code></pre>
-<pre class="r"><code># подгонка линейной модели на обучающей выборке
-fit.lm.3 &lt;- lm(mpg ~ poly(horsepower, 3), 
-               subset = inTrain)
-# считаем MSE на тестовой выборке
-mean((mpg[-inTrain] - predict(fit.lm.3,
-                              Auto[-inTrain, ]))^2)</code></pre>
-<pre><code>## [1] 19.78252</code></pre>
-<pre class="r"><code># отсоединить таблицу с данными
-detach(Auto)</code></pre>
-<div id="-----loocv" class="section level3">
-<h3>Перекрёстная проверка по отдельным наблюдениям (LOOCV)</h3>
-<p>Это самый затратный в вычислительном плане метод, но и самый надёжный в плане оценки ошибки вне выборки. Попробуем применить его к линейной модели.</p>
-<pre class="r"><code># подгонка линейной модели на обучающей выборке
+# keep MSE for each model
+err.test &lt;- sapply(1:3, function(n) {
+  mean((mpg[-inTrain] - predict(models[[n]], Auto[-inTrain, ]))^2)
+})
+names(err.test) &lt;- c(&#39;lm1&#39;, &#39;lm2&#39;, &#39;lm3&#39;)</code></pre>
+<p>Q: Do our modeles fit the formulas shown before?</p>
+<p>Plot models</p>
+<pre class="r"><code>par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+
+colors=c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;)
+x1 &lt;- data.frame(horsepower=seq(min(horsepower), max(horsepower), length = 200))
+for (i in 1:3) {
+    y2 &lt;- predict(models[[i]], newdata=x1)
+    lines(x1$horsepower, y2, col=colors[i], lwd=c(2,2,2))
+}
+legend(&#39;topright&#39;, lty=c(1,1,1),
+       col = c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;),
+       legend = c(&#39;x&#39;, &#39;x^2&#39;, &#39;x^3&#39;), lwd=c(2,2,2))</code></pre>
+<p><img src="/post/drafts/cross_validation_bootstrap/cross_validation_bootstrap_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="leave-one-out-cross-validation-loocv" class="section level3">
+<h3>Leave-one-out cross-validation (LOOCV)</h3>
+<pre class="r"><code>library(&#39;GGally&#39;)      # matrix diagrams
+library(&#39;boot&#39;)        # cross-validation</code></pre>
+<pre class="r"><code># fit model for train data
 fit.glm &lt;- glm(mpg ~ horsepower, data = Auto)
-# считаем LOOCV-ошибку
+# LOOCV-error
 cv.err &lt;- cv.glm(Auto, fit.glm)
-# результат: первое число -- по формуле LOOCV-ошибки,
-#  второе -- с поправкой на смещение
 cv.err$delta[1]</code></pre>
 <pre><code>## [1] 24.23151</code></pre>
-<p>Теперь оценим точность полиномиальных моделей, меняя степень, в которой стоит регрессор.</p>
-<pre class="r"><code># вектор с LOOCV-ошибками
+<p>Estimate the precision of polynomial models by changing power.</p>
+<pre class="r"><code># vector of LOOCV-errors
 cv.err.loocv &lt;- rep(0, 5)
 names(cv.err.loocv) &lt;- 1:5
-# цикл по степеням полиномов
+# repeat by powers of polynomes
 for (i in 1:5){
   fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
   cv.err.loocv[i] &lt;- cv.glm(Auto, fit.glm)$delta[1]
 }
-# результат
+# result
 cv.err.loocv</code></pre>
 <pre><code>##        1        2        3        4        5 
 ## 24.23151 19.24821 19.33498 19.42443 19.03321</code></pre>
 </div>
-<div id="k---" class="section level3">
-<h3>k-кратная перекрёстная проверка</h3>
-<p>K-кратная кросс-валидация – компромисс между методом проверочной выборки и LOOCV. Оценка ошибки вне выборки ближе к правде, по сравнению с проверочной выборкой, а объём вычислений меньше, чем при LOOCV. Проведём 10-кратную кросс-валидацию моделей разных степеней.</p>
-<pre class="r"><code># оценим точность полиномиальных моделей, меняя степень
-# вектор с ошибками по 10-кратной кросс-валидации
-cv.err.k.fold &lt;- rep(0, 5)
+<div id="k-cross-validation" class="section level3">
+<h3>k-cross-validation</h3>
+<p>K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.<br />
+We will make 10-time validation.</p>
+<pre class="r"><code>cv.err.k.fold &lt;- rep(0, 5)
 names(cv.err.k.fold) &lt;- 1:5
-# цикл по степеням полиномов
+# repeat for power of polynomes
 for (i in 1:5){
   fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
   cv.err.k.fold[i] &lt;- cv.glm(Auto, fit.glm,
                              K = 10)$delta[1]
 }
-# результат
+# result
 cv.err.k.fold</code></pre>
 <pre><code>##        1        2        3        4        5 
 ## 24.19329 19.29416 19.49610 19.61828 19.15289</code></pre>
-<p>Для сравнения напомним результаты расчёта MSE методом проверочной выборки:</p>
+<p>Compare with previous result:</p>
 <pre class="r"><code>err.test</code></pre>
-<pre><code>##        1        2        3 
+<pre><code>##      lm1      lm2      lm3 
 ## 26.14142 19.82259 19.78252</code></pre>
 <p>Опираясь на результаты расчётов с кросс-валидацией, можно заключить, что на самом деле ошибка вне выборки у линейной модели выше, чем показывала MSE на тестовой выборке. А модели со степенями 2 и 3 на самом деле точнее, чем показывала MSE без перекрёстной проверки.</p>
 </div>
-</div>
-<div class="section level2">
-<h2>Бутстреп</h2>
-<div id="---" class="section level3">
-<h3>Точность оценки статистичестического параметра</h3>
-<p>Пример с инвестиционным портфелем из двух активов: <code>Portfolio {ISLR}</code>. В наборе данных две переменных: * <code>X</code> – доход от актива X,<br />
-* <code>Y</code> – доход от актива Y.<br />
-Портфель инвестиций состоит из активов <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>, долю актива <span class="math inline">\(X\)</span> обозначим как <span class="math inline">\(\alpha\)</span>. Минимум дасперсии доходности:</p>
+<div id="bootstrap" class="section level2">
+<h2>Bootstrap</h2>
+<div id="presition-estimation-of-model-parameter" class="section level3">
+<h3>Presition estimation of model parameter</h3>
+<p>Пример с инвестиционным портфелем из двух активов: <code>Portfolio {ISLR}</code>. В наборе данных две переменных: * <code>X</code> – income from X,<br />
+* <code>Y</code> – income from Y.<br />
+We have <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, the portion of <span class="math inline">\(X\)</span> is <span class="math inline">\(\alpha\)</span>. Min of income dispersion:</p>
 <p><span class="math display">\[
 \mathrm{Var}(\alpha X + (1 - \alpha) Y) \rightarrow \mathrm{min}
 \]</span></p>
-<p>– достигается при значении параметра:<br />
+<p>– parameter:<br />
 <span class="math display">\[
 \alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2\sigma_{XY}}
 \]</span> Данных для оценки <span class="math inline">\(\hat{\sigma_X^2}\)</span>, <span class="math inline">\(\hat{\sigma_Y^2}\)</span> и <span class="math inline">\(\hat{\sigma_{XY}}\)</span> немного (100 наблюдений), поэтому применим бутстреп.</p>
@@ -293,13 +230,13 @@ boot(Auto, boot.fn, 1000)</code></pre>
 ## t2* -0.1578447 -0.0003113047 0.007411218</code></pre>
 <pre class="r"><code># сравним с МНК
 attach(Auto)</code></pre>
-<pre><code>## The following objects are masked from Auto (pos = 3):
-## 
-##     acceleration, cylinders, displacement, horsepower, mpg, name,
-##     origin, weight, year</code></pre>
 <pre><code>## The following object is masked from package:ggplot2:
 ## 
 ##     mpg</code></pre>
+<pre><code>## The following objects are masked from Auto (pos = 6):
+## 
+##     acceleration, cylinders, displacement, horsepower, mpg, name,
+##     origin, weight, year</code></pre>
 <pre class="r"><code>summary(lm(mpg ~ horsepower))$coef</code></pre>
 <pre><code>##               Estimate  Std. Error   t value      Pr(&gt;|t|)
 ## (Intercept) 39.9358610 0.717498656  55.65984 1.220362e-187
@@ -326,7 +263,7 @@ boot(Auto, boot.fn, 1000)</code></pre>
 ## t1* 39.9358610  0.0269563085 0.859851825
 ## t2* -0.1578447 -0.0002906457 0.007402954</code></pre>
 <p>В модели регрессии, для которой проводился расчёт, похоже, не нарушаются требования к остаткам, и оценки стандартных ошибок параметров, рассчитанные по МНК, очень близки к ошибкам этих же параметров, полученных бутстрепом.</p>
-<p><em>Источники</em></p>
+<p><em>Literature</em></p>
 <ol style="list-style-type: decimal">
 <li><em>James G., Witten D., Hastie T. and Tibshirani R.</em> An Introduction to Statistical Learning with Applications in R. URL: <a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf</a></li>
 </ol>

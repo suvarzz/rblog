@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python | Mark Goldberg</title>
+    <link>/tags/python/</link>
+      <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <description>Python</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>Python</title>
+      <link>/tags/python/</link>
+    </image>
+    
+    <item>
+      <title>Hopfield Neural Network</title>
+      <link>/post/statistics/hopfield_network/hopfield_network/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/hopfield_network/hopfield_network/</guid>
+      <description>
+
+
+&lt;p&gt;Here is an example of python code.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+
+# Patterns
+x1 = [1, -1, -1, -1, 1, -1, -1, -1, 1]
+x2 = [-1, -1, 1, -1, 1, -1, 1, -1, -1]
+
+L = []
+L.append(x1)
+L.append(x2)
+
+# Function to find weight from list of vectors (lists)
+def wts(l):
+    # length of the first element in input list
+    # Would be great to check that all elements have the same length
+    ln = len(l[1])
+    # Weight matrix filled with zeros
+    W = np.zeros((ln, ln))
+    # add x @ x.T for all vectors in input list
+    for i in range(len(l)):
+        L[i] = np.reshape(np.array(L[i]), (ln, 1))
+        W = W + L[i] @ L[i].T
+    # fill main diagonal with zeros
+    np.fill_diagonal(W, 0)
+    return W
+
+W = wts(L)
+
+### TEST
+# test vector
+t = (-1, -1, 1, -1, 1, -1, -1, 1, -1)
+
+def wvec(vec, W):
+    vec = np.reshape(np.array(vec), (len(vec), 1))
+    vec = W @ vec
+    vec = np.ndarray.round(np.tanh(vec))
+    return vec
+
+vec = wvec(t, W)
+
+for i in L:
+    if np.array_equal(vec, i):
+        print(&amp;quot;Pattern detected&amp;quot;, i)
+    else:
+        print(&amp;quot;Pattern not detected&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Pattern not detected
+## Pattern detected [[-1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [ 1]
+##  [-1]
+##  [-1]]&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

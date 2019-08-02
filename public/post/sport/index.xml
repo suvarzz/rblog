@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sport | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/post/sport/</link>
-      <atom:link href="https://suvar.netlify.com/post/sport/index.xml" rel="self" type="application/rss+xml" />
+    <link>/post/sport/</link>
+      <atom:link href="/post/sport/index.xml" rel="self" type="application/rss+xml" />
     <description>Sport</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Sport</title>
-      <link>https://suvar.netlify.com/post/sport/</link>
+      <link>/post/sport/</link>
     </image>
     
   </channel>

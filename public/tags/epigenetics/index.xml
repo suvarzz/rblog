@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Epigenetics | Mark Goldberg</title>
-    <link>https://suvar.netlify.com/tags/epigenetics/</link>
-      <atom:link href="https://suvar.netlify.com/tags/epigenetics/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/epigenetics/</link>
+      <atom:link href="/tags/epigenetics/index.xml" rel="self" type="application/rss+xml" />
     <description>Epigenetics</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://suvar.netlify.com/img/logo.png</url>
+      <url>/img/logo.png</url>
       <title>Epigenetics</title>
-      <link>https://suvar.netlify.com/tags/epigenetics/</link>
+      <link>/tags/epigenetics/</link>
     </image>
     
     <item>
       <title>Polycomb and Trithorax group proteins</title>
-      <link>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</link>
+      <link>/post/biology/pcg_trx/pcg_trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://suvar.netlify.com/post/biology/pcg_trx/pcg_trx/</guid>
+      <guid>/post/biology/pcg_trx/pcg_trx/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -115,6 +115,18 @@ We currently lack a clear understanding of the hierarchical recruitment of PcG a
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Name of the paper</title>
+      <link>/publication/template_paper/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/template_paper/</guid>
+      <description>
+
+
+&lt;p&gt;Summary of the paper and comments&lt;/p&gt;
 </description>
     </item>
     
