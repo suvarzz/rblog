@@ -1,0 +1,74 @@
+---
+title: "How to split data into train and test subsets?"
+subtitle: ""
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+lastmod: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics"]
+categories: ["R", "Statistics"]
+#bibliography: [bib.bib]
+output:
+  toc: true
+summary: "Here you will learn approaches to split your data into subsets - train and test for your modeling."
+---
+  
+Here you can find several simple approaches to split data into train and test subset to fit and to test parameters of your model. 
+We want to split our data:  
+train percent - 0.7  
+test percent - 0.3  
+
+Let us create a data frame filled with generated data.  
+
+```{r}
+df = data.frame(x=seq(.1,1,.1), y=seq(1,10), z=letters[seq(1,10)])
+df
+```
+1. First approach is to create a vector filled with selected IDs of rows and then apply this vector to subset data.  
+
+```{r}
+set.seed(1) # set state of random number generator
+tv1 = sample(nrow(df), nrow(df)*0.7)
+tv1
+
+# Select train and test data for column y using our vector
+train = df$y[tv1]
+test = df$y[-tv1] # the same as test = df$y[!tv1]
+train
+test
+```
+
+2. Another approch is to create a vecotr filled with logical true/false for each row of dataset and apply this vector to subset data.  
+```{r}
+set.seed(1) # set state of random number generator
+tv2 = sample(c(TRUE, FALSE), nrow(df), replace = T, prob = c(0.7,0.3))
+tv2
+
+# Select train and test data for column y using our vector
+train = df$y[tv2]
+test = df$y[!tv2]
+train
+test
+```
+
+3. Using [`caTools`](https://cran.r-project.org/web/packages/caTools/index.html).
+```{r}
+library(caTools)
+set.seed(1) 
+sample = sample.split(df, SplitRatio = .7)
+train = subset(df$y, sample == TRUE)
+test  = subset(df$y, sample == FALSE)
+train
+test
+```
+
+4. Using [`dplyr`](https://cran.r-project.org/web/packages/dplyr/)
+```{r, message=F}
+library(dplyr)
+df$id <- 1:nrow(df)
+train <- df %>% dplyr::sample_frac(.7)
+test  <- dplyr::anti_join(df, train, by = 'id')
+train$y
+test$y
+```
