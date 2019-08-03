@@ -77,86 +77,214 @@ legend(&#39;topright&#39;, lty=c(1,1,1),
        lwd=c(2,2,2,NA,NA), pch=c(NA,NA,NA,16,16))</code></pre>
 <p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre class="r"><code># end PLOT</code></pre>
+<p>Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;Auto&#39;:
+## 
+##     mpg</code></pre>
+<pre class="r"><code>mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
+                       degree = vector(&quot;integer&quot;, 100), 
+                       mse = vector(&quot;double&quot;, 100))
+counter &lt;- 1
+
+for(i in 1:10) {
+  # random sample
+  set.seed(i)
+  sample &lt;- sample(c(TRUE, FALSE), nrow(Auto), replace = T, prob = c(0.6,0.4))
+  train &lt;- Auto[sample, ]
+  test &lt;- Auto[!sample, ]
+  
+  # modeling
+  for(j in 1:10) {
+    lm.fit &lt;- lm(mpg ~ poly(horsepower, j), data = train)
+    
+    # add degree &amp; mse values
+    mse.df.2[counter, 2] &lt;- j
+    mse.df.2[counter, 3] &lt;- mean((test$mpg - predict(lm.fit, test))^2)
+    
+    # add sample identifier
+    mse.df.2[counter, 1] &lt;- i
+    counter &lt;- counter + 1
+  }
+  next
+}
+
+ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
+  geom_line(show.legend = FALSE) +
+  geom_point(show.legend = FALSE) +
+  ylim(c(10, 30))</code></pre>
+<p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-3-1.png" width="672" /> All ten curves indicate that there is not much benefit in including cubic or higher-order polynomial terms in the model.<br />
+However, MSE depends on train data subsets.<br />
+The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.<br />
+<strong>Cross-validation methods</strong> are used to overcome this drawback.</p>
 <div id="leave-one-out-cross-validation-loocv" class="section level3">
 <h3>Leave-one-out cross-validation (LOOCV)</h3>
-<pre class="r"><code>library(&#39;GGally&#39;)      # matrix diagrams
-library(&#39;boot&#39;)        # cross-validation</code></pre>
-<pre class="r"><code># fit model for train data
-fit.glm &lt;- glm(mpg ~ horsepower, data = Auto)
-# LOOCV-error
-cv.err &lt;- cv.glm(Auto, fit.glm)
-cv.err$delta[1]</code></pre>
+<p>In the LOOCV method a single observation is used for the validation set, and the remaining <span class="math inline">\(n - 1\)</span> observations make up the training set.<br />
+Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. Note: we will use <code>glm</code> function for linear regression models and the <code>cv.glm</code> function from <code>boot</code> package, which provide necessary tools to perform resamping.</p>
+<pre class="r"><code># LOOCV
+library(&#39;boot&#39;)        # cross-validation
+# step 1: fit model
+glm.fit &lt;- glm(mpg ~ horsepower, data = Auto)
+# setp 2: perform LOOCV across entire data set
+loocv.err &lt;- cv.glm(Auto, glm.fit)
+
+str(loocv.err)</code></pre>
+<pre><code>## List of 4
+##  $ call : language cv.glm(data = Auto, glmfit = glm.fit)
+##  $ K    : num 392
+##  $ delta: num [1:2] 24.2 24.2
+##  $ seed : int [1:626] 403 392 -1703707781 1994959178 434562476 -1277611857 -1105401243 1020654108 526650482 -1538305299 ...</code></pre>
+<p><strong>call</strong>: the original function call.<br />
+<strong>K</strong>: the number of folds used. The LOOCV repeats validation with each of all of 392 observations.<br />
+<strong>delta</strong>: prediction error (MSE) estimated by the cross-validation.<br />
+<strong>seed</strong>: the values of the random seed used for the function call</p>
+<p>Let’s compare MSE estimated by <strong>LOOCV</strong> methods with MSE derived by <strong>simple validation</strong> approach (0.6/0.4) what we previously used.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code># get MSE for our 10 polynomial models, where degree is 1 (linear models). 
+mse &lt;- mse.df.2 %&gt;% filter(degree == 1) %&gt;% pull(mse)
+mse                 # all MSE from our 10 linear polynoms</code></pre>
+<pre><code>##  [1] 28.43298 26.38322 27.35615 27.40516 20.31488 24.31761 23.14485
+##  [8] 21.92717 25.64242 23.90127</code></pre>
+<pre class="r"><code>mean(mse)           # average MSE from our 10 linear polynoms</code></pre>
+<pre><code>## [1] 24.88257</code></pre>
+<pre class="r"><code>loocv.err$delta[1]  # LOOCV MSE</code></pre>
 <pre><code>## [1] 24.23151</code></pre>
-<p>Estimate the precision of polynomial models by changing power.</p>
+<p>As we can see, MSE derived by LOOCV is 24.2 and it is more precise but very close to the average MSE derived by avereging of our 10 polynomial linear models we made before (~24.9).</p>
+<p>Now we can apply LOOCV to estimate MSE for all 10 degrees of our polynomial regression models.</p>
 <pre class="r"><code># vector of LOOCV-errors
-cv.err.loocv &lt;- rep(0, 5)
-names(cv.err.loocv) &lt;- 1:5
+n &lt;- 10 # max degree of polynom model
+cv.err.loocv &lt;- rep(NA, n)
+names(cv.err.loocv) &lt;- 1:n
 # repeat by powers of polynomes
-for (i in 1:5){
+for (i in 1:n){
   fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
   cv.err.loocv[i] &lt;- cv.glm(Auto, fit.glm)$delta[1]
 }
 # result
 cv.err.loocv</code></pre>
-<pre><code>##        1        2        3        4        5 
-## 24.23151 19.24821 19.33498 19.42443 19.03321</code></pre>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 24.23151 19.24821 19.33498 19.42443 19.03321 18.97864 18.83305 18.96115 
+##        9       10 
+## 19.06863 19.49093</code></pre>
+<p>Result is basically the same for this model as we got before but this result is more precise.<br />
+This LOOCV approach can be used with any kind of predictive modeling.</p>
 </div>
 </div>
 <div id="k-fold-cross-validation" class="section level2">
 <h2>k-fold cross validation</h2>
-<p>K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.<br />
+<p>library(‘GGally’) # matrix diagrams K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.<br />
 We will make 10-time validation.</p>
-<pre class="r"><code>cv.err.k.fold &lt;- rep(0, 5)
-names(cv.err.k.fold) &lt;- 1:5
+<pre class="r"><code>n &lt;- 10 # max degree (number of polynom models)
+cv.err.k.fold &lt;- rep(NA, 10)
+names(cv.err.k.fold) &lt;- 1:10
 # repeat for power of polynomes
-for (i in 1:5){
+for (i in 1:n){
   fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.k.fold[i] &lt;- cv.glm(Auto, fit.glm,
-                             K = 10)$delta[1]
+  cv.err.k.fold[i] &lt;- cv.glm(Auto, fit.glm, K = 10)$delta[1]
 }
 # result
 cv.err.k.fold</code></pre>
-<pre><code>##        1        2        3        4        5 
-## 24.45600 19.29844 19.38499 19.44170 19.29083</code></pre>
-<p>Compare with previous result:</p>
-<pre class="r"><code>mse.df</code></pre>
-<pre><code>##    degree      mse
-## 1       1 27.00389
-## 2       2 20.21120
-## 3       3 20.16025
-## 4       4 20.24898
-## 5       5 19.72873
-## 6       6 19.57046
-## 7       7 19.40368
-## 8       8 20.02701
-## 9       9 21.24304
-## 10     10 21.11673</code></pre>
-<p>Results show that error of liniear model is higher that was shown by MSE and errors are lower for polynomial regression models n=2,3.</p>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 24.10371 19.34487 19.33756 19.71388 18.86019 19.02235 18.90377 19.18771 
+##        9       10 
+## 19.29985 19.08448</code></pre>
+<p><strong>k-fold cross validation</strong> computationally more effective than <strong>LOOCV</strong>.</p>
 </div>
 <div id="bootstrapping" class="section level2">
 <h2>Bootstrapping</h2>
-<p>One of the great advantages of the bootstrap approach is that it can be applied in almost all situations. No complicated mathematical calculations are required. Performing a bootstrap analysis in R entails only two steps. First, we must create a function that computes the statistic of interest. Second, we use the <code>boot()</code> function, which is part of the boot library, to perform the bootstrap by repeatedly sampling observations from the data set with replacement.<br />
-Lets apply bootstrap for calculation of residual errors.</p>
-<pre class="r"><code>boot.fn &lt;- function(data, index){
+<p><strong>Bootstrapping</strong> repeatedly draws independent samples from our data set to create bootstrap data sets. This sample is performed with replacement, which means that the same observation can be sampled more than once.</p>
+<pre class="r"><code>n &lt;- nrow(Auto)
+statistic &lt;- function(data, index) {
+  # extract model coefficients
   coef(lm(mpg ~ horsepower, data = data, subset = index))
 }
-boot.fn(Auto, 1:n)
-
-set.seed(1)
-boot.fn(Auto, sample(n, n, replace = T))
-# aply boot to calculate standard errors for 1000 samplings with repeats)
-boot(Auto, boot.fn, 1000)
-# compere with &#39;МНК&#39;
-#summary(lm(mpg ~ horsepower))$coef
-# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
-# вычислим оценки параметров квадратичной модели регрессии
-boot.fn.2 &lt;- function(data, index){
+statistic(Auto, 1:392)</code></pre>
+<pre><code>## (Intercept)  horsepower 
+##  39.9358610  -0.1578447</code></pre>
+<pre class="r"><code>set.seed(1)
+boot(Auto, statistic, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = statistic, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0269563085 0.859851825
+## t2* -0.1578447 -0.0002906457 0.007402954</code></pre>
+<p>Bootstrap estimate for SE0 is 0.86, and that the bootstrap estimate for SE1is 0.0076. If we compare these to the standard errors provided by the summary function we see a difference (biased error).</p>
+<pre class="r"><code>summary(lm(mpg ~ horsepower, data = Auto))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ horsepower, data = Auto)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.5710  -3.2592  -0.3435   2.7630  16.9240 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 39.935861   0.717499   55.66   &lt;2e-16 ***
+## horsepower  -0.157845   0.006446  -24.49   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.906 on 390 degrees of freedom
+## Multiple R-squared:  0.6059, Adjusted R-squared:  0.6049 
+## F-statistic: 599.7 on 1 and 390 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Now we compair errors for polynomial model (degree=2) by bootstrap and non-bootstrap approach.</p>
+<pre class="r"><code>statistic.2 &lt;- function(data, index) {
   coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
 }
-# apply bootstap with 1000 samplings
 set.seed(1)
-boot(Auto, boot.fn, 1000)</code></pre>
-<p>Regression models errors calculated by MHK are similar byb errors calculated using bootstap</p>
+boot(Auto, statistic.2, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = statistic.2, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original      bias    std. error
+## t1*   23.44592 0.003943212   0.2255528
+## t2* -120.13774 0.117312678   3.7008952
+## t3*   44.08953 0.047449584   4.3294215</code></pre>
+<pre class="r"><code>summary(lm(mpg ~ poly(horsepower, 2), data = Auto))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ poly(horsepower, 2), data = Auto)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.7135  -2.5943  -0.0859   2.2868  15.8961 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            23.4459     0.2209  106.13   &lt;2e-16 ***
+## poly(horsepower, 2)1 -120.1377     4.3739  -27.47   &lt;2e-16 ***
+## poly(horsepower, 2)2   44.0895     4.3739   10.08   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.374 on 389 degrees of freedom
+## Multiple R-squared:  0.6876, Adjusted R-squared:  0.686 
+## F-statistic:   428 on 2 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.</p>
 <div id="bibiography" class="section level3">
 <h3>Bibiography</h3>
 <p><a href="http://faculty.marshall.usc.edu/gareth-james/">An Introduction to Statistical Learning by Gareth James</a><br />

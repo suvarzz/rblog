@@ -69,89 +69,140 @@ legend('topright', lty=c(1,1,1),
        lwd=c(2,2,2,NA,NA), pch=c(NA,NA,NA,16,16))
 # end PLOT
 ```
-
-### Leave-one-out cross-validation (LOOCV)
-```{r, echo=T, results="hide", message=F}
-library('GGally')      # matrix diagrams
-library('boot')        # cross-validation
-```
+Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:
 ```{r}
-# fit model for train data
-fit.glm <- glm(mpg ~ horsepower, data = Auto)
-# LOOCV-error
-cv.err <- cv.glm(Auto, fit.glm)
-cv.err$delta[1]
-```  
+library(ggplot2)
+mse.df.2 <- data.frame(sample = vector("integer", 100), 
+                       degree = vector("integer", 100), 
+                       mse = vector("double", 100))
+counter <- 1
 
-Estimate the precision of polynomial models by changing power.
+for(i in 1:10) {
+  # random sample
+  set.seed(i)
+  sample <- sample(c(TRUE, FALSE), nrow(Auto), replace = T, prob = c(0.6,0.4))
+  train <- Auto[sample, ]
+  test <- Auto[!sample, ]
+  
+  # modeling
+  for(j in 1:10) {
+    lm.fit <- lm(mpg ~ poly(horsepower, j), data = train)
+    
+    # add degree & mse values
+    mse.df.2[counter, 2] <- j
+    mse.df.2[counter, 3] <- mean((test$mpg - predict(lm.fit, test))^2)
+    
+    # add sample identifier
+    mse.df.2[counter, 1] <- i
+    counter <- counter + 1
+  }
+  next
+}
 
+ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
+  geom_line(show.legend = FALSE) +
+  geom_point(show.legend = FALSE) +
+  ylim(c(10, 30))
+```
+All ten curves indicate that there is not much benefit in including cubic or higher-order polynomial terms in the model.  
+However, MSE depends on train data subsets.  
+The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.  
+**Cross-validation methods** are used to overcome this drawback.  
+
+## Leave-one-out cross-validation (LOOCV)
+In the LOOCV method a single observation is used for the validation set, and the remaining $n - 1$ observations make up the training set.  
+Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. 
+Note: we will use `glm` function for linear regression models and the `cv.glm` function from `boot` package, which provide necessary tools to perform resamping.  
+```{r message=F}
+# LOOCV
+library('boot')        # cross-validation
+# step 1: fit model
+glm.fit <- glm(mpg ~ horsepower, data = Auto)
+# setp 2: perform LOOCV across entire data set
+loocv.err <- cv.glm(Auto, glm.fit)
+
+str(loocv.err)
+```
+**call**: the original function call.  
+**K**: the number of folds used. The LOOCV repeats validation with each of all of 392 observations.  
+**delta**: prediction error (MSE) estimated by the cross-validation.  
+**seed**: the values of the random seed used for the function call
+
+Let's compare MSE estimated by **LOOCV** methods with MSE derived by **simple validation** approach (0.6/0.4) what we previously used.  
+```{r}
+library(dplyr)
+# get MSE for our 10 polynomial models, where degree is 1 (linear models). 
+mse <- mse.df.2 %>% filter(degree == 1) %>% pull(mse)
+mse                 # all MSE from our 10 linear polynoms
+mean(mse)           # average MSE from our 10 linear polynoms
+loocv.err$delta[1]  # LOOCV MSE
+```
+As we can see, MSE derived by LOOCV is 24.2 and it is more precise but very close to the average MSE derived by avereging of our 10 polynomial linear models we made before (~24.9).  
+
+Now we can apply LOOCV to estimate MSE for all 10 degrees of our polynomial regression models.  
 ```{r}
 # vector of LOOCV-errors
-cv.err.loocv <- rep(0, 5)
-names(cv.err.loocv) <- 1:5
+n <- 10 # max degree of polynom model
+cv.err.loocv <- rep(NA, n)
+names(cv.err.loocv) <- 1:n
 # repeat by powers of polynomes
-for (i in 1:5){
+for (i in 1:n){
   fit.glm <- glm(mpg ~ poly(horsepower, i), data = Auto)
   cv.err.loocv[i] <- cv.glm(Auto, fit.glm)$delta[1]
 }
 # result
 cv.err.loocv
 ```
+Result is basically the same for this model as we got before but this result is more precise.  
+This LOOCV approach can be used with any kind of predictive modeling.  
 
 ## k-fold cross validation
-
+library('GGally')      # matrix diagrams
 K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.  
 We will make 10-time validation.     
 
 ```{r}
-cv.err.k.fold <- rep(0, 5)
-names(cv.err.k.fold) <- 1:5
+n <- 10 # max degree (number of polynom models)
+cv.err.k.fold <- rep(NA, 10)
+names(cv.err.k.fold) <- 1:10
 # repeat for power of polynomes
-for (i in 1:5){
+for (i in 1:n){
   fit.glm <- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.k.fold[i] <- cv.glm(Auto, fit.glm,
-                             K = 10)$delta[1]
+  cv.err.k.fold[i] <- cv.glm(Auto, fit.glm, K = 10)$delta[1]
 }
 # result
 cv.err.k.fold
 ```
+**k-fold cross validation** computationally more effective than **LOOCV**.
 
-Compare with previous result:   
+## Bootstrapping
+**Bootstrapping** repeatedly draws independent samples from our data set to create bootstrap data sets. This sample is performed with replacement, which means that the same observation can be sampled more than once.  
 
 ```{r}
-mse.df
-```
-
-Results show that error of liniear model is higher that was shown by MSE and errors are lower for polynomial regression models n=2,3.  
-
-## Bootstrapping   
-One of the great advantages of the bootstrap approach is that it can be applied in almost all situations. No complicated mathematical calculations are required. Performing a bootstrap analysis in R entails only two steps. First, we must create a function that computes the statistic of interest. Second, we use the `boot()` function, which is part of the boot library, to perform the bootstrap by repeatedly sampling observations from the data set with replacement.  
-Lets apply bootstrap for calculation of residual errors.   
-
-```{r, eval=F}
-boot.fn <- function(data, index){
+n <- nrow(Auto)
+statistic <- function(data, index) {
+  # extract model coefficients
   coef(lm(mpg ~ horsepower, data = data, subset = index))
 }
-boot.fn(Auto, 1:n)
-
+statistic(Auto, 1:392)
 set.seed(1)
-boot.fn(Auto, sample(n, n, replace = T))
-# aply boot to calculate standard errors for 1000 samplings with repeats)
-boot(Auto, boot.fn, 1000)
-# compere with 'МНК'
-#summary(lm(mpg ~ horsepower))$coef
-# оценки отличаются из-за того, что МНК -- параметрический метод с допущениями
-# вычислим оценки параметров квадратичной модели регрессии
-boot.fn.2 <- function(data, index){
+boot(Auto, statistic, 1000)
+```
+Bootstrap estimate for SE0 is 0.86, and that the bootstrap estimate for SE1is 0.0076. If we compare these to the standard errors provided by the summary function we see a difference (biased error).  
+```{r}
+summary(lm(mpg ~ horsepower, data = Auto))
+```
+Now we compair errors for polynomial model (degree=2) by bootstrap and non-bootstrap approach.
+```{r}
+statistic.2 <- function(data, index) {
   coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
 }
-# apply bootstap with 1000 samplings
 set.seed(1)
-boot(Auto, boot.fn, 1000)
+boot(Auto, statistic.2, 1000)
+summary(lm(mpg ~ poly(horsepower, 2), data = Auto))
 ```
+Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.  
 
-Regression models errors calculated by MHK are similar byb errors calculated using bootstap
-
-### Bibiography
+## Bibiography
 [An Introduction to Statistical Learning by Gareth James](http://faculty.marshall.usc.edu/gareth-james/)  
 [Air Forse Institute of Technology](https://afit-r.github.io)  
