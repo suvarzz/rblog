@@ -621,13 +621,11 @@
 
 <div id="TOC">
 <ul>
-<li><a href="#validation-approach">Validation approach</a><ul>
+<li><a href="#validation-approach">Validation approach</a></li>
 <li><a href="#leave-one-out-cross-validation-loocv">Leave-one-out cross-validation (LOOCV)</a></li>
-</ul></li>
 <li><a href="#k-fold-cross-validation">k-fold cross validation</a></li>
-<li><a href="#bootstrapping">Bootstrapping</a><ul>
+<li><a href="#bootstrapping">Bootstrapping</a></li>
 <li><a href="#bibiography">Bibiography</a></li>
-</ul></li>
 </ul>
 </div>
 
@@ -724,8 +722,9 @@ ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
 However, MSE depends on train data subsets.<br />
 The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.<br />
 <strong>Cross-validation methods</strong> are used to overcome this drawback.</p>
-<div id="leave-one-out-cross-validation-loocv" class="section level3">
-<h3>Leave-one-out cross-validation (LOOCV)</h3>
+</div>
+<div id="leave-one-out-cross-validation-loocv" class="section level2">
+<h2>Leave-one-out cross-validation (LOOCV)</h2>
 <p>In the LOOCV method a single observation is used for the validation set, and the remaining <span class="math inline">\(n - 1\)</span> observations make up the training set.<br />
 Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. Note: we will use <code>glm</code> function for linear regression models and the <code>cv.glm</code> function from <code>boot</code> package, which provide necessary tools to perform resamping.</p>
 <pre class="r"><code># LOOCV
@@ -783,7 +782,6 @@ cv.err.loocv</code></pre>
 ## 19.06863 19.49093</code></pre>
 <p>Result is basically the same for this model as we got before but this result is more precise.<br />
 This LOOCV approach can be used with any kind of predictive modeling.</p>
-</div>
 </div>
 <div id="k-fold-cross-validation" class="section level2">
 <h2>k-fold cross validation</h2>
@@ -890,11 +888,11 @@ boot(Auto, statistic.2, 1000)</code></pre>
 ## Multiple R-squared:  0.6876, Adjusted R-squared:  0.686 
 ## F-statistic:   428 on 2 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.</p>
-<div id="bibiography" class="section level3">
-<h3>Bibiography</h3>
+</div>
+<div id="bibiography" class="section level2">
+<h2>Bibiography</h2>
 <p><a href="http://faculty.marshall.usc.edu/gareth-james/">An Introduction to Statistical Learning by Gareth James</a><br />
 <a href="https://afit-r.github.io">Air Forse Institute of Technology</a></p>
-</div>
 </div>
 
     </div>

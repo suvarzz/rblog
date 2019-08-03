@@ -100,13 +100,11 @@ train$y&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#validation-approach&#34;&gt;Validation approach&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#validation-approach&#34;&gt;Validation approach&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#leave-one-out-cross-validation-loocv&#34;&gt;Leave-one-out cross-validation (LOOCV)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#k-fold-cross-validation&#34;&gt;k-fold cross validation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bootstrapping&#34;&gt;Bootstrapping&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#bootstrapping&#34;&gt;Bootstrapping&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#bibiography&#34;&gt;Bibiography&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -203,8 +201,9 @@ ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
 However, MSE depends on train data subsets.&lt;br /&gt;
 The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.&lt;br /&gt;
 &lt;strong&gt;Cross-validation methods&lt;/strong&gt; are used to overcome this drawback.&lt;/p&gt;
-&lt;div id=&#34;leave-one-out-cross-validation-loocv&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Leave-one-out cross-validation (LOOCV)&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;leave-one-out-cross-validation-loocv&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Leave-one-out cross-validation (LOOCV)&lt;/h2&gt;
 &lt;p&gt;In the LOOCV method a single observation is used for the validation set, and the remaining &lt;span class=&#34;math inline&#34;&gt;\(n - 1\)&lt;/span&gt; observations make up the training set.&lt;br /&gt;
 Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. Note: we will use &lt;code&gt;glm&lt;/code&gt; function for linear regression models and the &lt;code&gt;cv.glm&lt;/code&gt; function from &lt;code&gt;boot&lt;/code&gt; package, which provide necessary tools to perform resamping.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# LOOCV
@@ -262,7 +261,6 @@ cv.err.loocv&lt;/code&gt;&lt;/pre&gt;
 ## 19.06863 19.49093&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Result is basically the same for this model as we got before but this result is more precise.&lt;br /&gt;
 This LOOCV approach can be used with any kind of predictive modeling.&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;k-fold-cross-validation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;k-fold cross validation&lt;/h2&gt;
@@ -369,11 +367,11 @@ boot(Auto, statistic.2, 1000)&lt;/code&gt;&lt;/pre&gt;
 ## Multiple R-squared:  0.6876, Adjusted R-squared:  0.686 
 ## F-statistic:   428 on 2 and 389 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.&lt;/p&gt;
-&lt;div id=&#34;bibiography&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Bibiography&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibiography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibiography&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;http://faculty.marshall.usc.edu/gareth-james/&#34;&gt;An Introduction to Statistical Learning by Gareth James&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;https://afit-r.github.io&#34;&gt;Air Forse Institute of Technology&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>
