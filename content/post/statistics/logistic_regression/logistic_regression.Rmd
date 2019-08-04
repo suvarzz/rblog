@@ -12,43 +12,42 @@ output:
     toc: true
 summary: "Logistic regression"
 ---
-Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:
-* **default** – binary variable: Yes, if credit card holder did not return debt;
-* **student** – binary variable: Yes, if credit card holder is a student;
-* **balance** – average month balance on the bank account;
-* **income** – income of credit card holder.
+Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:  
+* **default** – binary variable: Yes, if credit card holder did not return debt;  
+* **student** – binary variable: Yes, if credit card holder is a student;  
+* **balance** – average month balance on the bank account;  
+* **income** – income of credit card holder.  
 
 ```{r, message=F}
 library('ISLR')
-library('GGally')
-library('MASS')
+
+
 
 train.percent <- 0.85
-options("ggmatrix.progress.bar" = FALSE)
+#options("ggmatrix.progress.bar" = FALSE)
 
 head(Default)
-str(Default)
-
-ggp <- ggpairs(Default)
-print(ggp, progress = T)
 
 set.seed(1)
-inTrain <- sample(seq_along(Default$default), nrow(Default)*train.percent)
+# train subset rate is 0.85
+inTrain <- sample(seq_along(Default$default), nrow(Default)*0.85)
 df <- Default[inTrain, ]
 
-# values of the train data
-actual <- df$default
+# logistic regression model 'default ~ f(balance)'
 model.logit <- glm(default ~ balance, data = df, family = 'binomial')
 summary(model.logit)
 
-# Predict
+# Predict 'default' by 'balance'
 p.logit <- predict(model.logit, df, type = 'response')
-predict <- factor(ifelse(p.logit > 0.5, 2, 1),
+predicted <- factor(ifelse(p.logit > 0.5, 2, 1),
                   levels = c(1, 2),
                   labels = c('No', 'Yes'))
 
+# true values for 'default' in train data
+actual <- df$default
+
 # confusion matrix
-conf.m <- table(actual, predict)
+conf.m <- table(actual, predicted)
 conf.m
 
 # sensitivity
@@ -62,6 +61,8 @@ sum(diag(conf.m)) / sum(conf.m)
 ```
 ## LDA
 ```{r}
+#library('GGally')
+library('MASS')
 model.lda <- lda(default ~ balance, data = Default[inTrain, ])
 model.lda
 
@@ -73,7 +74,7 @@ actual <- factor(ifelse(p.lda$posterior[, 'Yes'] > 0.5,
                   labels = c('No', 'Yes'))
 
 # confusion matrix
-conf.m <- table(actual, predict)
+conf.m <- table(actual, predicted)
 conf.m
 # sensitivity
 conf.m[2, 2] / sum(conf.m[2, ])

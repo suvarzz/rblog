@@ -28,13 +28,17 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables: * &lt;strong&gt;default&lt;/strong&gt; – binary variable: Yes, if credit card holder did not return debt; * &lt;strong&gt;student&lt;/strong&gt; – binary variable: Yes, if credit card holder is a student; * &lt;strong&gt;balance&lt;/strong&gt; – average month balance on the bank account; * &lt;strong&gt;income&lt;/strong&gt; – income of credit card holder.&lt;/p&gt;
+&lt;p&gt;Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:&lt;br /&gt;
+* &lt;strong&gt;default&lt;/strong&gt; – binary variable: Yes, if credit card holder did not return debt;&lt;br /&gt;
+* &lt;strong&gt;student&lt;/strong&gt; – binary variable: Yes, if credit card holder is a student;&lt;br /&gt;
+* &lt;strong&gt;balance&lt;/strong&gt; – average month balance on the bank account;&lt;br /&gt;
+* &lt;strong&gt;income&lt;/strong&gt; – income of credit card holder.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)
-library(&amp;#39;GGally&amp;#39;)
-library(&amp;#39;MASS&amp;#39;)
+
+
 
 train.percent &amp;lt;- 0.85
-options(&amp;quot;ggmatrix.progress.bar&amp;quot; = FALSE)
+#options(&amp;quot;ggmatrix.progress.bar&amp;quot; = FALSE)
 
 head(Default)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   default student   balance    income
@@ -44,25 +48,12 @@ head(Default)&lt;/code&gt;&lt;/pre&gt;
 ## 4      No      No  529.2506 35704.494
 ## 5      No      No  785.6559 38463.496
 ## 6      No     Yes  919.5885  7491.559&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Default)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    10000 obs. of  4 variables:
-##  $ default: Factor w/ 2 levels &amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ student: Factor w/ 2 levels &amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;: 1 2 1 1 1 2 1 2 1 1 ...
-##  $ balance: num  730 817 1074 529 786 ...
-##  $ income : num  44362 12106 31767 35704 38463 ...&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggp &amp;lt;- ggpairs(Default)
-print(ggp, progress = T)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Warning in ggmatrix_gtable(x, ...): Please use the &amp;#39;progress&amp;#39; parameter
-## in your ggmatrix-like function call. See ?ggmatrix_progress for a few
-## examples. ggmatrix_gtable &amp;#39;progress&amp;#39; and &amp;#39;progress_format&amp;#39; will soon be
-## deprecated.TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
-inTrain &amp;lt;- sample(seq_along(Default$default), nrow(Default)*train.percent)
+# train subset rate is 0.85
+inTrain &amp;lt;- sample(seq_along(Default$default), nrow(Default)*0.85)
 df &amp;lt;- Default[inTrain, ]
 
-# values of the train data
-actual &amp;lt;- df$default
+# logistic regression model &amp;#39;default ~ f(balance)&amp;#39;
 model.logit &amp;lt;- glm(default ~ balance, data = df, family = &amp;#39;binomial&amp;#39;)
 summary(model.logit)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
@@ -87,16 +78,19 @@ summary(model.logit)&lt;/code&gt;&lt;/pre&gt;
 ## AIC: 1340.5
 ## 
 ## Number of Fisher Scoring iterations: 8&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Predict
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Predict &amp;#39;default&amp;#39; by &amp;#39;balance&amp;#39;
 p.logit &amp;lt;- predict(model.logit, df, type = &amp;#39;response&amp;#39;)
-predict &amp;lt;- factor(ifelse(p.logit &amp;gt; 0.5, 2, 1),
+predicted &amp;lt;- factor(ifelse(p.logit &amp;gt; 0.5, 2, 1),
                   levels = c(1, 2),
                   labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
 
+# true values for &amp;#39;default&amp;#39; in train data
+actual &amp;lt;- df$default
+
 # confusion matrix
-conf.m &amp;lt;- table(actual, predict)
+conf.m &amp;lt;- table(actual, predicted)
 conf.m&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       predict
+&lt;pre&gt;&lt;code&gt;##       predicted
 ## actual   No  Yes
 ##    No  8172   41
 ##    Yes  194   93&lt;/code&gt;&lt;/pre&gt;
@@ -111,7 +105,9 @@ sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.9723529&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;lda&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;LDA&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;model.lda &amp;lt;- lda(default ~ balance, data = Default[inTrain, ])
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#library(&amp;#39;GGally&amp;#39;)
+library(&amp;#39;MASS&amp;#39;)
+model.lda &amp;lt;- lda(default ~ balance, data = Default[inTrain, ])
 model.lda&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Call:
 ## lda(default ~ balance, data = Default[inTrain, ])
@@ -136,9 +132,9 @@ actual &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt;
                   labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
 
 # confusion matrix
-conf.m &amp;lt;- table(actual, predict)
+conf.m &amp;lt;- table(actual, predicted)
 conf.m&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       predict
+&lt;pre&gt;&lt;code&gt;##       predicted
 ## actual   No  Yes
 ##    No  8366   42
 ##    Yes    0   92&lt;/code&gt;&lt;/pre&gt;

@@ -23,13 +23,17 @@ summary: "Logistic regression"
 </ul>
 </div>
 
-<p>Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables: * <strong>default</strong> – binary variable: Yes, if credit card holder did not return debt; * <strong>student</strong> – binary variable: Yes, if credit card holder is a student; * <strong>balance</strong> – average month balance on the bank account; * <strong>income</strong> – income of credit card holder.</p>
+<p>Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:<br />
+* <strong>default</strong> – binary variable: Yes, if credit card holder did not return debt;<br />
+* <strong>student</strong> – binary variable: Yes, if credit card holder is a student;<br />
+* <strong>balance</strong> – average month balance on the bank account;<br />
+* <strong>income</strong> – income of credit card holder.</p>
 <pre class="r"><code>library(&#39;ISLR&#39;)
-library(&#39;GGally&#39;)
-library(&#39;MASS&#39;)
+
+
 
 train.percent &lt;- 0.85
-options(&quot;ggmatrix.progress.bar&quot; = FALSE)
+#options(&quot;ggmatrix.progress.bar&quot; = FALSE)
 
 head(Default)</code></pre>
 <pre><code>##   default student   balance    income
@@ -39,25 +43,12 @@ head(Default)</code></pre>
 ## 4      No      No  529.2506 35704.494
 ## 5      No      No  785.6559 38463.496
 ## 6      No     Yes  919.5885  7491.559</code></pre>
-<pre class="r"><code>str(Default)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    10000 obs. of  4 variables:
-##  $ default: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ student: Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 2 1 2 1 1 ...
-##  $ balance: num  730 817 1074 529 786 ...
-##  $ income : num  44362 12106 31767 35704 38463 ...</code></pre>
-<pre class="r"><code>ggp &lt;- ggpairs(Default)
-print(ggp, progress = T)</code></pre>
-<pre><code>## Warning in ggmatrix_gtable(x, ...): Please use the &#39;progress&#39; parameter
-## in your ggmatrix-like function call. See ?ggmatrix_progress for a few
-## examples. ggmatrix_gtable &#39;progress&#39; and &#39;progress_format&#39; will soon be
-## deprecated.TRUE</code></pre>
-<p><img src="/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <pre class="r"><code>set.seed(1)
-inTrain &lt;- sample(seq_along(Default$default), nrow(Default)*train.percent)
+# train subset rate is 0.85
+inTrain &lt;- sample(seq_along(Default$default), nrow(Default)*0.85)
 df &lt;- Default[inTrain, ]
 
-# values of the train data
-actual &lt;- df$default
+# logistic regression model &#39;default ~ f(balance)&#39;
 model.logit &lt;- glm(default ~ balance, data = df, family = &#39;binomial&#39;)
 summary(model.logit)</code></pre>
 <pre><code>## 
@@ -82,16 +73,19 @@ summary(model.logit)</code></pre>
 ## AIC: 1340.5
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
-<pre class="r"><code># Predict
+<pre class="r"><code># Predict &#39;default&#39; by &#39;balance&#39;
 p.logit &lt;- predict(model.logit, df, type = &#39;response&#39;)
-predict &lt;- factor(ifelse(p.logit &gt; 0.5, 2, 1),
+predicted &lt;- factor(ifelse(p.logit &gt; 0.5, 2, 1),
                   levels = c(1, 2),
                   labels = c(&#39;No&#39;, &#39;Yes&#39;))
 
+# true values for &#39;default&#39; in train data
+actual &lt;- df$default
+
 # confusion matrix
-conf.m &lt;- table(actual, predict)
+conf.m &lt;- table(actual, predicted)
 conf.m</code></pre>
-<pre><code>##       predict
+<pre><code>##       predicted
 ## actual   No  Yes
 ##    No  8172   41
 ##    Yes  194   93</code></pre>
@@ -106,7 +100,9 @@ sum(diag(conf.m)) / sum(conf.m)</code></pre>
 <pre><code>## [1] 0.9723529</code></pre>
 <div id="lda" class="section level2">
 <h2>LDA</h2>
-<pre class="r"><code>model.lda &lt;- lda(default ~ balance, data = Default[inTrain, ])
+<pre class="r"><code>#library(&#39;GGally&#39;)
+library(&#39;MASS&#39;)
+model.lda &lt;- lda(default ~ balance, data = Default[inTrain, ])
 model.lda</code></pre>
 <pre><code>## Call:
 ## lda(default ~ balance, data = Default[inTrain, ])
@@ -131,9 +127,9 @@ actual &lt;- factor(ifelse(p.lda$posterior[, &#39;Yes&#39;] &gt; 0.5,
                   labels = c(&#39;No&#39;, &#39;Yes&#39;))
 
 # confusion matrix
-conf.m &lt;- table(actual, predict)
+conf.m &lt;- table(actual, predicted)
 conf.m</code></pre>
-<pre><code>##       predict
+<pre><code>##       predicted
 ## actual   No  Yes
 ##    No  8366   42
 ##    Yes    0   92</code></pre>
