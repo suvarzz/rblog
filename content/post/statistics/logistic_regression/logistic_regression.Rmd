@@ -52,7 +52,7 @@ crit
 df$predic.prob <- predict(model.logit, df, type="response")
 df$predic.pass <-  ifelse(df$predic.prob > 0.5, 1, 0)
 df
-log(1)
+
 # plot data
 plot(df$hours, df$pass, pch=19, col='black',
      main='Probability of Passing Exam vs Hours Studying',

@@ -56,6 +56,8 @@
 &lt;li&gt;Linear Regression&lt;/li&gt;
 &lt;li&gt;Multiple regression&lt;/li&gt;
 &lt;li&gt;Linear Model Selection&lt;/li&gt;
+&lt;li&gt;Polynomial Regression&lt;/li&gt;
+&lt;li&gt;Stepwise Regression&lt;/li&gt;
 &lt;li&gt;Regularized Regression&lt;/li&gt;
 &lt;li&gt;Regression Trees &amp;amp; Bagging&lt;/li&gt;
 &lt;li&gt;Random Forests&lt;/li&gt;

@@ -106,8 +106,6 @@ df&lt;/code&gt;&lt;/pre&gt;
 ## 18  4.75    1  0.95561071           1
 ## 19  5.00    1  0.96909707           1
 ## 20  5.50    1  0.98519444           1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;log(1)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot data
 plot(df$hours, df$pass, pch=19, col=&amp;#39;black&amp;#39;,
      main=&amp;#39;Probability of Passing Exam vs Hours Studying&amp;#39;,
