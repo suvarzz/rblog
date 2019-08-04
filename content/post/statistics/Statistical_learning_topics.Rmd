@@ -28,6 +28,8 @@ summary: "Basic topics of statistical learning."
 * Linear Regression
 * Multiple regression
 * Linear Model Selection
+* Polynomial Regression
+* Stepwise Regression
 * Regularized Regression
 * Regression Trees & Bagging
 * Random Forests

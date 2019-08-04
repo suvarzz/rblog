@@ -12,20 +12,82 @@ output:
     toc: true
 summary: "Logistic regression"
 ---
-Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:  
-* **default** – binary variable: Yes, if credit card holder did not return debt;  
-* **student** – binary variable: Yes, if credit card holder is a student;  
-* **balance** – average month balance on the bank account;  
-* **income** – income of credit card holder.  
+## Background
+Logistic regression builds model for binary dependent variables (0/1, True/False).  
+
+Logistic function:
+$$Y = \frac{1}{1+e^l} = \frac{e^l}{e^l+1}$$
+where $l$ is a linear combination of all observations (log-odds): $l = \beta_0 + \beta_{1}x_{1} + \beta_{2}x_{2} + ... + \beta_{p}x_{p} + \epsilon$    
+See also: [Sigmoid functions](https://en.wikipedia.org/wiki/Sigmoid_function):
+
+## Binomial logistic regression
+Probability of passing an exam versus hours of study.  
+Data from [wiki](https://en.wikipedia.org/wiki/Logistic_regression) describe if students **pass** exam depending of how many **hours** they studied.  
+We build **logistic regression** model to predict if 'pass' depending on learning 'hours'.  
+```{r}
+# put data into dataframe
+hours=c(0.50,.75,1,1.25,1.5,1.75,1.75,2,2.25,2.5,2.75,3,3.25,3.50,4,4.25,4.5,4.75,5,5.5)
+pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
+df = data.frame(hours, pass)
+
+# Logistic Regression model
+model.logit <- glm(pass ~ hours, data = df, family = 'binomial')
+
+summary(model.logit)
+```
+Coefficients Intercept = -4.0777 and Hours = 1.5046 are entered in the **logistic regression equation** to estimate the odds (probability) of passing the exam:
+$1/(1+e^{-(-4.0777+1.5046\cdot hours)})$
+Calculate the probability to pass exam if studied 4 hours:
+```{r}
+1/(1+exp(-(-4.0777+1.5046*4)))
+```
+Let's find a critical point where probability is 0.5:
+```{r}
+crit = -coef(model.logit)[1]/coef(model.logit)[2]
+crit
+```
+
+```{r}
+# predict 'pass' for given data
+df$predic.prob <- predict(model.logit, df, type="response")
+df$predic.pass <-  ifelse(df$predic.prob > 0.5, 1, 0)
+df
+log(1)
+# plot data
+plot(df$hours, df$pass, pch=19, col='black',
+     main='Probability of Passing Exam vs Hours Studying',
+     ylab='Probability of Passing Exam',
+     xlab='Hours Studying')
+
+# data frame to build a logistic function curve 'hours~pass'
+df2 <- data.frame(hours=seq(min(df$hours),max(df$hours),0.1), pass=NA)
+
+# predict 'pass' from our model
+df2$pass <- predict(model.logit, df2, type="response")
+# draw logistic function for our data sets
+lines(df2$pass~df2$hours, lwd=2)
+# critical point
+abline(h=0.5, col='green') # 
+abline(v=crit, col='red') # 
+
+# draw predicted points (-0.02 to avoid overlapping with actual data)
+points(df$hours, df$predic.pass-0.03, pch=19, col='red')
+
+legend('bottomright', lty=c(1,1,1,1),
+       col = c('black', 'red', 'black', 'green', 'red'),
+       legend = c('actual data', 'predicted', 'Logistic function', 'Decision p', 'Decision bound'),
+       lwd=c(NA,NA,1,1,1), pch=c(19,19,NA,NA,NA), bty = 'n')
+```
+
+## Logistic regression
+*Data*: generated credit card balance `Default{ISLR}`. 10000 observations for 4 variables:  
+**default** – binary variable: Yes, if credit card holder did not return debt;  
+**student** – binary variable: Yes, if credit card holder is a student;  
+**balance** – average month balance on the bank account;  
+**income** – income of credit card holder.  
 
 ```{r, message=F}
 library('ISLR')
-
-
-
-train.percent <- 0.85
-#options("ggmatrix.progress.bar" = FALSE)
-
 head(Default)
 
 set.seed(1)
@@ -59,7 +121,7 @@ conf.m[1, 1] / sum(conf.m[1, ])
 # probability
 sum(diag(conf.m)) / sum(conf.m)
 ```
-## LDA
+## Linear Discriminant Analysis (LDA)
 ```{r}
 #library('GGally')
 library('MASS')
@@ -83,7 +145,7 @@ conf.m[1, 1] / sum(conf.m[1, ])
 # true
 sum(diag(conf.m)) / sum(conf.m)
 ```
-## QDA
+## Quadratic Discriminant Analysis (QDA)
 ```{r}
 model.qda <- qda(default ~ balance, data = Default[inTrain, ])
 model.qda

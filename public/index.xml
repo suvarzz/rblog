@@ -426,25 +426,127 @@ FDR: 10%&lt;/p&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#lda&#34;&gt;LDA&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#qda&#34;&gt;QDA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#background&#34;&gt;Background&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#binomial-logistic-regression&#34;&gt;Binomial logistic regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#logistic-regression&#34;&gt;Logistic regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#linear-discriminant-analysis-lda&#34;&gt;Linear Discriminant Analysis (LDA)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#quadratic-discriminant-analysis-qda&#34;&gt;Quadratic Discriminant Analysis (QDA)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#roc-curve-for-lda&#34;&gt;ROC-curve for LDA&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#tasks&#34;&gt;Tasks&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:&lt;br /&gt;
-* &lt;strong&gt;default&lt;/strong&gt; – binary variable: Yes, if credit card holder did not return debt;&lt;br /&gt;
-* &lt;strong&gt;student&lt;/strong&gt; – binary variable: Yes, if credit card holder is a student;&lt;br /&gt;
-* &lt;strong&gt;balance&lt;/strong&gt; – average month balance on the bank account;&lt;br /&gt;
-* &lt;strong&gt;income&lt;/strong&gt; – income of credit card holder.&lt;/p&gt;
+&lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;Logistic regression builds model for binary dependent variables (0/1, True/False).&lt;/p&gt;
+&lt;p&gt;Logistic function: &lt;span class=&#34;math display&#34;&gt;\[Y = \frac{1}{1+e^l} = \frac{e^l}{e^l+1}\]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(l\)&lt;/span&gt; is a linear combination of all observations (log-odds): &lt;span class=&#34;math inline&#34;&gt;\(l = \beta_0 + \beta_{1}x_{1} + \beta_{2}x_{2} + ... + \beta_{p}x_{p} + \epsilon\)&lt;/span&gt;&lt;br /&gt;
+See also: &lt;a href=&#34;https://en.wikipedia.org/wiki/Sigmoid_function&#34;&gt;Sigmoid functions&lt;/a&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;binomial-logistic-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Binomial logistic regression&lt;/h2&gt;
+&lt;p&gt;Probability of passing an exam versus hours of study.&lt;br /&gt;
+Data from &lt;a href=&#34;https://en.wikipedia.org/wiki/Logistic_regression&#34;&gt;wiki&lt;/a&gt; describe if students &lt;strong&gt;pass&lt;/strong&gt; exam depending of how many &lt;strong&gt;hours&lt;/strong&gt; they studied.&lt;br /&gt;
+We build &lt;strong&gt;logistic regression&lt;/strong&gt; model to predict if ‘pass’ depending on learning ‘hours’.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# put data into dataframe
+hours=c(0.50,.75,1,1.25,1.5,1.75,1.75,2,2.25,2.5,2.75,3,3.25,3.50,4,4.25,4.5,4.75,5,5.5)
+pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
+df = data.frame(hours, pass)
+
+# Logistic Regression model
+model.logit &amp;lt;- glm(pass ~ hours, data = df, family = &amp;#39;binomial&amp;#39;)
+
+summary(model.logit)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## glm(formula = pass ~ hours, family = &amp;quot;binomial&amp;quot;, data = df)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.70557  -0.57357  -0.04654   0.45470   1.82008  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&amp;gt;|z|)  
+## (Intercept)  -4.0777     1.7610  -2.316   0.0206 *
+## hours         1.5046     0.6287   2.393   0.0167 *
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 27.726  on 19  degrees of freedom
+## Residual deviance: 16.060  on 18  degrees of freedom
+## AIC: 20.06
+## 
+## Number of Fisher Scoring iterations: 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Coefficients Intercept = -4.0777 and Hours = 1.5046 are entered in the &lt;strong&gt;logistic regression equation&lt;/strong&gt; to estimate the odds (probability) of passing the exam: &lt;span class=&#34;math inline&#34;&gt;\(1/(1+e^{-(-4.0777+1.5046\cdot hours)})\)&lt;/span&gt; Calculate the probability to pass exam if studied 4 hours:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;1/(1+exp(-(-4.0777+1.5046*4)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.874429&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s find a critical point where probability is 0.5:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;crit = -coef(model.logit)[1]/coef(model.logit)[2]
+crit&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## (Intercept) 
+##    2.710083&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# predict &amp;#39;pass&amp;#39; for given data
+df$predic.prob &amp;lt;- predict(model.logit, df, type=&amp;quot;response&amp;quot;)
+df$predic.pass &amp;lt;-  ifelse(df$predic.prob &amp;gt; 0.5, 1, 0)
+df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    hours pass predic.prob predic.pass
+## 1   0.50    0  0.03471034           0
+## 2   0.75    0  0.04977295           0
+## 3   1.00    0  0.07089196           0
+## 4   1.25    0  0.10002862           0
+## 5   1.50    0  0.13934447           0
+## 6   1.75    0  0.19083650           0
+## 7   1.75    1  0.19083650           0
+## 8   2.00    0  0.25570318           0
+## 9   2.25    1  0.33353024           0
+## 10  2.50    0  0.42162653           0
+## 11  2.75    1  0.51501086           1
+## 12  3.00    0  0.60735865           1
+## 13  3.25    1  0.69261733           1
+## 14  3.50    0  0.76648084           1
+## 15  4.00    1  0.87444750           1
+## 16  4.25    1  0.91027764           1
+## 17  4.50    1  0.93662366           1
+## 18  4.75    1  0.95561071           1
+## 19  5.00    1  0.96909707           1
+## 20  5.50    1  0.98519444           1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;log(1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot data
+plot(df$hours, df$pass, pch=19, col=&amp;#39;black&amp;#39;,
+     main=&amp;#39;Probability of Passing Exam vs Hours Studying&amp;#39;,
+     ylab=&amp;#39;Probability of Passing Exam&amp;#39;,
+     xlab=&amp;#39;Hours Studying&amp;#39;)
+
+# data frame to build a logistic function curve &amp;#39;hours~pass&amp;#39;
+df2 &amp;lt;- data.frame(hours=seq(min(df$hours),max(df$hours),0.1), pass=NA)
+
+# predict &amp;#39;pass&amp;#39; from our model
+df2$pass &amp;lt;- predict(model.logit, df2, type=&amp;quot;response&amp;quot;)
+# draw logistic function for our data sets
+lines(df2$pass~df2$hours, lwd=2)
+# critical point
+abline(h=0.5, col=&amp;#39;green&amp;#39;) # 
+abline(v=crit, col=&amp;#39;red&amp;#39;) # 
+
+# draw predicted points (-0.02 to avoid overlapping with actual data)
+points(df$hours, df$predic.pass-0.03, pch=19, col=&amp;#39;red&amp;#39;)
+
+legend(&amp;#39;bottomright&amp;#39;, lty=c(1,1,1,1),
+       col = c(&amp;#39;black&amp;#39;, &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;red&amp;#39;),
+       legend = c(&amp;#39;actual data&amp;#39;, &amp;#39;predicted&amp;#39;, &amp;#39;Logistic function&amp;#39;, &amp;#39;Decision p&amp;#39;, &amp;#39;Decision bound&amp;#39;),
+       lwd=c(NA,NA,1,1,1), pch=c(19,19,NA,NA,NA), bty = &amp;#39;n&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;logistic-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Logistic regression&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Data&lt;/em&gt;: generated credit card balance &lt;code&gt;Default{ISLR}&lt;/code&gt;. 10000 observations for 4 variables:&lt;br /&gt;
+&lt;strong&gt;default&lt;/strong&gt; – binary variable: Yes, if credit card holder did not return debt;&lt;br /&gt;
+&lt;strong&gt;student&lt;/strong&gt; – binary variable: Yes, if credit card holder is a student;&lt;br /&gt;
+&lt;strong&gt;balance&lt;/strong&gt; – average month balance on the bank account;&lt;br /&gt;
+&lt;strong&gt;income&lt;/strong&gt; – income of credit card holder.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)
-
-
-
-train.percent &amp;lt;- 0.85
-#options(&amp;quot;ggmatrix.progress.bar&amp;quot; = FALSE)
-
 head(Default)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   default student   balance    income
 ## 1      No      No  729.5265 44361.625
@@ -508,8 +610,9 @@ conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# probability
 sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.9723529&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;lda&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;LDA&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;linear-discriminant-analysis-lda&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Linear Discriminant Analysis (LDA)&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#library(&amp;#39;GGally&amp;#39;)
 library(&amp;#39;MASS&amp;#39;)
 model.lda &amp;lt;- lda(default ~ balance, data = Default[inTrain, ])
@@ -553,8 +656,8 @@ conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
 sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.9950588&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;qda&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;QDA&lt;/h2&gt;
+&lt;div id=&#34;quadratic-discriminant-analysis-qda&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Quadratic Discriminant Analysis (QDA)&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;model.qda &amp;lt;- qda(default ~ balance, data = Default[inTrain, ])
 model.qda&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Call:
@@ -645,7 +748,7 @@ text(x[p.vector == 0.5], y[p.vector == 0.5], &amp;#39;p = 0.5&amp;#39;, pos = 4)
 # point for probability 0.2
 points(x[p.vector == 0.2], y[p.vector == 0.2], pch = 16)
 text(x[p.vector == 0.2], y[p.vector == 0.2], &amp;#39;p = 0.2&amp;#39;, pos = 4)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;predict &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; 0.2, 2, 1),
                       levels = c(1, 2),
                       labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
@@ -1300,6 +1403,7 @@ res&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div id=&#34;what-is-heart-zones&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;What is heart zones&lt;/h3&gt;
+&lt;p&gt;ПРИВЕТ НАСТЯ!!!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;calculator&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Calculator&lt;/h3&gt;
