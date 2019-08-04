@@ -3,13 +3,98 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tags/bootstrap/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/post/statistics/statistical_learning_topics/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/hypothesis-testing/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/hypothesis_testing/hypothesis_testing/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/logistic-regression/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/logistic_regression/logistic_regression/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/bootstrap/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -26,29 +111,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/resampling/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -60,24 +122,6 @@
   </url>
   
   <url>
-    <loc>/categories/statistics/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/statistics/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/hopfield/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -86,12 +130,6 @@
   <url>
     <loc>/post/statistics/hopfield_network/hopfield_network/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/machine-learning/</loc>
-    <lastmod>2019-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -140,17 +178,6 @@
   </url>
   
   <url>
-    <loc>/tags/hypothesis-testing/</loc>
-    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/hypothesis_testing/hypothesis_testing_r/</loc>
-    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/marathon/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -181,12 +208,6 @@
   <url>
     <loc>/post/programming/r_tips_tricks/r_tips_tricks/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

@@ -1,0 +1,59 @@
+---
+title: "Model evaluation metrics"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+#weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "Machine Learning"]
+categories: ["Statistics"]
+bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Model evaluation metrics."
+---
+[check this link](https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/)
+
+## Confusion Matrix
+
+|              | True Y              | True N              |
+|--------------|---------------------|---------------------|
+| Predicted Y  | True Positive (TP)  | False Positive (FP) |
+| Predicted N  | False Negative (FN) | True Negatives      |
+
+Common performance metrcs:
+**False Positive Rate** = $\frac{FP}{N}$  
+
+**True Positive Rate (sensitivity)** = $\frac{TP}{P}$  
+
+**Precision** = $\frac{TP}{TP+FP}$  
+
+**Accuracy** = $\frac{TP+TN}{P+N}$    
+
+**Specificity** = $\frac{TN}{FP+TN}$  
+
+**Precision (PPV)** = $\frac{TP}{TP+FP} = 1 - FDR$  
+
+**False Discovery Rate (FDR)** =  $\frac{FP}{FP+TP} = 1 - PPV$  
+
+See more on [wiki](https://en.wikipedia.org/wiki/Confusion_matrix).
+
+## Gain and Lift Chart
+## Kolmogorov Smirnov Chart
+
+## AUC – ROC
+
+
+ROC graphs are two-dimensional graphs in which **True Positive** rate is plotted on the Y axis and **False Positive** rate is plotted on the X axis.  
+An ROC graph depicts relative tradeoffs between benefits (true positives) and costs (false positives) (fawcett_introduction_2006). 
+
+## Gini Coefficient
+
+## Concordant – Discordant Ratio
+
+## Root Mean Squared Error
+
+## Bibliography
+
+

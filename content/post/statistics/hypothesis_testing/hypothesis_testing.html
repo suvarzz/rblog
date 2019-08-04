@@ -1,14 +1,42 @@
 ---
 title: "Hypothesis testing"
-author: "Mark Boltengagen"
-date: '2019-08-01'
-draft: true
+author: "Mark Goldberg"
+date: '2019-08-04'
+draft: false
 math: true
 tags: ["R", "Statistics", "Hypothesis testing"]
 categories: ["R", "Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Hypothesis testing."
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#t-test">t-test</a><ul>
+<li><a href="#t-test-and-normal-distribution">t-test and normal distribution</a></li>
+<li><a href="#one-sample-t-test">One-sample t-test</a></li>
+<li><a href="#two-samples-t-test">Two samples t-test</a></li>
+</ul></li>
+<li><a href="#summary-of-r-functions-for-t-tests">Summary of R functions for t-tests</a><ul>
+<li><a href="#what-is-that">What is that?</a></li>
+</ul></li>
+<li><a href="#non-parametric-tests">Non-parametric tests</a><ul>
+<li><a href="#mann-whitney-u-rank-sum-test">Mann-Whitney U Rank Sum Test</a></li>
+<li><a href="#wilcoxon-test">Wilcoxon test</a></li>
+</ul></li>
+<li><a href="#tests-for-categorical-variables">Tests for categorical variables</a><ul>
+<li><a href="#chi-squared-tests">Chi-squared tests</a></li>
+</ul></li>
+<li><a href="#multiple-testing">Multiple testing</a><ul>
+<li><a href="#the-bonferroni-correction">The Bonferroni correction</a></li>
+</ul></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
 
 <p>Null hypothesis (H<sub>0</sub>):<br />
 1. H<sub>0</sub>: m = μ<br />

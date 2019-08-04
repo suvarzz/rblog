@@ -81,13 +81,8 @@ legend(&amp;#39;topright&amp;#39;, lty=c(1,1,1),
 &lt;p&gt;&lt;img src=&#34;/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# end PLOT&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;ggplot2&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;Auto&amp;#39;:
-## 
-##     mpg&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mse.df.2 &amp;lt;- data.frame(sample = vector(&amp;quot;integer&amp;quot;, 100), 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+mse.df.2 &amp;lt;- data.frame(sample = vector(&amp;quot;integer&amp;quot;, 100), 
                        degree = vector(&amp;quot;integer&amp;quot;, 100), 
                        mse = vector(&amp;quot;double&amp;quot;, 100))
 counter &amp;lt;- 1

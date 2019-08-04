@@ -681,13 +681,8 @@ legend(&#39;topright&#39;, lty=c(1,1,1),
 <p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre class="r"><code># end PLOT</code></pre>
 <p>Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:</p>
-<pre class="r"><code>library(ggplot2)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggplot2&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;Auto&#39;:
-## 
-##     mpg</code></pre>
-<pre class="r"><code>mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
+<pre class="r"><code>library(ggplot2)
+mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
                        degree = vector(&quot;integer&quot;, 100), 
                        mse = vector(&quot;double&quot;, 100))
 counter &lt;- 1
@@ -1018,13 +1013,13 @@ boot(Auto, statistic.2, 1000)</code></pre>
           
           <li><a href="/post/statistics/split_data_ways/split_data_ways/">How to split data into train and test subsets?</a></li>
           
-          <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing_r/">Hypothesis testing</a></li>
-          
           <li><a href="/post/statistics/markov_process/simple_markov_process/">Simple Markov process</a></li>
           
           <li><a href="/post/statistics/anova/anova/">ANOVA</a></li>
           
           <li><a href="/post/programming/r_tips_tricks/r_tips_tricks/">R tips and coding tricks</a></li>
+          
+          <li><a href="/post/statistics/splines/splines/">Spline model</a></li>
           
         </ul>
       </div>

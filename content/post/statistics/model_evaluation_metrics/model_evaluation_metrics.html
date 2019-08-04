@@ -1,0 +1,86 @@
+---
+title: "Model evaluation metrics"
+author: "Mark Goldberg"
+date: '2019-08-04'
+#weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "Machine Learning"]
+categories: ["Statistics"]
+bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Model evaluation metrics."
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#confusion-matrix">Confusion Matrix</a></li>
+<li><a href="#gain-and-lift-chart">Gain and Lift Chart</a></li>
+<li><a href="#kolmogorov-smirnov-chart">Kolmogorov Smirnov Chart</a></li>
+<li><a href="#auc-roc">AUC – ROC</a></li>
+<li><a href="#gini-coefficient">Gini Coefficient</a></li>
+<li><a href="#concordant-discordant-ratio">Concordant – Discordant Ratio</a></li>
+<li><a href="#root-mean-squared-error">Root Mean Squared Error</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+</div>
+
+<p><a href="https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/">check this link</a></p>
+<div id="confusion-matrix" class="section level2">
+<h2>Confusion Matrix</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>True Y</th>
+<th>True N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Predicted Y</td>
+<td>True Positive (TP)</td>
+<td>False Positive (FP)</td>
+</tr>
+<tr class="even">
+<td>Predicted N</td>
+<td>False Negative (FN)</td>
+<td>True Negatives</td>
+</tr>
+</tbody>
+</table>
+<p>Common performance metrcs: <strong>False Positive Rate</strong> = <span class="math inline">\(\frac{FP}{N}\)</span></p>
+<p><strong>True Positive Rate (sensitivity)</strong> = <span class="math inline">\(\frac{TP}{P}\)</span></p>
+<p><strong>Precision</strong> = <span class="math inline">\(\frac{TP}{TP+FP}\)</span></p>
+<p><strong>Accuracy</strong> = <span class="math inline">\(\frac{TP+TN}{P+N}\)</span></p>
+<p><strong>Specificity</strong> = <span class="math inline">\(\frac{TN}{FP+TN}\)</span></p>
+<p><strong>Precision (PPV)</strong> = <span class="math inline">\(\frac{TP}{TP+FP} = 1 - FDR\)</span></p>
+<p><strong>False Discovery Rate (FDR)</strong> = <span class="math inline">\(\frac{FP}{FP+TP} = 1 - PPV\)</span></p>
+<p>See more on <a href="https://en.wikipedia.org/wiki/Confusion_matrix">wiki</a>.</p>
+</div>
+<div id="gain-and-lift-chart" class="section level2">
+<h2>Gain and Lift Chart</h2>
+</div>
+<div id="kolmogorov-smirnov-chart" class="section level2">
+<h2>Kolmogorov Smirnov Chart</h2>
+</div>
+<div id="auc-roc" class="section level2">
+<h2>AUC – ROC</h2>
+<p>ROC graphs are two-dimensional graphs in which <strong>True Positive</strong> rate is plotted on the Y axis and <strong>False Positive</strong> rate is plotted on the X axis.<br />
+An ROC graph depicts relative tradeoffs between benefits (true positives) and costs (false positives) (fawcett_introduction_2006).</p>
+</div>
+<div id="gini-coefficient" class="section level2">
+<h2>Gini Coefficient</h2>
+</div>
+<div id="concordant-discordant-ratio" class="section level2">
+<h2>Concordant – Discordant Ratio</h2>
+</div>
+<div id="root-mean-squared-error" class="section level2">
+<h2>Root Mean Squared Error</h2>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+</div>

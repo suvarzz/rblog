@@ -5,12 +5,185 @@
     <link>/tags/machine-learning/</link>
       <atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Machine Learning</title>
       <link>/tags/machine-learning/</link>
     </image>
+    
+    <item>
+      <title>Statistical learning - topics</title>
+      <link>/post/statistics/statistical_learning_topics/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/statistical_learning_topics/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#statistics&#34;&gt;Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#variation-analysis&#34;&gt;Variation analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#unsupervised-learning&#34;&gt;Unsupervised Learning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#supervised-regression&#34;&gt;Supervised Regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#supervised-classification&#34;&gt;Supervised Classification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#estimation-of-model-parameters&#34;&gt;Estimation of model parameters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#time-series&#34;&gt;Time Series&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#deep-learning&#34;&gt;Deep Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;statistics&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Statistics&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Correlation&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/hypothesis_testing/hypothesis_testing/&#34;&gt;Hypothesis testing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variation-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Variation analysis&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;unsupervised-learning&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Unsupervised Learning&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;K-means Cluster Analysis&lt;/li&gt;
+&lt;li&gt;Hierarchical Cluster Analysis&lt;/li&gt;
+&lt;li&gt;Principal Component Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Supervised Regression&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Linear Regression&lt;/li&gt;
+&lt;li&gt;Multiple regression&lt;/li&gt;
+&lt;li&gt;Linear Model Selection&lt;/li&gt;
+&lt;li&gt;Regularized Regression&lt;/li&gt;
+&lt;li&gt;Regression Trees &amp;amp; Bagging&lt;/li&gt;
+&lt;li&gt;Random Forests&lt;/li&gt;
+&lt;li&gt;Imprecise Regression&lt;/li&gt;
+&lt;li&gt;Lasso regression&lt;/li&gt;
+&lt;li&gt;Ridge regression&lt;/li&gt;
+&lt;li&gt;ElasticNet regression&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;supervised-classification&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Supervised Classification&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Naïve Bayes&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Multinomial logistic regression&lt;/li&gt;
+&lt;li&gt;Ordinal logistic regression&lt;/li&gt;
+&lt;li&gt;Linear &amp;amp; Quadratic Discriminant Analysis&lt;/li&gt;
+&lt;li&gt;Support Vector Machines&lt;/li&gt;
+&lt;li&gt;Random Forests and Boosting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;estimation-of-model-parameters&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Estimation of model parameters&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/model_evaluation_metrics/model_evaluation_metrics&#34;&gt;Model evaluation metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/resampling_methods/resampling_methods&#34;&gt;Resampling Methods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;time-series&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Time Series&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Exploring &amp;amp; Visualizing Times Series&lt;/li&gt;
+&lt;li&gt;Benchmark Methods &amp;amp; Forecast Accuracy&lt;/li&gt;
+&lt;li&gt;Moving Averages&lt;/li&gt;
+&lt;li&gt;Exponential Smoothing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;deep-learning&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Deep Learning&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Neural Network Fundamentals&lt;/li&gt;
+&lt;li&gt;Neural Network for Regression&lt;/li&gt;
+&lt;li&gt;Neural Network for Classification&lt;/li&gt;
+&lt;li&gt;Feedforward Deep Learning with Keras &amp;amp; Tensorflow&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Model evaluation metrics</title>
+      <link>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#confusion-matrix&#34;&gt;Confusion Matrix&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gain-and-lift-chart&#34;&gt;Gain and Lift Chart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#kolmogorov-smirnov-chart&#34;&gt;Kolmogorov Smirnov Chart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#auc-roc&#34;&gt;AUC – ROC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gini-coefficient&#34;&gt;Gini Coefficient&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#concordant-discordant-ratio&#34;&gt;Concordant – Discordant Ratio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#root-mean-squared-error&#34;&gt;Root Mean Squared Error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliography&#34;&gt;Bibliography&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/&#34;&gt;check this link&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;confusion-matrix&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Confusion Matrix&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;True Y&lt;/th&gt;
+&lt;th&gt;True N&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Predicted Y&lt;/td&gt;
+&lt;td&gt;True Positive (TP)&lt;/td&gt;
+&lt;td&gt;False Positive (FP)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Predicted N&lt;/td&gt;
+&lt;td&gt;False Negative (FN)&lt;/td&gt;
+&lt;td&gt;True Negatives&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Common performance metrcs: &lt;strong&gt;False Positive Rate&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{FP}{N}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;True Positive Rate (sensitivity)&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{TP}{P}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Precision&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{TP}{TP+FP}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Accuracy&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{TP+TN}{P+N}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Specificity&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{TN}{FP+TN}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Precision (PPV)&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{TP}{TP+FP} = 1 - FDR\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;False Discovery Rate (FDR)&lt;/strong&gt; = &lt;span class=&#34;math inline&#34;&gt;\(\frac{FP}{FP+TP} = 1 - PPV\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;See more on &lt;a href=&#34;https://en.wikipedia.org/wiki/Confusion_matrix&#34;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gain-and-lift-chart&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Gain and Lift Chart&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;kolmogorov-smirnov-chart&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Kolmogorov Smirnov Chart&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;auc-roc&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;AUC – ROC&lt;/h2&gt;
+&lt;p&gt;ROC graphs are two-dimensional graphs in which &lt;strong&gt;True Positive&lt;/strong&gt; rate is plotted on the Y axis and &lt;strong&gt;False Positive&lt;/strong&gt; rate is plotted on the X axis.&lt;br /&gt;
+An ROC graph depicts relative tradeoffs between benefits (true positives) and costs (false positives) (fawcett_introduction_2006).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gini-coefficient&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Gini Coefficient&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;concordant-discordant-ratio&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Concordant – Discordant Ratio&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;root-mean-squared-error&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Root Mean Squared Error&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Hopfield Neural Network</title>

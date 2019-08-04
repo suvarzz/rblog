@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logistic regression | Mark Goldberg</title>
+    <link>/tags/logistic-regression/</link>
+      <atom:link href="/tags/logistic-regression/index.xml" rel="self" type="application/rss+xml" />
+    <description>Logistic regression</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>Logistic regression</title>
+      <link>/tags/logistic-regression/</link>
+    </image>
+    
+    <item>
+      <title>Logistic regression</title>
+      <link>/post/statistics/logistic_regression/logistic_regression/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/logistic_regression/logistic_regression/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#lda&#34;&gt;LDA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#qda&#34;&gt;QDA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#roc-curve-for-lda&#34;&gt;ROC-curve for LDA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tasks&#34;&gt;Tasks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables: * &lt;strong&gt;default&lt;/strong&gt; – binary variable: Yes, if credit card holder did not return debt; * &lt;strong&gt;student&lt;/strong&gt; – binary variable: Yes, if credit card holder is a student; * &lt;strong&gt;balance&lt;/strong&gt; – average month balance on the bank account; * &lt;strong&gt;income&lt;/strong&gt; – income of credit card holder.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)
+library(&amp;#39;GGally&amp;#39;)
+library(&amp;#39;MASS&amp;#39;)
+
+train.percent &amp;lt;- 0.85
+options(&amp;quot;ggmatrix.progress.bar&amp;quot; = FALSE)
+
+head(Default)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   default student   balance    income
+## 1      No      No  729.5265 44361.625
+## 2      No     Yes  817.1804 12106.135
+## 3      No      No 1073.5492 31767.139
+## 4      No      No  529.2506 35704.494
+## 5      No      No  785.6559 38463.496
+## 6      No     Yes  919.5885  7491.559&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(Default)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    10000 obs. of  4 variables:
+##  $ default: Factor w/ 2 levels &amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ student: Factor w/ 2 levels &amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;: 1 2 1 1 1 2 1 2 1 1 ...
+##  $ balance: num  730 817 1074 529 786 ...
+##  $ income : num  44362 12106 31767 35704 38463 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggp &amp;lt;- ggpairs(Default)
+print(ggp, progress = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning in ggmatrix_gtable(x, ...): Please use the &amp;#39;progress&amp;#39; parameter
+## in your ggmatrix-like function call. See ?ggmatrix_progress for a few
+## examples. ggmatrix_gtable &amp;#39;progress&amp;#39; and &amp;#39;progress_format&amp;#39; will soon be
+## deprecated.TRUE&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
+inTrain &amp;lt;- sample(seq_along(Default$default), nrow(Default)*train.percent)
+df &amp;lt;- Default[inTrain, ]
+
+# values of the train data
+actual &amp;lt;- df$default
+model.logit &amp;lt;- glm(default ~ balance, data = df, family = &amp;#39;binomial&amp;#39;)
+summary(model.logit)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## glm(formula = default ~ balance, family = &amp;quot;binomial&amp;quot;, data = df)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.3282  -0.1420  -0.0553  -0.0201   3.7934  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&amp;gt;|z|)    
+## (Intercept) -1.088e+01  4.022e-01  -27.07   &amp;lt;2e-16 ***
+## balance      5.657e-03  2.448e-04   23.11   &amp;lt;2e-16 ***
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2509.1  on 8499  degrees of freedom
+## Residual deviance: 1336.5  on 8498  degrees of freedom
+## AIC: 1340.5
+## 
+## Number of Fisher Scoring iterations: 8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Predict
+p.logit &amp;lt;- predict(model.logit, df, type = &amp;#39;response&amp;#39;)
+predict &amp;lt;- factor(ifelse(p.logit &amp;gt; 0.5, 2, 1),
+                  levels = c(1, 2),
+                  labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
+
+# confusion matrix
+conf.m &amp;lt;- table(actual, predict)
+conf.m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       predict
+## actual   No  Yes
+##    No  8172   41
+##    Yes  194   93&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.3240418&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# specificity
+conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9950079&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# probability
+sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9723529&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;lda&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;LDA&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;model.lda &amp;lt;- lda(default ~ balance, data = Default[inTrain, ])
+model.lda&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Call:
+## lda(default ~ balance, data = Default[inTrain, ])
+## 
+## Prior probabilities of groups:
+##         No        Yes 
+## 0.96623529 0.03376471 
+## 
+## Group means:
+##       balance
+## No   801.1297
+## Yes 1757.2025
+## 
+## Coefficients of linear discriminants:
+##                LD1
+## balance 0.00220817&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Predict
+p.lda &amp;lt;- predict(model.lda, df, type = &amp;#39;response&amp;#39;)
+actual &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; 0.5, 
+                         2, 1),
+                  levels = c(1, 2),
+                  labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
+
+# confusion matrix
+conf.m &amp;lt;- table(actual, predict)
+conf.m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       predict
+## actual   No  Yes
+##    No  8366   42
+##    Yes    0   92&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# specificity
+conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9950048&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# true
+sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9950588&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;qda&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;QDA&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;model.qda &amp;lt;- qda(default ~ balance, data = Default[inTrain, ])
+model.qda&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Call:
+## qda(default ~ balance, data = Default[inTrain, ])
+## 
+## Prior probabilities of groups:
+##         No        Yes 
+## 0.96623529 0.03376471 
+## 
+## Group means:
+##       balance
+## No   801.1297
+## Yes 1757.2025&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# predict
+p.qda &amp;lt;- predict(model.qda, df, type = &amp;#39;response&amp;#39;)
+predict &amp;lt;- factor(ifelse(p.qda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; 0.5, 
+                         2, 1),
+                  levels = c(1, 2),
+                  labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
+
+# confusion matrix
+conf.m &amp;lt;- table(actual, predict)
+conf.m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       predict
+## actual   No  Yes
+##    No  8390   18
+##    Yes    0   92&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# specificity
+conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9978592&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# true
+sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9978824&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;roc-curve-for-lda&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;ROC-curve for LDA&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# считаем 1-SPC и TPR для всех вариантов границы отсечения
+x &amp;lt;- NULL    # для (1 - SPC)
+y &amp;lt;- NULL    # для TPR
+
+# confusion matrix
+tbl &amp;lt;- as.data.frame(matrix(rep(0, 4), 2, 2))
+rownames(tbl) &amp;lt;- c(&amp;#39;fact.No&amp;#39;, &amp;#39;fact.Yes&amp;#39;)
+colnames(tbl) &amp;lt;- c(&amp;#39;predict.No&amp;#39;, &amp;#39;predict.Yes&amp;#39;)
+
+# probability vector
+p.vector &amp;lt;- seq(0, 1, length = 501)
+
+# цикл по вероятностям отсечения
+for (p in p.vector){
+    # prediction
+    prediction &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; p, 
+                             2, 1),
+                      levels = c(1, 2),
+                      labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
+    
+    # data frame to compare data with prediction
+    df.compare &amp;lt;- data.frame(actual = actual, prediction = prediction)
+    
+    # fill confusion matrix
+    tbl[1, 1] &amp;lt;- nrow(df.compare[df.compare$Факт == &amp;#39;No&amp;#39; &amp;amp; df.compare$Прогноз == &amp;#39;No&amp;#39;, ])
+    tbl[2, 2] &amp;lt;- nrow(df.compare[df.compare$Факт == &amp;#39;Yes&amp;#39; &amp;amp; df.compare$Прогноз == &amp;#39;Yes&amp;#39;, ])
+    tbl[1, 2] &amp;lt;- nrow(df.compare[df.compare$Факт == &amp;#39;No&amp;#39; &amp;amp; df.compare$Прогноз == &amp;#39;Yes&amp;#39;, ])
+    tbl[2, 1] &amp;lt;- nrow(df.compare[df.compare$Факт == &amp;#39;Yes&amp;#39; &amp;amp; df.compare$Прогноз == &amp;#39;No&amp;#39;, ])
+    
+    # calculate metrix
+    TPR &amp;lt;- tbl[2, 2] / sum(tbl[2, 2] + tbl[2, 1])
+    y &amp;lt;- c(y, TPR)
+    SPC &amp;lt;- tbl[1, 1] / sum(tbl[1, 1] + tbl[1, 2])
+    x &amp;lt;- c(x, 1 - SPC)
+}
+
+# ROC-curve
+par(mar = c(5, 5, 1, 1))
+# curve
+plot(x, y, type = &amp;#39;l&amp;#39;, col = &amp;#39;blue&amp;#39;, lwd = 3,
+     xlab = &amp;#39;(1 - SPC)&amp;#39;, ylab = &amp;#39;TPR&amp;#39;, 
+     xlim = c(0, 1), ylim = c(0, 1))
+# line of random classifier
+abline(a = 0, b = 1, lty = 3, lwd = 2)
+
+# oint for probability 0.5
+points(x[p.vector == 0.5], y[p.vector == 0.5], pch = 16)
+text(x[p.vector == 0.5], y[p.vector == 0.5], &amp;#39;p = 0.5&amp;#39;, pos = 4)
+# point for probability 0.2
+points(x[p.vector == 0.2], y[p.vector == 0.2], pch = 16)
+text(x[p.vector == 0.2], y[p.vector == 0.2], &amp;#39;p = 0.2&amp;#39;, pos = 4)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;predict &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; 0.2, 2, 1),
+                      levels = c(1, 2),
+                      labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
+
+conf.m &amp;lt;- table(actual, predict)
+conf.m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       predict
+## actual   No  Yes
+##    No  8124  284
+##    Yes    0   92&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# specificity
+conf.m[1, 1] / sum(conf.m[1, ])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9662226&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# true
+sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9665882&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tasks&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tasks&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

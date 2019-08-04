@@ -1,0 +1,174 @@
+---
+title: "Logistic regression"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "Logistic regression", "Regression"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Logistic regression"
+---
+Data: generated credit card balance Default{ISLR}. 10000 observations for 4 variables:
+* **default** – binary variable: Yes, if credit card holder did not return debt;
+* **student** – binary variable: Yes, if credit card holder is a student;
+* **balance** – average month balance on the bank account;
+* **income** – income of credit card holder.
+
+```{r, message=F}
+library('ISLR')
+library('GGally')
+library('MASS')
+
+train.percent <- 0.85
+options("ggmatrix.progress.bar" = FALSE)
+
+head(Default)
+str(Default)
+
+ggp <- ggpairs(Default)
+print(ggp, progress = T)
+
+set.seed(1)
+inTrain <- sample(seq_along(Default$default), nrow(Default)*train.percent)
+df <- Default[inTrain, ]
+
+# values of the train data
+actual <- df$default
+model.logit <- glm(default ~ balance, data = df, family = 'binomial')
+summary(model.logit)
+
+# Predict
+p.logit <- predict(model.logit, df, type = 'response')
+predict <- factor(ifelse(p.logit > 0.5, 2, 1),
+                  levels = c(1, 2),
+                  labels = c('No', 'Yes'))
+
+# confusion matrix
+conf.m <- table(actual, predict)
+conf.m
+
+# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])
+
+# specificity
+conf.m[1, 1] / sum(conf.m[1, ])
+
+# probability
+sum(diag(conf.m)) / sum(conf.m)
+```
+## LDA
+```{r}
+model.lda <- lda(default ~ balance, data = Default[inTrain, ])
+model.lda
+
+# Predict
+p.lda <- predict(model.lda, df, type = 'response')
+actual <- factor(ifelse(p.lda$posterior[, 'Yes'] > 0.5, 
+                         2, 1),
+                  levels = c(1, 2),
+                  labels = c('No', 'Yes'))
+
+# confusion matrix
+conf.m <- table(actual, predict)
+conf.m
+# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])
+# specificity
+conf.m[1, 1] / sum(conf.m[1, ])
+# true
+sum(diag(conf.m)) / sum(conf.m)
+```
+## QDA
+```{r}
+model.qda <- qda(default ~ balance, data = Default[inTrain, ])
+model.qda
+# predict
+p.qda <- predict(model.qda, df, type = 'response')
+predict <- factor(ifelse(p.qda$posterior[, 'Yes'] > 0.5, 
+                         2, 1),
+                  levels = c(1, 2),
+                  labels = c('No', 'Yes'))
+
+# confusion matrix
+conf.m <- table(actual, predict)
+conf.m
+# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])
+# specificity
+conf.m[1, 1] / sum(conf.m[1, ])
+# true
+sum(diag(conf.m)) / sum(conf.m)
+```
+## ROC-curve for LDA
+```{r}
+# считаем 1-SPC и TPR для всех вариантов границы отсечения
+x <- NULL    # для (1 - SPC)
+y <- NULL    # для TPR
+
+# confusion matrix
+tbl <- as.data.frame(matrix(rep(0, 4), 2, 2))
+rownames(tbl) <- c('fact.No', 'fact.Yes')
+colnames(tbl) <- c('predict.No', 'predict.Yes')
+
+# probability vector
+p.vector <- seq(0, 1, length = 501)
+
+# цикл по вероятностям отсечения
+for (p in p.vector){
+    # prediction
+    prediction <- factor(ifelse(p.lda$posterior[, 'Yes'] > p, 
+                             2, 1),
+                      levels = c(1, 2),
+                      labels = c('No', 'Yes'))
+    
+    # data frame to compare data with prediction
+    df.compare <- data.frame(actual = actual, prediction = prediction)
+    
+    # fill confusion matrix
+    tbl[1, 1] <- nrow(df.compare[df.compare$Факт == 'No' & df.compare$Прогноз == 'No', ])
+    tbl[2, 2] <- nrow(df.compare[df.compare$Факт == 'Yes' & df.compare$Прогноз == 'Yes', ])
+    tbl[1, 2] <- nrow(df.compare[df.compare$Факт == 'No' & df.compare$Прогноз == 'Yes', ])
+    tbl[2, 1] <- nrow(df.compare[df.compare$Факт == 'Yes' & df.compare$Прогноз == 'No', ])
+    
+    # calculate metrix
+    TPR <- tbl[2, 2] / sum(tbl[2, 2] + tbl[2, 1])
+    y <- c(y, TPR)
+    SPC <- tbl[1, 1] / sum(tbl[1, 1] + tbl[1, 2])
+    x <- c(x, 1 - SPC)
+}
+
+# ROC-curve
+par(mar = c(5, 5, 1, 1))
+# curve
+plot(x, y, type = 'l', col = 'blue', lwd = 3,
+     xlab = '(1 - SPC)', ylab = 'TPR', 
+     xlim = c(0, 1), ylim = c(0, 1))
+# line of random classifier
+abline(a = 0, b = 1, lty = 3, lwd = 2)
+
+# oint for probability 0.5
+points(x[p.vector == 0.5], y[p.vector == 0.5], pch = 16)
+text(x[p.vector == 0.5], y[p.vector == 0.5], 'p = 0.5', pos = 4)
+# point for probability 0.2
+points(x[p.vector == 0.2], y[p.vector == 0.2], pch = 16)
+text(x[p.vector == 0.2], y[p.vector == 0.2], 'p = 0.2', pos = 4)
+predict <- factor(ifelse(p.lda$posterior[, 'Yes'] > 0.2, 2, 1),
+                      levels = c(1, 2),
+                      labels = c('No', 'Yes'))
+
+conf.m <- table(actual, predict)
+conf.m
+
+# sensitivity
+conf.m[2, 2] / sum(conf.m[2, ])
+# specificity
+conf.m[1, 1] / sum(conf.m[1, ])
+# true
+sum(diag(conf.m)) / sum(conf.m)
+```
+
+## Tasks

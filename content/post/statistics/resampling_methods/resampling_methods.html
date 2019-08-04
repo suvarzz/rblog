@@ -76,13 +76,8 @@ legend(&#39;topright&#39;, lty=c(1,1,1),
 <p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre class="r"><code># end PLOT</code></pre>
 <p>Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:</p>
-<pre class="r"><code>library(ggplot2)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggplot2&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;Auto&#39;:
-## 
-##     mpg</code></pre>
-<pre class="r"><code>mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
+<pre class="r"><code>library(ggplot2)
+mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
                        degree = vector(&quot;integer&quot;, 100), 
                        mse = vector(&quot;double&quot;, 100))
 counter &lt;- 1

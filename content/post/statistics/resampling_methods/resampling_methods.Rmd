@@ -70,7 +70,7 @@ legend('topright', lty=c(1,1,1),
 # end PLOT
 ```
 Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:
-```{r}
+```{r, message=F}
 library(ggplot2)
 mse.df.2 <- data.frame(sample = vector("integer", 100), 
                        degree = vector("integer", 100), 

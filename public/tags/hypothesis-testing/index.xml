@@ -5,7 +5,7 @@
     <link>/tags/hypothesis-testing/</link>
       <atom:link href="/tags/hypothesis-testing/index.xml" rel="self" type="application/rss+xml" />
     <description>Hypothesis testing</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Hypothesis testing</title>
@@ -14,11 +14,34 @@
     
     <item>
       <title>Hypothesis testing</title>
-      <link>/post/statistics/hypothesis_testing/hypothesis_testing_r/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hypothesis_testing/hypothesis_testing_r/</guid>
+      <link>/post/statistics/hypothesis_testing/hypothesis_testing/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#t-test&#34;&gt;t-test&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#t-test-and-normal-distribution&#34;&gt;t-test and normal distribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-sample-t-test&#34;&gt;One-sample t-test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#two-samples-t-test&#34;&gt;Two samples t-test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summary-of-r-functions-for-t-tests&#34;&gt;Summary of R functions for t-tests&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-that&#34;&gt;What is that?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#non-parametric-tests&#34;&gt;Non-parametric tests&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#mann-whitney-u-rank-sum-test&#34;&gt;Mann-Whitney U Rank Sum Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wilcoxon-test&#34;&gt;Wilcoxon test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tests-for-categorical-variables&#34;&gt;Tests for categorical variables&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#chi-squared-tests&#34;&gt;Chi-squared tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#multiple-testing&#34;&gt;Multiple testing&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-bonferroni-correction&#34;&gt;The Bonferroni correction&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Null hypothesis (H&lt;sub&gt;0&lt;/sub&gt;):&lt;br /&gt;
 1. H&lt;sub&gt;0&lt;/sub&gt;: m = μ&lt;br /&gt;

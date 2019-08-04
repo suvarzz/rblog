@@ -1,0 +1,63 @@
+---
+title: "Statistical learning - topics"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+weight: 1
+draft: true
+math: true
+tags: ["R", "Statistics", "Machine Learning"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Basic topics of statistical learning."
+---
+# Statistics
+* Correlation
+* [Hypothesis testing](/post/statistics/hypothesis_testing/hypothesis_testing/)
+
+# Variation analysis
+
+# Unsupervised Learning
+* K-means Cluster Analysis
+* Hierarchical Cluster Analysis
+* Principal Component Analysis
+
+# Supervised Regression
+* Linear Regression
+* Multiple regression
+* Linear Model Selection
+* Regularized Regression
+* Regression Trees & Bagging
+* Random Forests
+* Imprecise Regression
+* Lasso regression
+* Ridge regression
+* ElasticNet regression
+
+# Supervised Classification
+* Naïve Bayes
+* [Logistic Regression](/post/statistics/logistic_regression/logistic_regression)
+* Multinomial logistic regression
+* Ordinal logistic regression
+* Linear & Quadratic Discriminant Analysis
+* Support Vector Machines
+* Random Forests and Boosting
+
+# Estimation of model parameters
+* [Model evaluation metrics](/post/statistics/model_evaluation_metrics/model_evaluation_metrics)
+* [Resampling Methods](/post/statistics/resampling_methods/resampling_methods)
+
+# Time Series
+* Exploring & Visualizing Times Series
+* Benchmark Methods & Forecast Accuracy
+* Moving Averages
+* Exponential Smoothing
+
+# Deep Learning
+* Neural Network Fundamentals
+* Neural Network for Regression
+* Neural Network for Classification
+* Feedforward Deep Learning with Keras & Tensorflow
+* [Hopfield Neural Network](/post/statistics/hopfield_network/hopfield_network)
