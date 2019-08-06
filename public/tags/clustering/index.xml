@@ -84,7 +84,7 @@ purrr::map_dbl(m, ac)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;hierarchical-cluster-analysis-1&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Hierarchical cluster analysis&lt;/h2&gt;
-&lt;p&gt;Let’s first split data into groups using &lt;code&gt;clust::hclust&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;Let’s first split data into 4 groups using &lt;code&gt;clust::hclust&lt;/code&gt; function.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# calculate distances
 d &amp;lt;- dist(df, method=&amp;#39;euclidean&amp;#39;)
 
@@ -95,8 +95,8 @@ hc1 &amp;lt;- hclust(d, method=&amp;#39;ward.D2&amp;#39;)
 # Plot the obtained dendrogram
 plot(hc1, hang = -1, cex = 0.6)
 
-# show 3 clusers
-rect.hclust(hc1, k=3, border=&amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+# show 4 clusers
+rect.hclust(hc1, k=4, border=&amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# group data by clusters
 groups &amp;lt;- cutree(hc1, k=3)
@@ -110,7 +110,7 @@ names(groups[groups == 1])&lt;/code&gt;&lt;/pre&gt;
 names(hc1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;merge&amp;quot;       &amp;quot;height&amp;quot;      &amp;quot;order&amp;quot;       &amp;quot;labels&amp;quot;      &amp;quot;method&amp;quot;     
 ## [6] &amp;quot;call&amp;quot;        &amp;quot;dist.method&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we can split data into groups using &lt;code&gt;cluster::agnes&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;Now we can split data into 4 groups using &lt;code&gt;cluster::agnes&lt;/code&gt; function.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# using &amp;#39;agnes&amp;#39; for hierarhical clustering
 hc3 &amp;lt;- cluster::agnes(df, method=&amp;#39;ward&amp;#39;)
 # plot slaster

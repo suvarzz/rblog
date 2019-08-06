@@ -62,7 +62,7 @@ purrr::map_dbl(m, ac)
 As we can see the **ward method** gives the best clustering.
 
 ## Hierarchical cluster analysis
-Let's first split data into groups using `clust::hclust` function.  
+Let's first split data into 4 groups using `clust::hclust` function.  
 
 ```{r}
 # calculate distances
@@ -75,8 +75,8 @@ hc1 <- hclust(d, method='ward.D2')
 # Plot the obtained dendrogram
 plot(hc1, hang = -1, cex = 0.6)
 
-# show 3 clusers
-rect.hclust(hc1, k=3, border="blue")
+# show 4 clusers
+rect.hclust(hc1, k=4, border="blue")
 ```
 
 ```{r}
@@ -88,7 +88,7 @@ names(groups[groups == 1])
 names(hc1)
 ```
 
-Now we can split data into groups using `cluster::agnes` function.  
+Now we can split data into 4 groups using `cluster::agnes` function.  
 
 ```{r}
 # using 'agnes' for hierarhical clustering

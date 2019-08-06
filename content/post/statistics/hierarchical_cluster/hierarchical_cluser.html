@@ -79,7 +79,7 @@ purrr::map_dbl(m, ac)</code></pre>
 </div>
 <div id="hierarchical-cluster-analysis-1" class="section level2">
 <h2>Hierarchical cluster analysis</h2>
-<p>Let’s first split data into groups using <code>clust::hclust</code> function.</p>
+<p>Let’s first split data into 4 groups using <code>clust::hclust</code> function.</p>
 <pre class="r"><code># calculate distances
 d &lt;- dist(df, method=&#39;euclidean&#39;)
 
@@ -90,8 +90,8 @@ hc1 &lt;- hclust(d, method=&#39;ward.D2&#39;)
 # Plot the obtained dendrogram
 plot(hc1, hang = -1, cex = 0.6)
 
-# show 3 clusers
-rect.hclust(hc1, k=3, border=&quot;blue&quot;)</code></pre>
+# show 4 clusers
+rect.hclust(hc1, k=4, border=&quot;blue&quot;)</code></pre>
 <p><img src="/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code># group data by clusters
 groups &lt;- cutree(hc1, k=3)
@@ -105,7 +105,7 @@ names(groups[groups == 1])</code></pre>
 names(hc1)</code></pre>
 <pre><code>## [1] &quot;merge&quot;       &quot;height&quot;      &quot;order&quot;       &quot;labels&quot;      &quot;method&quot;     
 ## [6] &quot;call&quot;        &quot;dist.method&quot;</code></pre>
-<p>Now we can split data into groups using <code>cluster::agnes</code> function.</p>
+<p>Now we can split data into 4 groups using <code>cluster::agnes</code> function.</p>
 <pre class="r"><code># using &#39;agnes&#39; for hierarhical clustering
 hc3 &lt;- cluster::agnes(df, method=&#39;ward&#39;)
 # plot slaster
