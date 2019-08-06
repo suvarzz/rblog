@@ -37,10 +37,14 @@ nn <- neuralnet(Species == "setosa" ~ Petal.Length + Petal.Width, train, linear.
 # Predict for test data
 pred <- predict(nn, test)
 # Confusion matrix
-table(test$Species == "setosa", pred[, 1] > 0.5)
-
+t <- table(test$Species == "setosa", pred[, 1] > 0.5)
+t
 # plot NN
 plot(nn)
+
+# Confusion matrix using caret
+library(caret)
+caret::confusionMatrix(t)
 ```
 
 ## Multiclass classification
@@ -54,5 +58,9 @@ table(test$Species, apply(pred, 1, which.max))
 
 # Plot NN
 plot(nn)
+
+# Confusion matrix using 'caret'
+caret::confusionMatrix(t)
 ```
+
 ## Bibliography

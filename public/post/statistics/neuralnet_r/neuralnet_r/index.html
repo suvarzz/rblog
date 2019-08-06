@@ -485,7 +485,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    2 min read
   </span>
   
 
@@ -648,13 +648,47 @@ test &lt;- df[-train.id,]</code></pre>
 # Predict for test data
 pred &lt;- predict(nn, test)
 # Confusion matrix
-table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)</code></pre>
+t &lt;- table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)
+t</code></pre>
 <pre><code>##        
 ##         FALSE TRUE
-##   FALSE    14    0
-##   TRUE      0    1</code></pre>
+##   FALSE     8    0
+##   TRUE      0    7</code></pre>
 <pre class="r"><code># plot NN
-plot(nn)</code></pre>
+plot(nn)
+
+# Confusion matrix using caret
+library(caret)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre class="r"><code>caret::confusionMatrix(t)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.5333    
+##     P-Value [Acc &gt; NIR] : 8.035e-05 
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.5333    
+##          Detection Rate : 0.5333    
+##    Detection Prevalence : 0.5333    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &#39;Positive&#39; Class : FALSE     
+## </code></pre>
 </div>
 <div id="multiclass-classification" class="section level2">
 <h2>Multiclass classification</h2>
@@ -665,12 +699,42 @@ plot(nn)</code></pre>
 pred &lt;- predict(nn, test)
 table(test$Species, apply(pred, 1, which.max))</code></pre>
 <pre><code>##             
-##              1 2 3
-##   setosa     1 0 0
-##   versicolor 0 5 1
-##   virginica  0 0 8</code></pre>
+##              2 3
+##   setosa     6 1
+##   versicolor 4 0
+##   virginica  4 0</code></pre>
 <pre class="r"><code># Plot NN
-plot(nn)</code></pre>
+plot(nn)
+
+# Confusion matrix using &#39;caret&#39;
+caret::confusionMatrix(t)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.5333    
+##     P-Value [Acc &gt; NIR] : 8.035e-05 
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.5333    
+##          Detection Rate : 0.5333    
+##    Detection Prevalence : 0.5333    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &#39;Positive&#39; Class : FALSE     
+## </code></pre>
 </div>
 <div id="bibliography" class="section level2">
 <h2>Bibliography</h2>

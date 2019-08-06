@@ -620,13 +620,47 @@ test &amp;lt;- df[-train.id,]&lt;/code&gt;&lt;/pre&gt;
 # Predict for test data
 pred &amp;lt;- predict(nn, test)
 # Confusion matrix
-table(test$Species == &amp;quot;setosa&amp;quot;, pred[, 1] &amp;gt; 0.5)&lt;/code&gt;&lt;/pre&gt;
+t &amp;lt;- table(test$Species == &amp;quot;setosa&amp;quot;, pred[, 1] &amp;gt; 0.5)
+t&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##        
 ##         FALSE TRUE
-##   FALSE    14    0
-##   TRUE      0    1&lt;/code&gt;&lt;/pre&gt;
+##   FALSE     8    0
+##   TRUE      0    7&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot NN
-plot(nn)&lt;/code&gt;&lt;/pre&gt;
+plot(nn)
+
+# Confusion matrix using caret
+library(caret)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.5333    
+##     P-Value [Acc &amp;gt; NIR] : 8.035e-05 
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&amp;#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.5333    
+##          Detection Rate : 0.5333    
+##    Detection Prevalence : 0.5333    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &amp;#39;Positive&amp;#39; Class : FALSE     
+## &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;multiclass-classification&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Multiclass classification&lt;/h2&gt;
@@ -637,12 +671,42 @@ plot(nn)&lt;/code&gt;&lt;/pre&gt;
 pred &amp;lt;- predict(nn, test)
 table(test$Species, apply(pred, 1, which.max))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             
-##              1 2 3
-##   setosa     1 0 0
-##   versicolor 0 5 1
-##   virginica  0 0 8&lt;/code&gt;&lt;/pre&gt;
+##              2 3
+##   setosa     6 1
+##   versicolor 4 0
+##   virginica  4 0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot NN
-plot(nn)&lt;/code&gt;&lt;/pre&gt;
+plot(nn)
+
+# Confusion matrix using &amp;#39;caret&amp;#39;
+caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.5333    
+##     P-Value [Acc &amp;gt; NIR] : 8.035e-05 
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&amp;#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.5333    
+##          Detection Rate : 0.5333    
+##    Detection Prevalence : 0.5333    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &amp;#39;Positive&amp;#39; Class : FALSE     
+## &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
