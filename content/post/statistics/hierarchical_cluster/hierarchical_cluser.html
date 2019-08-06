@@ -30,7 +30,8 @@ summary: "Here you can find how to work with hierarchical cluster analysis, how 
 <h2>Hierarchical cluster analysis</h2>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <p>Prepare data for analysis <code>datasets::USArrests</code></p>
-<pre class="r"><code>df &lt;- USArrests
+<pre class="r"><code>library(datasets)
+df &lt;- datasets::USArrests
 head(df)</code></pre>
 <pre><code>##            Murder Assault UrbanPop Rape
 ## Alabama      13.2     236       58 21.2

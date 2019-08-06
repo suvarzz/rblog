@@ -19,7 +19,8 @@ library(tidyverse)
 ```
 Prepare data for analysis `datasets::USArrests`  
 ```{r}
-df <- USArrests
+library(datasets)
+df <- datasets::USArrests
 head(df)
 # check if 'NA' values present in data
 any(is.na(df))

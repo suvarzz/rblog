@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Logistic regression">
+  <meta name="description" content="Here you can find how to work with k-means cluster analysis.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/statistics/logistic_regression/logistic_regression/">
+  <link rel="alternate" hreflang="en-us" href="/post/statistics/k_means/k_means/">
 
   
 
@@ -109,7 +109,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/statistics/logistic_regression/logistic_regression/">
+  <link rel="canonical" href="/post/statistics/k_means/k_means/">
 
   
   
@@ -121,9 +121,9 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Mark Goldberg">
-  <meta property="og:url" content="/post/statistics/logistic_regression/logistic_regression/">
-  <meta property="og:title" content="Logistic regression | Mark Goldberg">
-  <meta property="og:description" content="Logistic regression"><meta property="og:image" content="/img/logo.png">
+  <meta property="og:url" content="/post/statistics/k_means/k_means/">
+  <meta property="og:title" content="k-means | Mark Goldberg">
+  <meta property="og:description" content="Here you can find how to work with k-means cluster analysis."><meta property="og:image" content="/img/logo.png">
   <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
   
     
@@ -141,7 +141,7 @@
 
 
 
-  <title>Logistic regression | Mark Goldberg</title>
+  <title>k-means | Mark Goldberg</title>
 
 </head>
 
@@ -453,7 +453,7 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Logistic regression</h1>
+  <h1 itemprop="name">k-means</h1>
 
   
 
@@ -485,7 +485,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    7 min read
+    3 min read
   </span>
   
 
@@ -493,7 +493,7 @@
   
   
   <span class="middot-divider"></span>
-  <a href="/post/statistics/logistic_regression/logistic_regression/#disqus_thread"></a>
+  <a href="/post/statistics/k_means/k_means/#disqus_thread"></a>
   
 
   
@@ -516,7 +516,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/statistics/logistic_regression/logistic_regression/&amp;text=Logistic%20regression" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/statistics/k_means/k_means/&amp;text=k-means" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -529,7 +529,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/logistic_regression/logistic_regression/&amp;t=Logistic%20regression" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/k_means/k_means/&amp;t=k-means" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
@@ -542,7 +542,7 @@
       
       
       <li>
-        <a href="mailto:?subject=Logistic%20regression&amp;body=/post/statistics/logistic_regression/logistic_regression/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=k-means&amp;body=/post/statistics/k_means/k_means/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -555,7 +555,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/logistic_regression/logistic_regression/&amp;title=Logistic%20regression" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/k_means/k_means/&amp;title=k-means" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -568,7 +568,7 @@
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Logistic%20regression%20/post/statistics/logistic_regression/logistic_regression/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=k-means%20/post/statistics/k_means/k_means/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -581,7 +581,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/logistic_regression/logistic_regression/&amp;title=Logistic%20regression" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/k_means/k_means/&amp;title=k-means" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -619,351 +619,77 @@
     <div class="article-style" itemprop="articleBody">
       
 
-<div id="TOC">
-<ul>
-<li><a href="#background">Background</a></li>
-<li><a href="#binomial-logistic-regression">Binomial logistic regression</a></li>
-<li><a href="#logistic-regression">Logistic regression</a></li>
-<li><a href="#linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)</a></li>
-<li><a href="#quadratic-discriminant-analysis-qda">Quadratic Discriminant Analysis (QDA)</a></li>
-<li><a href="#roc-curve-for-lda">ROC-curve for LDA</a></li>
-<li><a href="#tasks">Tasks</a></li>
-</ul>
-</div>
 
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>Logistic regression builds model for binary dependent variables (0/1, True/False).</p>
-<p>Logistic function: <span class="math display">\[Y = \frac{1}{1+e^l} = \frac{e^l}{e^l+1}\]</span> where <span class="math inline">\(l\)</span> is a linear combination of all observations (log-odds): <span class="math inline">\(l = \beta_0 + \beta_{1}x_{1} + \beta_{2}x_{2} + ... + \beta_{p}x_{p} + \epsilon\)</span><br />
-See also: <a href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid functions</a>:</p>
-</div>
-<div id="binomial-logistic-regression" class="section level2">
-<h2>Binomial logistic regression</h2>
-<p>Probability of passing an exam versus hours of study.<br />
-Data from <a href="https://en.wikipedia.org/wiki/Logistic_regression">wiki</a> describe if students <strong>pass</strong> exam depending of how many <strong>hours</strong> they studied.<br />
-We build <strong>logistic regression</strong> model to predict if ‘pass’ depending on learning ‘hours’.</p>
-<pre class="r"><code># put data into dataframe
-hours=c(0.50,.75,1,1.25,1.5,1.75,1.75,2,2.25,2.5,2.75,3,3.25,3.50,4,4.25,4.5,4.75,5,5.5)
-pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
-df = data.frame(hours, pass)
+<div id="k-means-cluster-analysis" class="section level2">
+<h2>K-means cluster analysis</h2>
+<pre class="r"><code>library(datasets)
+df &lt;- datasets::iris
+head(df)</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>There are 3 species:</p>
+<pre class="r"><code>unique(df$Species)</code></pre>
+<pre><code>## [1] setosa     versicolor virginica 
+## Levels: setosa versicolor virginica</code></pre>
+<p>We try to predict them by <em>Petal.Lenght</em>and <em>Petal.Width</em> variables using k-means clustering.</p>
+<pre><code># Plot Petal.Length ~ Petal.Width data
+plot(df$Petal.Length ~ df$Petal.Width)
 
-# Logistic Regression model
-model.logit &lt;- glm(pass ~ hours, data = df, family = &#39;binomial&#39;)
-
-summary(model.logit)</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = pass ~ hours, family = &quot;binomial&quot;, data = df)
+# Find number of clusters using wss
+wss &lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
+for (i in 2:15) wss[i] &lt;- sum(kmeans(df[, 3:4], i)$withinss)
+plot(1:15, wss, type=&quot;b&quot;, xlab=&quot;Number of Clusters&quot;, ylab=&quot;Within groups sum of squares&quot;)</code></pre>
+<p>More than 3 clusters give no obvious advantages.</p>
+<pre class="r"><code># Make k-means with 3 clasters
+ncl &lt;- 3
+cl &lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
+cl</code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 50, 48, 52
 ## 
-## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -1.70557  -0.57357  -0.04654   0.45470   1.82008  
+## Cluster means:
+##   Petal.Length Petal.Width
+## 1     1.462000    0.246000
+## 2     5.595833    2.037500
+## 3     4.269231    1.342308
 ## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)  
-## (Intercept)  -4.0777     1.7610  -2.316   0.0206 *
-## hours         1.5046     0.6287   2.393   0.0167 *
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Clustering vector:
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [71] 3 3 3 3 3 3 3 2 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2
+## [106] 2 3 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 3 2
+## [141] 2 2 2 2 2 2 2 2 2 2
 ## 
-## (Dispersion parameter for binomial family taken to be 1)
+## Within cluster sum of squares by cluster:
+## [1]  2.02200 16.29167 13.05769
+##  (between_SS / total_SS =  94.3 %)
 ## 
-##     Null deviance: 27.726  on 19  degrees of freedom
-## Residual deviance: 16.060  on 18  degrees of freedom
-## AIC: 20.06
+## Available components:
 ## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<p>Coefficients Intercept = -4.0777 and Hours = 1.5046 are entered in the <strong>logistic regression equation</strong> to estimate the odds (probability) of passing the exam: <span class="math inline">\(1/(1+e^{-(-4.0777+1.5046\cdot hours)})\)</span> Calculate the probability to pass exam if studied 4 hours:</p>
-<pre class="r"><code>1/(1+exp(-(-4.0777+1.5046*4)))</code></pre>
-<pre><code>## [1] 0.874429</code></pre>
-<p>Let’s find a critical point where probability is 0.5:</p>
-<pre class="r"><code>crit = -coef(model.logit)[1]/coef(model.logit)[2]
-crit</code></pre>
-<pre><code>## (Intercept) 
-##    2.710083</code></pre>
-<pre class="r"><code># predict &#39;pass&#39; for given data
-df$predic.prob &lt;- predict(model.logit, df, type=&quot;response&quot;)
-df$predic.pass &lt;-  ifelse(df$predic.prob &gt; 0.5, 1, 0)
-df</code></pre>
-<pre><code>##    hours pass predic.prob predic.pass
-## 1   0.50    0  0.03471034           0
-## 2   0.75    0  0.04977295           0
-## 3   1.00    0  0.07089196           0
-## 4   1.25    0  0.10002862           0
-## 5   1.50    0  0.13934447           0
-## 6   1.75    0  0.19083650           0
-## 7   1.75    1  0.19083650           0
-## 8   2.00    0  0.25570318           0
-## 9   2.25    1  0.33353024           0
-## 10  2.50    0  0.42162653           0
-## 11  2.75    1  0.51501086           1
-## 12  3.00    0  0.60735865           1
-## 13  3.25    1  0.69261733           1
-## 14  3.50    0  0.76648084           1
-## 15  4.00    1  0.87444750           1
-## 16  4.25    1  0.91027764           1
-## 17  4.50    1  0.93662366           1
-## 18  4.75    1  0.95561071           1
-## 19  5.00    1  0.96909707           1
-## 20  5.50    1  0.98519444           1</code></pre>
-<pre class="r"><code># plot data
-plot(df$hours, df$pass, pch=19, col=&#39;black&#39;,
-     main=&#39;Probability of Passing Exam vs Hours Studying&#39;,
-     ylab=&#39;Probability of Passing Exam&#39;,
-     xlab=&#39;Hours Studying&#39;)
-
-# data frame to build a logistic function curve &#39;hours~pass&#39;
-df2 &lt;- data.frame(hours=seq(min(df$hours),max(df$hours),0.1), pass=NA)
-
-# predict &#39;pass&#39; from our model
-df2$pass &lt;- predict(model.logit, df2, type=&quot;response&quot;)
-# draw logistic function for our data sets
-lines(df2$pass~df2$hours, lwd=2)
-# critical point
-abline(h=0.5, col=&#39;green&#39;) # 
-abline(v=crit, col=&#39;red&#39;) # 
-
-# draw predicted points (-0.02 to avoid overlapping with actual data)
-points(df$hours, df$predic.pass-0.03, pch=19, col=&#39;red&#39;)
-
-legend(&#39;bottomright&#39;, lty=c(1,1,1,1),
-       col = c(&#39;black&#39;, &#39;red&#39;, &#39;black&#39;, &#39;green&#39;, &#39;red&#39;),
-       legend = c(&#39;actual data&#39;, &#39;predicted&#39;, &#39;Logistic function&#39;, &#39;Decision p&#39;, &#39;Decision bound&#39;),
-       lwd=c(NA,NA,1,1,1), pch=c(19,19,NA,NA,NA), bty = &#39;n&#39;)</code></pre>
-<p><img src="/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-</div>
-<div id="logistic-regression" class="section level2">
-<h2>Logistic regression</h2>
-<p><em>Data</em>: generated credit card balance <code>Default{ISLR}</code>. 10000 observations for 4 variables:<br />
-<strong>default</strong> – binary variable: Yes, if credit card holder did not return debt;<br />
-<strong>student</strong> – binary variable: Yes, if credit card holder is a student;<br />
-<strong>balance</strong> – average month balance on the bank account;<br />
-<strong>income</strong> – income of credit card holder.</p>
-<pre class="r"><code>library(&#39;ISLR&#39;)
-head(Default)</code></pre>
-<pre><code>##   default student   balance    income
-## 1      No      No  729.5265 44361.625
-## 2      No     Yes  817.1804 12106.135
-## 3      No      No 1073.5492 31767.139
-## 4      No      No  529.2506 35704.494
-## 5      No      No  785.6559 38463.496
-## 6      No     Yes  919.5885  7491.559</code></pre>
-<pre class="r"><code>set.seed(1)
-# train subset rate is 0.85
-inTrain &lt;- sample(seq_along(Default$default), nrow(Default)*0.85)
-df &lt;- Default[inTrain, ]
-
-# logistic regression model &#39;default ~ f(balance)&#39;
-model.logit &lt;- glm(default ~ balance, data = df, family = &#39;binomial&#39;)
-summary(model.logit)</code></pre>
-<pre><code>## 
-## Call:
-## glm(formula = default ~ balance, family = &quot;binomial&quot;, data = df)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.3282  -0.1420  -0.0553  -0.0201   3.7934  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -1.088e+01  4.022e-01  -27.07   &lt;2e-16 ***
-## balance      5.657e-03  2.448e-04   23.11   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 2509.1  on 8499  degrees of freedom
-## Residual deviance: 1336.5  on 8498  degrees of freedom
-## AIC: 1340.5
-## 
-## Number of Fisher Scoring iterations: 8</code></pre>
-<pre class="r"><code># Predict &#39;default&#39; by &#39;balance&#39;
-p.logit &lt;- predict(model.logit, df, type = &#39;response&#39;)
-predicted &lt;- factor(ifelse(p.logit &gt; 0.5, 2, 1),
-                  levels = c(1, 2),
-                  labels = c(&#39;No&#39;, &#39;Yes&#39;))
-
-# true values for &#39;default&#39; in train data
-actual &lt;- df$default
-
-# confusion matrix
-conf.m &lt;- table(actual, predicted)
-conf.m</code></pre>
-<pre><code>##       predicted
-## actual   No  Yes
-##    No  8172   41
-##    Yes  194   93</code></pre>
-<pre class="r"><code># sensitivity
-conf.m[2, 2] / sum(conf.m[2, ])</code></pre>
-<pre><code>## [1] 0.3240418</code></pre>
-<pre class="r"><code># specificity
-conf.m[1, 1] / sum(conf.m[1, ])</code></pre>
-<pre><code>## [1] 0.9950079</code></pre>
-<pre class="r"><code># probability
-sum(diag(conf.m)) / sum(conf.m)</code></pre>
-<pre><code>## [1] 0.9723529</code></pre>
-</div>
-<div id="linear-discriminant-analysis-lda" class="section level2">
-<h2>Linear Discriminant Analysis (LDA)</h2>
-<pre class="r"><code>#library(&#39;GGally&#39;)
-library(&#39;MASS&#39;)
-model.lda &lt;- lda(default ~ balance, data = Default[inTrain, ])
-model.lda</code></pre>
-<pre><code>## Call:
-## lda(default ~ balance, data = Default[inTrain, ])
-## 
-## Prior probabilities of groups:
-##         No        Yes 
-## 0.96623529 0.03376471 
-## 
-## Group means:
-##       balance
-## No   801.1297
-## Yes 1757.2025
-## 
-## Coefficients of linear discriminants:
-##                LD1
-## balance 0.00220817</code></pre>
-<pre class="r"><code># Predict
-p.lda &lt;- predict(model.lda, df, type = &#39;response&#39;)
-actual &lt;- factor(ifelse(p.lda$posterior[, &#39;Yes&#39;] &gt; 0.5, 
-                         2, 1),
-                  levels = c(1, 2),
-                  labels = c(&#39;No&#39;, &#39;Yes&#39;))
-
-# confusion matrix
-conf.m &lt;- table(actual, predicted)
-conf.m</code></pre>
-<pre><code>##       predicted
-## actual   No  Yes
-##    No  8366   42
-##    Yes    0   92</code></pre>
-<pre class="r"><code># sensitivity
-conf.m[2, 2] / sum(conf.m[2, ])</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code># specificity
-conf.m[1, 1] / sum(conf.m[1, ])</code></pre>
-<pre><code>## [1] 0.9950048</code></pre>
-<pre class="r"><code># true
-sum(diag(conf.m)) / sum(conf.m)</code></pre>
-<pre><code>## [1] 0.9950588</code></pre>
-</div>
-<div id="quadratic-discriminant-analysis-qda" class="section level2">
-<h2>Quadratic Discriminant Analysis (QDA)</h2>
-<pre class="r"><code>model.qda &lt;- qda(default ~ balance, data = Default[inTrain, ])
-model.qda</code></pre>
-<pre><code>## Call:
-## qda(default ~ balance, data = Default[inTrain, ])
-## 
-## Prior probabilities of groups:
-##         No        Yes 
-## 0.96623529 0.03376471 
-## 
-## Group means:
-##       balance
-## No   801.1297
-## Yes 1757.2025</code></pre>
-<pre class="r"><code># predict
-p.qda &lt;- predict(model.qda, df, type = &#39;response&#39;)
-predict &lt;- factor(ifelse(p.qda$posterior[, &#39;Yes&#39;] &gt; 0.5, 
-                         2, 1),
-                  levels = c(1, 2),
-                  labels = c(&#39;No&#39;, &#39;Yes&#39;))
-
-# confusion matrix
-conf.m &lt;- table(actual, predict)
-conf.m</code></pre>
-<pre><code>##       predict
-## actual   No  Yes
-##    No  8390   18
-##    Yes    0   92</code></pre>
-<pre class="r"><code># sensitivity
-conf.m[2, 2] / sum(conf.m[2, ])</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code># specificity
-conf.m[1, 1] / sum(conf.m[1, ])</code></pre>
-<pre><code>## [1] 0.9978592</code></pre>
-<pre class="r"><code># true
-sum(diag(conf.m)) / sum(conf.m)</code></pre>
-<pre><code>## [1] 0.9978824</code></pre>
-</div>
-<div id="roc-curve-for-lda" class="section level2">
-<h2>ROC-curve for LDA</h2>
-<pre class="r"><code># считаем 1-SPC и TPR для всех вариантов границы отсечения
-x &lt;- NULL    # для (1 - SPC)
-y &lt;- NULL    # для TPR
-
-# confusion matrix
-tbl &lt;- as.data.frame(matrix(rep(0, 4), 2, 2))
-rownames(tbl) &lt;- c(&#39;fact.No&#39;, &#39;fact.Yes&#39;)
-colnames(tbl) &lt;- c(&#39;predict.No&#39;, &#39;predict.Yes&#39;)
-
-# probability vector
-p.vector &lt;- seq(0, 1, length = 501)
-
-# цикл по вероятностям отсечения
-for (p in p.vector){
-    # prediction
-    prediction &lt;- factor(ifelse(p.lda$posterior[, &#39;Yes&#39;] &gt; p, 
-                             2, 1),
-                      levels = c(1, 2),
-                      labels = c(&#39;No&#39;, &#39;Yes&#39;))
-    
-    # data frame to compare data with prediction
-    df.compare &lt;- data.frame(actual = actual, prediction = prediction)
-    
-    # fill confusion matrix
-    tbl[1, 1] &lt;- nrow(df.compare[df.compare$Факт == &#39;No&#39; &amp; df.compare$Прогноз == &#39;No&#39;, ])
-    tbl[2, 2] &lt;- nrow(df.compare[df.compare$Факт == &#39;Yes&#39; &amp; df.compare$Прогноз == &#39;Yes&#39;, ])
-    tbl[1, 2] &lt;- nrow(df.compare[df.compare$Факт == &#39;No&#39; &amp; df.compare$Прогноз == &#39;Yes&#39;, ])
-    tbl[2, 1] &lt;- nrow(df.compare[df.compare$Факт == &#39;Yes&#39; &amp; df.compare$Прогноз == &#39;No&#39;, ])
-    
-    # calculate metrix
-    TPR &lt;- tbl[2, 2] / sum(tbl[2, 2] + tbl[2, 1])
-    y &lt;- c(y, TPR)
-    SPC &lt;- tbl[1, 1] / sum(tbl[1, 1] + tbl[1, 2])
-    x &lt;- c(x, 1 - SPC)
-}
-
-# ROC-curve
-par(mar = c(5, 5, 1, 1))
-# curve
-plot(x, y, type = &#39;l&#39;, col = &#39;blue&#39;, lwd = 3,
-     xlab = &#39;(1 - SPC)&#39;, ylab = &#39;TPR&#39;, 
-     xlim = c(0, 1), ylim = c(0, 1))
-# line of random classifier
-abline(a = 0, b = 1, lty = 3, lwd = 2)
-
-# oint for probability 0.5
-points(x[p.vector == 0.5], y[p.vector == 0.5], pch = 16)
-text(x[p.vector == 0.5], y[p.vector == 0.5], &#39;p = 0.5&#39;, pos = 4)
-# point for probability 0.2
-points(x[p.vector == 0.2], y[p.vector == 0.2], pch = 16)
-text(x[p.vector == 0.2], y[p.vector == 0.2], &#39;p = 0.2&#39;, pos = 4)</code></pre>
-<p><img src="/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>predict &lt;- factor(ifelse(p.lda$posterior[, &#39;Yes&#39;] &gt; 0.2, 2, 1),
-                      levels = c(1, 2),
-                      labels = c(&#39;No&#39;, &#39;Yes&#39;))
-
-conf.m &lt;- table(actual, predict)
-conf.m</code></pre>
-<pre><code>##       predict
-## actual   No  Yes
-##    No  8124  284
-##    Yes    0   92</code></pre>
-<pre class="r"><code># sensitivity
-conf.m[2, 2] / sum(conf.m[2, ])</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code># specificity
-conf.m[1, 1] / sum(conf.m[1, ])</code></pre>
-<pre><code>## [1] 0.9662226</code></pre>
-<pre class="r"><code># true
-sum(diag(conf.m)) / sum(conf.m)</code></pre>
-<pre><code>## [1] 0.9665882</code></pre>
-</div>
-<div id="tasks" class="section level2">
-<h2>Tasks</h2>
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<pre class="r"><code># Compair result of clustering with real data (3 species of iris are in analysis)
+table(cl$cluster, df$Species)</code></pre>
+<pre><code>##    
+##     setosa versicolor virginica
+##   1     50          0         0
+##   2      0          2        46
+##   3      0         48         4</code></pre>
+<pre class="r"><code># Plot data
+clusters &lt;- split.data.frame(df, cl$cluster)
+xlim &lt;- c(min(df$Petal.Width), max(df$Petal.Width))
+ylim &lt;- c(min(df$Petal.Length), max(df$Petal.Length))
+col &lt;- c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;)
+plot(0, xlab=&#39;Petal width&#39;, ylab=&#39;Petal length&#39;, xlim=xlim, ylim=ylim)
+for ( i in 1:ncl ) {
+  points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
+}</code></pre>
+<p><img src="/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 
     </div>
@@ -979,9 +705,9 @@ sum(diag(conf.m)) / sum(conf.m)</code></pre>
   
   <a class="badge badge-light" href="/tags/statistics/">Statistics</a>
   
-  <a class="badge badge-light" href="/tags/logistic-regression/">Logistic regression</a>
+  <a class="badge badge-light" href="/tags/clustering/">Clustering</a>
   
-  <a class="badge badge-light" href="/tags/regression/">Regression</a>
+  <a class="badge badge-light" href="/tags/k-means/">k-means</a>
   
 </div>
 
@@ -1087,13 +813,13 @@ sum(diag(conf.m)) / sum(conf.m)</code></pre>
           
           <li><a href="/post/statistics/hierarchical_cluster/hierarchical_cluser/">Hierarchical cluster analysis</a></li>
           
-          <li><a href="/post/statistics/linear_regression_math/linear_regression_math/">Linear Regression (Math)</a></li>
+          <li><a href="/post/statistics/logistic_regression/logistic_regression/">Logistic regression</a></li>
           
           <li><a href="/post/statistics/statistical_learning_topics/">Statistical learning - topics</a></li>
           
-          <li><a href="/post/statistics/k_means/k_means/">k-means</a></li>
-          
           <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing/">Hypothesis testing</a></li>
+          
+          <li><a href="/post/statistics/model_evaluation_metrics/model_evaluation_metrics/">Model evaluation metrics</a></li>
           
         </ul>
       </div>

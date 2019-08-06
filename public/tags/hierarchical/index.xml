@@ -35,7 +35,8 @@
 &lt;h2&gt;Hierarchical cluster analysis&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Prepare data for analysis &lt;code&gt;datasets::USArrests&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- USArrests
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)
+df &amp;lt;- datasets::USArrests
 head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##            Murder Assault UrbanPop Rape
 ## Alabama      13.2     236       58 21.2

@@ -635,7 +635,8 @@
 <h2>Hierarchical cluster analysis</h2>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <p>Prepare data for analysis <code>datasets::USArrests</code></p>
-<pre class="r"><code>df &lt;- USArrests
+<pre class="r"><code>library(datasets)
+df &lt;- datasets::USArrests
 head(df)</code></pre>
 <pre><code>##            Murder Assault UrbanPop Rape
 ## Alabama      13.2     236       58 21.2
@@ -848,6 +849,8 @@ groups[groups==1]</code></pre>
         <h3>Related</h3>
         <ul>
           
+          <li><a href="/post/statistics/k_means/k_means/">k-means</a></li>
+          
           <li><a href="/post/statistics/logistic_regression/logistic_regression/">Logistic regression</a></li>
           
           <li><a href="/post/statistics/statistical_learning_topics/">Statistical learning - topics</a></li>
@@ -855,8 +858,6 @@ groups[groups==1]</code></pre>
           <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing/">Hypothesis testing</a></li>
           
           <li><a href="/post/statistics/model_evaluation_metrics/model_evaluation_metrics/">Model evaluation metrics</a></li>
-          
-          <li><a href="/post/statistics/split_data_ways/split_data_ways/">How to split data into train and test subsets?</a></li>
           
         </ul>
       </div>

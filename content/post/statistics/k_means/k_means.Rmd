@@ -1,0 +1,57 @@
+---
+title: "k-means"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "Clustering", "k-means"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  #blogdown::html_page:
+  toc: true
+summary: "Here you can find how to work with k-means cluster analysis."
+---
+
+## K-means cluster analysis
+```{r setup}
+library(datasets)
+df <- datasets::iris
+head(df)
+```
+There are 3 species:
+```{r}
+unique(df$Species)
+```
+We try to predict them by *Petal.Lenght*and *Petal.Width* variables using k-means clustering.  
+
+```
+# Plot Petal.Length ~ Petal.Width data
+plot(df$Petal.Length ~ df$Petal.Width)
+
+# Find number of clusters using wss
+wss <- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(df[, 3:4], i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares")
+```
+More than 3 clusters give no obvious advantages.  
+
+```{r}
+# Make k-means with 3 clasters
+ncl <- 3
+cl <- stats::kmeans(df[, 3:4], ncl, nstart = 20)
+cl
+
+# Compair result of clustering with real data (3 species of iris are in analysis)
+table(cl$cluster, df$Species)
+
+# Plot data
+clusters <- split.data.frame(df, cl$cluster)
+xlim <- c(min(df$Petal.Width), max(df$Petal.Width))
+ylim <- c(min(df$Petal.Length), max(df$Petal.Length))
+col <- c('red', 'green', 'blue')
+plot(0, xlab='Petal width', ylab='Petal length', xlim=xlim, ylim=ylim)
+for ( i in 1:ncl ) {
+  points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
+}
+```
