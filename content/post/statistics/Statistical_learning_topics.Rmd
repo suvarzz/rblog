@@ -21,8 +21,7 @@ summary: "Basic topics of statistical learning."
 
 # Unsupervised Learning
 * [Hierarchical Cluster Analysis](/post/statistics/hierarchical_cluster/hierarchical_cluser/)
-* K-means Cluster Analysis
-
+* [K-means Cluster Analysis](/post/statistics/k_means/k_means/)
 * Principal Component Analysis
 
 # Supervised Regression
