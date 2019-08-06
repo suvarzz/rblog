@@ -5,7 +5,7 @@
     <link>/tags/machine-learning/</link>
       <atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Machine Learning</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Statistical learning - topics</title>
       <link>/post/statistics/statistical_learning_topics/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/statistical_learning_topics/</guid>
       <description>
 
@@ -45,9 +45,9 @@
 &lt;div id=&#34;unsupervised-learning&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Unsupervised Learning&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;K-means Cluster Analysis&lt;/li&gt;
-&lt;li&gt;Hierarchical Cluster Analysis&lt;/li&gt;
-&lt;li&gt;Principal Component Analysis&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluster/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;K-means Cluster Analysis&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Principal Component Analysis&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;
