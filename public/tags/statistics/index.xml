@@ -5,7 +5,7 @@
     <link>/tags/statistics/</link>
       <atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Statistics</title>
@@ -109,312 +109,44 @@
     </item>
     
     <item>
-      <title>Hypothesis testing</title>
-      <link>/post/statistics/hypothesis_testing/hypothesis_testing/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
+      <title>Linear Regression (Math)</title>
+      <link>/post/statistics/linear_regression_math/linear_regression_math/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/linear_regression_math/linear_regression_math/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#t-test&#34;&gt;t-test&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#t-test-and-normal-distribution&#34;&gt;t-test and normal distribution&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#one-sample-t-test&#34;&gt;One-sample t-test&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#two-samples-t-test&#34;&gt;Two samples t-test&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#summary-of-r-functions-for-t-tests&#34;&gt;Summary of R functions for t-tests&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#what-is-that&#34;&gt;What is that?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#non-parametric-tests&#34;&gt;Non-parametric tests&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#mann-whitney-u-rank-sum-test&#34;&gt;Mann-Whitney U Rank Sum Test&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#wilcoxon-test&#34;&gt;Wilcoxon test&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#tests-for-categorical-variables&#34;&gt;Tests for categorical variables&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#chi-squared-tests&#34;&gt;Chi-squared tests&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#multiple-testing&#34;&gt;Multiple testing&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#the-bonferroni-correction&#34;&gt;The Bonferroni correction&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-find-coefficients-0-and-1&#34;&gt;How to find coefficients β0 and β1?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Null hypothesis (H&lt;sub&gt;0&lt;/sub&gt;):&lt;br /&gt;
-1. H&lt;sub&gt;0&lt;/sub&gt;: m = μ&lt;br /&gt;
-2. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; μ&lt;br /&gt;
-3. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; μ&lt;/p&gt;
-&lt;p&gt;Alternative hypotheses (H&lt;sub&gt;a&lt;/sub&gt;): 1. H&lt;sub&gt;a&lt;/sub&gt;:m ≠ μ (different)&lt;br /&gt;
-2. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;gt; μ (greater)&lt;br /&gt;
-3. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;lt; μ (less)&lt;/p&gt;
-&lt;p&gt;Note: Hypothesis 1. are called &lt;strong&gt;two-tailed tests&lt;/strong&gt; and hypotheses 2. &amp;amp; 3. are called &lt;strong&gt;one-tailed tests&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The p-value is the probability that the observed data could happen, under the condition that the null hypothesis is true.&lt;/p&gt;
-&lt;p&gt;Note: p-value is not the probability that the null hypothesis is true.&lt;br /&gt;
-Note: Absence of evidence ⧧ evidence of absence.&lt;/p&gt;
-&lt;p&gt;Cutoffs for hypothesis testing *p &amp;lt; 0.05, **p &amp;lt; 0.01, ***p &amp;lt; 0.001. If p value is less than significance level alpha (0.05), the hull hypothesies is rejected.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;not rejected (‘negative’)&lt;/th&gt;
-&lt;th&gt;rejected (‘positive’)&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; true&lt;/td&gt;
-&lt;td&gt;True negative (specificity)&lt;/td&gt;
-&lt;td&gt;False Positive (Type I error)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; false&lt;/td&gt;
-&lt;td&gt;False Negative (Type II error)&lt;/td&gt;
-&lt;td&gt;True positive (sensitivity)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Type II errors are usually more dangerous.&lt;/p&gt;
-&lt;div id=&#34;t-test&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;t-test&lt;/h1&gt;
-&lt;div id=&#34;t-test-and-normal-distribution&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;t-test and normal distribution&lt;/h2&gt;
-&lt;p&gt;t-distribution assumes that the observations are &lt;strong&gt;independent&lt;/strong&gt; and that they follow a &lt;strong&gt;normal distribution&lt;/strong&gt;. If the data are &lt;strong&gt;dependent&lt;/strong&gt;, then p-values will likely be totally wrong (e.g., for positive correlation, too optimistic). Type II errors?&lt;br /&gt;
-It is good to test if observations are normally distributed. Otherwise we assume that data is normally distributed.&lt;br /&gt;
-Independence of observations is usually not testable, but can be reasonably assumed if the data collection process was random without replacement.&lt;/p&gt;
-&lt;p&gt;FIXME: I do not understand this. Deviation data from normalyty will lead to type-I errors. I data is deviated from normal distribution, use &lt;strong&gt;Wilcoxon test&lt;/strong&gt; or &lt;strong&gt;permutation tests&lt;/strong&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;one-sample-t-test&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;One-sample t-test&lt;/h2&gt;
-&lt;p&gt;One-sample t-test is used to compare the mean of one sample to a known standard (or theoretical/hypothetical) mean (μ).&lt;br /&gt;
-t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t = \frac{m - \mu}{s/\sqrt{n}}\)&lt;/span&gt;, where&lt;br /&gt;
-&lt;strong&gt;m&lt;/strong&gt; is the sample &lt;strong&gt;mean&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;n&lt;/strong&gt; is the sample &lt;strong&gt;size&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;s&lt;/strong&gt; is the sample &lt;strong&gt;standard deviation&lt;/strong&gt; with n−1 degrees of freedom&lt;br /&gt;
-&lt;strong&gt;μ&lt;/strong&gt; is the &lt;strong&gt;theoretical value&lt;/strong&gt;&lt;br /&gt;
-Q: And what should I do with this t-statistics?&lt;br /&gt;
-Q: What is the difference between t-test and ANOVA?&lt;br /&gt;
-Q: What is the smallest sample size which can be tested by t-test?&lt;br /&gt;
-Q: Show diagrams explaining why p-value of one-sided is smaller than two-sided tests.&lt;/p&gt;
-&lt;p&gt;R example:&lt;br /&gt;
-We want to test if N is different from given mean μ=0:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;N = c(-0.01, 0.65, -0.17, 1.77, 0.76, -0.16, 0.88, 1.09, 0.96, 0.25)
-t.test(N, mu = 0, alternative = &amp;quot;less&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  One Sample t-test
-## 
-## data:  N
-## t = 3.0483, df = 9, p-value = 0.9931
-## alternative hypothesis: true mean is less than 0
-## 95 percent confidence interval:
-##      -Inf 0.964019
-## sample estimates:
-## mean of x 
-##     0.602&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;two.sided&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  One Sample t-test
-## 
-## data:  N
-## t = 3.0483, df = 9, p-value = 0.01383
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  0.1552496 1.0487504
-## sample estimates:
-## mean of x 
-##     0.602&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;greater&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  One Sample t-test
-## 
-## data:  N
-## t = 3.0483, df = 9, p-value = 0.006916
-## alternative hypothesis: true mean is greater than 0
-## 95 percent confidence interval:
-##  0.239981      Inf
-## sample estimates:
-## mean of x 
-##     0.602&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;FIXME: why it accepts all alternatives at the same time (less and greater?)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;two-samples-t-test&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Two samples t-test&lt;/h2&gt;
-&lt;p&gt;Do two different samples have the same mean?&lt;br /&gt;
-H&lt;sub&gt;0&lt;/sub&gt;:&lt;br /&gt;
-1. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; = 0&lt;br /&gt;
-2. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; 0&lt;br /&gt;
-3. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; 0&lt;/p&gt;
-&lt;p&gt;H&lt;sub&gt;a&lt;/sub&gt;:&lt;br /&gt;
-1. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; ≠ 0 (different)&lt;br /&gt;
-2. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;gt; 0 (greater)&lt;br /&gt;
-3. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;lt; 0 (less)&lt;/p&gt;
-&lt;p&gt;The paired sample t-test has four main assumptions:&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;The dependent variable must be &lt;strong&gt;continuous&lt;/strong&gt; (interval/ratio).&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;The observations are &lt;strong&gt;independent&lt;/strong&gt; of one another.&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;The dependent variable should be approximately &lt;strong&gt;normally distributed&lt;/strong&gt;.&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;The dependent variable should not contain any &lt;strong&gt;outliers&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Continuous data can take on any value within a range (income, height, weight, etc.). The opposite of continuous data is discrete data, which can only take on a few values (Low, Medium, High, etc.). Occasionally, discrete data can be used to approximate a continuous scale, such as with &lt;strong&gt;Likert-type scales&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t=\frac{y - x}{SE}\)&lt;/span&gt;, where y and x are the samples means. SE is the standard error for the difference. If H&lt;sub&gt;0&lt;/sub&gt; is correct, test statistic follows a t-distribution with n+m-2 degrees of freedom (n, m the number of observations in each sample).&lt;/p&gt;
-&lt;p&gt;To apply t-test samples must be tested if they have equal variance:&lt;br /&gt;
-equal variance (homoscedastic). Type 3 means two samples, unequal variance (heteroscedastic).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;### t-test
-a = c(175, 168, 168, 190, 156, 181, 182, 175, 174, 179)
-b = c(185, 169, 173, 173, 188, 186, 175, 174, 179, 180)
-
-# test homogeneity of variances using Fisher’s F-test
-var.test(a,b)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  F test to compare two variances
-## 
-## data:  a and b
-## F = 2.1028, num df = 9, denom df = 9, p-value = 0.2834
-## alternative hypothesis: true ratio of variances is not equal to 1
-## 95 percent confidence interval:
-##  0.5223017 8.4657950
-## sample estimates:
-## ratio of variances 
-##           2.102784&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# variance is homogene (can use var.equal=T in t.test)
-
-# t-test
-t.test(a,b, 
-       var.equal=TRUE,   # variance is homogene (tested by var.test(a,b)) 
-       paired=FALSE)     # samples are independent&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  Two Sample t-test
-## 
-## data:  a and b
-## t = -0.94737, df = 18, p-value = 0.356
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -10.93994   4.13994
-## sample estimates:
-## mean of x mean of y 
-##     174.8     178.2&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary-of-r-functions-for-t-tests&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Summary of R functions for t-tests&lt;/h1&gt;
-&lt;p&gt;One-sample t-test&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(x, mu = 0, alternative = c(&amp;quot;two.sided&amp;quot;, &amp;quot;less&amp;quot;, &amp;quot;greater&amp;quot;), paired = FALSE, var.equal = FALSE, conf.level = 0.95)&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;what-is-that&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;What is that?&lt;/h2&gt;
-&lt;p&gt;one-way ANOVA or 2-way ANOVA with &lt;strong&gt;Bonferroni multiple comparison&lt;/strong&gt; or &lt;strong&gt;Dunnett’s post-test&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;non-parametric-tests&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Non-parametric tests&lt;/h1&gt;
-&lt;div id=&#34;mann-whitney-u-rank-sum-test&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Mann-Whitney U Rank Sum Test&lt;/h2&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;The dependent variable is ordinal or continuous.&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;The data consist of a randomly selected sample of independent observations from two independent groups.&lt;br /&gt;
-&lt;/li&gt;
-&lt;li&gt;The dependent variables for the two independent groups share a similar shape.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wilcoxon-test&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Wilcoxon test&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;Wilcoxon&lt;/strong&gt; is a &lt;strong&gt;non-parametric test&lt;/strong&gt; which works on normal and non-normal data. However, we usually prefer not to use it if we can assume that the data is normally distributed. The non-parametric test comes with less statistical power, this is a price that one has to pay for more flexible assumptions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;tests-for-categorical-variables&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Tests for categorical variables&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Categorical variable&lt;/strong&gt; can take fixed number of possible values, assigning each individual or other unit of observation to a particular group or nominal category on the basis of some qualitative property.&lt;/p&gt;
-&lt;div id=&#34;chi-squared-tests&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Chi-squared tests&lt;/h2&gt;
-&lt;p&gt;The chi-squared test is most suited to large datasets. As a general rule, the chi-squared test is appropriate if at least 80% of the cells have an expected frequency of 5 or greater. In addition, none of the cells should have an expected frequency less than 1. If the expected values are very small, categories may be combined (if it makes sense to do so) to create fewer larger categories. Alternatively, Fisher’s exact test can be used.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(83,35), c(92,43))
-data&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
-## [1,]   83   35
-## [2,]   92   43&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;chisq.test(data, correct=F)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  Pearson&amp;#39;s Chi-squared test
-## 
-## data:  data
-## X-squared = 0.14172, df = 1, p-value = 0.7066&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;chisq.test(testor,correct=F) ## Fisher’s Exact test R Example:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th&gt;Group&lt;/th&gt;
-&lt;th&gt;TumourShrinkage-No&lt;/th&gt;
-&lt;th&gt;TumourShrinkage-Yes&lt;/th&gt;
-&lt;th&gt;Total&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td&gt;1 Treatment&lt;/td&gt;
-&lt;td&gt;8&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;11&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;2 Placebo&lt;/td&gt;
-&lt;td&gt;9&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;13&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td&gt;3 Total&lt;/td&gt;
-&lt;td&gt;17&lt;/td&gt;
-&lt;td&gt;7&lt;/td&gt;
-&lt;td&gt;24&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;The &lt;strong&gt;null hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;no association&lt;/strong&gt; between treatment and tumour shrinkage.&lt;br /&gt;
-The &lt;strong&gt;alternative hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;some association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(8,3), c(9,4))
-data&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
-## [1,]    8    3
-## [2,]    9    4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fisher.test(data)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  Fisher&amp;#39;s Exact Test for Count Data
-## 
-## data:  data
-## p-value = 1
-## alternative hypothesis: true odds ratio is not equal to 1
-## 95 percent confidence interval:
-##   0.1456912 10.6433317
-## sample estimates:
-## odds ratio 
-##   1.176844&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The output Fisher’s exact test tells us that the probability of observing such an extreme combination of frequencies is high, our p-value is 1.000 which is clearly greater than 0.05. In this case, there is &lt;strong&gt;no evidence of an association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;multiple-testing&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Multiple testing&lt;/h1&gt;
-&lt;p&gt;When performing a large number of tests, the type I error is inflated: for α=0.05 and performing n tests, the probability of no false positive result is: 0.095 x 0.95 x … (n-times) &amp;lt;&amp;lt;&amp;lt; 0.095&lt;br /&gt;
-The larger the number of tests performed, the higher the probability of a false rejection!&lt;br /&gt;
-Many data analysis approaches in genomics rely on itemby-item (i.e. multiple) testing:&lt;br /&gt;
-Microarray or RNA-Seq expression profiles of “normal” vs “perturbed” samples: gene-by-gene&lt;br /&gt;
-ChIP-chip: locus-by-locus&lt;br /&gt;
-RNAi and chemical compound screens&lt;br /&gt;
-Genome-wide association studies: marker-by-marker&lt;br /&gt;
-QTL analysis: marker-by-marker and trait-by-trait&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;False positive rate&lt;/strong&gt; (FPR) - the proportion of false positives among all resulst.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;False discovery rate&lt;/strong&gt; (FDR) - the proportion of false positives among all significant results.&lt;/p&gt;
-&lt;p&gt;Example: 20,000 genes, 100 hits, 10 of them wrong.&lt;br /&gt;
-FPR: 0.05%&lt;br /&gt;
-FDR: 10%&lt;/p&gt;
-&lt;div id=&#34;the-bonferroni-correction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The Bonferroni correction&lt;/h2&gt;
-&lt;p&gt;The Bonferroni correction sets the significance cut-off at α/n.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Sources&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.sthda.com/english/wiki/one-sample-t-test-in-r&#34;&gt;One-Sample T-test in R&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - expectd value of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, the same as &lt;span class=&#34;math inline&#34;&gt;\(E(Y|x)\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; - intercept&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; - slope&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2}\)&lt;/span&gt;&lt;/p&gt;
+&lt;div id=&#34;how-to-find-coefficients-0-and-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to find coefficients β0 and β1?&lt;/h2&gt;
+&lt;p&gt;To find &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; we should find &lt;strong&gt;minimum&lt;/strong&gt; of &lt;strong&gt;sum of squared residuals&lt;/strong&gt; (&lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt;)&lt;br /&gt;
+To find this minimum we should calculate derivatives of &lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt; with respect to &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and set them to 0:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\min_{\beta_0,\beta1} : SSR \implies \frac{\partial SSR}{\partial \beta_0} = \frac{\partial SSR}{\partial \beta_1} = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Here is the solution:&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(SSR = \displaystyle\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1x_i))^2 = \displaystyle\sum_{i=1}^{n} (y_i^2 - 2y_i \beta_0 - 2y_i \beta_1 x_i + \beta_0^2 + 2\beta_0\beta_1x_i + \beta_1^2x_i^2)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial\beta_0} = \displaystyle\sum_{i=1}^{n}(-2y_i + 2\beta_0 + 2\beta_1x_i)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\sum_{i=1}^{n} (-y_i + \hat\beta_0 + \hat\beta_1 x_i) = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\bar y = \frac{1}{n} \displaystyle\sum_{i=1}^{n} y_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar x = \frac{1}{n} \displaystyle\sum_{i=1}^{n} x_i \implies -n\bar y + n \hat\beta_0 + \hat\beta_1 n \hat x = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial \beta_1} = \displaystyle\sum_{i=1}^{n} (-2x_i y_i + 2\beta_0 x_i + 2\beta_1 x_i^2)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + \hat\beta_0 \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + (\bar y - \hat\beta_1 \bar x) \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} x_i(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} x_i (x_i - \bar x)} = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2} = \frac{Cov(x,y)}{Var(x)} = r_{xy} \frac{s_y}{s_x}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - estimated &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar y\)&lt;/span&gt; - averages of &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y_i\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(r_{xy}\)&lt;/span&gt; - sample correlation coefficient between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(s_x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_y\)&lt;/span&gt; - uncorrected sample standard deviations of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(Var\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Cov\)&lt;/span&gt; - sample variance and sample covariance.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -422,7 +154,7 @@ FDR: 10%&lt;/p&gt;
     <item>
       <title>Logistic regression</title>
       <link>/post/statistics/logistic_regression/logistic_regression/</link>
-      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/logistic_regression/logistic_regression/</guid>
       <description>
 
@@ -771,6 +503,317 @@ sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;tasks&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Tasks&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hypothesis testing</title>
+      <link>/post/statistics/hypothesis_testing/hypothesis_testing/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#t-test&#34;&gt;t-test&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#t-test-and-normal-distribution&#34;&gt;t-test and normal distribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-sample-t-test&#34;&gt;One-sample t-test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#two-samples-t-test&#34;&gt;Two samples t-test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summary-of-r-functions-for-t-tests&#34;&gt;Summary of R functions for t-tests&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-that&#34;&gt;What is that?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#non-parametric-tests&#34;&gt;Non-parametric tests&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#mann-whitney-u-rank-sum-test&#34;&gt;Mann-Whitney U Rank Sum Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wilcoxon-test&#34;&gt;Wilcoxon test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tests-for-categorical-variables&#34;&gt;Tests for categorical variables&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#chi-squared-tests&#34;&gt;Chi-squared tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#multiple-testing&#34;&gt;Multiple testing&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-bonferroni-correction&#34;&gt;The Bonferroni correction&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Null hypothesis (H&lt;sub&gt;0&lt;/sub&gt;):&lt;br /&gt;
+1. H&lt;sub&gt;0&lt;/sub&gt;: m = μ&lt;br /&gt;
+2. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; μ&lt;br /&gt;
+3. H&lt;sub&gt;0&lt;/sub&gt;: m &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; μ&lt;/p&gt;
+&lt;p&gt;Alternative hypotheses (H&lt;sub&gt;a&lt;/sub&gt;): 1. H&lt;sub&gt;a&lt;/sub&gt;:m ≠ μ (different)&lt;br /&gt;
+2. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;gt; μ (greater)&lt;br /&gt;
+3. H&lt;sub&gt;a&lt;/sub&gt;:m &amp;lt; μ (less)&lt;/p&gt;
+&lt;p&gt;Note: Hypothesis 1. are called &lt;strong&gt;two-tailed tests&lt;/strong&gt; and hypotheses 2. &amp;amp; 3. are called &lt;strong&gt;one-tailed tests&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The p-value is the probability that the observed data could happen, under the condition that the null hypothesis is true.&lt;/p&gt;
+&lt;p&gt;Note: p-value is not the probability that the null hypothesis is true.&lt;br /&gt;
+Note: Absence of evidence ⧧ evidence of absence.&lt;/p&gt;
+&lt;p&gt;Cutoffs for hypothesis testing *p &amp;lt; 0.05, **p &amp;lt; 0.01, ***p &amp;lt; 0.001. If p value is less than significance level alpha (0.05), the hull hypothesies is rejected.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;not rejected (‘negative’)&lt;/th&gt;
+&lt;th&gt;rejected (‘positive’)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; true&lt;/td&gt;
+&lt;td&gt;True negative (specificity)&lt;/td&gt;
+&lt;td&gt;False Positive (Type I error)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;H&lt;sub&gt;0&lt;/sub&gt; false&lt;/td&gt;
+&lt;td&gt;False Negative (Type II error)&lt;/td&gt;
+&lt;td&gt;True positive (sensitivity)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Type II errors are usually more dangerous.&lt;/p&gt;
+&lt;div id=&#34;t-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;t-test&lt;/h1&gt;
+&lt;div id=&#34;t-test-and-normal-distribution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;t-test and normal distribution&lt;/h2&gt;
+&lt;p&gt;t-distribution assumes that the observations are &lt;strong&gt;independent&lt;/strong&gt; and that they follow a &lt;strong&gt;normal distribution&lt;/strong&gt;. If the data are &lt;strong&gt;dependent&lt;/strong&gt;, then p-values will likely be totally wrong (e.g., for positive correlation, too optimistic). Type II errors?&lt;br /&gt;
+It is good to test if observations are normally distributed. Otherwise we assume that data is normally distributed.&lt;br /&gt;
+Independence of observations is usually not testable, but can be reasonably assumed if the data collection process was random without replacement.&lt;/p&gt;
+&lt;p&gt;FIXME: I do not understand this. Deviation data from normalyty will lead to type-I errors. I data is deviated from normal distribution, use &lt;strong&gt;Wilcoxon test&lt;/strong&gt; or &lt;strong&gt;permutation tests&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-sample-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;One-sample t-test&lt;/h2&gt;
+&lt;p&gt;One-sample t-test is used to compare the mean of one sample to a known standard (or theoretical/hypothetical) mean (μ).&lt;br /&gt;
+t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t = \frac{m - \mu}{s/\sqrt{n}}\)&lt;/span&gt;, where&lt;br /&gt;
+&lt;strong&gt;m&lt;/strong&gt; is the sample &lt;strong&gt;mean&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;n&lt;/strong&gt; is the sample &lt;strong&gt;size&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;s&lt;/strong&gt; is the sample &lt;strong&gt;standard deviation&lt;/strong&gt; with n−1 degrees of freedom&lt;br /&gt;
+&lt;strong&gt;μ&lt;/strong&gt; is the &lt;strong&gt;theoretical value&lt;/strong&gt;&lt;br /&gt;
+Q: And what should I do with this t-statistics?&lt;br /&gt;
+Q: What is the difference between t-test and ANOVA?&lt;br /&gt;
+Q: What is the smallest sample size which can be tested by t-test?&lt;br /&gt;
+Q: Show diagrams explaining why p-value of one-sided is smaller than two-sided tests.&lt;/p&gt;
+&lt;p&gt;R example:&lt;br /&gt;
+We want to test if N is different from given mean μ=0:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;N = c(-0.01, 0.65, -0.17, 1.77, 0.76, -0.16, 0.88, 1.09, 0.96, 0.25)
+t.test(N, mu = 0, alternative = &amp;quot;less&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.9931
+## alternative hypothesis: true mean is less than 0
+## 95 percent confidence interval:
+##      -Inf 0.964019
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;two.sided&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.01383
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  0.1552496 1.0487504
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(N, mu = 0, alternative = &amp;quot;greater&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One Sample t-test
+## 
+## data:  N
+## t = 3.0483, df = 9, p-value = 0.006916
+## alternative hypothesis: true mean is greater than 0
+## 95 percent confidence interval:
+##  0.239981      Inf
+## sample estimates:
+## mean of x 
+##     0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;FIXME: why it accepts all alternatives at the same time (less and greater?)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;two-samples-t-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Two samples t-test&lt;/h2&gt;
+&lt;p&gt;Do two different samples have the same mean?&lt;br /&gt;
+H&lt;sub&gt;0&lt;/sub&gt;:&lt;br /&gt;
+1. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; = 0&lt;br /&gt;
+2. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\leq\)&lt;/span&gt; 0&lt;br /&gt;
+3. H&lt;sub&gt;0&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &lt;span class=&#34;math inline&#34;&gt;\(\geq\)&lt;/span&gt; 0&lt;/p&gt;
+&lt;p&gt;H&lt;sub&gt;a&lt;/sub&gt;:&lt;br /&gt;
+1. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; ≠ 0 (different)&lt;br /&gt;
+2. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;gt; 0 (greater)&lt;br /&gt;
+3. H&lt;sub&gt;a&lt;/sub&gt;: m&lt;sub&gt;1&lt;/sub&gt; - m&lt;sub&gt;2&lt;/sub&gt; &amp;lt; 0 (less)&lt;/p&gt;
+&lt;p&gt;The paired sample t-test has four main assumptions:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The dependent variable must be &lt;strong&gt;continuous&lt;/strong&gt; (interval/ratio).&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The observations are &lt;strong&gt;independent&lt;/strong&gt; of one another.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variable should be approximately &lt;strong&gt;normally distributed&lt;/strong&gt;.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variable should not contain any &lt;strong&gt;outliers&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Continuous data can take on any value within a range (income, height, weight, etc.). The opposite of continuous data is discrete data, which can only take on a few values (Low, Medium, High, etc.). Occasionally, discrete data can be used to approximate a continuous scale, such as with &lt;strong&gt;Likert-type scales&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;t-statistics: &lt;span class=&#34;math inline&#34;&gt;\(t=\frac{y - x}{SE}\)&lt;/span&gt;, where y and x are the samples means. SE is the standard error for the difference. If H&lt;sub&gt;0&lt;/sub&gt; is correct, test statistic follows a t-distribution with n+m-2 degrees of freedom (n, m the number of observations in each sample).&lt;/p&gt;
+&lt;p&gt;To apply t-test samples must be tested if they have equal variance:&lt;br /&gt;
+equal variance (homoscedastic). Type 3 means two samples, unequal variance (heteroscedastic).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;### t-test
+a = c(175, 168, 168, 190, 156, 181, 182, 175, 174, 179)
+b = c(185, 169, 173, 173, 188, 186, 175, 174, 179, 180)
+
+# test homogeneity of variances using Fisher’s F-test
+var.test(a,b)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  F test to compare two variances
+## 
+## data:  a and b
+## F = 2.1028, num df = 9, denom df = 9, p-value = 0.2834
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.5223017 8.4657950
+## sample estimates:
+## ratio of variances 
+##           2.102784&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# variance is homogene (can use var.equal=T in t.test)
+
+# t-test
+t.test(a,b, 
+       var.equal=TRUE,   # variance is homogene (tested by var.test(a,b)) 
+       paired=FALSE)     # samples are independent&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Two Sample t-test
+## 
+## data:  a and b
+## t = -0.94737, df = 18, p-value = 0.356
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -10.93994   4.13994
+## sample estimates:
+## mean of x mean of y 
+##     174.8     178.2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary-of-r-functions-for-t-tests&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summary of R functions for t-tests&lt;/h1&gt;
+&lt;p&gt;One-sample t-test&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t.test(x, mu = 0, alternative = c(&amp;quot;two.sided&amp;quot;, &amp;quot;less&amp;quot;, &amp;quot;greater&amp;quot;), paired = FALSE, var.equal = FALSE, conf.level = 0.95)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;what-is-that&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is that?&lt;/h2&gt;
+&lt;p&gt;one-way ANOVA or 2-way ANOVA with &lt;strong&gt;Bonferroni multiple comparison&lt;/strong&gt; or &lt;strong&gt;Dunnett’s post-test&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;non-parametric-tests&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Non-parametric tests&lt;/h1&gt;
+&lt;div id=&#34;mann-whitney-u-rank-sum-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mann-Whitney U Rank Sum Test&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The dependent variable is ordinal or continuous.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The data consist of a randomly selected sample of independent observations from two independent groups.&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;The dependent variables for the two independent groups share a similar shape.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wilcoxon-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Wilcoxon test&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;Wilcoxon&lt;/strong&gt; is a &lt;strong&gt;non-parametric test&lt;/strong&gt; which works on normal and non-normal data. However, we usually prefer not to use it if we can assume that the data is normally distributed. The non-parametric test comes with less statistical power, this is a price that one has to pay for more flexible assumptions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tests-for-categorical-variables&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Tests for categorical variables&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Categorical variable&lt;/strong&gt; can take fixed number of possible values, assigning each individual or other unit of observation to a particular group or nominal category on the basis of some qualitative property.&lt;/p&gt;
+&lt;div id=&#34;chi-squared-tests&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Chi-squared tests&lt;/h2&gt;
+&lt;p&gt;The chi-squared test is most suited to large datasets. As a general rule, the chi-squared test is appropriate if at least 80% of the cells have an expected frequency of 5 or greater. In addition, none of the cells should have an expected frequency less than 1. If the expected values are very small, categories may be combined (if it makes sense to do so) to create fewer larger categories. Alternatively, Fisher’s exact test can be used.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(83,35), c(92,43))
+data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
+## [1,]   83   35
+## [2,]   92   43&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;chisq.test(data, correct=F)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Pearson&amp;#39;s Chi-squared test
+## 
+## data:  data
+## X-squared = 0.14172, df = 1, p-value = 0.7066&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;chisq.test(testor,correct=F) ## Fisher’s Exact test R Example:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Group&lt;/th&gt;
+&lt;th&gt;TumourShrinkage-No&lt;/th&gt;
+&lt;th&gt;TumourShrinkage-Yes&lt;/th&gt;
+&lt;th&gt;Total&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1 Treatment&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2 Placebo&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3 Total&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The &lt;strong&gt;null hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;no association&lt;/strong&gt; between treatment and tumour shrinkage.&lt;br /&gt;
+The &lt;strong&gt;alternative hypothesis&lt;/strong&gt; is that there is &lt;strong&gt;some association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data = rbind(c(8,3), c(9,4))
+data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
+## [1,]    8    3
+## [2,]    9    4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fisher.test(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Fisher&amp;#39;s Exact Test for Count Data
+## 
+## data:  data
+## p-value = 1
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##   0.1456912 10.6433317
+## sample estimates:
+## odds ratio 
+##   1.176844&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output Fisher’s exact test tells us that the probability of observing such an extreme combination of frequencies is high, our p-value is 1.000 which is clearly greater than 0.05. In this case, there is &lt;strong&gt;no evidence of an association&lt;/strong&gt; between treatment group and tumour shrinkage.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multiple-testing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Multiple testing&lt;/h1&gt;
+&lt;p&gt;When performing a large number of tests, the type I error is inflated: for α=0.05 and performing n tests, the probability of no false positive result is: 0.095 x 0.95 x … (n-times) &amp;lt;&amp;lt;&amp;lt; 0.095&lt;br /&gt;
+The larger the number of tests performed, the higher the probability of a false rejection!&lt;br /&gt;
+Many data analysis approaches in genomics rely on itemby-item (i.e. multiple) testing:&lt;br /&gt;
+Microarray or RNA-Seq expression profiles of “normal” vs “perturbed” samples: gene-by-gene&lt;br /&gt;
+ChIP-chip: locus-by-locus&lt;br /&gt;
+RNAi and chemical compound screens&lt;br /&gt;
+Genome-wide association studies: marker-by-marker&lt;br /&gt;
+QTL analysis: marker-by-marker and trait-by-trait&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;False positive rate&lt;/strong&gt; (FPR) - the proportion of false positives among all resulst.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;False discovery rate&lt;/strong&gt; (FDR) - the proportion of false positives among all significant results.&lt;/p&gt;
+&lt;p&gt;Example: 20,000 genes, 100 hits, 10 of them wrong.&lt;br /&gt;
+FPR: 0.05%&lt;br /&gt;
+FDR: 10%&lt;/p&gt;
+&lt;div id=&#34;the-bonferroni-correction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Bonferroni correction&lt;/h2&gt;
+&lt;p&gt;The Bonferroni correction sets the significance cut-off at α/n.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Sources&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.sthda.com/english/wiki/one-sample-t-test-in-r&#34;&gt;One-Sample T-test in R&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

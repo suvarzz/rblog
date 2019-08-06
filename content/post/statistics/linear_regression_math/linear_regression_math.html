@@ -1,0 +1,49 @@
+---
+title: "Linear Regression (Math)"
+author: "Mark Goldberg"
+date: '2019-08-06'
+draft: false
+math: true
+tags: ["Math", "Statistics", "Regression"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Pure math for linear regression model."
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#how-to-find-coefficients-0-and-1">How to find coefficients β0 and β1?</a></li>
+</ul>
+</div>
+
+<p><span class="math inline">\(\hat y = \beta_0 + \beta_1 x\)</span></p>
+<p><span class="math inline">\(\hat y\)</span> - expectd value of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>, the same as <span class="math inline">\(E(Y|x)\)</span><br />
+<span class="math inline">\(\beta_0\)</span> - intercept<br />
+<span class="math inline">\(\beta_1\)</span> - slope</p>
+<p><span class="math inline">\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)</span></p>
+<p><span class="math inline">\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2}\)</span></p>
+<div id="how-to-find-coefficients-0-and-1" class="section level2">
+<h2>How to find coefficients β0 and β1?</h2>
+<p>To find <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_0\)</span> we should find <strong>minimum</strong> of <strong>sum of squared residuals</strong> (<span class="math inline">\(SSR\)</span>)<br />
+To find this minimum we should calculate derivatives of <span class="math inline">\(SSR\)</span> with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> and set them to 0:</p>
+<p><span class="math inline">\(\displaystyle\min_{\beta_0,\beta1} : SSR \implies \frac{\partial SSR}{\partial \beta_0} = \frac{\partial SSR}{\partial \beta_1} = 0\)</span></p>
+<p>Here is the solution:<br />
+<span class="math inline">\(SSR = \displaystyle\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1x_i))^2 = \displaystyle\sum_{i=1}^{n} (y_i^2 - 2y_i \beta_0 - 2y_i \beta_1 x_i + \beta_0^2 + 2\beta_0\beta_1x_i + \beta_1^2x_i^2)\)</span></p>
+<p><span class="math inline">\(\frac{\partial SSR}{\partial\beta_0} = \displaystyle\sum_{i=1}^{n}(-2y_i + 2\beta_0 + 2\beta_1x_i)\)</span></p>
+<p><span class="math inline">\(\displaystyle\sum_{i=1}^{n} (-y_i + \hat\beta_0 + \hat\beta_1 x_i) = 0\)</span></p>
+<p><span class="math inline">\(\bar y = \frac{1}{n} \displaystyle\sum_{i=1}^{n} y_i\)</span> and <span class="math inline">\(\bar x = \frac{1}{n} \displaystyle\sum_{i=1}^{n} x_i \implies -n\bar y + n \hat\beta_0 + \hat\beta_1 n \hat x = 0\)</span></p>
+<p><span class="math inline">\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)</span></p>
+<p><span class="math inline">\(\frac{\partial SSR}{\partial \beta_1} = \displaystyle\sum_{i=1}^{n} (-2x_i y_i + 2\beta_0 x_i + 2\beta_1 x_i^2)\)</span></p>
+<p><span class="math inline">\(-\displaystyle\sum_{i=1}^{n} x_i y_i + \hat\beta_0 \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)</span></p>
+<p><span class="math inline">\(-\displaystyle\sum_{i=1}^{n} x_i y_i + (\bar y - \hat\beta_1 \bar x) \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)</span></p>
+<p><span class="math inline">\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} x_i(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} x_i (x_i - \bar x)} = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2} = \frac{Cov(x,y)}{Var(x)} = r_{xy} \frac{s_y}{s_x}\)</span></p>
+<p><span class="math inline">\(\hat x\)</span> and <span class="math inline">\(\hat y\)</span> - estimated <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span><br />
+<span class="math inline">\(\bar x\)</span> and <span class="math inline">\(\bar y\)</span> - averages of <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span><br />
+<span class="math inline">\(r_{xy}\)</span> - sample correlation coefficient between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span><br />
+<span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> - uncorrected sample standard deviations of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span><br />
+<span class="math inline">\(Var\)</span> and <span class="math inline">\(Cov\)</span> - sample variance and sample covariance.</p>
+</div>

@@ -1,0 +1,71 @@
+---
+title: "Fit models in R (summary)"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: true
+math: true
+tags: ["R", "Statistics", "Regression"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV)."
+---
+
+# Fit models in R (summary)
+
+This page contains summary of various approaches for fitting models to data using R.  
+
+fit model (**m**) for **x** ~ f(**y**) or **x** ~ f(**y**, **z**, **k**, ...), where  
+**y** - response  
+**x**, **z**, **k**, ... - explanatory variables  
+**df** - data frame containing variables  
+
+```{r, eval=F}
+# toy data for linear model
+#df=data.frame(y=c(1.52,6.08,8.62), x=c(1.95,3.79,7.37), z=c(1,2,3))
+
+## Model summary
+summary(m)                 # parameter estimates and overall model fit
+coef(m)                    # model coefficients (means, slopes, intercepts)
+confint(m)                 # confidence intervals for parameters
+confint(m, level = 0.95)   # 95% conf. intervals for slope and intercept
+resid(m)                   # residuals
+predict(m)     
+
+anova(m1, m2)  # compare fits of 2 models, "full" vs "reduced"
+anova(m)       # ANOVA table (** terms tested sequentially **)
+
+## Prediction by model
+predict(m)                # predicted values
+predict(m, data = df)     # predicted values
+fitted(m)                 # predicted values
+
+## Plot model
+plot(x ~ y, data = df)  # plot data
+abline(m)               # model curve
+plot(m)                 # plots of residuals, normal quantiles, leverage
+
+## Linear regression model
+m <- lm(y ~ 1, data = df)            # estimate mean
+lm(y ~ A, data = df)                 # A - faclor; single factor ANOVA
+
+m <- lm(y ~ x, data = df)            # linear regression of y on x
+m <- lm(y ~ x, data = df, na.action = na.exclude)   # exclude 'NA' from data
+m <- lm(y ~ x + z, data = df)        # multiple linear regression 
+m <- lm(y ~ x + z + x:z, data = df)  # interaction between x and z presents
+lm(y ~ x*z, data = df)               # interaction between x and z presents
+
+m <- lm(y ~ 0 + x, data = df)        # transformation
+lm(y ~ x - 1, data = df)             # transformation
+```
+
+```{r, eval=F}
+## Polynomial regression model
+m <- lm(y ~ poly(x, n), data = df)   # n-degree (2,3,...)
+
+```
+
+### Bibliography
+[Fit models to data by Dolph Schluter](https://www.zoology.ubc.ca/~schluter/R/fit-model/)  
