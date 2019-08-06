@@ -59,7 +59,7 @@ $Var$ and $Cov$ - sample variance and sample covariance.
 ## Matrix form for multiple regression
 We can write $\hat y = \beta_0 + \beta_1 x$ in a matrix form:
 
-$Y = \begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix}$ $\b = \begin{bmatrix}\beta_1\\\beta_2\\\vdots\\\beta_n\end{bmatrix}$
+$Y = \begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix}$ $b = \begin{bmatrix}\beta_1\\\beta_2\\\vdots\\\beta_n\end{bmatrix}$
 $X = \begin{bmatrix}1 & x_{1,1} & x_{1,2} \dots & x_{1,k}\\1 & x_{2,1} & x_{2,2} \dots & x_{2,k}\\\vdots & \vdots & \vdots & \vdots\\1 & x_{n,1} & x_{n,2} \dots & x_{n,k}\end{bmatrix}$
 
 $Y = Xb$
