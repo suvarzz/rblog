@@ -26,8 +26,15 @@ library(datasets)
 
 # data
 df &amp;lt;- datasets::iris
-
-# split data
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data
 train.ratio = 0.9
 n = nrow(df)
 
@@ -45,8 +52,8 @@ pred &amp;lt;- predict(nn, test)
 table(test$Species == &amp;quot;setosa&amp;quot;, pred[, 1] &amp;gt; 0.5)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##        
 ##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7&lt;/code&gt;&lt;/pre&gt;
+##   FALSE    10    0
+##   TRUE      0    5&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;multiclass-classification&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Multiclass classification&lt;/h2&gt;
@@ -58,8 +65,8 @@ pred &amp;lt;- predict(nn, test)
 table(test$Species, apply(pred, 1, which.max))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             
 ##              1 2 3
-##   setosa     7 0 0
-##   versicolor 0 4 0
+##   setosa     5 0 0
+##   versicolor 0 6 0
 ##   virginica  0 0 4&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;

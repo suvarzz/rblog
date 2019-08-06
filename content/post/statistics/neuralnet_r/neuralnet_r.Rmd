@@ -20,6 +20,7 @@ library(datasets)
 
 # data
 df <- datasets::iris
+head(df)
 
 # split data
 train.ratio = 0.9
