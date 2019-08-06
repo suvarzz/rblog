@@ -66,8 +66,8 @@ $Y = Xb$
 
 $X'Y = X'Xb$
 
-$(X'X)^-1X'Xb = (X'X)^-1X'Y$
+$(X'X)^{-1}X'Xb = (X'X)^{-1}X'Y$
 
-$b = (X'X)^-1X'Y$
+$b = (X'X)^{-1}X'Y$
 
-$(X'X)^-1X'X = I$ - identity matrix
+$(X'X)^{-1}X'X = I$ - identity matrix
