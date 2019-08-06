@@ -1,0 +1,104 @@
+---
+title: "Hierarchical cluster analysis"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "Clustering", "Hierarchical"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Here you can find how to work with hierarchical cluster analysis, how choose number of cluseter and how to choose the best model."
+---
+## Hierarchical cluster analysis
+
+```{r, message=F}
+library(tidyverse)
+```
+Prepare data for analysis `datasets::USArrests`  
+```{r}
+df <- USArrests
+head(df)
+# check if 'NA' values present in data
+any(is.na(df))
+# remove 'NA' if necessary
+df <- na.omit(df)
+# normalize
+df <- scale(df)
+```
+## Choosing optimal number of clusters
+### Elbow method
+plot **k** ~ **wss**, where **k** - is a cluseter number and **wss** is a total within-cluster sum of square.
+
+```{r}
+wss <- (nrow(df)-1)*sum(apply(df,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(df, centers=i)$withinss)
+plot(1:15, wss, type="b",
+     xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
+```
+This diagram shows that 4 number of clusers is optimal for this dataset.
+
+## Choosing the best clustering model
+
+```{r}
+hc2 <- cluster::agnes(df, method='complete')
+hc2$ac
+```
+
+This metric allows to estimate the quality of cluster. Closer to 1 is better.  
+Using this metric we can try several models and choose the best one.  
+
+```{r}
+m <- c( "average", "single", "complete", "ward")
+names(m) <- c( "average", "single", "complete", "ward")
+# function to compute coefficient
+ac <- function(x) { cluster::agnes(df, method = x)$ac }
+
+purrr::map_dbl(m, ac)
+```
+As we can see the **ward method** gives the best clustering.
+
+## Hierarchical cluster analysis
+Let's first split data into groups using `clust::hclust` function.  
+
+```{r}
+# calculate distances
+d <- dist(df, method='euclidean')
+
+# hierarchical cluster analysis
+# 'ward.D2' method is equivalent of agnes 'ward'
+hc1 <- hclust(d, method='ward.D2')
+
+# Plot the obtained dendrogram
+plot(hc1, hang = -1, cex = 0.6)
+
+# show 3 clusers
+rect.hclust(hc1, k=3, border="blue")
+```
+
+```{r}
+# group data by clusters
+groups <- cutree(hc1, k=3)
+names(groups[groups == 1])
+
+# check for cluster metrics
+names(hc1)
+```
+
+Now we can split data into groups using `cluster::agnes` function.  
+
+```{r}
+# using 'agnes' for hierarhical clustering
+hc3 <- cluster::agnes(df, method='ward')
+# plot slaster
+cluster::pltree(hc3, hang = -1, cex = 0.6)
+# split into groups
+groups <- cutree(as.hclust(hc3), k = 4)
+groups[groups==1]
+```
+
+## Bibliography
+[UC Business Analytics R Programming Guide](https://uc-r.github.io/hc_clustering)

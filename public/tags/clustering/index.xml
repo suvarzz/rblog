@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clustering | Mark Goldberg</title>
+    <link>/tags/clustering/</link>
+      <atom:link href="/tags/clustering/index.xml" rel="self" type="application/rss+xml" />
+    <description>Clustering</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>Clustering</title>
+      <link>/tags/clustering/</link>
+    </image>
+    
+    <item>
+      <title>Hierarchical cluster analysis</title>
+      <link>/post/statistics/hierarchical_cluster/hierarchical_cluser/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/hierarchical_cluster/hierarchical_cluser/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#hierarchical-cluster-analysis&#34;&gt;Hierarchical cluster analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#choosing-optimal-number-of-clusters&#34;&gt;Choosing optimal number of clusters&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#elbow-method&#34;&gt;Elbow method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#choosing-the-best-clustering-model&#34;&gt;Choosing the best clustering model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#hierarchical-cluster-analysis-1&#34;&gt;Hierarchical cluster analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliography&#34;&gt;Bibliography&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;hierarchical-cluster-analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Hierarchical cluster analysis&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Prepare data for analysis &lt;code&gt;datasets::USArrests&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- USArrests
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            Murder Assault UrbanPop Rape
+## Alabama      13.2     236       58 21.2
+## Alaska       10.0     263       48 44.5
+## Arizona       8.1     294       80 31.0
+## Arkansas      8.8     190       50 19.5
+## California    9.0     276       91 40.6
+## Colorado      7.9     204       78 38.7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# check if &amp;#39;NA&amp;#39; values present in data
+any(is.na(df))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] FALSE&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# remove &amp;#39;NA&amp;#39; if necessary
+df &amp;lt;- na.omit(df)
+# normalize
+df &amp;lt;- scale(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;choosing-optimal-number-of-clusters&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Choosing optimal number of clusters&lt;/h2&gt;
+&lt;div id=&#34;elbow-method&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Elbow method&lt;/h3&gt;
+&lt;p&gt;plot &lt;strong&gt;k&lt;/strong&gt; ~ &lt;strong&gt;wss&lt;/strong&gt;, where &lt;strong&gt;k&lt;/strong&gt; - is a cluseter number and &lt;strong&gt;wss&lt;/strong&gt; is a total within-cluster sum of square.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wss &amp;lt;- (nrow(df)-1)*sum(apply(df,2,var))
+for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df, centers=i)$withinss)
+plot(1:15, wss, type=&amp;quot;b&amp;quot;,
+     xlab=&amp;quot;Number of Clusters&amp;quot;,
+     ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; This diagram shows that 4 number of clusers is optimal for this dataset.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;choosing-the-best-clustering-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Choosing the best clustering model&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;hc2 &amp;lt;- cluster::agnes(df, method=&amp;#39;complete&amp;#39;)
+hc2$ac&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.8531583&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This metric allows to estimate the quality of cluster. Closer to 1 is better.&lt;br /&gt;
+Using this metric we can try several models and choose the best one.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m &amp;lt;- c( &amp;quot;average&amp;quot;, &amp;quot;single&amp;quot;, &amp;quot;complete&amp;quot;, &amp;quot;ward&amp;quot;)
+names(m) &amp;lt;- c( &amp;quot;average&amp;quot;, &amp;quot;single&amp;quot;, &amp;quot;complete&amp;quot;, &amp;quot;ward&amp;quot;)
+# function to compute coefficient
+ac &amp;lt;- function(x) { cluster::agnes(df, method = x)$ac }
+
+purrr::map_dbl(m, ac)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   average    single  complete      ward 
+## 0.7379371 0.6276128 0.8531583 0.9346210&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As we can see the &lt;strong&gt;ward method&lt;/strong&gt; gives the best clustering.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;hierarchical-cluster-analysis-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Hierarchical cluster analysis&lt;/h2&gt;
+&lt;p&gt;Let’s first split data into groups using &lt;code&gt;clust::hclust&lt;/code&gt; function.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# calculate distances
+d &amp;lt;- dist(df, method=&amp;#39;euclidean&amp;#39;)
+
+# hierarchical cluster analysis
+# &amp;#39;ward.D2&amp;#39; method is equivalent of agnes &amp;#39;ward&amp;#39;
+hc1 &amp;lt;- hclust(d, method=&amp;#39;ward.D2&amp;#39;)
+
+# Plot the obtained dendrogram
+plot(hc1, hang = -1, cex = 0.6)
+
+# show 3 clusers
+rect.hclust(hc1, k=3, border=&amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# group data by clusters
+groups &amp;lt;- cutree(hc1, k=3)
+names(groups[groups == 1])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;Alabama&amp;quot;        &amp;quot;Alaska&amp;quot;         &amp;quot;Arizona&amp;quot;        &amp;quot;California&amp;quot;    
+##  [5] &amp;quot;Colorado&amp;quot;       &amp;quot;Florida&amp;quot;        &amp;quot;Georgia&amp;quot;        &amp;quot;Illinois&amp;quot;      
+##  [9] &amp;quot;Louisiana&amp;quot;      &amp;quot;Maryland&amp;quot;       &amp;quot;Michigan&amp;quot;       &amp;quot;Mississippi&amp;quot;   
+## [13] &amp;quot;Nevada&amp;quot;         &amp;quot;New Mexico&amp;quot;     &amp;quot;New York&amp;quot;       &amp;quot;North Carolina&amp;quot;
+## [17] &amp;quot;South Carolina&amp;quot; &amp;quot;Tennessee&amp;quot;      &amp;quot;Texas&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# check for cluster metrics
+names(hc1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;merge&amp;quot;       &amp;quot;height&amp;quot;      &amp;quot;order&amp;quot;       &amp;quot;labels&amp;quot;      &amp;quot;method&amp;quot;     
+## [6] &amp;quot;call&amp;quot;        &amp;quot;dist.method&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can split data into groups using &lt;code&gt;cluster::agnes&lt;/code&gt; function.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# using &amp;#39;agnes&amp;#39; for hierarhical clustering
+hc3 &amp;lt;- cluster::agnes(df, method=&amp;#39;ward&amp;#39;)
+# plot slaster
+cluster::pltree(hc3, hang = -1, cex = 0.6)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split into groups
+groups &amp;lt;- cutree(as.hclust(hc3), k = 4)
+groups[groups==1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        Alabama        Georgia      Louisiana    Mississippi North Carolina 
+##              1              1              1              1              1 
+## South Carolina      Tennessee 
+##              1              1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://uc-r.github.io/hc_clustering&#34;&gt;UC Business Analytics R Programming Guide&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
