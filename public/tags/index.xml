@@ -13,6 +13,14 @@
     </image>
     
     <item>
+      <title>Classification</title>
+      <link>/tags/classification/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Clustering</title>
       <link>/tags/clustering/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
@@ -49,6 +57,14 @@
       <link>/tags/math/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural Network</title>
+      <link>/tags/neural-network/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/neural-network/</guid>
       <description></description>
     </item>
     
@@ -121,14 +137,6 @@
       <link>/tags/hopfield/</link>
       <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/hopfield/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Neural Network</title>
-      <link>/tags/neural-network/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/neural-network/</guid>
       <description></description>
     </item>
     

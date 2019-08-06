@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Researcher">
+  <meta name="description" content="Examples of Neural Network classification using Neuralnet R package.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/tags/r/">
+  <link rel="alternate" hreflang="en-us" href="/post/statistics/neuralnet_r/neuralnet_r/">
 
   
 
@@ -103,17 +103,13 @@
   
 
   
-  <link rel="alternate" href="/tags/r/index.xml" type="application/rss+xml" title="Mark Goldberg">
-  
 
-  
-  <link rel="alternate" type="application/rss&#43;xml" href="/tags/r/index.xml">
   
 
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/r/">
+  <link rel="canonical" href="/post/statistics/neuralnet_r/neuralnet_r/">
 
   
   
@@ -125,12 +121,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Mark Goldberg">
-  <meta property="og:url" content="/tags/r/">
-  <meta property="og:title" content="R | Mark Goldberg">
-  <meta property="og:description" content="Researcher"><meta property="og:image" content="/img/logo.png">
+  <meta property="og:url" content="/post/statistics/neuralnet_r/neuralnet_r/">
+  <meta property="og:title" content="Neuralnet R | Mark Goldberg">
+  <meta property="og:description" content="Examples of Neural Network classification using Neuralnet R package."><meta property="og:image" content="/img/logo.png">
   <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2019-08-06T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2019-08-06T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-06T00:00:00&#43;00:00">
   
 
   
@@ -142,7 +141,7 @@
 
 
 
-  <title>R | Mark Goldberg</title>
+  <title>Neuralnet R | Mark Goldberg</title>
 
 </head>
 
@@ -304,7 +303,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/post/statistics/"><span>Math</span></a>
+          <a class="nav-link  active" href="/post/statistics/"><span>Math</span></a>
         </li>
 
         
@@ -433,85 +432,409 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article" itemscope itemtype="http://schema.org/Article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Neuralnet R</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name">R</h1>
-
-  
-
-  
-</div>
 
 
 
-<div class="universal-wrapper">
-  
+<meta content="2019-08-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-06 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
 
   
   
-  <div>
-    <h2><a href="/post/programming/r_tips_tricks/r_tips_tricks/">R tips and coding tricks</a></h2>
-    <div class="article-style">
-      
-      Here you can find some simple interesting concepts for coding in R.
-How to select all numeric columns in a data frame? df = data.frame(x = c(1:3), y = c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), z = c(0.1, 0.2, 0.3)) df ## x y z ## 1 1 A 0.1 ## 2 2 B 0.2 ## 3 3 C 0.3 # Select all numeric columns df[sapply(df,is.numeric)] ## x z ## 1 1 0.1 ## 2 2 0.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/statistics/markov_process/simple_markov_process/">Simple Markov process</a></h2>
-    <div class="article-style">
-      
-      Here, we will consider a simple example of Markov process with implementation in R.
-The following example is taken from Bodo Winter website.
-A Markov process is characterized by (1) a finite set of states and (2) fixed transition probabilities between the states.
-Let’s consider an example. Assume you have a classroom, with students who could be either in the state alert or in the state bored. And then, at any given time point, there’s a certain probability of an alert student becoming bored (say 0.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/statistics/splines/splines/">Spline model</a></h2>
-    <div class="article-style">
-      
-      Practical example showing how to generate data set using given function, how to split data, buld spline model on train data and how to use test data to find optimal parameters of the model.
-      
-    </div>
-  </div>
-  
 
   
-<nav>
-  <ul class="pagination justify-content-center">
+  <span class="article-date">
     
-    <li class="page-item"><a class="page-link" href="/tags/r/">&laquo;</a></li>
     
+      
+    
+    <time>Aug 6, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/statistics/neuralnet_r/neuralnet_r/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/statistics/">Statistics</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/statistics/neuralnet_r/neuralnet_r/&amp;text=Neuralnet%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/neuralnet_r/neuralnet_r/&amp;t=Neuralnet%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Neuralnet%20R&amp;body=/post/statistics/neuralnet_r/neuralnet_r/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/neuralnet_r/neuralnet_r/&amp;title=Neuralnet%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Neuralnet%20R%20/post/statistics/neuralnet_r/neuralnet_r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/neuralnet_r/neuralnet_r/&amp;title=Neuralnet%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
     
   </ul>
-</nav>
+</div>
 
+
+  
 
 </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<p>Using of <code>neuralnet</code> R package to tran Neural Network for classification.</p>
+<pre class="r"><code>library(neuralnet)
+library(datasets)
+
+# data
+df &lt;- datasets::iris
+
+# split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id &lt;- sample(n, size = n*train.ratio)
+train &lt;- df[train.id,]
+test &lt;- df[-train.id,]</code></pre>
+<div id="binary-classification" class="section level2">
+<h2>Binary classification</h2>
+<pre class="r"><code>nn &lt;- neuralnet(Species == &quot;setosa&quot; ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+plot(nn)
+
+# Predict for test data
+pred &lt;- predict(nn, test)
+# Confusion matrix
+table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)</code></pre>
+<pre><code>##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7</code></pre>
+</div>
+<div id="multiclass-classification" class="section level2">
+<h2>Multiclass classification</h2>
+<pre class="r"><code>nn &lt;- neuralnet((Species == &quot;setosa&quot;) + (Species == &quot;versicolor&quot;) + (Species == &quot;virginica&quot;)
+                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+plot(nn)
+# Predict for test data
+pred &lt;- predict(nn, test)
+table(test$Species, apply(pred, 1, which.max))</code></pre>
+<pre><code>##             
+##              1 2 3
+##   setosa     7 0 0
+##   versicolor 0 4 0
+##   virginica  0 0 4</code></pre>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/statistics/">Statistics</a>
+  
+  <a class="badge badge-light" href="/tags/classification/">Classification</a>
+  
+  <a class="badge badge-light" href="/tags/neural-network/">Neural Network</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/statistics/hierarchical_cluster/hierarchical_cluser/">Hierarchical cluster analysis</a></li>
+          
+          <li><a href="/post/statistics/logistic_regression/logistic_regression/">Logistic regression</a></li>
+          
+          <li><a href="/post/statistics/statistical_learning_topics/">Statistical learning - topics</a></li>
+          
+          <li><a href="/post/statistics/k_means/k_means/">k-means</a></li>
+          
+          <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing/">Hypothesis testing</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
 
       
 
@@ -602,6 +925,8 @@ Let’s consider an example. Assume you have a classroom, with students who coul
 
     
     
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
     
 
     

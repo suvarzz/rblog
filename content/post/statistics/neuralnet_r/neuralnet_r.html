@@ -1,0 +1,62 @@
+---
+title: "Neuralnet R"
+author: "Mark Goldberg"
+date: '2019-08-06'
+draft: false
+math: true
+tags: ["R", "Statistics", "Classification", "Neural Network"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  #blogdown::html_page:
+  toc: true
+summary: "Examples of Neural Network classification using Neuralnet R package."
+---
+
+
+
+<p>Using of <code>neuralnet</code> R package to tran Neural Network for classification.</p>
+<pre class="r"><code>library(neuralnet)
+library(datasets)
+
+# data
+df &lt;- datasets::iris
+
+# split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id &lt;- sample(n, size = n*train.ratio)
+train &lt;- df[train.id,]
+test &lt;- df[-train.id,]</code></pre>
+<div id="binary-classification" class="section level2">
+<h2>Binary classification</h2>
+<pre class="r"><code>nn &lt;- neuralnet(Species == &quot;setosa&quot; ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+plot(nn)
+
+# Predict for test data
+pred &lt;- predict(nn, test)
+# Confusion matrix
+table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)</code></pre>
+<pre><code>##        
+##         FALSE TRUE
+##   FALSE     8    0
+##   TRUE      0    7</code></pre>
+</div>
+<div id="multiclass-classification" class="section level2">
+<h2>Multiclass classification</h2>
+<pre class="r"><code>nn &lt;- neuralnet((Species == &quot;setosa&quot;) + (Species == &quot;versicolor&quot;) + (Species == &quot;virginica&quot;)
+                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+plot(nn)
+# Predict for test data
+pred &lt;- predict(nn, test)
+table(test$Species, apply(pred, 1, which.max))</code></pre>
+<pre><code>##             
+##              1 2 3
+##   setosa     7 0 0
+##   versicolor 0 4 0
+##   virginica  0 0 4</code></pre>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+</div>
