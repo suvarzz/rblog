@@ -651,23 +651,24 @@ pred &lt;- predict(nn, test)
 table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)</code></pre>
 <pre><code>##        
 ##         FALSE TRUE
-##   FALSE    10    0
-##   TRUE      0    5</code></pre>
+##   FALSE    14    0
+##   TRUE      0    1</code></pre>
 <pre class="r"><code># plot NN
 plot(nn)</code></pre>
 </div>
 <div id="multiclass-classification" class="section level2">
 <h2>Multiclass classification</h2>
-<pre class="r"><code>nn &lt;- neuralnet((Species == &quot;setosa&quot;) + (Species == &quot;versicolor&quot;) + (Species == &quot;virginica&quot;) ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+<pre class="r"><code>nn &lt;- neuralnet((Species == &quot;setosa&quot;) + (Species == &quot;versicolor&quot;) + (Species == &quot;virginica&quot;) 
+                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
 
 # Predict for test data
 pred &lt;- predict(nn, test)
 table(test$Species, apply(pred, 1, which.max))</code></pre>
 <pre><code>##             
 ##              1 2 3
-##   setosa     5 0 0
-##   versicolor 0 5 2
-##   virginica  0 0 3</code></pre>
+##   setosa     1 0 0
+##   versicolor 0 5 1
+##   virginica  0 0 8</code></pre>
 <pre class="r"><code># Plot NN
 plot(nn)</code></pre>
 </div>

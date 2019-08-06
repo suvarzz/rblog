@@ -45,7 +45,8 @@ plot(nn)
 
 ## Multiclass classification
 ```{r}
-nn <- neuralnet((Species == "setosa") + (Species == "versicolor") + (Species == "virginica") ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+nn <- neuralnet((Species == "setosa") + (Species == "versicolor") + (Species == "virginica") 
+                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
 
 # Predict for test data
 pred <- predict(nn, test)
