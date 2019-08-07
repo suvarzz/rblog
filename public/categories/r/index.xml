@@ -5,12 +5,66 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sun, 04 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
+    
+    <item>
+      <title>How to split data into train and test subsets?</title>
+      <link>/post/statistics/split_data_ways/split_data_ways/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
+      <description>
+
+
+&lt;p&gt;Here you can find several simple approaches to split data into train and test subset to fit and to test parameters of your model. We want to take 0.8 of our initial data to train our model.&lt;br /&gt;
+Data: &lt;code&gt;datasets::iris&lt;/code&gt;.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;First approach is to create a &lt;strong&gt;vector containing randomly selected row ids&lt;/strong&gt; and to apply this vector to split data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;inTrain = sample(nrow(iris), nrow(iris)*0.8)
+
+# split data
+train = iris[inTrain, ]
+test = iris[-inTrain, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The same idea to split data as before using &lt;code&gt;caret&lt;/code&gt; package.&lt;br /&gt;
+The advantage is that &lt;code&gt;createDataPartition&lt;/code&gt; function allows to split data many &lt;code&gt;times&lt;/code&gt; and use these subsets to estimate parameters of our model.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+trainIndex &amp;lt;- createDataPartition(iris$Species, p=.8,
+                                  list = FALSE,        # if FALSE - create a vector/matrix, if TRUE - create a list
+                                  times = 1)           # how many subsets
+# split data
+train &amp;lt;- iris[trainIndex, ]
+test &amp;lt;- iris[-trainIndex, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Another approch is to create a &lt;strong&gt;logical vecotor&lt;/strong&gt; containing randomly distributed true/false and apply this vector to subset data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;inTrain = sample(c(TRUE, FALSE), nrow(iris), replace = T, prob = c(0.8,0.2))
+
+# select data
+train = iris[inTrain, ]
+test = iris[!inTrain, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/caTools/index.html&#34;&gt;&lt;code&gt;caTools&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caTools)
+inTrain = sample.split(iris, SplitRatio = .8)
+train = subset(iris, inTrain == TRUE)
+test  = subset(iris, inTrain == FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/&#34;&gt;&lt;code&gt;dplyr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+iris$id &amp;lt;- 1:nrow(iris)
+train &amp;lt;- iris %&amp;gt;% dplyr::sample_frac(.8)
+test  &amp;lt;- dplyr::anti_join(iris, train, by = &amp;#39;id&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Hypothesis testing</title>
@@ -320,85 +374,6 @@ FDR: 10%&lt;/p&gt;
 &lt;h1&gt;Sources&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.sthda.com/english/wiki/one-sample-t-test-in-r&#34;&gt;One-Sample T-test in R&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How to split data into train and test subsets?</title>
-      <link>/post/statistics/split_data_ways/split_data_ways/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
-      <description>
-
-
-&lt;p&gt;Here you can find several simple approaches to split data into train and test subset to fit and to test parameters of your model. We want to split our data:&lt;br /&gt;
-train percent - 0.7&lt;br /&gt;
-test percent - 0.3&lt;/p&gt;
-&lt;p&gt;Let us create a data frame filled with generated data.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df = data.frame(x=seq(.1,1,.1), y=seq(1,10), z=letters[seq(1,10)])
-df&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      x  y z
-## 1  0.1  1 a
-## 2  0.2  2 b
-## 3  0.3  3 c
-## 4  0.4  4 d
-## 5  0.5  5 e
-## 6  0.6  6 f
-## 7  0.7  7 g
-## 8  0.8  8 h
-## 9  0.9  9 i
-## 10 1.0 10 j&lt;/code&gt;&lt;/pre&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;First approach is to create a vector filled with selected IDs of rows and then apply this vector to subset data.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1) # set state of random number generator
-tv1 = sample(nrow(df), nrow(df)*0.7)
-tv1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 4 5 7 2 8 9&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select train and test data for column y using our vector
-train = df$y[tv1]
-test = df$y[-tv1] # the same as test = df$y[!tv1]
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 4 5 7 2 8 9&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  6 10&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Another approch is to create a vecotr filled with logical true/false for each row of dataset and apply this vector to subset data.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1) # set state of random number generator
-tv2 = sample(c(TRUE, FALSE), nrow(df), replace = T, prob = c(0.7,0.3))
-tv2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select train and test data for column y using our vector
-train = df$y[tv2]
-test = df$y[!tv2]
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  2  3  5  8  9 10&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4 6 7&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/caTools/index.html&#34;&gt;&lt;code&gt;caTools&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caTools)
-set.seed(1) 
-sample = sample.split(df, SplitRatio = .7)
-train = subset(df$y, sample == TRUE)
-test  = subset(df$y, sample == FALSE)
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  2  4  5  7  8 10&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 6 9&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/&#34;&gt;&lt;code&gt;dplyr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
-df$id &amp;lt;- 1:nrow(df)
-train &amp;lt;- df %&amp;gt;% dplyr::sample_frac(.7)
-test  &amp;lt;- dplyr::anti_join(df, train, by = &amp;#39;id&amp;#39;)
-train$y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 10  2  8  7  4  6  1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test$y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 5 9&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

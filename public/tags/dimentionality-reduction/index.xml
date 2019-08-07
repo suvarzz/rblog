@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dimentionality reduction | Mark Goldberg</title>
+    <link>/tags/dimentionality-reduction/</link>
+      <atom:link href="/tags/dimentionality-reduction/index.xml" rel="self" type="application/rss+xml" />
+    <description>Dimentionality reduction</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>Dimentionality reduction</title>
+      <link>/tags/dimentionality-reduction/</link>
+    </image>
+    
+    <item>
+      <title>Uniform Manifold Approximation and Projection (UMAP)</title>
+      <link>/post/statistics/umap/umap/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/umap/umap/</guid>
+      <description>
+
+
+&lt;div id=&#34;uniform-manifold-approximation-and-projection-umap&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(umap)
+
+head(iris, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select determinative variables and lables
+dat = iris[, grep(&amp;quot;Sepal|Petal&amp;quot;, colnames(iris))]
+lbls = iris[, &amp;quot;Species&amp;quot;]
+
+# apply UMAP transformation
+set.seed(123)
+iris.umap = umap::umap(dat)
+
+# layout matrix (coordinates for vis.)
+mx &amp;lt;- iris.umap$layout
+head(mx, 5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          [,1]      [,2]
+## [1,] 16.34555 1.7888418
+## [2,] 14.74415 0.8264381
+## [3,] 14.58204 1.3219384
+## [4,] 14.55112 1.3763256
+## [5,] 16.64683 2.1515565&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot UMAP components
+plot(subset(mx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(mx[,1]), max(mx[,1])),
+     ylim=c(min(mx[,2]), max(mx[,2])))
+points(subset(mx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(mx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# generate test data by adding noise to original data
+iris.wnoise = dat + matrix(rnorm(150*40, 0, 0.1), ncol=4)
+colnames(iris.wnoise) = colnames(dat)
+head(iris.wnoise, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     5.043952    3.578774     1.328476   0.3430402
+## 2     4.876982    3.076904     1.324731   0.3046629
+## 3     4.855871    3.233220     1.206146   0.2435289&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# predict
+pmx = predict(iris.umap, iris.wnoise)
+head(pmx, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]      [,2]
+## 1 16.28067 1.5141526
+## 2 14.81119 0.4305712
+## 3 15.15975 1.3219315&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot generated test data
+plot(subset(pmx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(pmx[,1]), max(pmx[,1])),
+     ylim=c(min(pmx[,2]), max(pmx[,2])))
+points(subset(pmx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(pmx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There are two strategies for tuning: via configuration objects (1) and via additional arguments (2).&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;code&gt;umap.defaults&lt;/code&gt; - configuration object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# set parameters
+custom.config = umap.defaults
+custom.config$random_state = 321
+umap3 = umap(dat, custom.config)
+mx2 = iris.umap$layout
+
+plot(subset(mx2, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(mx2[,1]), max(mx2[,1])),
+     ylim=c(min(mx2[,2]), max(mx2[,2])),
+     main=&amp;quot;Another UMAP visualization (different seed)&amp;quot;)
+points(subset(mx2, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(mx2, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Additional arguments &lt;code&gt;iris.umap.3 = umap(iris.data, random_state=123)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1802.03426&#34;&gt;UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://cran.r-project.org/web/packages/umap/vignettes/umap.html&#34;&gt;Uniform Manifold Approximation and Projection in R&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

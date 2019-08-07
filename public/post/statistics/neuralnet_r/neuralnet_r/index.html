@@ -127,9 +127,9 @@
   <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2019-08-06T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2019-08-07T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-08-06T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2019-08-07T00:00:00&#43;00:00">
   
 
   
@@ -462,8 +462,8 @@
 
 
 
-<meta content="2019-08-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-<meta content="2019-08-06 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+<meta content="2019-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-07 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -476,7 +476,7 @@
     
       
     
-    <time>Aug 6, 2019</time>
+    <time>Aug 7, 2019</time>
   </span>
   
 
@@ -485,7 +485,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    4 min read
   </span>
   
 
@@ -652,8 +652,8 @@ t &lt;- table(test$Species == &quot;setosa&quot;, pred[, 1] &gt; 0.5)
 t</code></pre>
 <pre><code>##        
 ##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7</code></pre>
+##   FALSE    13    0
+##   TRUE      0    2</code></pre>
 <pre class="r"><code># plot NN
 plot(nn)
 
@@ -666,13 +666,13 @@ library(caret)</code></pre>
 ## 
 ##        
 ##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7
+##   FALSE    13    0
+##   TRUE      0    2
 ##                                     
 ##                Accuracy : 1         
 ##                  95% CI : (0.782, 1)
-##     No Information Rate : 0.5333    
-##     P-Value [Acc &gt; NIR] : 8.035e-05 
+##     No Information Rate : 0.8667    
+##     P-Value [Acc &gt; NIR] : 0.1169    
 ##                                     
 ##                   Kappa : 1         
 ##                                     
@@ -682,9 +682,9 @@ library(caret)</code></pre>
 ##             Specificity : 1.0000    
 ##          Pos Pred Value : 1.0000    
 ##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.5333    
-##          Detection Rate : 0.5333    
-##    Detection Prevalence : 0.5333    
+##              Prevalence : 0.8667    
+##          Detection Rate : 0.8667    
+##    Detection Prevalence : 0.8667    
 ##       Balanced Accuracy : 1.0000    
 ##                                     
 ##        &#39;Positive&#39; Class : FALSE     
@@ -699,10 +699,10 @@ library(caret)</code></pre>
 pred &lt;- predict(nn, test)
 table(test$Species, apply(pred, 1, which.max))</code></pre>
 <pre><code>##             
-##              2 3
-##   setosa     6 1
-##   versicolor 4 0
-##   virginica  4 0</code></pre>
+##              1 2 3
+##   setosa     2 0 0
+##   versicolor 0 3 1
+##   virginica  0 0 9</code></pre>
 <pre class="r"><code># Plot NN
 plot(nn)
 
@@ -712,13 +712,13 @@ caret::confusionMatrix(t)</code></pre>
 ## 
 ##        
 ##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7
+##   FALSE    13    0
+##   TRUE      0    2
 ##                                     
 ##                Accuracy : 1         
 ##                  95% CI : (0.782, 1)
-##     No Information Rate : 0.5333    
-##     P-Value [Acc &gt; NIR] : 8.035e-05 
+##     No Information Rate : 0.8667    
+##     P-Value [Acc &gt; NIR] : 0.1169    
 ##                                     
 ##                   Kappa : 1         
 ##                                     
@@ -728,13 +728,95 @@ caret::confusionMatrix(t)</code></pre>
 ##             Specificity : 1.0000    
 ##          Pos Pred Value : 1.0000    
 ##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.5333    
-##          Detection Rate : 0.5333    
-##    Detection Prevalence : 0.5333    
+##              Prevalence : 0.8667    
+##          Detection Rate : 0.8667    
+##    Detection Prevalence : 0.8667    
 ##       Balanced Accuracy : 1.0000    
 ##                                     
 ##        &#39;Positive&#39; Class : FALSE     
 ## </code></pre>
+</div>
+<div id="neuralnet-with-2-hidden-neurons" class="section level2">
+<h2>Neuralnet with 2 hidden neurons</h2>
+<pre class="r"><code>library(datasets)
+library(neuralnet)
+library(caret)
+
+# data
+df &lt;- datasets::iris
+head(df)</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre class="r"><code># split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id &lt;- sample(n, size = n*train.ratio)
+train &lt;- df[train.id,]
+test &lt;- df[-train.id,]
+
+nn &lt;- neuralnet(Species == &quot;versicolor&quot; ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, train, hidden = 2, linear.output = FALSE)
+
+# Predict for test data
+pred &lt;- predict(nn, test)
+# Confusion matrix
+t &lt;- table(test$Species == &quot;versicolor&quot;, pred[, 1] &gt; 0.5)
+# Confusion matrix
+caret::confusionMatrix(t)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     5    6
+##   TRUE      0    4
+##                                           
+##                Accuracy : 0.6             
+##                  95% CI : (0.3229, 0.8366)
+##     No Information Rate : 0.6667          
+##     P-Value [Acc &gt; NIR] : 0.79696         
+##                                           
+##                   Kappa : 0.3077          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.04123         
+##                                           
+##             Sensitivity : 1.0000          
+##             Specificity : 0.4000          
+##          Pos Pred Value : 0.4545          
+##          Neg Pred Value : 1.0000          
+##              Prevalence : 0.3333          
+##          Detection Rate : 0.3333          
+##    Detection Prevalence : 0.7333          
+##       Balanced Accuracy : 0.7000          
+##                                           
+##        &#39;Positive&#39; Class : FALSE           
+## </code></pre>
+<pre class="r"><code># plot NN
+plot(nn, rep=&#39;best&#39;)</code></pre>
+<p><img src="/post/statistics/neuralnet_r/neuralnet_r_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code># compair predicted and actual values
+test$predicted &lt;- ifelse(pred&gt;0.5, 1, 0)
+test</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species predicted
+## 12           4.8         3.4          1.6         0.2     setosa         0
+## 19           5.7         3.8          1.7         0.3     setosa         0
+## 25           4.8         3.4          1.9         0.2     setosa         0
+## 40           5.1         3.4          1.5         0.2     setosa         0
+## 42           4.5         2.3          1.3         0.3     setosa         0
+## 64           6.1         2.9          4.7         1.4 versicolor         1
+## 70           5.6         2.5          3.9         1.1 versicolor         1
+## 74           6.1         2.8          4.7         1.2 versicolor         1
+## 90           5.5         2.5          4.0         1.3 versicolor         1
+## 101          6.3         3.3          6.0         2.5  virginica         1
+## 103          7.1         3.0          5.9         2.1  virginica         1
+## 114          5.7         2.5          5.0         2.0  virginica         1
+## 123          7.7         2.8          6.7         2.0  virginica         1
+## 124          6.3         2.7          4.9         1.8  virginica         1
+## 145          6.7         3.3          5.7         2.5  virginica         1</code></pre>
 </div>
 <div id="bibliography" class="section level2">
 <h2>Bibliography</h2>
@@ -859,15 +941,15 @@ caret::confusionMatrix(t)</code></pre>
         <h3>Related</h3>
         <ul>
           
-          <li><a href="/post/statistics/hierarchical_cluster/hierarchical_cluser/">Hierarchical cluster analysis</a></li>
-          
-          <li><a href="/post/statistics/logistic_regression/logistic_regression/">Logistic regression</a></li>
+          <li><a href="/post/statistics/split_data_ways/split_data_ways/">How to split data into train and test subsets?</a></li>
           
           <li><a href="/post/statistics/statistical_learning_topics/">Statistical learning - topics</a></li>
           
-          <li><a href="/post/statistics/k_means/k_means/">k-means</a></li>
+          <li><a href="/post/statistics/umap/umap/">Uniform Manifold Approximation and Projection (UMAP)</a></li>
           
-          <li><a href="/post/statistics/hypothesis_testing/hypothesis_testing/">Hypothesis testing</a></li>
+          <li><a href="/post/statistics/tsne/tsne/">tSNE</a></li>
+          
+          <li><a href="/post/statistics/hierarchical_cluster/hierarchical_cluser/">Hierarchical cluster analysis</a></li>
           
         </ul>
       </div>

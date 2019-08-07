@@ -4,18 +4,103 @@
   
   <url>
     <loc>/post/statistics/statistical_learning_topics/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/tsne/tsne/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/classification/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/dimentionality-reduction/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/split_data_ways/split_data_ways/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/neural-network/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/neuralnet_r/neuralnet_r/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/umap/umap/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tsne/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,65 +138,13 @@
   </url>
   
   <url>
-    <loc>/tags/machine-learning/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/math/</loc>
     <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/statistics/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/neural-network/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/neuralnet_r/neuralnet_r/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/regression/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/statistics/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/statistics/</loc>
-    <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2019-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -144,12 +177,6 @@
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/bootstrap/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -159,11 +186,6 @@
     <loc>/tags/cross-validation/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/split_data_ways/split_data_ways/</loc>
-    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -189,13 +211,13 @@
   </url>
   
   <url>
-    <loc>/categories/python/</loc>
+    <loc>/tags/python/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/python/</loc>
+    <loc>/categories/python/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -211,13 +233,13 @@
   </url>
   
   <url>
-    <loc>/categories/epigenetics/</loc>
+    <loc>/tags/epigenetics/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/epigenetics/</loc>
+    <loc>/categories/epigenetics/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -277,13 +299,13 @@
   </url>
   
   <url>
-    <loc>/categories/sport/</loc>
+    <loc>/tags/sport/</loc>
     <lastmod>2019-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/sport/</loc>
+    <loc>/categories/sport/</loc>
     <lastmod>2019-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

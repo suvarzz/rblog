@@ -5,7 +5,7 @@
     <link>/tags/machine-learning/</link>
       <atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Machine Learning</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Statistical learning - topics</title>
       <link>/post/statistics/statistical_learning_topics/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/statistical_learning_topics/</guid>
       <description>
 
@@ -48,6 +48,8 @@
 &lt;li&gt;&lt;a href=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Principal Component Analysis&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;

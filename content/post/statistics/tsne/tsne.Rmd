@@ -1,0 +1,62 @@
+---
+title: "tSNE"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "tSNE"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "tSNE."
+---
+## tSNE
+```{r, message=F}
+library(tsne)
+# tSNE
+set.seed(5)
+tsne_iris = tsne(iris[,1:4], k=2, perplexity=30, max_iter=1000)
+
+# set colors
+colors = rainbow(length(unique(iris$Species)))
+names(colors) = unique(iris$Species)
+
+# plot tSNE
+plot(tsne_iris, t='n')
+points(tsne_iris, col=colors[iris$Species])
+```
+
+## Barnes-Hut t-Distributed Stochastic Neighbor Embedding  
+
+`Rtsne` package. It is faster than `tsne` and better separate elements in groups.  
+```{r, message=F, results='hide'}
+library(Rtsne)
+# remove duplicates
+iris_unique <- unique(iris)
+mx <- as.matrix(iris_unique[,1:4])
+normalize_input(mx)
+```
+```{r}
+set.seed(3)
+rtsne <- Rtsne(mx, dims=2, perplexity=30, theta=0.5)
+names(rtsne)
+# plot tsne
+plot(rtsne[['Y']], t='n')
+points(rtsne[['Y']], col=colors[iris_unique$Species])
+```
+
+## Compare with Principal Component Analysis (PCA)
+
+```{r}
+# compare to PCA
+pca_iris = princomp(iris[,1:4])$scores[,1:2]
+
+# plot PCA
+plot(pca_iris, t='n')
+points(pca_iris, col=colors[iris$Species])
+```
+
+## Bibliography

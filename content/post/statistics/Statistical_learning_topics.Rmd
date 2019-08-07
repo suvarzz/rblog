@@ -23,6 +23,8 @@ summary: "Basic topics of statistical learning."
 * [Hierarchical Cluster Analysis](/post/statistics/hierarchical_cluster/hierarchical_cluser/)
 * [K-means Cluster Analysis](/post/statistics/k_means/k_means/)
 * Principal Component Analysis
+* [Uniform Manifold Approximation and Projection (UMAP)](/post/statistics/umap/umap/)
+* [t-Distributed Stochastic Neighbor Embedding (tSNE)](/post/statistics/tsne/tsne/)
 
 # Supervised Regression
 * Linear Regression

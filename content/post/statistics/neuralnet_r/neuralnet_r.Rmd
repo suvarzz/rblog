@@ -63,4 +63,39 @@ plot(nn)
 caret::confusionMatrix(t)
 ```
 
+## Neuralnet with 2 hidden neurons
+```{r}
+library(datasets)
+library(neuralnet)
+library(caret)
+
+# data
+df <- datasets::iris
+head(df)
+
+# split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id <- sample(n, size = n*train.ratio)
+train <- df[train.id,]
+test <- df[-train.id,]
+
+nn <- neuralnet(Species == "versicolor" ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, train, hidden = 2, linear.output = FALSE)
+
+# Predict for test data
+pred <- predict(nn, test)
+# Confusion matrix
+t <- table(test$Species == "versicolor", pred[, 1] > 0.5)
+# Confusion matrix
+caret::confusionMatrix(t)
+
+# plot NN
+plot(nn, rep='best')
+
+# compair predicted and actual values
+test$predicted <- ifelse(pred>0.5, 1, 0)
+test
+```
+
 ## Bibliography

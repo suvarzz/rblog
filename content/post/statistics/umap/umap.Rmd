@@ -1,0 +1,85 @@
+---
+title: "Uniform Manifold Approximation and Projection (UMAP)"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "Dimentionality reduction"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  #blogdown::html_page:
+  toc: true
+summary: "Unsupervised method for dimentionality reduction - Uniform Manifold Approximation and Projection (UMAP)."
+---
+
+## Uniform Manifold Approximation and Projection (UMAP)
+
+```{r}
+library(umap)
+
+head(iris, 3)
+
+# select determinative variables and lables
+dat = iris[, grep("Sepal|Petal", colnames(iris))]
+lbls = iris[, "Species"]
+
+# apply UMAP transformation
+set.seed(123)
+iris.umap = umap::umap(dat)
+
+# layout matrix (coordinates for vis.)
+mx <- iris.umap$layout
+head(mx, 5)
+
+# plot UMAP components
+plot(subset(mx, lbls == 'setosa'), col = 'red',
+     xlim=c(min(mx[,1]), max(mx[,1])),
+     ylim=c(min(mx[,2]), max(mx[,2])))
+points(subset(mx, lbls == 'virginica'), col = 'green')
+points(subset(mx, lbls == 'versicolor'), col = 'blue')
+```
+
+```{r}
+# generate test data by adding noise to original data
+iris.wnoise = dat + matrix(rnorm(150*40, 0, 0.1), ncol=4)
+colnames(iris.wnoise) = colnames(dat)
+head(iris.wnoise, 3)
+
+# predict
+pmx = predict(iris.umap, iris.wnoise)
+head(pmx, 3)
+
+# plot generated test data
+plot(subset(pmx, lbls == 'setosa'), col = 'red',
+     xlim=c(min(pmx[,1]), max(pmx[,1])),
+     ylim=c(min(pmx[,2]), max(pmx[,2])))
+points(subset(pmx, lbls == 'virginica'), col = 'green')
+points(subset(pmx, lbls == 'versicolor'), col = 'blue')
+```
+
+There are two strategies for tuning: via configuration objects (1) and via additional arguments (2).  
+
+1. `umap.defaults` - configuration object.  
+
+```{r}
+# set parameters
+custom.config = umap.defaults
+custom.config$random_state = 321
+umap3 = umap(dat, custom.config)
+mx2 = iris.umap$layout
+
+plot(subset(mx2, lbls == 'setosa'), col = 'red',
+     xlim=c(min(mx2[,1]), max(mx2[,1])),
+     ylim=c(min(mx2[,2]), max(mx2[,2])),
+     main="Another UMAP visualization (different seed)")
+points(subset(mx2, lbls == 'virginica'), col = 'green')
+points(subset(mx2, lbls == 'versicolor'), col = 'blue')
+```
+
+2. Additional arguments
+`iris.umap.3 = umap(iris.data, random_state=123)`  
+
+## Bibliography
+[UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction](https://arxiv.org/abs/1802.03426)  
+[Uniform Manifold Approximation and Projection in R](https://cran.r-project.org/web/packages/umap/vignettes/umap.html)  

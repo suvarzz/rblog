@@ -5,7 +5,7 @@
     <link>/tags/r/</link>
       <atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>R</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Statistical learning - topics</title>
       <link>/post/statistics/statistical_learning_topics/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/statistical_learning_topics/</guid>
       <description>
 
@@ -48,6 +48,8 @@
 &lt;li&gt;&lt;a href=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Principal Component Analysis&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;
@@ -104,6 +106,433 @@
 &lt;li&gt;Feedforward Deep Learning with Keras &amp;amp; Tensorflow&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>tSNE</title>
+      <link>/post/statistics/tsne/tsne/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/tsne/tsne/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#tsne&#34;&gt;tSNE&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#barnes-hut-t-distributed-stochastic-neighbor-embedding&#34;&gt;Barnes-Hut t-Distributed Stochastic Neighbor Embedding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#compare-with-principal-component-analysis-pca&#34;&gt;Compare with Principal Component Analysis (PCA)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliography&#34;&gt;Bibliography&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;tsne&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;tSNE&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tsne)
+# tSNE
+set.seed(5)
+tsne_iris = tsne(iris[,1:4], k=2, perplexity=30, max_iter=1000)
+
+# set colors
+colors = rainbow(length(unique(iris$Species)))
+names(colors) = unique(iris$Species)
+
+# plot tSNE
+plot(tsne_iris, t=&amp;#39;n&amp;#39;)
+points(tsne_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;barnes-hut-t-distributed-stochastic-neighbor-embedding&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Barnes-Hut t-Distributed Stochastic Neighbor Embedding&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Rtsne&lt;/code&gt; package. It is faster than &lt;code&gt;tsne&lt;/code&gt; and better separate elements in groups.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Rtsne)
+# remove duplicates
+iris_unique &amp;lt;- unique(iris)
+mx &amp;lt;- as.matrix(iris_unique[,1:4])
+normalize_input(mx)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(3)
+rtsne &amp;lt;- Rtsne(mx, dims=2, perplexity=30, theta=0.5)
+names(rtsne)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;N&amp;quot;                   &amp;quot;Y&amp;quot;                   &amp;quot;costs&amp;quot;              
+##  [4] &amp;quot;itercosts&amp;quot;           &amp;quot;origD&amp;quot;               &amp;quot;perplexity&amp;quot;         
+##  [7] &amp;quot;theta&amp;quot;               &amp;quot;max_iter&amp;quot;            &amp;quot;stop_lying_iter&amp;quot;    
+## [10] &amp;quot;mom_switch_iter&amp;quot;     &amp;quot;momentum&amp;quot;            &amp;quot;final_momentum&amp;quot;     
+## [13] &amp;quot;eta&amp;quot;                 &amp;quot;exaggeration_factor&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot tsne
+plot(rtsne[[&amp;#39;Y&amp;#39;]], t=&amp;#39;n&amp;#39;)
+points(rtsne[[&amp;#39;Y&amp;#39;]], col=colors[iris_unique$Species])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;compare-with-principal-component-analysis-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Compare with Principal Component Analysis (PCA)&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# compare to PCA
+pca_iris = princomp(iris[,1:4])$scores[,1:2]
+
+# plot PCA
+plot(pca_iris, t=&amp;#39;n&amp;#39;)
+points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to split data into train and test subsets?</title>
+      <link>/post/statistics/split_data_ways/split_data_ways/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
+      <description>
+
+
+&lt;p&gt;Here you can find several simple approaches to split data into train and test subset to fit and to test parameters of your model. We want to take 0.8 of our initial data to train our model.&lt;br /&gt;
+Data: &lt;code&gt;datasets::iris&lt;/code&gt;.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;First approach is to create a &lt;strong&gt;vector containing randomly selected row ids&lt;/strong&gt; and to apply this vector to split data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;inTrain = sample(nrow(iris), nrow(iris)*0.8)
+
+# split data
+train = iris[inTrain, ]
+test = iris[-inTrain, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The same idea to split data as before using &lt;code&gt;caret&lt;/code&gt; package.&lt;br /&gt;
+The advantage is that &lt;code&gt;createDataPartition&lt;/code&gt; function allows to split data many &lt;code&gt;times&lt;/code&gt; and use these subsets to estimate parameters of our model.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+trainIndex &amp;lt;- createDataPartition(iris$Species, p=.8,
+                                  list = FALSE,        # if FALSE - create a vector/matrix, if TRUE - create a list
+                                  times = 1)           # how many subsets
+# split data
+train &amp;lt;- iris[trainIndex, ]
+test &amp;lt;- iris[-trainIndex, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Another approch is to create a &lt;strong&gt;logical vecotor&lt;/strong&gt; containing randomly distributed true/false and apply this vector to subset data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;inTrain = sample(c(TRUE, FALSE), nrow(iris), replace = T, prob = c(0.8,0.2))
+
+# select data
+train = iris[inTrain, ]
+test = iris[!inTrain, ]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/caTools/index.html&#34;&gt;&lt;code&gt;caTools&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caTools)
+inTrain = sample.split(iris, SplitRatio = .8)
+train = subset(iris, inTrain == TRUE)
+test  = subset(iris, inTrain == FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/&#34;&gt;&lt;code&gt;dplyr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+iris$id &amp;lt;- 1:nrow(iris)
+train &amp;lt;- iris %&amp;gt;% dplyr::sample_frac(.8)
+test  &amp;lt;- dplyr::anti_join(iris, train, by = &amp;#39;id&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Neuralnet R</title>
+      <link>/post/statistics/neuralnet_r/neuralnet_r/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/neuralnet_r/neuralnet_r/</guid>
+      <description>
+
+
+&lt;p&gt;Using of &lt;code&gt;neuralnet&lt;/code&gt; R package to tran Neural Network for classification.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(neuralnet)
+library(datasets)
+
+# data
+df &amp;lt;- datasets::iris
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id &amp;lt;- sample(n, size = n*train.ratio)
+train &amp;lt;- df[train.id,]
+test &amp;lt;- df[-train.id,]&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;binary-classification&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Binary classification&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nn &amp;lt;- neuralnet(Species == &amp;quot;setosa&amp;quot; ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+
+# Predict for test data
+pred &amp;lt;- predict(nn, test)
+# Confusion matrix
+t &amp;lt;- table(test$Species == &amp;quot;setosa&amp;quot;, pred[, 1] &amp;gt; 0.5)
+t&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        
+##         FALSE TRUE
+##   FALSE    13    0
+##   TRUE      0    2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot NN
+plot(nn)
+
+# Confusion matrix using caret
+library(caret)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE    13    0
+##   TRUE      0    2
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.8667    
+##     P-Value [Acc &amp;gt; NIR] : 0.1169    
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&amp;#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.8667    
+##          Detection Rate : 0.8667    
+##    Detection Prevalence : 0.8667    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &amp;#39;Positive&amp;#39; Class : FALSE     
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multiclass-classification&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Multiclass classification&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nn &amp;lt;- neuralnet((Species == &amp;quot;setosa&amp;quot;) + (Species == &amp;quot;versicolor&amp;quot;) + (Species == &amp;quot;virginica&amp;quot;) 
+                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
+
+# Predict for test data
+pred &amp;lt;- predict(nn, test)
+table(test$Species, apply(pred, 1, which.max))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             
+##              1 2 3
+##   setosa     2 0 0
+##   versicolor 0 3 1
+##   virginica  0 0 9&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot NN
+plot(nn)
+
+# Confusion matrix using &amp;#39;caret&amp;#39;
+caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE    13    0
+##   TRUE      0    2
+##                                     
+##                Accuracy : 1         
+##                  95% CI : (0.782, 1)
+##     No Information Rate : 0.8667    
+##     P-Value [Acc &amp;gt; NIR] : 0.1169    
+##                                     
+##                   Kappa : 1         
+##                                     
+##  Mcnemar&amp;#39;s Test P-Value : NA        
+##                                     
+##             Sensitivity : 1.0000    
+##             Specificity : 1.0000    
+##          Pos Pred Value : 1.0000    
+##          Neg Pred Value : 1.0000    
+##              Prevalence : 0.8667    
+##          Detection Rate : 0.8667    
+##    Detection Prevalence : 0.8667    
+##       Balanced Accuracy : 1.0000    
+##                                     
+##        &amp;#39;Positive&amp;#39; Class : FALSE     
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;neuralnet-with-2-hidden-neurons&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Neuralnet with 2 hidden neurons&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)
+library(neuralnet)
+library(caret)
+
+# data
+df &amp;lt;- datasets::iris
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data
+train.ratio = 0.9
+n = nrow(df)
+
+train.id &amp;lt;- sample(n, size = n*train.ratio)
+train &amp;lt;- df[train.id,]
+test &amp;lt;- df[-train.id,]
+
+nn &amp;lt;- neuralnet(Species == &amp;quot;versicolor&amp;quot; ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, train, hidden = 2, linear.output = FALSE)
+
+# Predict for test data
+pred &amp;lt;- predict(nn, test)
+# Confusion matrix
+t &amp;lt;- table(test$Species == &amp;quot;versicolor&amp;quot;, pred[, 1] &amp;gt; 0.5)
+# Confusion matrix
+caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##        
+##         FALSE TRUE
+##   FALSE     5    6
+##   TRUE      0    4
+##                                           
+##                Accuracy : 0.6             
+##                  95% CI : (0.3229, 0.8366)
+##     No Information Rate : 0.6667          
+##     P-Value [Acc &amp;gt; NIR] : 0.79696         
+##                                           
+##                   Kappa : 0.3077          
+##                                           
+##  Mcnemar&amp;#39;s Test P-Value : 0.04123         
+##                                           
+##             Sensitivity : 1.0000          
+##             Specificity : 0.4000          
+##          Pos Pred Value : 0.4545          
+##          Neg Pred Value : 1.0000          
+##              Prevalence : 0.3333          
+##          Detection Rate : 0.3333          
+##    Detection Prevalence : 0.7333          
+##       Balanced Accuracy : 0.7000          
+##                                           
+##        &amp;#39;Positive&amp;#39; Class : FALSE           
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot NN
+plot(nn, rep=&amp;#39;best&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/neuralnet_r/neuralnet_r_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# compair predicted and actual values
+test$predicted &amp;lt;- ifelse(pred&amp;gt;0.5, 1, 0)
+test&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species predicted
+## 12           4.8         3.4          1.6         0.2     setosa         0
+## 19           5.7         3.8          1.7         0.3     setosa         0
+## 25           4.8         3.4          1.9         0.2     setosa         0
+## 40           5.1         3.4          1.5         0.2     setosa         0
+## 42           4.5         2.3          1.3         0.3     setosa         0
+## 64           6.1         2.9          4.7         1.4 versicolor         1
+## 70           5.6         2.5          3.9         1.1 versicolor         1
+## 74           6.1         2.8          4.7         1.2 versicolor         1
+## 90           5.5         2.5          4.0         1.3 versicolor         1
+## 101          6.3         3.3          6.0         2.5  virginica         1
+## 103          7.1         3.0          5.9         2.1  virginica         1
+## 114          5.7         2.5          5.0         2.0  virginica         1
+## 123          7.7         2.8          6.7         2.0  virginica         1
+## 124          6.3         2.7          4.9         1.8  virginica         1
+## 145          6.7         3.3          5.7         2.5  virginica         1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Uniform Manifold Approximation and Projection (UMAP)</title>
+      <link>/post/statistics/umap/umap/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/umap/umap/</guid>
+      <description>
+
+
+&lt;div id=&#34;uniform-manifold-approximation-and-projection-umap&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(umap)
+
+head(iris, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select determinative variables and lables
+dat = iris[, grep(&amp;quot;Sepal|Petal&amp;quot;, colnames(iris))]
+lbls = iris[, &amp;quot;Species&amp;quot;]
+
+# apply UMAP transformation
+set.seed(123)
+iris.umap = umap::umap(dat)
+
+# layout matrix (coordinates for vis.)
+mx &amp;lt;- iris.umap$layout
+head(mx, 5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          [,1]      [,2]
+## [1,] 16.34555 1.7888418
+## [2,] 14.74415 0.8264381
+## [3,] 14.58204 1.3219384
+## [4,] 14.55112 1.3763256
+## [5,] 16.64683 2.1515565&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot UMAP components
+plot(subset(mx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(mx[,1]), max(mx[,1])),
+     ylim=c(min(mx[,2]), max(mx[,2])))
+points(subset(mx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(mx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# generate test data by adding noise to original data
+iris.wnoise = dat + matrix(rnorm(150*40, 0, 0.1), ncol=4)
+colnames(iris.wnoise) = colnames(dat)
+head(iris.wnoise, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     5.043952    3.578774     1.328476   0.3430402
+## 2     4.876982    3.076904     1.324731   0.3046629
+## 3     4.855871    3.233220     1.206146   0.2435289&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# predict
+pmx = predict(iris.umap, iris.wnoise)
+head(pmx, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]      [,2]
+## 1 16.28067 1.5141526
+## 2 14.81119 0.4305712
+## 3 15.15975 1.3219315&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot generated test data
+plot(subset(pmx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(pmx[,1]), max(pmx[,1])),
+     ylim=c(min(pmx[,2]), max(pmx[,2])))
+points(subset(pmx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(pmx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There are two strategies for tuning: via configuration objects (1) and via additional arguments (2).&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;code&gt;umap.defaults&lt;/code&gt; - configuration object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# set parameters
+custom.config = umap.defaults
+custom.config$random_state = 321
+umap3 = umap(dat, custom.config)
+mx2 = iris.umap$layout
+
+plot(subset(mx2, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
+     xlim=c(min(mx2[,1]), max(mx2[,1])),
+     ylim=c(min(mx2[,2]), max(mx2[,2])),
+     main=&amp;quot;Another UMAP visualization (different seed)&amp;quot;)
+points(subset(mx2, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
+points(subset(mx2, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Additional arguments &lt;code&gt;iris.umap.3 = umap(iris.data, random_state=123)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1802.03426&#34;&gt;UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://cran.r-project.org/web/packages/umap/vignettes/umap.html&#34;&gt;Uniform Manifold Approximation and Projection in R&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -585,136 +1014,6 @@ sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Neuralnet R</title>
-      <link>/post/statistics/neuralnet_r/neuralnet_r/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/neuralnet_r/neuralnet_r/</guid>
-      <description>
-
-
-&lt;p&gt;Using of &lt;code&gt;neuralnet&lt;/code&gt; R package to tran Neural Network for classification.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(neuralnet)
-library(datasets)
-
-# data
-df &amp;lt;- datasets::iris
-head(df)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split data
-train.ratio = 0.9
-n = nrow(df)
-
-train.id &amp;lt;- sample(n, size = n*train.ratio)
-train &amp;lt;- df[train.id,]
-test &amp;lt;- df[-train.id,]&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;binary-classification&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Binary classification&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nn &amp;lt;- neuralnet(Species == &amp;quot;setosa&amp;quot; ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
-
-# Predict for test data
-pred &amp;lt;- predict(nn, test)
-# Confusion matrix
-t &amp;lt;- table(test$Species == &amp;quot;setosa&amp;quot;, pred[, 1] &amp;gt; 0.5)
-t&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        
-##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot NN
-plot(nn)
-
-# Confusion matrix using caret
-library(caret)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
-## 
-##        
-##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7
-##                                     
-##                Accuracy : 1         
-##                  95% CI : (0.782, 1)
-##     No Information Rate : 0.5333    
-##     P-Value [Acc &amp;gt; NIR] : 8.035e-05 
-##                                     
-##                   Kappa : 1         
-##                                     
-##  Mcnemar&amp;#39;s Test P-Value : NA        
-##                                     
-##             Sensitivity : 1.0000    
-##             Specificity : 1.0000    
-##          Pos Pred Value : 1.0000    
-##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.5333    
-##          Detection Rate : 0.5333    
-##    Detection Prevalence : 0.5333    
-##       Balanced Accuracy : 1.0000    
-##                                     
-##        &amp;#39;Positive&amp;#39; Class : FALSE     
-## &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;multiclass-classification&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Multiclass classification&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nn &amp;lt;- neuralnet((Species == &amp;quot;setosa&amp;quot;) + (Species == &amp;quot;versicolor&amp;quot;) + (Species == &amp;quot;virginica&amp;quot;) 
-                ~ Petal.Length + Petal.Width, train, linear.output = FALSE)
-
-# Predict for test data
-pred &amp;lt;- predict(nn, test)
-table(test$Species, apply(pred, 1, which.max))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##             
-##              2 3
-##   setosa     6 1
-##   versicolor 4 0
-##   virginica  4 0&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot NN
-plot(nn)
-
-# Confusion matrix using &amp;#39;caret&amp;#39;
-caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
-## 
-##        
-##         FALSE TRUE
-##   FALSE     8    0
-##   TRUE      0    7
-##                                     
-##                Accuracy : 1         
-##                  95% CI : (0.782, 1)
-##     No Information Rate : 0.5333    
-##     P-Value [Acc &amp;gt; NIR] : 8.035e-05 
-##                                     
-##                   Kappa : 1         
-##                                     
-##  Mcnemar&amp;#39;s Test P-Value : NA        
-##                                     
-##             Sensitivity : 1.0000    
-##             Specificity : 1.0000    
-##          Pos Pred Value : 1.0000    
-##          Neg Pred Value : 1.0000    
-##              Prevalence : 0.5333    
-##          Detection Rate : 0.5333    
-##    Detection Prevalence : 0.5333    
-##       Balanced Accuracy : 1.0000    
-##                                     
-##        &amp;#39;Positive&amp;#39; Class : FALSE     
-## &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Bibliography&lt;/h2&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>k-means</title>
       <link>/post/statistics/k_means/k_means/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
@@ -1183,85 +1482,6 @@ An ROC graph depicts relative tradeoffs between benefits (true positives) and co
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How to split data into train and test subsets?</title>
-      <link>/post/statistics/split_data_ways/split_data_ways/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
-      <description>
-
-
-&lt;p&gt;Here you can find several simple approaches to split data into train and test subset to fit and to test parameters of your model. We want to split our data:&lt;br /&gt;
-train percent - 0.7&lt;br /&gt;
-test percent - 0.3&lt;/p&gt;
-&lt;p&gt;Let us create a data frame filled with generated data.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df = data.frame(x=seq(.1,1,.1), y=seq(1,10), z=letters[seq(1,10)])
-df&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      x  y z
-## 1  0.1  1 a
-## 2  0.2  2 b
-## 3  0.3  3 c
-## 4  0.4  4 d
-## 5  0.5  5 e
-## 6  0.6  6 f
-## 7  0.7  7 g
-## 8  0.8  8 h
-## 9  0.9  9 i
-## 10 1.0 10 j&lt;/code&gt;&lt;/pre&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;First approach is to create a vector filled with selected IDs of rows and then apply this vector to subset data.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1) # set state of random number generator
-tv1 = sample(nrow(df), nrow(df)*0.7)
-tv1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 4 5 7 2 8 9&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select train and test data for column y using our vector
-train = df$y[tv1]
-test = df$y[-tv1] # the same as test = df$y[!tv1]
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 4 5 7 2 8 9&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  6 10&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Another approch is to create a vecotr filled with logical true/false for each row of dataset and apply this vector to subset data.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1) # set state of random number generator
-tv2 = sample(c(TRUE, FALSE), nrow(df), replace = T, prob = c(0.7,0.3))
-tv2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select train and test data for column y using our vector
-train = df$y[tv2]
-test = df$y[!tv2]
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  2  3  5  8  9 10&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4 6 7&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/caTools/index.html&#34;&gt;&lt;code&gt;caTools&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caTools)
-set.seed(1) 
-sample = sample.split(df, SplitRatio = .7)
-train = subset(df$y, sample == TRUE)
-test  = subset(df$y, sample == FALSE)
-train&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  1  2  4  5  7  8 10&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 6 9&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Using &lt;a href=&#34;https://cran.r-project.org/web/packages/dplyr/&#34;&gt;&lt;code&gt;dplyr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
-df$id &amp;lt;- 1:nrow(df)
-train &amp;lt;- df %&amp;gt;% dplyr::sample_frac(.7)
-test  &amp;lt;- dplyr::anti_join(df, train, by = &amp;#39;id&amp;#39;)
-train$y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 10  2  8  7  4  6  1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test$y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3 5 9&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

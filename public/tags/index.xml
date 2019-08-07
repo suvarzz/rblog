@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Tags</title>
@@ -15,8 +15,56 @@
     <item>
       <title>Classification</title>
       <link>/tags/classification/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dimentionality reduction</title>
+      <link>/tags/dimentionality-reduction/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/dimentionality-reduction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural Network</title>
+      <link>/tags/neural-network/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/neural-network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tSNE</title>
+      <link>/tags/tsne/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/tsne/</guid>
       <description></description>
     </item>
     
@@ -45,14 +93,6 @@
     </item>
     
     <item>
-      <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Math</title>
       <link>/tags/math/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
@@ -61,34 +101,10 @@
     </item>
     
     <item>
-      <title>Neural Network</title>
-      <link>/tags/neural-network/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/neural-network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Regression</title>
       <link>/tags/regression/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistics</title>
-      <link>/tags/statistics/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     

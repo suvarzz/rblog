@@ -1,0 +1,76 @@
+---
+title: "tSNE"
+author: "Mark Goldberg"
+date: '2019-08-07'
+weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "tSNE"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "tSNE."
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#tsne">tSNE</a></li>
+<li><a href="#barnes-hut-t-distributed-stochastic-neighbor-embedding">Barnes-Hut t-Distributed Stochastic Neighbor Embedding</a></li>
+<li><a href="#compare-with-principal-component-analysis-pca">Compare with Principal Component Analysis (PCA)</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+</div>
+
+<div id="tsne" class="section level2">
+<h2>tSNE</h2>
+<pre class="r"><code>library(tsne)
+# tSNE
+set.seed(5)
+tsne_iris = tsne(iris[,1:4], k=2, perplexity=30, max_iter=1000)
+
+# set colors
+colors = rainbow(length(unique(iris$Species)))
+names(colors) = unique(iris$Species)
+
+# plot tSNE
+plot(tsne_iris, t=&#39;n&#39;)
+points(tsne_iris, col=colors[iris$Species])</code></pre>
+<p><img src="/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="barnes-hut-t-distributed-stochastic-neighbor-embedding" class="section level2">
+<h2>Barnes-Hut t-Distributed Stochastic Neighbor Embedding</h2>
+<p><code>Rtsne</code> package. It is faster than <code>tsne</code> and better separate elements in groups.</p>
+<pre class="r"><code>library(Rtsne)
+# remove duplicates
+iris_unique &lt;- unique(iris)
+mx &lt;- as.matrix(iris_unique[,1:4])
+normalize_input(mx)</code></pre>
+<pre class="r"><code>set.seed(3)
+rtsne &lt;- Rtsne(mx, dims=2, perplexity=30, theta=0.5)
+names(rtsne)</code></pre>
+<pre><code>##  [1] &quot;N&quot;                   &quot;Y&quot;                   &quot;costs&quot;              
+##  [4] &quot;itercosts&quot;           &quot;origD&quot;               &quot;perplexity&quot;         
+##  [7] &quot;theta&quot;               &quot;max_iter&quot;            &quot;stop_lying_iter&quot;    
+## [10] &quot;mom_switch_iter&quot;     &quot;momentum&quot;            &quot;final_momentum&quot;     
+## [13] &quot;eta&quot;                 &quot;exaggeration_factor&quot;</code></pre>
+<pre class="r"><code># plot tsne
+plot(rtsne[[&#39;Y&#39;]], t=&#39;n&#39;)
+points(rtsne[[&#39;Y&#39;]], col=colors[iris_unique$Species])</code></pre>
+<p><img src="/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="compare-with-principal-component-analysis-pca" class="section level2">
+<h2>Compare with Principal Component Analysis (PCA)</h2>
+<pre class="r"><code># compare to PCA
+pca_iris = princomp(iris[,1:4])$scores[,1:2]
+
+# plot PCA
+plot(pca_iris, t=&#39;n&#39;)
+points(pca_iris, col=colors[iris$Species])</code></pre>
+<p><img src="/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+</div>
