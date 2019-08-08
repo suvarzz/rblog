@@ -5,7 +5,7 @@
     <link>/categories/statistics/</link>
       <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Statistics</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Statistical learning - topics</title>
       <link>/post/statistics/statistical_learning_topics/</link>
-      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/statistical_learning_topics/</guid>
       <description>
 
@@ -72,12 +72,12 @@
 &lt;div id=&#34;supervised-classification&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Supervised Classification&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;Naïve Bayes&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/naive_bayes/naive_bayes&#34;&gt;Naïve Bayes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Multinomial logistic regression&lt;/li&gt;
 &lt;li&gt;Ordinal logistic regression&lt;/li&gt;
 &lt;li&gt;Linear &amp;amp; Quadratic Discriminant Analysis&lt;/li&gt;
-&lt;li&gt;Support Vector Machines&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/svm/svm&#34;&gt;Support Vector Machines&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Random Forests and Boosting&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -100,9 +100,9 @@
 &lt;div id=&#34;deep-learning&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Deep Learning&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;Neural Network Fundamentals&lt;/li&gt;
 &lt;li&gt;Neural Network for Regression&lt;/li&gt;
 &lt;li&gt;Neural Network for Classification&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/post/statistics/lvq/lvq&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Feedforward Deep Learning with Keras &amp;amp; Tensorflow&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -175,6 +175,231 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Compare Models And Select The Best Using The Caret R Package</title>
+      <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/compare_models_caret/compare_models_caret/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#compare-models-and-select-the-best-using-the-caret-r-package&#34;&gt;Compare Models And Select The Best Using The Caret R Package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bibliography&#34;&gt;Bibliography&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;compare-models-and-select-the-best-using-the-caret-r-package&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Compare Models And Select The Best Using The Caret R Package&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Data&lt;/em&gt;: mlbench::PimaIndiansDiabetes. Find the best model to predict diabetes from all given parameters.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Models&lt;/em&gt;:&lt;br /&gt;
+* &lt;strong&gt;Learning Vector Quantization&lt;/strong&gt; (LVQ)&lt;br /&gt;
+* &lt;strong&gt;Gradient Boosted Machine&lt;/strong&gt; (GBM)&lt;br /&gt;
+* &lt;strong&gt;Support Vector Machine&lt;/strong&gt; (SVM)&lt;/p&gt;
+&lt;p&gt;Each model is automatically tuned and is evaluated using 3 repeats of 10-fold cross validation.&lt;br /&gt;
+The random number seed is set before each algorithm is trained to ensure that each algorithm gets the same data partitions and repeats.&lt;br /&gt;
+The best models have 30 results (3 repeats of 10-fold cross validation).&lt;br /&gt;
+The objective of comparing results is to compare the accuracy distributions (30 values) between the models.&lt;/p&gt;
+&lt;p&gt;This is done in three ways. The distributions are summarized in terms of the percentiles. The distributions are summarized as box plots and finally the distributions are summarized as dot plots.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(mlbench)
+library(caret)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# load the dataset
+data(PimaIndiansDiabetes)
+
+# training scheme
+control &amp;lt;- trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
+
+# train the LVQ model
+set.seed(7)
+modelLvq &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, trControl=control)
+
+# train the GBM model
+set.seed(7)
+modelGbm &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;gbm&amp;quot;, trControl=control, verbose=FALSE)
+
+# train the SVM model
+set.seed(7)
+modelSvm &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;svmRadial&amp;quot;, trControl=control)
+
+# collect resamples
+results &amp;lt;- resamples(list(LVQ=modelLvq, GBM=modelGbm, SVM=modelSvm))
+
+# summarize the distributions
+summary(results)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## summary.resamples(object = results)
+## 
+## Models: LVQ, GBM, SVM 
+## Number of resamples: 30 
+## 
+## Accuracy 
+##          Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&amp;#39;s
+## LVQ 0.5974026 0.6623377 0.7012987 0.6992538 0.7402597 0.7922078    0
+## GBM 0.7012987 0.7402597 0.7662338 0.7678685 0.8045540 0.8552632    0
+## SVM 0.6973684 0.7305195 0.7662338 0.7665243 0.7922078 0.8441558    0
+## 
+## Kappa 
+##           Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&amp;#39;s
+## LVQ 0.04251905 0.2444627 0.3210038 0.3064691 0.3989071 0.5276074    0
+## GBM 0.24798301 0.3770808 0.4441549 0.4563312 0.5264481 0.6814024    0
+## SVM 0.25171233 0.3670435 0.4590164 0.4500126 0.5211405 0.6457055    0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# boxplots of results
+bwplot(results)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dot plots of results
+dotplot(results)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://machinelearningmastery.com/compare-models-and-select-the-best-using-the-caret-r-package/&#34;&gt;Compare Models And Select The Best Using The Caret R Package&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Gradient Boosting Machine</title>
+      <link>/post/statistics/gbm/gbm/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/gbm/gbm/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#gradient-boosting-machine&#34;&gt;Gradient Boosting Machine&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;gradient-boosting-machine&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Gradient Boosting Machine&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Type of problem&lt;/em&gt;: regression and supervised classification.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Learning Vector Quantization</title>
+      <link>/post/statistics/lvq/lvq/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/lvq/lvq/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#learning-vector-quantization&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;learning-vector-quantization&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Learning Vector Quantization&lt;/h2&gt;
+&lt;p&gt;Learning Vector Quantiztion (LVQ) is a supervised classification algorithm for binary and multiclass problems. LVQ is a special case of a neural network.&lt;br /&gt;
+LVQ model creates codebook vectors by learning training dataset. Codebook vectors represent class regions. They contain elements that placed around the respective class according to their matching level. If the element matches, it comes closer to the target class, if it does not match, it moves farther from it. With this codebooks, the model classifies new data. &lt;a href=&#34;http://jsalatas.ictpro.gr/implementation-of-competitive-learning-networks-for-weka/&#34;&gt;Here&lt;/a&gt; is a nice explanation how it works.&lt;/p&gt;
+&lt;p&gt;There are several versions of &lt;strong&gt;LVQ&lt;/strong&gt; function:&lt;br /&gt;
+&lt;code&gt;lvq1()&lt;/code&gt;, &lt;code&gt;olvq1()&lt;/code&gt;, &lt;code&gt;lvq2()&lt;/code&gt;, &lt;code&gt;lvq3()&lt;/code&gt;, &lt;code&gt;dlvq()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(class) # olvq1()
+library(caret) # to split data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# generate dataset
+df &amp;lt;- iris
+
+id = caret::createDataPartition(df$Species, p = .8, list = F)
+
+train = df[id, ]
+test = df[-id, ]
+
+# initialize an LVQ codebook
+cb = class::lvqinit(train[1:4], train$Species)
+
+# training set in a codebook.
+build.cb = class::olvq1(train[1:4], train$Species, cb)
+
+# classify test set from LVQ Codebook for test data
+predict = class::lvqtest(build.cb, test[1:4])
+
+# confusion matrix.
+caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Confusion Matrix and Statistics
+## 
+##             Reference
+## Prediction   setosa versicolor virginica
+##   setosa         10          0         0
+##   versicolor      0          9         1
+##   virginica       0          0        10
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9667          
+##                  95% CI : (0.8278, 0.9992)
+##     No Information Rate : 0.3667          
+##     P-Value [Acc &amp;gt; NIR] : 4.476e-12       
+##                                           
+##                   Kappa : 0.95            
+##                                           
+##  Mcnemar&amp;#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: setosa Class: versicolor Class: virginica
+## Sensitivity                 1.0000            1.0000           0.9091
+## Specificity                 1.0000            0.9524           1.0000
+## Pos Pred Value              1.0000            0.9000           1.0000
+## Neg Pred Value              1.0000            1.0000           0.9500
+## Prevalence                  0.3333            0.3000           0.3667
+## Detection Rate              0.3333            0.3000           0.3333
+## Detection Prevalence        0.3333            0.3333           0.3333
+## Balanced Accuracy           1.0000            0.9762           0.9545&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Naive Bayes</title>
+      <link>/post/statistics/naive_bayes/naive_bayes/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/naive_bayes/naive_bayes/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#naive-bayes&#34;&gt;Naive Bayes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;naive-bayes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Naive Bayes&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(P(c|x) = \frac{P(x|c)(P(c))}{P(x)}\)&lt;/span&gt;, where&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(P(c|x)\)&lt;/span&gt; - posteriour probability&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(P(x|c)\)&lt;/span&gt; - Likelihood&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(P(c)\)&lt;/span&gt; - Class Prior Probbility&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(P(x)\)&lt;/span&gt; - Predictor Prior Probability&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Support Vector Machine</title>
+      <link>/post/statistics/svm/svm/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/svm/svm/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#support-vector-machine&#34;&gt;Support Vector Machine&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;support-vector-machine&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Support Vector Machine&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Type of problem&lt;/em&gt;: regression, supervised classification.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

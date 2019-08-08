@@ -1,0 +1,24 @@
+---
+title: "Naive Bayes"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "caret", "Machine Learning"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Naive Bayes"
+---
+
+## Naive Bayes
+
+$P(c|x) = \frac{P(x|c)(P(c))}{P(x)}$, where  
+$P(c|x)$ - posteriour probability  
+$P(x|c)$ - Likelihood  
+$P(c)$ - Class Prior Probbility  
+$P(x)$ - Predictor Prior Probability  
+
+

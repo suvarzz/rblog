@@ -1,0 +1,71 @@
+---
+title: "Compare Models And Select The Best Using The Caret R Package"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+#weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "caret", "Machine Learning"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Compare Models And Select The Best Using The Caret R Package."
+---
+
+## Compare Models And Select The Best Using The Caret R Package
+
+*Data*: mlbench::PimaIndiansDiabetes. Find the best model to predict diabetes from all given parameters.  
+
+*Models*:  
+* **Learning Vector Quantization** (LVQ)  
+* **Gradient Boosted Machine** (GBM)  
+* **Support Vector Machine** (SVM)  
+
+Each model is automatically tuned and is evaluated using 3 repeats of 10-fold cross validation.  
+The random number seed is set before each algorithm is trained to ensure that each algorithm gets the same data partitions and repeats.  
+The best models have 30 results (3 repeats of 10-fold cross validation).  
+The objective of comparing results is to compare the accuracy distributions (30 values) between the models.  
+
+This is done in three ways. The distributions are summarized in terms of the percentiles. The distributions are summarized as box plots and finally the distributions are summarized as dot plots.  
+
+```{r}
+library(mlbench)
+library(caret)
+
+# load the dataset
+data(PimaIndiansDiabetes)
+
+# training scheme
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+
+# train the LVQ model
+set.seed(7)
+modelLvq <- train(diabetes~., data=PimaIndiansDiabetes, method="lvq", trControl=control)
+
+# train the GBM model
+set.seed(7)
+modelGbm <- train(diabetes~., data=PimaIndiansDiabetes, method="gbm", trControl=control, verbose=FALSE)
+
+# train the SVM model
+set.seed(7)
+modelSvm <- train(diabetes~., data=PimaIndiansDiabetes, method="svmRadial", trControl=control)
+
+# collect resamples
+results <- resamples(list(LVQ=modelLvq, GBM=modelGbm, SVM=modelSvm))
+
+# summarize the distributions
+summary(results)
+```
+```{r}
+# boxplots of results
+bwplot(results)
+```
+```{r}
+# dot plots of results
+dotplot(results)
+```
+
+## Bibliography
+[Compare Models And Select The Best Using The Caret R Package](https://machinelearningmastery.com/compare-models-and-select-the-best-using-the-caret-r-package/)

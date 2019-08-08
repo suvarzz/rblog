@@ -28,8 +28,8 @@ summary: "Basic topics of statistical learning."
 
 # Supervised Regression
 * Linear Regression
-* Multiple regression
-* Linear Model Selection
+  + Multiple regression
+  + Linear Model Selection
 * Polynomial Regression
 * Stepwise Regression
 * Regularized Regression
@@ -41,12 +41,12 @@ summary: "Basic topics of statistical learning."
 * ElasticNet regression
 
 # Supervised Classification
-* Naïve Bayes
+* [Naïve Bayes](/post/statistics/naive_bayes/naive_bayes)
 * [Logistic Regression](/post/statistics/logistic_regression/logistic_regression)
 * Multinomial logistic regression
 * Ordinal logistic regression
 * Linear & Quadratic Discriminant Analysis
-* Support Vector Machines
+* [Support Vector Machines](/post/statistics/svm/svm)
 * Random Forests and Boosting
 
 # Estimation of model parameters
@@ -60,8 +60,8 @@ summary: "Basic topics of statistical learning."
 * Exponential Smoothing
 
 # Deep Learning
-* Neural Network Fundamentals
 * Neural Network for Regression
 * Neural Network for Classification
+  + [Learning Vector Quantization](/post/statistics/lvq/lvq)
 * Feedforward Deep Learning with Keras & Tensorflow
 * [Hopfield Neural Network](/post/statistics/hopfield_network/hopfield_network)

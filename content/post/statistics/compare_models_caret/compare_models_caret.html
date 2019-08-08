@@ -1,0 +1,92 @@
+---
+title: "Compare Models And Select The Best Using The Caret R Package"
+author: "Mark Goldberg"
+date: '2019-08-08'
+#weight: 1
+draft: false
+math: true
+tags: ["R", "Statistics", "caret", "Machine Learning"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Compare Models And Select The Best Using The Caret R Package."
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#compare-models-and-select-the-best-using-the-caret-r-package">Compare Models And Select The Best Using The Caret R Package</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+</div>
+
+<div id="compare-models-and-select-the-best-using-the-caret-r-package" class="section level2">
+<h2>Compare Models And Select The Best Using The Caret R Package</h2>
+<p><em>Data</em>: mlbench::PimaIndiansDiabetes. Find the best model to predict diabetes from all given parameters.</p>
+<p><em>Models</em>:<br />
+* <strong>Learning Vector Quantization</strong> (LVQ)<br />
+* <strong>Gradient Boosted Machine</strong> (GBM)<br />
+* <strong>Support Vector Machine</strong> (SVM)</p>
+<p>Each model is automatically tuned and is evaluated using 3 repeats of 10-fold cross validation.<br />
+The random number seed is set before each algorithm is trained to ensure that each algorithm gets the same data partitions and repeats.<br />
+The best models have 30 results (3 repeats of 10-fold cross validation).<br />
+The objective of comparing results is to compare the accuracy distributions (30 values) between the models.</p>
+<p>This is done in three ways. The distributions are summarized in terms of the percentiles. The distributions are summarized as box plots and finally the distributions are summarized as dot plots.</p>
+<pre class="r"><code>library(mlbench)
+library(caret)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre class="r"><code># load the dataset
+data(PimaIndiansDiabetes)
+
+# training scheme
+control &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3)
+
+# train the LVQ model
+set.seed(7)
+modelLvq &lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&quot;lvq&quot;, trControl=control)
+
+# train the GBM model
+set.seed(7)
+modelGbm &lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&quot;gbm&quot;, trControl=control, verbose=FALSE)
+
+# train the SVM model
+set.seed(7)
+modelSvm &lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&quot;svmRadial&quot;, trControl=control)
+
+# collect resamples
+results &lt;- resamples(list(LVQ=modelLvq, GBM=modelGbm, SVM=modelSvm))
+
+# summarize the distributions
+summary(results)</code></pre>
+<pre><code>## 
+## Call:
+## summary.resamples(object = results)
+## 
+## Models: LVQ, GBM, SVM 
+## Number of resamples: 30 
+## 
+## Accuracy 
+##          Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## LVQ 0.5974026 0.6623377 0.7012987 0.6992538 0.7402597 0.7922078    0
+## GBM 0.7012987 0.7402597 0.7662338 0.7678685 0.8045540 0.8552632    0
+## SVM 0.6973684 0.7305195 0.7662338 0.7665243 0.7922078 0.8441558    0
+## 
+## Kappa 
+##           Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## LVQ 0.04251905 0.2444627 0.3210038 0.3064691 0.3989071 0.5276074    0
+## GBM 0.24798301 0.3770808 0.4441549 0.4563312 0.5264481 0.6814024    0
+## SVM 0.25171233 0.3670435 0.4590164 0.4500126 0.5211405 0.6457055    0</code></pre>
+<pre class="r"><code># boxplots of results
+bwplot(results)</code></pre>
+<p><img src="/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code># dot plots of results
+dotplot(results)</code></pre>
+<p><img src="/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+<p><a href="https://machinelearningmastery.com/compare-models-and-select-the-best-using-the-caret-r-package/">Compare Models And Select The Best Using The Caret R Package</a></p>
+</div>
