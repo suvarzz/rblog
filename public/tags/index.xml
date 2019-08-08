@@ -13,6 +13,22 @@
     </image>
     
     <item>
+      <title>Clustering</title>
+      <link>/tags/clustering/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/clustering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploratory analysis</title>
+      <link>/tags/exploratory-analysis/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/exploratory-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Machine Learning</title>
       <link>/tags/machine-learning/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
@@ -41,6 +57,14 @@
       <link>/tags/caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/caret/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k-means</title>
+      <link>/tags/k-means/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/k-means/</guid>
       <description></description>
     </item>
     
@@ -77,14 +101,6 @@
     </item>
     
     <item>
-      <title>Clustering</title>
-      <link>/tags/clustering/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/clustering/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Hierarchical</title>
       <link>/tags/hierarchical/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
@@ -113,14 +129,6 @@
       <link>/tags/regression/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>k-means</title>
-      <link>/tags/k-means/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/k-means/</guid>
       <description></description>
     </item>
     

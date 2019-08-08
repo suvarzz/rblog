@@ -14,6 +14,7 @@ summary: "Here you can find how to work with k-means cluster analysis."
 ---
 
 ## K-means cluster analysis
+
 ```{r setup}
 library(datasets)
 df <- datasets::iris

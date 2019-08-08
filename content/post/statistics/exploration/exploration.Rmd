@@ -13,7 +13,7 @@ output:
 summary: "Exploratory analysis in R."
 ---
 ## View data
-Here you can find several R functions which can help to see the structure of your data
+Here you can find several R functions which can help to see the structure of your data.  
 
 
 ## Correlation between variables
@@ -33,18 +33,17 @@ cor.mx <- cor(df)
 corrplot::corrplot.mixed(cor.mx, order="hclust")
                
 ```
-```{r}
+```{r, message=F}
 print(cor.mx)
 
 library(caret)
 # prepare training scheme
 control <- caret::trainControl(method="repeatedcv", number=10, repeats=3)
-# train the model
-model <- train(diabetes~., data=PimaIndiansDiabetes, method="lvq", preProcess="scale", trControl=control)
+#model <- train(diabetes~., data=PimaIndiansDiabetes, method="lvq", preProcess="scale", trControl=control)
 # estimate variable importance
-importance <- varImp(model, scale=FALSE)
+#importance <- varImp(model, scale=FALSE)
 # summarize importance
-print(importance)
+#print(importance)
 ```
 How to show correlation table? Alternatively we can use `corrplot` with `method = "number"`.   
 

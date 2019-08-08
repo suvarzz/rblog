@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exploratory analysis | Mark Goldberg</title>
+    <link>/tags/exploratory-analysis/</link>
+      <atom:link href="/tags/exploratory-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>Exploratory analysis</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>Exploratory analysis</title>
+      <link>/tags/exploratory-analysis/</link>
+    </image>
+    
+    <item>
+      <title>Exploratory analysis in R</title>
+      <link>/post/statistics/exploration/exploration/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/exploration/exploration/</guid>
+      <description>
+
+
+&lt;div id=&#34;view-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;View data&lt;/h2&gt;
+&lt;p&gt;Here you can find several R functions which can help to see the structure of your data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-between-variables&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Correlation between variables&lt;/h2&gt;
+&lt;p&gt;Let’s find if data in columns are correlated using &lt;code&gt;corrplot&lt;/code&gt;.&lt;br /&gt;
+&lt;a href=&#34;http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram&#34;&gt;Here&lt;/a&gt; you can find how to tune correlogram.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## corrplot 0.84 loaded&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select numerical columns 1-4
+df = iris[1:4]
+
+# build correlation matrix 
+cor.mx &amp;lt;- cor(df)
+
+# correlation plot ordered correlation coefficients
+corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+# prepare training scheme
+control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
+#model &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, preProcess=&amp;quot;scale&amp;quot;, trControl=control)
+# estimate variable importance
+#importance &amp;lt;- varImp(model, scale=FALSE)
+# summarize importance
+#print(importance)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How to show correlation table? Alternatively we can use &lt;code&gt;corrplot&lt;/code&gt; with &lt;code&gt;method = &amp;quot;number&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
+&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Can we remove outliers&lt;/p&gt;
+&lt;p&gt;How to remove ‘NA’, ‘Inf’, and ‘0’&lt;/p&gt;
+&lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filtering&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Filtering&lt;/h1&gt;
+&lt;p&gt;You can see how to filter and subset your data in folloing posts: 1.&lt;br /&gt;
+2.&lt;br /&gt;
+3.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
