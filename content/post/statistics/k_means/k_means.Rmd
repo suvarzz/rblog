@@ -25,7 +25,7 @@ unique(df$Species)
 ```
 We try to predict them by *Petal.Lenght*and *Petal.Width* variables using k-means clustering.  
 
-```
+```{r}
 # Plot Petal.Length ~ Petal.Width data
 plot(df$Petal.Length ~ df$Petal.Width)
 

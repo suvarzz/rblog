@@ -1,0 +1,67 @@
+---
+title: "Exploratory analysis in R"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "Exploratory analysis"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  #blogdown::html_page:
+  toc: true
+summary: "Exploratory analysis in R."
+---
+## View data
+Here you can find several R functions which can help to see the structure of your data
+
+
+## Correlation between variables
+
+Let's find if data in columns are correlated using `corrplot`.  
+[Here](http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram) you can find how to tune correlogram.  
+```{r}
+library(corrplot)
+
+# select numerical columns 1-4
+df = iris[1:4]
+
+# build correlation matrix 
+cor.mx <- cor(df)
+
+# correlation plot ordered correlation coefficients
+corrplot::corrplot.mixed(cor.mx, order="hclust")
+               
+```
+```{r}
+print(cor.mx)
+
+library(caret)
+# prepare training scheme
+control <- caret::trainControl(method="repeatedcv", number=10, repeats=3)
+# train the model
+model <- train(diabetes~., data=PimaIndiansDiabetes, method="lvq", preProcess="scale", trControl=control)
+# estimate variable importance
+importance <- varImp(model, scale=FALSE)
+# summarize importance
+print(importance)
+```
+How to show correlation table? Alternatively we can use `corrplot` with `method = "number"`.   
+
+
+How to choose variables with the best correlation? Can we sort them by importance?
+
+Can we exclude data based on low correlation?
+This can be also done by dimentionality reduction methods such as [PCA](/posts/statistics/pca/pca/).  
+
+Can we remove outliers
+
+How to remove 'NA', 'Inf', and '0' 
+
+Do we need to remove duplicated data (rows, columns)
+
+# Filtering
+You can see how to filter and subset your data in folloing posts:
+1.  
+2.  
+3.  
