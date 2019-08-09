@@ -26,8 +26,8 @@
   weight = 50
 
 [[main]]
-  name = "Sport"
-  url = "/post/sport/"
+  name = "Bioinformatics"
+  url = "/post/bioinformatics/"
   weight = 60
 
 [[main]]

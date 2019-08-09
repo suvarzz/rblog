@@ -29,6 +29,14 @@
     </item>
     
     <item>
+      <title>Hierarchical</title>
+      <link>/tags/hierarchical/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/hierarchical/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>/tags/r/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
@@ -105,14 +113,6 @@
       <link>/tags/tsne/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/tsne/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hierarchical</title>
-      <link>/tags/hierarchical/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/hierarchical/</guid>
       <description></description>
     </item>
     
@@ -197,14 +197,6 @@
     </item>
     
     <item>
-      <title>Marathon</title>
-      <link>/tags/marathon/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/marathon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Markov process</title>
       <link>/tags/markov-process/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
@@ -225,14 +217,6 @@
       <link>/tags/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/splines/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sport</title>
-      <link>/tags/sport/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/sport/</guid>
       <description></description>
     </item>
     
