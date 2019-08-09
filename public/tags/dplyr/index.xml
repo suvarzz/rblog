@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dplyr | Mark Goldberg</title>
+    <link>/tags/dplyr/</link>
+      <atom:link href="/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
+    <description>dplyr</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo.png</url>
+      <title>dplyr</title>
+      <link>/tags/dplyr/</link>
+    </image>
+    
+    <item>
+      <title>Dplyr tutorial</title>
+      <link>/post/statistics/dplyr_tutorial/dplyr_tutorial/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/dplyr_tutorial/dplyr_tutorial/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#short-summary&#34;&gt;Short summary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#adding-rows-and-columns&#34;&gt;Adding rows and columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#remove-duplicates&#34;&gt;Remove duplicates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#select&#34;&gt;Select&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#filter-rows&#34;&gt;Filter rows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summarize&#34;&gt;Summarize&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sort&#34;&gt;Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pipes&#34;&gt;Pipes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#combine-data&#34;&gt;Combine data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#by-is-a-common-variable-primary-key-to-join-by.&#34;&gt;‘by’ is a common variable (primary key) to join by.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nested-if_else&#34;&gt;Nested If_Else&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#if-family-of-functions&#34;&gt;if() Family of Functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#todo&#34;&gt;TODO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vectorize-functions-to-columns&#34;&gt;Vectorize functions to columns&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to&#34;&gt;How to …&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#convert-empty-spaces-to-na&#34;&gt;Convert empty spaces to NA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#randomly-select-n-rows&#34;&gt;Randomly select n rows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;short-summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Short summary&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select data
+df %&amp;gt;% select(A, B)          # select fields
+df %&amp;gt;% select(-B, -B)        # exclude fields
+df %&amp;gt;% select(-c(A, B))      # select multiple fields
+df %&amp;gt;% select(starts_with(&amp;#39;a&amp;#39;))      # select by names of fields starting with ...
+df %&amp;gt;% select(-starts_with(&amp;#39;a&amp;#39;))        # exclude by names of fields starting with ...
+df %&amp;gt;% select(contains(&amp;#39;ab&amp;#39;))           # select by names of fields contains a literal string
+df %&amp;gt;% select(ends_with(&amp;#39;r&amp;#39;))           # Ends with a prefix
+          # matches()   Matches a regular expression
+          # num_range() Numerical range like x01, x02, x03.
+          # one_of()    Variables in character vector.
+          # everything()    All variables.
+df %&amp;gt;% select(A, everything())        # reorder variables, that A will be in the 1st column
+df %&amp;gt;% select(C, B, A, everything())  # reordrer columns
+df %&amp;gt;% select(C, B, A)                # the same as previous
+
+# Filter rows
+
+filter(df, A==1)
+filter(df, A&amp;gt;1)
+filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))
+filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;) &amp;amp; C &amp;gt; 1)     # multiple filtering AND
+filter(df, Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;) | C == 1)   # multiple filtering OR
+filter(df, !Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;))           # filtering NOT
+filter(df, grepl(&amp;quot;A&amp;quot;, Name))    
+
+# Adding rows and columns
+df %&amp;gt;% mutate(mycol = NA)     # Add column &amp;#39;mycol&amp;#39; filled with &amp;#39;NA&amp;#39;
+df %&amp;gt;% mutate(mycol = A*B)     # Add column &amp;#39;mycol&amp;#39; as A*B
+df=data.frame(A=c(1,2), B=c(3,4))
+df %&amp;gt;% cbind(mycol = NA)
+df %&amp;gt;% rbind(myrow = NA)      # add &amp;#39;myrow&amp;#39; filled &amp;#39;NA&amp;#39;
+
+# Remove duplicates
+df %&amp;gt;% distinct()                       # remove duplicated rows
+df %&amp;gt;% distinct(A, .keep_all=TRUE)      # remove rows when field &amp;#39;A&amp;#39; is duplicated
+df %&amp;gt;% distinct(A, B, .keep_all=TRUE)   # remove rows when several fields at the same row are duplicated
+
+# Compair data
+all_equal(x,y)      # compair two data frames
+
+# Combine data
+intersect(x, y)     # Rows that appear in both x and y.
+union(x, y)         # Rows that appear in either or both x and y.
+setdiff(x, y)       # Rows that appear in x but not y.
+
+# Sort
+arrange(df, A)           # Sort rows by A column
+arrange(df, desc(A))     # Sort by descendence of values in column A
+arrange(df, A, B)        # Sort by A &amp;amp; B
+
+group_by(df, A, B)
+
+inner_join(x, y, by = )
+left_join(x, y, by = )
+right_join(x, y, by = )
+full_join(x, y, by = )
+semi_join(x, y, by = )
+anti_join(x, y, by = )
+
+# Miscellaneous
+df %&amp;gt;% na_if(&amp;quot;&amp;quot;)            # Convert empty spaces to &amp;#39;NA&amp;#39;
+sample_frac(df, size=0.8)   # Randomly select fraction of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# toy data
+df &amp;lt;- data.frame(&amp;quot;Age&amp;quot; = c(10,15,10,15), &amp;quot;Name&amp;quot; = c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;, &amp;quot;C&amp;quot;, &amp;quot;B&amp;quot;), &amp;quot;Gender&amp;quot;=c(1,0,1,0))
+df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;adding-rows-and-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Adding rows and columns&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% mutate(N = NA)    # add new last column &amp;#39;N&amp;#39; filled NA&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender  N
+## 1  10    A      1 NA
+## 2  15    B      0 NA
+## 3  10    C      1 NA
+## 4  15    B      0 NA&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rbind(N = NA)     # add new last row &amp;#39;N&amp;#39; filled &amp;#39;NA&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0
+## 5  NA &amp;lt;NA&amp;gt;     NA&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;remove-duplicates&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Remove duplicates&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct()                                # remove duplicated rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct(Age, .keep_all=TRUE)             # remove rows when field &amp;#39;Age&amp;#39; is duplicated&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct(Age, Gender, .keep_all=TRUE)     # remove rows when fields &amp;#39;A&amp;#39; &amp;amp; &amp;#39;B&amp;#39; are duplicated&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;select&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Select&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(Name, Gender)          # select fields&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Name Gender
+## 1    A      1
+## 2    B      0
+## 3    C      1
+## 4    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(-Name, -Gender)        # exclude fields&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(-c(Name, Gender))      # same as privious&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(starts_with(&amp;quot;A&amp;quot;))      # select names of fields: A -&amp;gt; Age&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, -starts_with(&amp;quot;A&amp;quot;))        # select all except A -&amp;gt; Age&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Name Gender
+## 1    A      1
+## 2    B      0
+## 3    C      1
+## 4    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, contains(&amp;quot;G&amp;quot;))            # Contains a literal string&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Gender
+## 1  10      1
+## 2  15      0
+## 3  10      1
+## 4  15      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, ends_with(&amp;quot;r&amp;quot;))           # Ends with a prefix&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender
+## 1      1
+## 2      0
+## 3      1
+## 4      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;          # matches()   Matches a regular expression
+          # num_range() Numerical range like x01, x02, x03.
+          # one_of()    Variables in character vector.
+          # everything()    All variables.
+select(df, Age, everything())        # reorder variables, that Age will be in the 1st column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, Gender, Age, Name, everything()) # reordrer columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender Age Name
+## 1      1  10    A
+## 2      0  15    B
+## 3      1  10    C
+## 4      0  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, Gender, Age, Name)               # the same as previous&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender Age Name
+## 1      1  10    A
+## 2      0  15    B
+## 3      1  10    C
+## 4      0  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filter-rows&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Filter rows&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Gender==1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Age&amp;gt;10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;) &amp;amp; Age &amp;gt; 10)     # multiple filtering AND&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;) | Gender == 1) # multiple filtering OR&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, !Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;))              # filtering NOT&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, grepl(&amp;quot;A&amp;quot;, Name))                    # grepl function&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summarize&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summarize&lt;/h2&gt;
+&lt;p&gt;summarize(df, avg = mean(Age), m = median(Age))&lt;/p&gt;
+&lt;p&gt;summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function&lt;/p&gt;
+&lt;p&gt;summarise summarize_all # Allply funs to every column summarize_at # Apply funs to specific columns summarize_if # Apply funs to all cols of one type&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sort&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sort&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, Age)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1
+## 3  15    B      0
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, desc(Age))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0
+## 3  10    A      1
+## 4  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, Age, Name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1
+## 3  15    B      0
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;group_by(df, Age, Name) # ???&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 3
+## # Groups:   Age, Name [3]
+##     Age Name  Gender
+##   &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &amp;lt;dbl&amp;gt;
+## 1    10 A          1
+## 2    15 B          0
+## 3    10 C          1
+## 4    15 B          0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pipes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pipes&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(Age, Name) %&amp;gt;% arrange(Age) %&amp;gt;% filter(Name %in% c(&amp;#39;C&amp;#39;,&amp;#39;B&amp;#39;)) %&amp;gt;% distinct() # select columns and sort by and select rows and remove duplicated rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name
+## 1  10    C
+## 2  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;combine-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Combine data&lt;/h2&gt;
+&lt;p&gt;intersect(x, y) # Rows that appear in both x and y. union(x, y) # Rows that appear in either or both x and y. setdiff(x, y) # Rows that appear in x but not y.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-is-a-common-variable-primary-key-to-join-by.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;‘by’ is a common variable (primary key) to join by.&lt;/h2&gt;
+&lt;p&gt;inner_join(x, y, by = ) left_join(x, y, by = ) right_join(x, y, by = ) full_join(x, y, by = ) semi_join(x, y, by = ) anti_join(x, y, by = )&lt;/p&gt;
+&lt;p&gt;if_else(condition, true, false, missing = NULL) mydf =data.frame(x = c(1:5,NA))&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;nested-if_else&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Nested If_Else&lt;/h1&gt;
+&lt;p&gt;mydf %&amp;gt;% mutate(newvar= if_else(is.na(x),“I am missing”, if_else(x==1,“I am one”, if_else(x==2,“I am two”, if_else(x==3,“I am three”,“Others”))))) #TODO bind_rows() bind_cols() ntile()&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;if-family-of-functions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;if() Family of Functions&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;todo&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;TODO&lt;/h1&gt;
+&lt;p&gt;select_if mutate_if pull()&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;vectorize-functions-to-columns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Vectorize functions to columns&lt;/h1&gt;
+&lt;p&gt;mutate transmute mutate_all mutate_at add_column rename&lt;/p&gt;
+&lt;div id=&#34;how-to&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to …&lt;/h2&gt;
+&lt;div id=&#34;convert-empty-spaces-to-na&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Convert empty spaces to NA&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;d&amp;quot;)
+df %&amp;gt;% na_if(&amp;quot;&amp;quot;)              # &amp;quot;a&amp;quot; &amp;quot;b&amp;quot; NA  &amp;quot;d&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot; &amp;quot;b&amp;quot; NA  &amp;quot;d&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;randomly-select-n-rows&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Randomly select n rows&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- data.frame(A=seq(1:10), B=seq(.1,1,.1))
+df %&amp;gt;% sample_frac(size=0.3)   # Randomly select fraction of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    A   B
+## 1  2 0.2
+## 2  9 0.9
+## 3 10 1.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sample_n(df, size, …) # Randomly select size rows slice(df # select rows by position&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -12,9 +12,22 @@ output:
   toc: true
 summary: "Exploratory analysis in R."
 ---
-## View data
-Here you can find several R functions which can help to see the structure of your data.  
 
+## Example 1: Iris
+**Data description**: Iris is a famous (Fisher's or Anderson's) data set gives the measurements in centimeters of the variables **sepal** length and width and **petal** length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris **setosa**, **versicolor**, and **virginica**.  
+
+## Structure of the data
+```{r}
+# select numerical columns 1-4
+df = iris[1:4]
+
+head(df, n=5) # first rows
+tail(df, n=5) # last rows
+dim(df)       # data dimention
+nrow(df)      # number of rows
+ncol(df)      # number of columns
+str(df)  
+```
 
 ## Correlation between variables
 
@@ -23,15 +36,10 @@ Let's find if data in columns are correlated using `corrplot`.
 ```{r}
 library(corrplot)
 
-# select numerical columns 1-4
-df = iris[1:4]
-
 # build correlation matrix 
 cor.mx <- cor(df)
-
 # correlation plot ordered correlation coefficients
 corrplot::corrplot.mixed(cor.mx, order="hclust")
-               
 ```
 ```{r, message=F}
 print(cor.mx)
@@ -47,15 +55,22 @@ control <- caret::trainControl(method="repeatedcv", number=10, repeats=3)
 ```
 How to show correlation table? Alternatively we can use `corrplot` with `method = "number"`.   
 
+Missing data
+How to remove 'NA', 'Inf', and '0'
+```{r}
+colSums(sapply(df, is.na))
+```
 
+```{r}
+# Scatterplot Matrices
+pairs(iris[, -5], bg = c("yellow", "green", "black")[iris$Species], pch = 21)
+```
 How to choose variables with the best correlation? Can we sort them by importance?
 
 Can we exclude data based on low correlation?
 This can be also done by dimentionality reduction methods such as [PCA](/posts/statistics/pca/pca/).  
 
 Can we remove outliers
-
-How to remove 'NA', 'Inf', and '0' 
 
 Do we need to remove duplicated data (rows, columns)
 

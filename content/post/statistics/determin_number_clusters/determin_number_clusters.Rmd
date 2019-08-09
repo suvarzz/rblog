@@ -1,0 +1,104 @@
+---
+title: "Determining the optimal number of clusters"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Clustering"]
+categories: ["R", "Statistics" ]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+## Elbow method
+The basic idea is to find **minimal the total intra-cluster variation** or **total Within-cluster Sum ofSquares** (WSS).  
+Plot number of clusters ~ *WSS* show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn't improve much better the total WSS.  
+The optimal number of clusters can be defined as follow:  
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)  
+2. For each k calculate the total within-cluster sum of squares (wss).  
+3. Plot k ~ wss
+4. The location of a bend (knee) in the plot is generally considered as an indicator of the optimal number of clusters.  
+
+## Average silhouette method
+**Average silhouette method determines how well each object lies within its cluster. A high average silhouette width indicates a good clustering.  
+The optimal number of clusters is detected by maximal the average slhouette.  
+
+The optimal number of clusters can be defined as follow:  
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)  
+2. For each k, calculate the average silhouette of observations (aso).  
+3. Plot k ~ aso  
+4. The location of the maximum is considered as the optimal number of clusters.  
+
+## Gap statistic method
+The **gap statistic** compares the **total within intra-cluster variation** for different values of k with their expected values under null reference distribution of the data. The estimate of the optimal clusters will be value that maximize the gap statistic (i.e, that yields the largest gap statistic).  
+
+```{r, message=F}
+library(factoextra)
+
+# normalized data
+df <- scale(iris[, -5])
+head(df)
+
+# Elbow method
+fviz_nbclust(df, kmeans, method = "wss") +
+    labs(subtitle = "Elbow method")
+
+# Silhouette method
+fviz_nbclust(df, kmeans, method = "silhouette")+
+    labs(subtitle = "Silhouette method")
+
+# Gap statistic
+set.seed(123)
+fviz_nbclust(df, kmeans, nstart = 25,  method = "gap_stat", nboot = 50)+
+  labs(subtitle = "Gap statistic method")
+```
+As we can see from these examples, the **Elbow method** predicts 2-3 clusters, **Silhouette method** predicts 2 and the **Gap statistic method** predicts 2 clusters. As we know, `iris` data contains 3 clusters of different `Species` and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.  
+
+## Using NbCLust
+```{r, message=F}
+library(NbClust)
+res <- NbClust(data = df,                 # matrix or data frame
+               distance = "euclidean",    # distance
+               method = "kmeans",        # method
+               min.nc = 2, max.nc = 10)   # min and max number of clusters to test
+res$Best.nc[,1:5]
+```
+```{r}
+# Example with iris data
+data <- iris[, -5]
+# distance matrix
+diss_matrix <-  dist(data, method = "euclidean") # here method is the distance method
+res <- NbClust(data,                    # matrix or data frame
+               diss = diss_matrix,      # distance matrix
+               distance = NULL,         # if set, diss musnt be NULL
+               min.nc = 2, max.nc = 10, # min and max number of clusters to test
+               method = "complete",     # clustering method
+               index = "alllong")       # all indexes; can be selected
+```
+```{r, message=F}
+# indeces first 5 methods
+head(res$All.index[,1:7])
+
+# optimal number of clusters
+best.result <- t(res$Best.nc)
+best.result
+
+# density plot of all best results
+library(magrittr)
+best.result %>%
+  .[,1] %>%
+  na.omit() %>%
+  as.vector() %>%
+  density(.) %>% 
+  plot(., xlab='k, klusters', main='Optimal number of clusters')
+```
+
+Es we can see the most of methods predict k=3 for clustering `iris` data.  
+If you try k-means method, you will get optimal between 2 and 3.  
+
+
+## Sources
+* [Cluster Validataion Essentials by Alboukadel Kassambara](https://www.datanovia.com/en/lessons/determining-the-optimal-number-of-clusters-3-must-know-methods/)  
+* [Tibshirani R at al. Estimating the number of clusters in a data set via the gap statistic. J.R.Statist.Soc.B, 2001](http://web.stanford.edu/~hastie/Papers/gap.pdf)  
+* [NbClust: An R Package for Determining the Relevant Number of Clusters in a Data] Set(https://cran.r-project.org/web/packages/NbClust/NbClust.pdf)  

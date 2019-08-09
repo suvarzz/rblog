@@ -1,0 +1,210 @@
+---
+title: "Determining the optimal number of clusters"
+author: "Mark Goldberg"
+date: '2019-08-09'
+draft: false
+math: true
+tags: ["R", "Clustering"]
+categories: ["R", "Statistics" ]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#elbow-method">Elbow method</a></li>
+<li><a href="#average-silhouette-method">Average silhouette method</a></li>
+<li><a href="#gap-statistic-method">Gap statistic method</a></li>
+<li><a href="#using-nbclust">Using NbCLust</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+
+<div id="elbow-method" class="section level2">
+<h2>Elbow method</h2>
+<p>The basic idea is to find <strong>minimal the total intra-cluster variation</strong> or <strong>total Within-cluster Sum ofSquares</strong> (WSS).<br />
+Plot number of clusters ~ <em>WSS</em> show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn’t improve much better the total WSS.<br />
+The optimal number of clusters can be defined as follow:<br />
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)<br />
+2. For each k calculate the total within-cluster sum of squares (wss).<br />
+3. Plot k ~ wss 4. The location of a bend (knee) in the plot is generally considered as an indicator of the optimal number of clusters.</p>
+</div>
+<div id="average-silhouette-method" class="section level2">
+<h2>Average silhouette method</h2>
+<p>**Average silhouette method determines how well each object lies within its cluster. A high average silhouette width indicates a good clustering.<br />
+The optimal number of clusters is detected by maximal the average slhouette.</p>
+<p>The optimal number of clusters can be defined as follow:<br />
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)<br />
+2. For each k, calculate the average silhouette of observations (aso).<br />
+3. Plot k ~ aso<br />
+4. The location of the maximum is considered as the optimal number of clusters.</p>
+</div>
+<div id="gap-statistic-method" class="section level2">
+<h2>Gap statistic method</h2>
+<p>The <strong>gap statistic</strong> compares the <strong>total within intra-cluster variation</strong> for different values of k with their expected values under null reference distribution of the data. The estimate of the optimal clusters will be value that maximize the gap statistic (i.e, that yields the largest gap statistic).</p>
+<pre class="r"><code>library(factoextra)
+
+# normalized data
+df &lt;- scale(iris[, -5])
+head(df)</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width
+## [1,]   -0.8976739  1.01560199    -1.335752   -1.311052
+## [2,]   -1.1392005 -0.13153881    -1.335752   -1.311052
+## [3,]   -1.3807271  0.32731751    -1.392399   -1.311052
+## [4,]   -1.5014904  0.09788935    -1.279104   -1.311052
+## [5,]   -1.0184372  1.24503015    -1.335752   -1.311052
+## [6,]   -0.5353840  1.93331463    -1.165809   -1.048667</code></pre>
+<pre class="r"><code># Elbow method
+fviz_nbclust(df, kmeans, method = &quot;wss&quot;) +
+    labs(subtitle = &quot;Elbow method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code># Silhouette method
+fviz_nbclust(df, kmeans, method = &quot;silhouette&quot;)+
+    labs(subtitle = &quot;Silhouette method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code># Gap statistic
+set.seed(123)
+fviz_nbclust(df, kmeans, nstart = 25,  method = &quot;gap_stat&quot;, nboot = 50)+
+  labs(subtitle = &quot;Gap statistic method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png" width="672" /> As we can see from these examples, the <strong>Elbow method</strong> predicts 2-3 clusters, <strong>Silhouette method</strong> predicts 2 and the <strong>Gap statistic method</strong> predicts 2 clusters. As we know, <code>iris</code> data contains 3 clusters of different <code>Species</code> and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.</p>
+</div>
+<div id="using-nbclust" class="section level2">
+<h2>Using NbCLust</h2>
+<pre class="r"><code>library(NbClust)
+res &lt;- NbClust(data = df,                 # matrix or data frame
+               distance = &quot;euclidean&quot;,    # distance
+               method = &quot;kmeans&quot;,        # method
+               min.nc = 2, max.nc = 10)   # min and max number of clusters to test</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre><code>## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## </code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre><code>## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 11 proposed 2 as the best number of clusters 
+## * 10 proposed 3 as the best number of clusters 
+## * 1 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 1 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  2 
+##  
+##  
+## *******************************************************************</code></pre>
+<pre class="r"><code>res$Best.nc[,1:5]</code></pre>
+<pre><code>##                     KL       CH Hartigan    CCC    Scott
+## Number_clusters 3.0000   2.0000   3.0000 3.0000   3.0000
+## Value_Index     5.1669 251.3493  54.2213 5.1886 131.6411</code></pre>
+<pre class="r"><code># Example with iris data
+data &lt;- iris[, -5]
+# distance matrix
+diss_matrix &lt;-  dist(data, method = &quot;euclidean&quot;) # here method is the distance method
+res &lt;- NbClust(data,                    # matrix or data frame
+               diss = diss_matrix,      # distance matrix
+               distance = NULL,         # if set, diss musnt be NULL
+               min.nc = 2, max.nc = 10, # min and max number of clusters to test
+               method = &quot;complete&quot;,     # clustering method
+               index = &quot;alllong&quot;)       # all indexes; can be selected</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre><code>## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## </code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre><code>## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 2 proposed 2 as the best number of clusters 
+## * 15 proposed 3 as the best number of clusters 
+## * 6 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 3 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  3 
+##  
+##  
+## *******************************************************************</code></pre>
+<pre class="r"><code># indeces first 5 methods
+head(res$All.index[,1:7])</code></pre>
+<pre><code>##        KL       CH Hartigan     CCC     Scott  Marriot    TrCovW
+## 2  1.9652 280.8392 240.7478 30.4441  933.9084 977604.0 6868.5401
+## 3  5.3598 485.9050  68.8363 35.8668 1210.7629 347351.8  304.1791
+## 4 54.0377 495.1816  16.4167 35.6036 1346.7582 249402.3  135.7432
+## 5  0.0263 414.3925  51.1371 33.0698 1387.9419 296129.2  121.5044
+## 6  7.1653 455.4931  16.8076 33.9870 1506.5585 193380.9   96.9908
+## 7  0.5308 423.7198  20.2960 32.9063 1560.0089 184311.4   93.2005</code></pre>
+<pre class="r"><code># optimal number of clusters
+best.result &lt;- t(res$Best.nc)
+best.result</code></pre>
+<pre><code>##            Number_clusters Value_Index
+## KL                       4     54.0377
+## CH                       4    495.1816
+## Hartigan                 3    171.9115
+## CCC                      3     35.8668
+## Scott                    3    276.8545
+## Marriot                  3 532302.6940
+## TrCovW                   3   6564.3610
+## TraceW                   3    117.0760
+## Friedman                 4    151.3607
+## Rubin                    6    -33.9014
+## Cindex                   3      0.3163
+## DB                       3      0.7025
+## Silhouette               2      0.5160
+## Duda                     4      0.5932
+## PseudoT2                 4     32.9134
+## Beale                    3      1.8840
+## Ratkowsky                3      0.4922
+## Ball                     3     87.7349
+## PtBiserial               3      0.7203
+## Gap                      3      0.1343
+## Frey                     1          NA
+## McClain                  2      0.4228
+## Gamma                    4      0.9261
+## Gplus                   10     52.7862
+## Tau                      3   2649.8405
+## Dunn                    10      0.1543
+## Hubert                   0      0.0000
+## SDindex                  3      1.6226
+## Dindex                   0      0.0000
+## SDbw                    10      0.0303</code></pre>
+<pre class="r"><code># density plot of all best results
+library(magrittr)
+best.result %&gt;%
+  .[,1] %&gt;%
+  na.omit() %&gt;%
+  as.vector() %&gt;%
+  density(.) %&gt;% 
+  plot(., xlab=&#39;k, klusters&#39;, main=&#39;Optimal number of clusters&#39;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Es we can see the most of methods predict k=3 for clustering <code>iris</code> data.<br />
+If you try k-means method, you will get optimal between 2 and 3.</p>
+</div>
+<div id="sources" class="section level2">
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.datanovia.com/en/lessons/determining-the-optimal-number-of-clusters-3-must-know-methods/">Cluster Validataion Essentials by Alboukadel Kassambara</a><br />
+</li>
+<li><a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">Tibshirani R at al. Estimating the number of clusters in a data set via the gap statistic. J.R.Statist.Soc.B, 2001</a><br />
+</li>
+<li>[NbClust: An R Package for Determining the Relevant Number of Clusters in a Data] Set(<a href="https://cran.r-project.org/web/packages/NbClust/NbClust.pdf" class="uri">https://cran.r-project.org/web/packages/NbClust/NbClust.pdf</a>)</li>
+</ul>
+</div>

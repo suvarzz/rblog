@@ -2,7 +2,7 @@
 title: "ANOVA"
 author: "Mark Goldberg"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-draft: true
+draft: false
 math: true
 tags: ["R"]
 categories: ["R"]

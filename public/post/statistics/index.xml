@@ -5,7 +5,7 @@
     <link>/post/statistics/</link>
       <atom:link href="/post/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Math</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Math</title>
@@ -180,6 +180,738 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>ANOVA</title>
+      <link>/post/statistics/anova/anova/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/anova/anova/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#one-way-anova&#34;&gt;One-way ANOVA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;one-way-anova&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;One-way ANOVA&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;variance&lt;/strong&gt; = SS/df, where SS - sum of squares and df - degree of freedom&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(SS = \displaystyle\sum_{i=1}^{n}{(x_i - \mu)^2}\)&lt;/span&gt;, where&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; is the sample &lt;strong&gt;mean&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;n&lt;/strong&gt; is the sample &lt;strong&gt;size&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(x) = \frac{1}{n}{\displaystyle\sum_{i=1}^{n}{(x_i - \mu)^2}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;3 groups of students with scores (1-100):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a = c(82,93,61,74,69,70,53)
+b = c(71,62,85,94,78,66,71)
+c = c(64,73,87,91,56,78,87)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;SST = SSE + SSC = W + B, where&lt;br /&gt;
+SST - Total Sum of Squares&lt;br /&gt;
+SSE - Error Sum of Squares - within (W)&lt;br /&gt;
+SSC - Sum of Squares Columns (treatmens) - between (B)&lt;/p&gt;
+&lt;p&gt;C - columns (treatments)&lt;br /&gt;
+N - total number of observations&lt;/p&gt;
+&lt;p&gt;Mean squared of columns - MSC = SSC/df_columns, where df_columns = C-1&lt;br /&gt;
+Mean squared of error - MSE = SSE/df_error, where df_error = N-C&lt;br /&gt;
+Sum of squares (total) - SST, where df_total = N-1 F-statistics - F = MSC/MSE&lt;/p&gt;
+&lt;p&gt;Let’s calculate degree of freedom for our example:&lt;br /&gt;
+df_columns = 3-1 = 2, MSC = SSC/2&lt;br /&gt;
+df_error = 21-3 = 18, MSE = SSE/18&lt;br /&gt;
+df_total = 21-1 = 20&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a = c(82,93,61,74,69,70,53)
+b = c(71,62,85,94,78,66,71)
+c = c(64,73,87,91,56,78,87)
+sq = function(x) { sum((x - mean(x))^2) }
+sq(a)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1039.429&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sq(b)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 751.4286&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sq(c)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1021.714&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using R packages:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data
+# Number of calories consumed by month:
+may &amp;lt;- c(2166, 1568, 2233, 1882, 2019)
+sep &amp;lt;- c(2279, 2075, 2131, 2009, 1793)
+dec &amp;lt;- c(2226, 2154, 2583, 2010, 2190)
+
+d &amp;lt;- stack(list(may=may, sep=sep, dec=dec))
+d&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    values ind
+## 1    2166 may
+## 2    1568 may
+## 3    2233 may
+## 4    1882 may
+## 5    2019 may
+## 6    2279 sep
+## 7    2075 sep
+## 8    2131 sep
+## 9    2009 sep
+## 10   1793 sep
+## 11   2226 dec
+## 12   2154 dec
+## 13   2583 dec
+## 14   2010 dec
+## 15   2190 dec&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;names(d)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;values&amp;quot; &amp;quot;ind&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;oneway.test(values ~ ind, data=d, var.equal=TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  One-way analysis of means
+## 
+## data:  values and ind
+## F = 1.7862, num df = 2, denom df = 12, p-value = 0.2094&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# alternative using aov
+res &amp;lt;- aov(values ~ ind, data = d)
+res&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Call:
+##    aov(formula = values ~ ind, data = d)
+## 
+## Terms:
+##                      ind Residuals
+## Sum of Squares  174664.1  586719.6
+## Deg. of Freedom        2        12
+## 
+## Residual standard error: 221.1183
+## Estimated effects may be unbalanced&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(res)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             Df Sum Sq Mean Sq F value Pr(&amp;gt;F)
+## ind          2 174664   87332   1.786  0.209
+## Residuals   12 586720   48893&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Sources&lt;/h1&gt;
+&lt;p&gt;Example for one-way ANOVA: &lt;a href=&#34;https://www.youtube.com/playlist?list=PLIeGtxpvyG-KA-BLkL391X__r0kU4_hm5&#34;&gt;youtube&lt;/a&gt; by Brandon Foltz&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Determining the optimal number of clusters</title>
+      <link>/post/statistics/determin_number_clusters/determin_number_clusters/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#elbow-method&#34;&gt;Elbow method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#average-silhouette-method&#34;&gt;Average silhouette method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gap-statistic-method&#34;&gt;Gap statistic method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#using-nbclust&#34;&gt;Using NbCLust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;elbow-method&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Elbow method&lt;/h2&gt;
+&lt;p&gt;The basic idea is to find &lt;strong&gt;minimal the total intra-cluster variation&lt;/strong&gt; or &lt;strong&gt;total Within-cluster Sum ofSquares&lt;/strong&gt; (WSS).&lt;br /&gt;
+Plot number of clusters ~ &lt;em&gt;WSS&lt;/em&gt; show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn’t improve much better the total WSS.&lt;br /&gt;
+The optimal number of clusters can be defined as follow:&lt;br /&gt;
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)&lt;br /&gt;
+2. For each k calculate the total within-cluster sum of squares (wss).&lt;br /&gt;
+3. Plot k ~ wss 4. The location of a bend (knee) in the plot is generally considered as an indicator of the optimal number of clusters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;average-silhouette-method&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Average silhouette method&lt;/h2&gt;
+&lt;p&gt;**Average silhouette method determines how well each object lies within its cluster. A high average silhouette width indicates a good clustering.&lt;br /&gt;
+The optimal number of clusters is detected by maximal the average slhouette.&lt;/p&gt;
+&lt;p&gt;The optimal number of clusters can be defined as follow:&lt;br /&gt;
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)&lt;br /&gt;
+2. For each k, calculate the average silhouette of observations (aso).&lt;br /&gt;
+3. Plot k ~ aso&lt;br /&gt;
+4. The location of the maximum is considered as the optimal number of clusters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gap-statistic-method&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Gap statistic method&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;gap statistic&lt;/strong&gt; compares the &lt;strong&gt;total within intra-cluster variation&lt;/strong&gt; for different values of k with their expected values under null reference distribution of the data. The estimate of the optimal clusters will be value that maximize the gap statistic (i.e, that yields the largest gap statistic).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(factoextra)
+
+# normalized data
+df &amp;lt;- scale(iris[, -5])
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      Sepal.Length Sepal.Width Petal.Length Petal.Width
+## [1,]   -0.8976739  1.01560199    -1.335752   -1.311052
+## [2,]   -1.1392005 -0.13153881    -1.335752   -1.311052
+## [3,]   -1.3807271  0.32731751    -1.392399   -1.311052
+## [4,]   -1.5014904  0.09788935    -1.279104   -1.311052
+## [5,]   -1.0184372  1.24503015    -1.335752   -1.311052
+## [6,]   -0.5353840  1.93331463    -1.165809   -1.048667&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Elbow method
+fviz_nbclust(df, kmeans, method = &amp;quot;wss&amp;quot;) +
+    labs(subtitle = &amp;quot;Elbow method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Silhouette method
+fviz_nbclust(df, kmeans, method = &amp;quot;silhouette&amp;quot;)+
+    labs(subtitle = &amp;quot;Silhouette method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Gap statistic
+set.seed(123)
+fviz_nbclust(df, kmeans, nstart = 25,  method = &amp;quot;gap_stat&amp;quot;, nboot = 50)+
+  labs(subtitle = &amp;quot;Gap statistic method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;using-nbclust&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Using NbCLust&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(NbClust)
+res &amp;lt;- NbClust(data = df,                 # matrix or data frame
+               distance = &amp;quot;euclidean&amp;quot;,    # distance
+               method = &amp;quot;kmeans&amp;quot;,        # method
+               min.nc = 2, max.nc = 10)   # min and max number of clusters to test&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 11 proposed 2 as the best number of clusters 
+## * 10 proposed 3 as the best number of clusters 
+## * 1 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 1 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  2 
+##  
+##  
+## *******************************************************************&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;res$Best.nc[,1:5]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                     KL       CH Hartigan    CCC    Scott
+## Number_clusters 3.0000   2.0000   3.0000 3.0000   3.0000
+## Value_Index     5.1669 251.3493  54.2213 5.1886 131.6411&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Example with iris data
+data &amp;lt;- iris[, -5]
+# distance matrix
+diss_matrix &amp;lt;-  dist(data, method = &amp;quot;euclidean&amp;quot;) # here method is the distance method
+res &amp;lt;- NbClust(data,                    # matrix or data frame
+               diss = diss_matrix,      # distance matrix
+               distance = NULL,         # if set, diss musnt be NULL
+               min.nc = 2, max.nc = 10, # min and max number of clusters to test
+               method = &amp;quot;complete&amp;quot;,     # clustering method
+               index = &amp;quot;alllong&amp;quot;)       # all indexes; can be selected&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 2 proposed 2 as the best number of clusters 
+## * 15 proposed 3 as the best number of clusters 
+## * 6 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 3 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  3 
+##  
+##  
+## *******************************************************************&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# indeces first 5 methods
+head(res$All.index[,1:7])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        KL       CH Hartigan     CCC     Scott  Marriot    TrCovW
+## 2  1.9652 280.8392 240.7478 30.4441  933.9084 977604.0 6868.5401
+## 3  5.3598 485.9050  68.8363 35.8668 1210.7629 347351.8  304.1791
+## 4 54.0377 495.1816  16.4167 35.6036 1346.7582 249402.3  135.7432
+## 5  0.0263 414.3925  51.1371 33.0698 1387.9419 296129.2  121.5044
+## 6  7.1653 455.4931  16.8076 33.9870 1506.5585 193380.9   96.9908
+## 7  0.5308 423.7198  20.2960 32.9063 1560.0089 184311.4   93.2005&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# optimal number of clusters
+best.result &amp;lt;- t(res$Best.nc)
+best.result&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            Number_clusters Value_Index
+## KL                       4     54.0377
+## CH                       4    495.1816
+## Hartigan                 3    171.9115
+## CCC                      3     35.8668
+## Scott                    3    276.8545
+## Marriot                  3 532302.6940
+## TrCovW                   3   6564.3610
+## TraceW                   3    117.0760
+## Friedman                 4    151.3607
+## Rubin                    6    -33.9014
+## Cindex                   3      0.3163
+## DB                       3      0.7025
+## Silhouette               2      0.5160
+## Duda                     4      0.5932
+## PseudoT2                 4     32.9134
+## Beale                    3      1.8840
+## Ratkowsky                3      0.4922
+## Ball                     3     87.7349
+## PtBiserial               3      0.7203
+## Gap                      3      0.1343
+## Frey                     1          NA
+## McClain                  2      0.4228
+## Gamma                    4      0.9261
+## Gplus                   10     52.7862
+## Tau                      3   2649.8405
+## Dunn                    10      0.1543
+## Hubert                   0      0.0000
+## SDindex                  3      1.6226
+## Dindex                   0      0.0000
+## SDbw                    10      0.0303&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# density plot of all best results
+library(magrittr)
+best.result %&amp;gt;%
+  .[,1] %&amp;gt;%
+  na.omit() %&amp;gt;%
+  as.vector() %&amp;gt;%
+  density(.) %&amp;gt;% 
+  plot(., xlab=&amp;#39;k, klusters&amp;#39;, main=&amp;#39;Optimal number of clusters&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Es we can see the most of methods predict k=3 for clustering &lt;code&gt;iris&lt;/code&gt; data.&lt;br /&gt;
+If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.datanovia.com/en/lessons/determining-the-optimal-number-of-clusters-3-must-know-methods/&#34;&gt;Cluster Validataion Essentials by Alboukadel Kassambara&lt;/a&gt;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://web.stanford.edu/~hastie/Papers/gap.pdf&#34;&gt;Tibshirani R at al. Estimating the number of clusters in a data set via the gap statistic. J.R.Statist.Soc.B, 2001&lt;/a&gt;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;[NbClust: An R Package for Determining the Relevant Number of Clusters in a Data] Set(&lt;a href=&#34;https://cran.r-project.org/web/packages/NbClust/NbClust.pdf&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/web/packages/NbClust/NbClust.pdf&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dplyr tutorial</title>
+      <link>/post/statistics/dplyr_tutorial/dplyr_tutorial/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/dplyr_tutorial/dplyr_tutorial/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#short-summary&#34;&gt;Short summary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#adding-rows-and-columns&#34;&gt;Adding rows and columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#remove-duplicates&#34;&gt;Remove duplicates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#select&#34;&gt;Select&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#filter-rows&#34;&gt;Filter rows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summarize&#34;&gt;Summarize&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sort&#34;&gt;Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pipes&#34;&gt;Pipes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#combine-data&#34;&gt;Combine data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#by-is-a-common-variable-primary-key-to-join-by.&#34;&gt;‘by’ is a common variable (primary key) to join by.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nested-if_else&#34;&gt;Nested If_Else&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#if-family-of-functions&#34;&gt;if() Family of Functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#todo&#34;&gt;TODO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vectorize-functions-to-columns&#34;&gt;Vectorize functions to columns&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to&#34;&gt;How to …&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#convert-empty-spaces-to-na&#34;&gt;Convert empty spaces to NA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#randomly-select-n-rows&#34;&gt;Randomly select n rows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;short-summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Short summary&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select data
+df %&amp;gt;% select(A, B)          # select fields
+df %&amp;gt;% select(-B, -B)        # exclude fields
+df %&amp;gt;% select(-c(A, B))      # select multiple fields
+df %&amp;gt;% select(starts_with(&amp;#39;a&amp;#39;))      # select by names of fields starting with ...
+df %&amp;gt;% select(-starts_with(&amp;#39;a&amp;#39;))        # exclude by names of fields starting with ...
+df %&amp;gt;% select(contains(&amp;#39;ab&amp;#39;))           # select by names of fields contains a literal string
+df %&amp;gt;% select(ends_with(&amp;#39;r&amp;#39;))           # Ends with a prefix
+          # matches()   Matches a regular expression
+          # num_range() Numerical range like x01, x02, x03.
+          # one_of()    Variables in character vector.
+          # everything()    All variables.
+df %&amp;gt;% select(A, everything())        # reorder variables, that A will be in the 1st column
+df %&amp;gt;% select(C, B, A, everything())  # reordrer columns
+df %&amp;gt;% select(C, B, A)                # the same as previous
+
+# Filter rows
+
+filter(df, A==1)
+filter(df, A&amp;gt;1)
+filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))
+filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;) &amp;amp; C &amp;gt; 1)     # multiple filtering AND
+filter(df, Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;) | C == 1)   # multiple filtering OR
+filter(df, !Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;))           # filtering NOT
+filter(df, grepl(&amp;quot;A&amp;quot;, Name))    
+
+# Adding rows and columns
+df %&amp;gt;% mutate(mycol = NA)     # Add column &amp;#39;mycol&amp;#39; filled with &amp;#39;NA&amp;#39;
+df %&amp;gt;% mutate(mycol = A*B)     # Add column &amp;#39;mycol&amp;#39; as A*B
+df=data.frame(A=c(1,2), B=c(3,4))
+df %&amp;gt;% cbind(mycol = NA)
+df %&amp;gt;% rbind(myrow = NA)      # add &amp;#39;myrow&amp;#39; filled &amp;#39;NA&amp;#39;
+
+# Remove duplicates
+df %&amp;gt;% distinct()                       # remove duplicated rows
+df %&amp;gt;% distinct(A, .keep_all=TRUE)      # remove rows when field &amp;#39;A&amp;#39; is duplicated
+df %&amp;gt;% distinct(A, B, .keep_all=TRUE)   # remove rows when several fields at the same row are duplicated
+
+# Compair data
+all_equal(x,y)      # compair two data frames
+
+# Combine data
+intersect(x, y)     # Rows that appear in both x and y.
+union(x, y)         # Rows that appear in either or both x and y.
+setdiff(x, y)       # Rows that appear in x but not y.
+
+# Sort
+arrange(df, A)           # Sort rows by A column
+arrange(df, desc(A))     # Sort by descendence of values in column A
+arrange(df, A, B)        # Sort by A &amp;amp; B
+
+group_by(df, A, B)
+
+inner_join(x, y, by = )
+left_join(x, y, by = )
+right_join(x, y, by = )
+full_join(x, y, by = )
+semi_join(x, y, by = )
+anti_join(x, y, by = )
+
+# Miscellaneous
+df %&amp;gt;% na_if(&amp;quot;&amp;quot;)            # Convert empty spaces to &amp;#39;NA&amp;#39;
+sample_frac(df, size=0.8)   # Randomly select fraction of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# toy data
+df &amp;lt;- data.frame(&amp;quot;Age&amp;quot; = c(10,15,10,15), &amp;quot;Name&amp;quot; = c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;, &amp;quot;C&amp;quot;, &amp;quot;B&amp;quot;), &amp;quot;Gender&amp;quot;=c(1,0,1,0))
+df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;adding-rows-and-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Adding rows and columns&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% mutate(N = NA)    # add new last column &amp;#39;N&amp;#39; filled NA&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender  N
+## 1  10    A      1 NA
+## 2  15    B      0 NA
+## 3  10    C      1 NA
+## 4  15    B      0 NA&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% rbind(N = NA)     # add new last row &amp;#39;N&amp;#39; filled &amp;#39;NA&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0
+## 5  NA &amp;lt;NA&amp;gt;     NA&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;remove-duplicates&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Remove duplicates&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct()                                # remove duplicated rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct(Age, .keep_all=TRUE)             # remove rows when field &amp;#39;Age&amp;#39; is duplicated&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% distinct(Age, Gender, .keep_all=TRUE)     # remove rows when fields &amp;#39;A&amp;#39; &amp;amp; &amp;#39;B&amp;#39; are duplicated&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;select&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Select&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(Name, Gender)          # select fields&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Name Gender
+## 1    A      1
+## 2    B      0
+## 3    C      1
+## 4    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(-Name, -Gender)        # exclude fields&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(-c(Name, Gender))      # same as privious&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(starts_with(&amp;quot;A&amp;quot;))      # select names of fields: A -&amp;gt; Age&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age
+## 1  10
+## 2  15
+## 3  10
+## 4  15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, -starts_with(&amp;quot;A&amp;quot;))        # select all except A -&amp;gt; Age&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Name Gender
+## 1    A      1
+## 2    B      0
+## 3    C      1
+## 4    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, contains(&amp;quot;G&amp;quot;))            # Contains a literal string&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Gender
+## 1  10      1
+## 2  15      0
+## 3  10      1
+## 4  15      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, ends_with(&amp;quot;r&amp;quot;))           # Ends with a prefix&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender
+## 1      1
+## 2      0
+## 3      1
+## 4      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;          # matches()   Matches a regular expression
+          # num_range() Numerical range like x01, x02, x03.
+          # one_of()    Variables in character vector.
+          # everything()    All variables.
+select(df, Age, everything())        # reorder variables, that Age will be in the 1st column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, Gender, Age, Name, everything()) # reordrer columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender Age Name
+## 1      1  10    A
+## 2      0  15    B
+## 3      1  10    C
+## 4      0  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;select(df, Gender, Age, Name)               # the same as previous&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Gender Age Name
+## 1      1  10    A
+## 2      0  15    B
+## 3      1  10    C
+## 4      0  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filter-rows&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Filter rows&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Gender==1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Age&amp;gt;10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;) &amp;amp; Age &amp;gt; 10)     # multiple filtering AND&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;) | Gender == 1) # multiple filtering OR&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  15    B      0
+## 3  10    C      1
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, !Name %in% c(&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;))              # filtering NOT&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(df, grepl(&amp;quot;A&amp;quot;, Name))                    # grepl function&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summarize&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summarize&lt;/h2&gt;
+&lt;p&gt;summarize(df, avg = mean(Age), m = median(Age))&lt;/p&gt;
+&lt;p&gt;summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function&lt;/p&gt;
+&lt;p&gt;summarise summarize_all # Allply funs to every column summarize_at # Apply funs to specific columns summarize_if # Apply funs to all cols of one type&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sort&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sort&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, Age)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1
+## 3  15    B      0
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, desc(Age))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  15    B      0
+## 2  15    B      0
+## 3  10    A      1
+## 4  10    C      1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;arrange(df, Age, Name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name Gender
+## 1  10    A      1
+## 2  10    C      1
+## 3  15    B      0
+## 4  15    B      0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;group_by(df, Age, Name) # ???&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 3
+## # Groups:   Age, Name [3]
+##     Age Name  Gender
+##   &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &amp;lt;dbl&amp;gt;
+## 1    10 A          1
+## 2    15 B          0
+## 3    10 C          1
+## 4    15 B          0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pipes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pipes&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% select(Age, Name) %&amp;gt;% arrange(Age) %&amp;gt;% filter(Name %in% c(&amp;#39;C&amp;#39;,&amp;#39;B&amp;#39;)) %&amp;gt;% distinct() # select columns and sort by and select rows and remove duplicated rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Age Name
+## 1  10    C
+## 2  15    B&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;combine-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Combine data&lt;/h2&gt;
+&lt;p&gt;intersect(x, y) # Rows that appear in both x and y. union(x, y) # Rows that appear in either or both x and y. setdiff(x, y) # Rows that appear in x but not y.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-is-a-common-variable-primary-key-to-join-by.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;‘by’ is a common variable (primary key) to join by.&lt;/h2&gt;
+&lt;p&gt;inner_join(x, y, by = ) left_join(x, y, by = ) right_join(x, y, by = ) full_join(x, y, by = ) semi_join(x, y, by = ) anti_join(x, y, by = )&lt;/p&gt;
+&lt;p&gt;if_else(condition, true, false, missing = NULL) mydf =data.frame(x = c(1:5,NA))&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;nested-if_else&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Nested If_Else&lt;/h1&gt;
+&lt;p&gt;mydf %&amp;gt;% mutate(newvar= if_else(is.na(x),“I am missing”, if_else(x==1,“I am one”, if_else(x==2,“I am two”, if_else(x==3,“I am three”,“Others”))))) #TODO bind_rows() bind_cols() ntile()&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;if-family-of-functions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;if() Family of Functions&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;todo&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;TODO&lt;/h1&gt;
+&lt;p&gt;select_if mutate_if pull()&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;vectorize-functions-to-columns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Vectorize functions to columns&lt;/h1&gt;
+&lt;p&gt;mutate transmute mutate_all mutate_at add_column rename&lt;/p&gt;
+&lt;div id=&#34;how-to&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to …&lt;/h2&gt;
+&lt;div id=&#34;convert-empty-spaces-to-na&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Convert empty spaces to NA&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;d&amp;quot;)
+df %&amp;gt;% na_if(&amp;quot;&amp;quot;)              # &amp;quot;a&amp;quot; &amp;quot;b&amp;quot; NA  &amp;quot;d&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot; &amp;quot;b&amp;quot; NA  &amp;quot;d&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;randomly-select-n-rows&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Randomly select n rows&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- data.frame(A=seq(1:10), B=seq(.1,1,.1))
+df %&amp;gt;% sample_frac(size=0.3)   # Randomly select fraction of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    A   B
+## 1  2 0.2
+## 2  9 0.9
+## 3 10 1.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sample_n(df, size, …) # Randomly select size rows slice(df # select rows by position&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exploratory analysis in R</title>
+      <link>/post/statistics/exploration/exploration/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/exploration/exploration/</guid>
+      <description>
+
+
+&lt;div id=&#34;example-1-iris&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Example 1: Iris&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Data description&lt;/strong&gt;: Iris is a famous (Fisher’s or Anderson’s) data set gives the measurements in centimeters of the variables &lt;strong&gt;sepal&lt;/strong&gt; length and width and &lt;strong&gt;petal&lt;/strong&gt; length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris &lt;strong&gt;setosa&lt;/strong&gt;, &lt;strong&gt;versicolor&lt;/strong&gt;, and &lt;strong&gt;virginica&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;structure-of-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Structure of the data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select numerical columns 1-4
+df = iris[1:4]
+
+head(df, n=5) # first rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1          5.1         3.5          1.4         0.2
+## 2          4.9         3.0          1.4         0.2
+## 3          4.7         3.2          1.3         0.2
+## 4          4.6         3.1          1.5         0.2
+## 5          5.0         3.6          1.4         0.2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tail(df, n=5) # last rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 146          6.7         3.0          5.2         2.3
+## 147          6.3         2.5          5.0         1.9
+## 148          6.5         3.0          5.2         2.0
+## 149          6.2         3.4          5.4         2.3
+## 150          5.9         3.0          5.1         1.8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dim(df)       # data dimention&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 150   4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nrow(df)      # number of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 150&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncol(df)      # number of columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)  &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    150 obs. of  4 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-between-variables&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Correlation between variables&lt;/h2&gt;
+&lt;p&gt;Let’s find if data in columns are correlated using &lt;code&gt;corrplot&lt;/code&gt;.&lt;br /&gt;
+&lt;a href=&#34;http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram&#34;&gt;Here&lt;/a&gt; you can find how to tune correlogram.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## corrplot 0.84 loaded&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# build correlation matrix 
+cor.mx &amp;lt;- cor(df)
+# correlation plot ordered correlation coefficients
+corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+# prepare training scheme
+control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
+#model &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, preProcess=&amp;quot;scale&amp;quot;, trControl=control)
+# estimate variable importance
+#importance &amp;lt;- varImp(model, scale=FALSE)
+# summarize importance
+#print(importance)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How to show correlation table? Alternatively we can use &lt;code&gt;corrplot&lt;/code&gt; with &lt;code&gt;method = &amp;quot;number&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Missing data How to remove ‘NA’, ‘Inf’, and ‘0’&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;colSums(sapply(df, is.na))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##            0            0            0            0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Scatterplot Matrices
+pairs(iris[, -5], bg = c(&amp;quot;yellow&amp;quot;, &amp;quot;green&amp;quot;, &amp;quot;black&amp;quot;)[iris$Species], pch = 21)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
+&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Can we remove outliers&lt;/p&gt;
+&lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filtering&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Filtering&lt;/h1&gt;
+&lt;p&gt;You can see how to filter and subset your data in folloing posts: 1.&lt;br /&gt;
+2.&lt;br /&gt;
+3.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Compare Models And Select The Best Using The Caret R Package</title>
       <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
@@ -260,63 +992,6 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://machinelearningmastery.com/compare-models-and-select-the-best-using-the-caret-r-package/&#34;&gt;Compare Models And Select The Best Using The Caret R Package&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Exploratory analysis in R</title>
-      <link>/post/statistics/exploration/exploration/</link>
-      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/exploration/exploration/</guid>
-      <description>
-
-
-&lt;div id=&#34;view-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;View data&lt;/h2&gt;
-&lt;p&gt;Here you can find several R functions which can help to see the structure of your data.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;correlation-between-variables&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Correlation between variables&lt;/h2&gt;
-&lt;p&gt;Let’s find if data in columns are correlated using &lt;code&gt;corrplot&lt;/code&gt;.&lt;br /&gt;
-&lt;a href=&#34;http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram&#34;&gt;Here&lt;/a&gt; you can find how to tune correlogram.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## corrplot 0.84 loaded&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select numerical columns 1-4
-df = iris[1:4]
-
-# build correlation matrix 
-cor.mx &amp;lt;- cor(df)
-
-# correlation plot ordered correlation coefficients
-corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
-## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
-## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
-## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
-## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
-# prepare training scheme
-control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
-#model &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, preProcess=&amp;quot;scale&amp;quot;, trControl=control)
-# estimate variable importance
-#importance &amp;lt;- varImp(model, scale=FALSE)
-# summarize importance
-#print(importance)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;How to show correlation table? Alternatively we can use &lt;code&gt;corrplot&lt;/code&gt; with &lt;code&gt;method = &amp;quot;number&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
-&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Can we remove outliers&lt;/p&gt;
-&lt;p&gt;How to remove ‘NA’, ‘Inf’, and ‘0’&lt;/p&gt;
-&lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;filtering&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Filtering&lt;/h1&gt;
-&lt;p&gt;You can see how to filter and subset your data in folloing posts: 1.&lt;br /&gt;
-2.&lt;br /&gt;
-3.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -2169,112 +2844,6 @@ for i in L:
 ##  [ 1]
 ##  [-1]
 ##  [-1]]&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ANOVA</title>
-      <link>/post/statistics/anova/anova/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/anova/anova/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#one-way-anova&#34;&gt;One-way ANOVA&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div id=&#34;one-way-anova&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;One-way ANOVA&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;variance&lt;/strong&gt; = SS/df, where SS - sum of squares and df - degree of freedom&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(SS = \displaystyle\sum_{i=1}^{n}{(x_i - \mu)^2}\)&lt;/span&gt;, where&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; is the sample &lt;strong&gt;mean&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;n&lt;/strong&gt; is the sample &lt;strong&gt;size&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(x) = \frac{1}{n}{\displaystyle\sum_{i=1}^{n}{(x_i - \mu)^2}}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;3 groups of students with scores (1-100):&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a = c(82,93,61,74,69,70,53)
-b = c(71,62,85,94,78,66,71)
-c = c(64,73,87,91,56,78,87)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;SST = SSE + SSC = W + B, where&lt;br /&gt;
-SST - Total Sum of Squares&lt;br /&gt;
-SSE - Error Sum of Squares - within (W)&lt;br /&gt;
-SSC - Sum of Squares Columns (treatmens) - between (B)&lt;/p&gt;
-&lt;p&gt;C - columns (treatments)&lt;br /&gt;
-N - total number of observations&lt;/p&gt;
-&lt;p&gt;Mean squared of columns - MSC = SSC/df_columns, where df_columns = C-1&lt;br /&gt;
-Mean squared of error - MSE = SSE/df_error, where df_error = N-C&lt;br /&gt;
-Sum of squares (total) - SST, where df_total = N-1 F-statistics - F = MSC/MSE&lt;/p&gt;
-&lt;p&gt;Let’s calculate degree of freedom for our example:&lt;br /&gt;
-df_columns = 3-1 = 2, MSC = SSC/2&lt;br /&gt;
-df_error = 21-3 = 18, MSE = SSE/18&lt;br /&gt;
-df_total = 21-1 = 20&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a = c(82,93,61,74,69,70,53)
-b = c(71,62,85,94,78,66,71)
-c = c(64,73,87,91,56,78,87)
-sq = function(x) { sum((x - mean(x))^2) }
-sq(a)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1039.429&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sq(b)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 751.4286&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sq(c)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1021.714&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Using R packages:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data
-# Number of calories consumed by month:
-may &amp;lt;- c(2166, 1568, 2233, 1882, 2019)
-sep &amp;lt;- c(2279, 2075, 2131, 2009, 1793)
-dec &amp;lt;- c(2226, 2154, 2583, 2010, 2190)
-
-d &amp;lt;- stack(list(may=may, sep=sep, dec=dec))
-d&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    values ind
-## 1    2166 may
-## 2    1568 may
-## 3    2233 may
-## 4    1882 may
-## 5    2019 may
-## 6    2279 sep
-## 7    2075 sep
-## 8    2131 sep
-## 9    2009 sep
-## 10   1793 sep
-## 11   2226 dec
-## 12   2154 dec
-## 13   2583 dec
-## 14   2010 dec
-## 15   2190 dec&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;names(d)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;values&amp;quot; &amp;quot;ind&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;oneway.test(values ~ ind, data=d, var.equal=TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-##  One-way analysis of means
-## 
-## data:  values and ind
-## F = 1.7862, num df = 2, denom df = 12, p-value = 0.2094&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# alternative using aov
-res &amp;lt;- aov(values ~ ind, data = d)
-res&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Call:
-##    aov(formula = values ~ ind, data = d)
-## 
-## Terms:
-##                      ind Residuals
-## Sum of Squares  174664.1  586719.6
-## Deg. of Freedom        2        12
-## 
-## Residual standard error: 221.1183
-## Estimated effects may be unbalanced&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(res)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##             Df Sum Sq Mean Sq F value Pr(&amp;gt;F)
-## ind          2 174664   87332   1.786  0.209
-## Residuals   12 586720   48893&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Sources&lt;/h1&gt;
-&lt;p&gt;Example for one-way ANOVA: &lt;a href=&#34;https://www.youtube.com/playlist?list=PLIeGtxpvyG-KA-BLkL391X__r0kU4_hm5&#34;&gt;youtube&lt;/a&gt; by Brandon Foltz&lt;/p&gt;
-&lt;/div&gt;
 </description>
     </item>
     

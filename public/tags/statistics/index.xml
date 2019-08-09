@@ -5,7 +5,7 @@
     <link>/tags/statistics/</link>
       <atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Statistics</title>
@@ -180,6 +180,96 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>Exploratory analysis in R</title>
+      <link>/post/statistics/exploration/exploration/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/exploration/exploration/</guid>
+      <description>
+
+
+&lt;div id=&#34;example-1-iris&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Example 1: Iris&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Data description&lt;/strong&gt;: Iris is a famous (Fisher’s or Anderson’s) data set gives the measurements in centimeters of the variables &lt;strong&gt;sepal&lt;/strong&gt; length and width and &lt;strong&gt;petal&lt;/strong&gt; length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris &lt;strong&gt;setosa&lt;/strong&gt;, &lt;strong&gt;versicolor&lt;/strong&gt;, and &lt;strong&gt;virginica&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;structure-of-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Structure of the data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select numerical columns 1-4
+df = iris[1:4]
+
+head(df, n=5) # first rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1          5.1         3.5          1.4         0.2
+## 2          4.9         3.0          1.4         0.2
+## 3          4.7         3.2          1.3         0.2
+## 4          4.6         3.1          1.5         0.2
+## 5          5.0         3.6          1.4         0.2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tail(df, n=5) # last rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 146          6.7         3.0          5.2         2.3
+## 147          6.3         2.5          5.0         1.9
+## 148          6.5         3.0          5.2         2.0
+## 149          6.2         3.4          5.4         2.3
+## 150          5.9         3.0          5.1         1.8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dim(df)       # data dimention&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 150   4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nrow(df)      # number of rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 150&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncol(df)      # number of columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)  &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    150 obs. of  4 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-between-variables&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Correlation between variables&lt;/h2&gt;
+&lt;p&gt;Let’s find if data in columns are correlated using &lt;code&gt;corrplot&lt;/code&gt;.&lt;br /&gt;
+&lt;a href=&#34;http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram&#34;&gt;Here&lt;/a&gt; you can find how to tune correlogram.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## corrplot 0.84 loaded&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# build correlation matrix 
+cor.mx &amp;lt;- cor(df)
+# correlation plot ordered correlation coefficients
+corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+# prepare training scheme
+control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
+#model &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, preProcess=&amp;quot;scale&amp;quot;, trControl=control)
+# estimate variable importance
+#importance &amp;lt;- varImp(model, scale=FALSE)
+# summarize importance
+#print(importance)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How to show correlation table? Alternatively we can use &lt;code&gt;corrplot&lt;/code&gt; with &lt;code&gt;method = &amp;quot;number&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Missing data How to remove ‘NA’, ‘Inf’, and ‘0’&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;colSums(sapply(df, is.na))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##            0            0            0            0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Scatterplot Matrices
+pairs(iris[, -5], bg = c(&amp;quot;yellow&amp;quot;, &amp;quot;green&amp;quot;, &amp;quot;black&amp;quot;)[iris$Species], pch = 21)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
+&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Can we remove outliers&lt;/p&gt;
+&lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filtering&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Filtering&lt;/h1&gt;
+&lt;p&gt;You can see how to filter and subset your data in folloing posts: 1.&lt;br /&gt;
+2.&lt;br /&gt;
+3.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Compare Models And Select The Best Using The Caret R Package</title>
       <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
@@ -260,63 +350,6 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://machinelearningmastery.com/compare-models-and-select-the-best-using-the-caret-r-package/&#34;&gt;Compare Models And Select The Best Using The Caret R Package&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Exploratory analysis in R</title>
-      <link>/post/statistics/exploration/exploration/</link>
-      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/exploration/exploration/</guid>
-      <description>
-
-
-&lt;div id=&#34;view-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;View data&lt;/h2&gt;
-&lt;p&gt;Here you can find several R functions which can help to see the structure of your data.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;correlation-between-variables&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Correlation between variables&lt;/h2&gt;
-&lt;p&gt;Let’s find if data in columns are correlated using &lt;code&gt;corrplot&lt;/code&gt;.&lt;br /&gt;
-&lt;a href=&#34;http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram&#34;&gt;Here&lt;/a&gt; you can find how to tune correlogram.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## corrplot 0.84 loaded&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# select numerical columns 1-4
-df = iris[1:4]
-
-# build correlation matrix 
-cor.mx &amp;lt;- cor(df)
-
-# correlation plot ordered correlation coefficients
-corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
-## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
-## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
-## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
-## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
-# prepare training scheme
-control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, number=10, repeats=3)
-#model &amp;lt;- train(diabetes~., data=PimaIndiansDiabetes, method=&amp;quot;lvq&amp;quot;, preProcess=&amp;quot;scale&amp;quot;, trControl=control)
-# estimate variable importance
-#importance &amp;lt;- varImp(model, scale=FALSE)
-# summarize importance
-#print(importance)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;How to show correlation table? Alternatively we can use &lt;code&gt;corrplot&lt;/code&gt; with &lt;code&gt;method = &amp;quot;number&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
-&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Can we remove outliers&lt;/p&gt;
-&lt;p&gt;How to remove ‘NA’, ‘Inf’, and ‘0’&lt;/p&gt;
-&lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;filtering&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Filtering&lt;/h1&gt;
-&lt;p&gt;You can see how to filter and subset your data in folloing posts: 1.&lt;br /&gt;
-2.&lt;br /&gt;
-3.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
