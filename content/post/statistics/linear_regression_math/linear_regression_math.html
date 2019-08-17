@@ -1,7 +1,7 @@
 ---
 title: "Linear Regression (Math)"
 author: "Mark Goldberg"
-date: '2019-08-06'
+date: '2019-08-14'
 draft: false
 math: true
 tags: ["Math", "Statistics", "Regression"]
@@ -24,6 +24,15 @@ summary: "Pure math for linear regression model."
 
 <div id="simple-linear-regression" class="section level2">
 <h2>Simple linear regression</h2>
+<p>Ordinary Least Squares (OLS) function:</p>
+<p><span class="math inline">\(minimize\left\{SSE = sum_{i=1}^{n} (y_i - \hat y_i)^2 \right\}\)</span></p>
+<p>Assumtions of OLS regression:<br />
+* Linear relationship<br />
+* Multivariathe normality<br />
+* No autocorrelation<br />
+* Homoscedastic (constant variance in residuals)<br />
+* There are more observations (n) than features (p) (n &gt; p)<br />
+* No or little multicollinearity</p>
 <p><span class="math inline">\(\hat y = \beta_0 + \beta_1 x\)</span></p>
 <p><span class="math inline">\(\hat y\)</span> - expectd value of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>, the same as <span class="math inline">\(E(Y|x)\)</span><br />
 <span class="math inline">\(\beta_0\)</span> - intercept<br />

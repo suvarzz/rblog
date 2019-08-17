@@ -1,0 +1,267 @@
+---
+title: "R tidyverse package - reference"
+author: "Mark Goldberg"
+date: '2019-08-16'
+draft: false
+math: true
+tags: ["R", "tidyverse"]
+categories: ["R"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "R tidyverse package - reference"
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#readr---read-and-write-data">readr - read and write data</a><ul>
+<li><a href="#read-data">Read data</a></li>
+<li><a href="#write-data">Write data</a></li>
+</ul></li>
+<li><a href="#tibble---advanced-data-frames">tibble - advanced data frames</a></li>
+<li><a href="#tidyr---operations-with-tables">tidyr - operations with tables</a></li>
+<li><a href="#magrittr---pipelines">magrittr - pipelines</a></li>
+<li><a href="#purrr---functional-programming">purrr - functional programming</a></li>
+<li><a href="#dplyr---data-manipulation">dplyr - data manipulation</a></li>
+<li><a href="#stringr">stringr</a></li>
+<li><a href="#forcats">forcats</a></li>
+<li><a href="#lubridate">lubridate</a></li>
+<li><a href="#broom-modelr">broom &amp; modelr</a></li>
+</ul>
+</div>
+
+<p>library(tidyverse) ggplot2 tibble tidyr readr purrr dplyr stringr forcats</p>
+<div id="readr---read-and-write-data" class="section level1">
+<h1>readr - read and write data</h1>
+<div id="read-data" class="section level2">
+<h2>Read data</h2>
+<pre class="r"><code>library(readr)
+read_delim()   # delim not specified
+read_tsv()     # tab-separated
+
+read_csv()     # comma-separated
+read_csv2()    # semicolon-separated
+read_table()   # space-sepatated (fixed length columns)
+read_table2() # space-separated (variable length columns)
+
+read_file()
+read_file_raw()
+read_log()
+
+read_csv_chunked()
+read_csv2_chunked()
+read_delim_chunked()
+read_lines_chunked()
+read_raw_chunked()
+
+read_delim(file, delim, quote = &quot;\&quot;&quot;, escape_backslash = FALSE,
+           escape_double = TRUE, col_names = TRUE, col_types = NULL,
+           locale = default_locale(), na = c(&quot;&quot;, &quot;NA&quot;), quoted_na = TRUE,
+           comment = &quot;&quot;, trim_ws = FALSE, skip = 0, n_max = Inf,
+           guess_max = min(1000, n_max), progress = show_progress(),
+           skip_empty_rows = TRUE)
+
+col_types
+
+c | col_character()
+i | col_integer()
+n | col_number()
+d | col_double()
+l | col_logical()
+f | col_factor()
+d | col_date()
+t | col_time()
+? | col_guess()  # default
+_ - | cal_skip() # skip the column
+
+
+col_types = &quot;clnt&quot;
+col_types = cols(A = col_character())
+          = cols(A = col_factor(levels = c(&#39;a&#39;,&#39;b&#39;))) # specify factor
+          = cols(A = col_factor(ordered = TRUE))      # order factor
+
+locale = locale(date_names = &quot;en&quot;,
+                date_format = &quot;%AD&quot;,
+                time_format = &quot;%AT&quot;,
+                decimal_mark = &quot;.&quot;,
+                grouping_mark = &quot;,&quot;,
+                tz = &quot;UTC&quot;,
+                encoding = &quot;UTF-8&quot;,
+                asciify = FALSE)
+
+date_format(format = &quot;%Y-%m-%d&quot;, tz = &quot;UTC&quot;)
+time_format(format = &quot;%H:%M:%S&quot;, tz = &quot;UTC&quot;)
+
+%d   # day
+%m   # month (digits)
+%B   # month full name - Januar, ...
+%b   # month abbr. - Jan, Feb, ...
+%Y   # year 2006
+%y   # year 06
+%H   # 24 hours format
+%I   # 12 hours format
+%M   # minutes
+%p   # am/pm
+%S   # second
+%Z   # time zone as name &#39;Berlin&#39;
+%z   # ime zone &#39;UTC&#39;
+
+Preset values:
+%D   %m/%d/%y
+%x   %y/%m/%d
+%F   %Y-%m-%d
+%R   %H:%M
+%T   %H:%M:%S
+
+parse_character()
+parse_date()
+parse_datetime()
+parse_double()
+parse_factor()
+parse_guess()
+parse_number()
+parse_logical()
+parse_vector()
+
+parse_date(c(&quot;1975/02/05&quot;), format = &quot;%Y/%m/%d&quot;)</code></pre>
+</div>
+<div id="write-data" class="section level2">
+<h2>Write data</h2>
+<pre class="r"><code>write_delim()
+write_tsv()
+write_csv()
+write_csv2()
+write_excel_csv()
+write_excel_csv2()
+write_lines()
+write_rds()
+write_file()
+
+write_delim(x, path, delim = &quot; &quot;, na = &quot;NA&quot;, append = FALSE,
+            col_names = !append, quote_escape = &quot;double&quot;)</code></pre>
+</div>
+</div>
+<div id="tibble---advanced-data-frames" class="section level1">
+<h1>tibble - advanced data frames</h1>
+<pre class="r"><code>library(tibble)
+x&lt;- tibble(a = c(1,2), b = c(&#39;A&#39;,&#39;B&#39;))
+
+x &lt;- tribble(~a,~b,~c,
+            1,2,3,
+            &#39;A&#39;,&#39;B&#39;,&#39;C&#39;)
+
+as_tibble(x)
+as.data.frame(x)
+
+print(x, n=2, width=5)
+
+x[1]          # get column by id
+x[&#39;A&#39;]        # get column by column name
+x$A           # get column
+
+x[1:5]        # get columns
+x[c(&#39;A&#39;,&#39;B&#39;)] # get columns
+
+x[[1]]        # get column as vector
+x[[&#39;A&#39;]]      # get column as vector
+
+x[row, column] # subset
+x[5, 10]       # get value row 5 and column 10
+x[1:5, 10:20]  # subset tibble
+x[1:3,]        # get 3 rows
+x[,1:3]        # get 3 columns</code></pre>
+</div>
+<div id="tidyr---operations-with-tables" class="section level1">
+<h1>tidyr - operations with tables</h1>
+<pre class="r"><code>gather()
+spread()
+separate()
+extract()
+unite()
+expand()
+crossing()
+complete()
+
+drop_na()
+replace_na()
+
+fill()
+nest()
+unnest()</code></pre>
+</div>
+<div id="magrittr---pipelines" class="section level1">
+<h1>magrittr - pipelines</h1>
+<pre class="r"><code>df %&gt;% f() %&gt;% g() %&gt;% h()
+df %&gt;% f %&gt;% g %&gt;% h
+
+df %&lt;&gt;% f        # df &lt;- df %&gt;% f
+
+df %$% { a - b}  # to refer df columns by names
+
+df %T&gt;% f        #  return df
+df %&gt;% calculate %T&gt;% print %T&gt;% plot %&gt;% calculate</code></pre>
+</div>
+<div id="purrr---functional-programming" class="section level1">
+<h1>purrr - functional programming</h1>
+<pre class="r"><code>keep()       # true subset by result of logical function
+discard()    # false subset by result of logical function
+compact()    # remove empty elements
+
+f &lt;- function(x) x%%2 == 0
+1:4 %&gt;% keep(f)             # 2 4
+1:4 %&gt;% discard(f)          # 1 3 
+1:4 %&gt;% keep(negate(f))     # 1 3 
+
+1:4 %&gt;% map(f)              # return logicals in list
+1:4 %&gt;% map_lgl(f)          # return logicals in vector
+
+map()
+map_lgl()
+map_dbl()
+map_chr()
+map_call()
+map_at()
+map_if()
+map_depth()
+map_int()
+map_dfr()                   # return vector of input length
+
+lmap()
+lmap_at()
+lmap_if()
+
+pmap()
+pmap_chr()
+pmap_dbl()
+pmap_df()
+pmap_dfc()
+pmap_dfr()
+pmap_int()
+pmap_lgl()
+pmap_raw()
+
+# lambda function
+f &lt;- function(x) x &gt; 2
+1:4 %&gt;% keep(f)                  # 3 4
+1:4 %&gt;% keep(function(x) x &gt; 2)  # 3 4
+1:4 %&gt;% keep(~ .x &gt; 2)           # 3 4
+
+list(1:3, 1:3, 1:3) %&gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6</code></pre>
+</div>
+<div id="dplyr---data-manipulation" class="section level1">
+<h1>dplyr - data manipulation</h1>
+</div>
+<div id="stringr" class="section level1">
+<h1>stringr</h1>
+</div>
+<div id="forcats" class="section level1">
+<h1>forcats</h1>
+</div>
+<div id="lubridate" class="section level1">
+<h1>lubridate</h1>
+</div>
+<div id="broom-modelr" class="section level1">
+<h1>broom &amp; modelr</h1>
+</div>

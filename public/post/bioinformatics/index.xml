@@ -5,12 +5,362 @@
     <link>/post/bioinformatics/</link>
       <atom:link href="/post/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
     <description>Bioinformatics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Bioinformatics</title>
       <link>/post/bioinformatics/</link>
     </image>
+    
+    <item>
+      <title>Genome Wide Associated Studies (GWAS)</title>
+      <link>/post/bioinformatics/gwas/gwas/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/gwas/gwas/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#snp-analysis-using-snpasoc-r-package&#34;&gt;SNP analysis using SNPasoc R package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gwas-using-plink&#34;&gt;GWAS using PLINK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;snp-analysis-using-snpasoc-r-package&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;SNP analysis using SNPasoc R package&lt;/h1&gt;
+&lt;p&gt;Example demonstrate an association test for an illness for one single SNP.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;SNPassoc&amp;quot;)
+library(&amp;quot;SNPassoc&amp;quot;)
+data(SNPs)
+head(SNPs)
+head(SNPs.info.pos)
+
+# select 6-40 SNP and create SNP object
+mySNP &amp;lt;- setupSNP(SNPs, 6:40, sep=&amp;quot;&amp;quot;)
+
+# casco - 1 for case, 0 for control)
+mySNP
+
+# association test
+res &amp;lt;- association(casco~sex+snp10001+blood.pre, data = mySNP,
+                     model.interaction = c(&amp;quot;dominant&amp;quot;,&amp;quot;codominant&amp;quot;))
+res&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;0 - control sample size&lt;br /&gt;
+% - percent for each variant&lt;br /&gt;
+1 - case sample size&lt;br /&gt;
+% - percent for each varian&lt;br /&gt;
+OR - odd ratio&lt;br /&gt;
+lower/upper - 95% confidence interval for odd ratio&lt;br /&gt;
+p-value of likelihood ratio test&lt;br /&gt;
+AIC - Akaike Information Criterion&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# association scan for SNPs - separately for all models
+res &amp;lt;- WGassociation(protein, data = mySNP, model = &amp;#39;all&amp;#39;) # same formula as protein~1,
+# p-values for dominant model
+dominant(res)
+# p-values for recessive model
+recessive(res)
+# complete statistics
+WGstats(res)
+summary(res)
+
+# Plot p-values for all models
+plot(res)
+
+# whole genome association - one log model
+resHapMap &amp;lt;- WGassociation(protein, data= mySNP, model=&amp;#39;log&amp;#39;)
+plot(resHapMap)
+
+Another examplw for all genome association
+# two population groups (CEU and YRI), 60 samples for each group
+data(HapMap)
+str(HapMap)
+str(HapMap.SNPs.pos)
+# SNP class object
+myHapMap &amp;lt;- setupSNP(HapMap, colSNPs=3:9307, sort=TRUE, info=HapMap.SNPs.pos, sep=&amp;quot;&amp;quot;)
+
+# association for dominant model
+myHapMapres &amp;lt;- WGassociation(group, data= myHapMap, model=&amp;quot;dominant&amp;quot;)
+
+head(myHapMapres)
+print(myHapMapres)
+# plot association for all chromosomes
+
+plot(myHapMapres, whole=TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gwas-using-plink&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;GWAS using PLINK&lt;/h1&gt;
+&lt;p&gt;The PLINK format of the GWAS data consists of two separate files, one containing the &lt;em&gt;SNP information&lt;/em&gt; (.ped)and the other containing the &lt;em&gt;mapping information&lt;/em&gt; (.map). For dependence analysis, it can be combined with the phenotype data separately.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Processing of sequencing data in R</title>
+      <link>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#alignment-using&#34;&gt;Alignment using&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#get-fastq-from-sra-database&#34;&gt;Get fastq from SRA database&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;alignment-using&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Alignment using&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Rsubread) # sequence alignment
+
+fastq.files &amp;lt;- list.files(pattern = &amp;quot;.fastq.gz$&amp;quot;, full.names = TRUE)
+fastq.files
+
+# build index
+buildindex(basename=&amp;quot;mm10&amp;quot;, reference=&amp;quot;mm10.fa&amp;quot;)
+
+# alignment
+align(fastq.files, index=&amp;quot;chr1_mm10&amp;quot;)
+
+# parameters
+args(align)
+
+# check result
+bam.files &amp;lt;- list.files(pattern = &amp;quot;.BAM$&amp;quot;, full.names = TRUE)
+bam.files
+# properties of BAM files
+propmapped(files=bam.files)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-fastq-from-sra-database&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Get fastq from SRA database&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(SRAdb) # SRA database
+dir.create(&amp;quot;~/SRA&amp;quot;)
+setwd(&amp;quot;~/SRA&amp;quot;)
+
+## Create database
+sqlfile &amp;lt;-&amp;#39;SRAmetadb.sqlite&amp;#39;
+# load database [~3 Gb, 60 Gb on disc!!!]
+if(!file.exists(&amp;#39;SRAmetadb.sqlite&amp;#39;)) sqlfile &amp;lt;&amp;lt;- getSRAdbFile()
+# connect database
+sra_con &amp;lt;- dbConnect(SQLite(), sqlfile)
+
+## get info for SRA from created database
+sraInf &amp;lt;- getSRAinfo(&amp;quot;SRP045534&amp;quot;, sra_con, sraType=&amp;quot;sra&amp;quot;)
+sraInf
+
+# download SRA
+# get SRA using SRA info [~ 5 Gb]
+sapply(sraInf$run, function(x) try(getSRAfile(x, sra_con, fileType=&amp;quot;sra&amp;quot;), silent=TRUE))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;## extract FASTQ from SRA
+cd ~/SRA
+for sra in *.sra
+  do
+    fastq-dump $sra
+  done&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RNA-seq analysis in R</title>
+      <link>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(edgeR)
+library(limma)
+library(Glimma) 
+library(gplots)
+library(org.Mm.eg.db)
+library(RColorBrewer)
+
+# Preprocessing of expression data
+# dataset: https://figshare.com/s/1d788fd384d33e913a2a
+setwd(&amp;quot;~/data/&amp;quot;)
+
+# load data
+sampleinfo &amp;lt;- read.delim(&amp;quot;SampleInfo.txt&amp;quot;)
+seqdata &amp;lt;- read.delim(&amp;quot;GSE60450_Lactation-GenewiseCounts.txt&amp;quot;, stringsAsFactors = FALSE)
+head(seqdata)
+# format data
+# Remove first two columns from seqdata
+exp &amp;lt;- seqdata[,-(1:2)]
+
+# Store EntrezGeneID as rownames
+rownames(exp) &amp;lt;- seqdata[,1]
+head(exp)
+
+# make shorter sample names
+colnames(exp) &amp;lt;- substr(colnames(exp), start=1, stop=7)
+head(exp)
+
+# Counts per Million (CPM)
+myCPM &amp;lt;- edgeR::cpm(exp)
+# Have a look at the output
+head(myCPM)
+
+# TRUE if CPM &amp;gt; 0.5
+thresh &amp;lt;- myCPM &amp;gt; 0.5
+# logical matrix
+head(thresh)
+
+# How many genes with CPM &amp;gt; 0.5
+table(rowSums(thresh))
+
+# keep genes that have at least 2 TRUES in each row of thresh
+fltr &amp;lt;- rowSums(thresh) &amp;gt;= 2
+# Subset the rows of countdata to keep the more highly expressed genes
+exp.fltr &amp;lt;- exp[fltr,]
+summary(exp.fltr)
+dim(exp.fltr)
+
+# We will look at the first sample
+plot(myCPM[,1],countdata[,1])
+# Let us limit the x and y-axis so we can actually look to see what is happening at the smaller counts
+plot(myCPM[,1],countdata[,1],ylim=c(0,50),xlim=c(0,3))
+# Add a vertical line at 0.5 CPM
+abline(v=0.5)
+
+### Digital Gene Expression List from edgeR
+# Convert counts to DGEList object
+dgeObj &amp;lt;- edge::DGEList(exp.fltr)
+# have a look at dgeObj
+dgeObj
+# See what slots are stored in dgeObj
+names(dgeObj)
+# Library size information is stored in the samples slot
+dgeObj$samples
+
+# Library sizes and distribution plot
+dgeObj$samples$lib.size
+
+
+# The names argument tells the barplot to use the sample names on the x-axis
+# The las argument rotates the axis names
+barplot(dgeObj$samples$lib.size, names=colnames(dgeObj), las=2, main=&amp;quot;Barplot of library sizes&amp;quot;)
+
+# Get log2 counts per million
+logcounts &amp;lt;- cpm(dgeObj,log=TRUE)
+# Check distributions of samples using boxplots
+boxplot(logcounts, xlab=&amp;quot;&amp;quot;, ylab=&amp;quot;Log2 counts per million&amp;quot;, las=2,
+        main = &amp;quot;Boxplots of logCPMs (unnormalised)&amp;quot;)
+# Let&amp;#39;s add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(logcounts),col=&amp;quot;blue&amp;quot;)
+
+plotMDS(dgeObj)
+# We specify the option to let us plot two plots side-by-sde
+par(mfrow=c(1,2))
+# Let&amp;#39;s set up colour schemes for CellType
+# How many cell types and in what order are they stored?
+levels(sampleinfo$CellType)
+## Let&amp;#39;s choose purple for basal and orange for luminal
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+data.frame(sampleinfo$CellType, col.cell)
+
+# Redo the MDS with cell type colouring
+plotMDS(dgeObj,col=col.cell)
+# Let&amp;#39;s add a legend to the plot so we know which colours correspond to which cell type
+legend(&amp;quot;topleft&amp;quot;, fill=c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;), legend=levels(sampleinfo$CellType))
+# Add a title
+title(&amp;quot;Cell type&amp;quot;)
+
+# Similarly for status
+levels(sampleinfo$Status)
+col.status &amp;lt;- c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;)[sampleinfo$Status]
+col.status
+plotMDS(dgeObj, col=col.status)
+legend(&amp;quot;topleft&amp;quot;, fill=c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;),
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&amp;quot;Status&amp;quot;)
+
+# There is a sample info corrected file in your data directory
+# Old sampleinfo
+sampleinfo
+# I&amp;#39;m going to write over the sampleinfo object with the corrected sample info
+sampleinfo &amp;lt;- read.delim(&amp;quot;data/SampleInfo_Corrected.txt&amp;quot;)
+sampleinfo
+
+# Redo the MDSplot with corrected information
+par(mfrow=c(1,2))
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+col.status &amp;lt;- c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;)[sampleinfo$Status]
+
+
+plotMDS(dgeObj,col=col.cell)
+legend(&amp;quot;topleft&amp;quot;,fill=c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;),
+       legend=levels(sampleinfo$CellType))
+title(&amp;quot;Cell type&amp;quot;)
+
+
+plotMDS(dgeObj,col=col.status)
+legend(&amp;quot;topleft&amp;quot;,fill=c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;), 
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&amp;quot;Status&amp;quot;)
+
+# Dimension 3 appears to separate pregnant samples from the rest. Dim4?
+plotMDS(dgeObj,dim=c(3,4))
+
+labels &amp;lt;- paste(sampleinfo$SampleName, sampleinfo$CellType, sampleinfo$Status)
+group &amp;lt;- paste(sampleinfo$CellType,sampleinfo$Status,sep=&amp;quot;.&amp;quot;)
+group &amp;lt;- factor(group)
+glMDSPlot(dgeObj, labels=labels, groups=group, folder=&amp;quot;mds&amp;quot;)
+
+# Hierarchical clustering with heatmaps
+
+# We estimate the variance for each row in the logcounts matrix
+var_genes &amp;lt;- apply(logcounts, 1, var)
+head(var_genes)
+# Get the gene names for the top 500 most variable genes
+select_var &amp;lt;- names(sort(var_genes, decreasing=TRUE))[1:500]
+head(select_var)
+# Subset logcounts matrix
+highly_variable_lcpm &amp;lt;- logcounts[select_var,]
+dim(highly_variable_lcpm)
+head(highly_variable_lcpm)
+
+## Get some nicer colours
+mypalette &amp;lt;- brewer.pal(11,&amp;quot;RdYlBu&amp;quot;)
+morecols &amp;lt;- colorRampPalette(mypalette)
+# Set up colour vector for celltype variable
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+
+# Plot the heatmap
+heatmap.2(highly_variable_lcpm, 
+          col=rev(morecols(50)),
+          trace=&amp;quot;column&amp;quot;, 
+          main=&amp;quot;Top 500 most variable genes across samples&amp;quot;,
+          ColSideColors=col.cell,scale=&amp;quot;row&amp;quot;)
+
+# Save the heatmap
+png(file=&amp;quot;High_var_genes.heatmap.png&amp;quot;)
+heatmap.2(highly_variable_lcpm,col=rev(morecols(50)), trace=&amp;quot;none&amp;quot;,
+          main=&amp;quot;Top 500 most variable genes\nacross samples&amp;quot;, 
+          ColSideColors=col.cell,scale=&amp;quot;row&amp;quot;)
+dev.off()
+
+# Normalization for composition bias
+# Apply normalisation to DGEList object
+dgeObj &amp;lt;- calcNormFactors(dgeObj)
+
+dgeObj$samples
+
+par(mfrow=c(1,2))
+plotMD(logcounts,column = 7)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+plotMD(logcounts,column = 11)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+par(mfrow=c(1,2))
+plotMD(dgeObj,column = 7)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+plotMD(dgeObj,column = 11)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+save(group,dgeObj,sampleinfo,file=&amp;quot;Robjects/preprocessing.Rdata&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Differential expression analysis</title>

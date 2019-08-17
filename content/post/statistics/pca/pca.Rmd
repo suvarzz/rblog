@@ -1,0 +1,142 @@
+---
+title: "Principal component analysis"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Statistics", "PCA"]
+categories: ["Statistics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Principal component analysis."
+---
+# Principal component analysis of iris dataset
+```{r, message = FALSE}
+library(tidyverse)
+library(factoextra)
+df <- iris
+head(df)
+str(df)
+
+library(caret)
+trainIndex <- caret::createDataPartition(df[,5], p=.8, list = FALSE, times = 1)
+# split data
+train <- df[trainIndex, ]
+test <- df[-trainIndex, ]
+
+# PCA
+pca <- prcomp(train[,-5], scale=TRUE)
+
+# eigenvalues on 'scree plot'
+# percentage of variances explained by each principal component.
+factoextra::fviz_eig(pca, addlabels = TRUE)
+
+# Graph of individuals
+factoextra::fviz_pca_ind(pca, geom = 'point')
+
+groups <- as.factor(train[,5])
+fviz_pca_ind(pca,
+             col.ind = groups, # color by groups
+             palette = c('red', 'green', 'blue'),
+             addEllipses = TRUE, # Concentration ellipses
+             ellipse.type = "confidence",
+             legend.title = "Groups",
+             repel = TRUE)
+
+```
+
+```{r}
+# Graph of variables
+fviz_pca_var(pca,
+             col.var = 'contrib',    # color by contributions to the PC 
+             gradient.cols = c('#00AFBB', '#E7B800', '#FC4E07'),
+             repel = T)          # avoid text overlapping
+
+# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = 'point',
+                col.var = 'red', # Variables color
+                col.ind = 'grey'  # Individuals color
+                )
+
+```
+
+
+```{r, message = FALSE}
+library(tidyverse)
+library(factoextra)
+library(mlbench) # dataset
+
+data(PimaIndiansDiabetes)
+df <- PimaIndiansDiabetes
+head(df)
+str(df)
+```
+## Split data
+```{r, message=FALSE}
+trainIndex <- sample(nrow(df), nrow(df)*0.8)
+# split data
+train <- df[trainIndex, -ncol(df)]
+test <- df[-trainIndex, -ncol(df)]
+```
+
+## Principal component analysis
+```{r}
+pca <- prcomp(train, scale=T)
+
+# eigenvalues on 'scree plot'
+# percentage of variances explained by each principal component.
+fviz_eig(pca, addlabels = T)
+
+# Graph of individuals
+fviz_pca_ind(pca,
+             geom = 'point',
+             col.ind = "cos2", # Color by the quality of representation
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"))
+
+# Graph of variables
+fviz_pca_var(pca,
+             col.var = 'contrib',    # color by contributions to the PC 
+             gradient.cols = c('#00AFBB', '#E7B800', '#FC4E07'),
+             repel = T)          # avoid text overlapping
+
+# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = 'point',
+                col.var = 'red', # Variables color
+                col.ind = 'grey'  # Individuals color
+                )
+```
+```{r}
+# Eigenvalues
+get_eigenvalue(pca)
+
+# Results for Variables
+pca.var <- get_pca_var(pca)
+pca.var$coord          # Coordinates
+pca.var$contrib        # Contributions to the PCs
+pca.var$cos2           # Quality of representation 
+
+# Results for individuals
+pca.ind <- get_pca_ind(pca)
+pca.ind$coord %>% head()        # Coordinates
+pca.ind$contrib %>% head()       # Contributions to the PCs
+pca.ind$cos2 %>% head()           # Quality of representation 
+```
+
+## Prediction
+```{r}
+p <- predict(pca, newdata = test)
+
+# Plot prediction
+
+plot <- fviz_pca_ind(pca, repel=T, geom = 'point')
+fviz_add(plot, p, color='red')
+```
+
+## How to calculate coordinates for test data?
+
+## Sources
+* [http://www.sthda.com](http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/)  

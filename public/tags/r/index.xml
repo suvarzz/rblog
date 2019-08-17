@@ -5,7 +5,7 @@
     <link>/tags/r/</link>
       <atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>R</title>
@@ -176,6 +176,894 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>R tidyverse package - reference</title>
+      <link>/post/programming/tidyverse_reference/tidyverse_reference/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/programming/tidyverse_reference/tidyverse_reference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#readr---read-and-write-data&#34;&gt;readr - read and write data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#read-data&#34;&gt;Read data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#write-data&#34;&gt;Write data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tibble---advanced-data-frames&#34;&gt;tibble - advanced data frames&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tidyr---operations-with-tables&#34;&gt;tidyr - operations with tables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#magrittr---pipelines&#34;&gt;magrittr - pipelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#purrr---functional-programming&#34;&gt;purrr - functional programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#dplyr---data-manipulation&#34;&gt;dplyr - data manipulation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#stringr&#34;&gt;stringr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#forcats&#34;&gt;forcats&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lubridate&#34;&gt;lubridate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#broom-modelr&#34;&gt;broom &amp;amp; modelr&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;library(tidyverse) ggplot2 tibble tidyr readr purrr dplyr stringr forcats&lt;/p&gt;
+&lt;div id=&#34;readr---read-and-write-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;readr - read and write data&lt;/h1&gt;
+&lt;div id=&#34;read-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Read data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(readr)
+read_delim()   # delim not specified
+read_tsv()     # tab-separated
+
+read_csv()     # comma-separated
+read_csv2()    # semicolon-separated
+read_table()   # space-sepatated (fixed length columns)
+read_table2() # space-separated (variable length columns)
+
+read_file()
+read_file_raw()
+read_log()
+
+read_csv_chunked()
+read_csv2_chunked()
+read_delim_chunked()
+read_lines_chunked()
+read_raw_chunked()
+
+read_delim(file, delim, quote = &amp;quot;\&amp;quot;&amp;quot;, escape_backslash = FALSE,
+           escape_double = TRUE, col_names = TRUE, col_types = NULL,
+           locale = default_locale(), na = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;), quoted_na = TRUE,
+           comment = &amp;quot;&amp;quot;, trim_ws = FALSE, skip = 0, n_max = Inf,
+           guess_max = min(1000, n_max), progress = show_progress(),
+           skip_empty_rows = TRUE)
+
+col_types
+
+c | col_character()
+i | col_integer()
+n | col_number()
+d | col_double()
+l | col_logical()
+f | col_factor()
+d | col_date()
+t | col_time()
+? | col_guess()  # default
+_ - | cal_skip() # skip the column
+
+
+col_types = &amp;quot;clnt&amp;quot;
+col_types = cols(A = col_character())
+          = cols(A = col_factor(levels = c(&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;))) # specify factor
+          = cols(A = col_factor(ordered = TRUE))      # order factor
+
+locale = locale(date_names = &amp;quot;en&amp;quot;,
+                date_format = &amp;quot;%AD&amp;quot;,
+                time_format = &amp;quot;%AT&amp;quot;,
+                decimal_mark = &amp;quot;.&amp;quot;,
+                grouping_mark = &amp;quot;,&amp;quot;,
+                tz = &amp;quot;UTC&amp;quot;,
+                encoding = &amp;quot;UTF-8&amp;quot;,
+                asciify = FALSE)
+
+date_format(format = &amp;quot;%Y-%m-%d&amp;quot;, tz = &amp;quot;UTC&amp;quot;)
+time_format(format = &amp;quot;%H:%M:%S&amp;quot;, tz = &amp;quot;UTC&amp;quot;)
+
+%d   # day
+%m   # month (digits)
+%B   # month full name - Januar, ...
+%b   # month abbr. - Jan, Feb, ...
+%Y   # year 2006
+%y   # year 06
+%H   # 24 hours format
+%I   # 12 hours format
+%M   # minutes
+%p   # am/pm
+%S   # second
+%Z   # time zone as name &amp;#39;Berlin&amp;#39;
+%z   # ime zone &amp;#39;UTC&amp;#39;
+
+Preset values:
+%D   %m/%d/%y
+%x   %y/%m/%d
+%F   %Y-%m-%d
+%R   %H:%M
+%T   %H:%M:%S
+
+parse_character()
+parse_date()
+parse_datetime()
+parse_double()
+parse_factor()
+parse_guess()
+parse_number()
+parse_logical()
+parse_vector()
+
+parse_date(c(&amp;quot;1975/02/05&amp;quot;), format = &amp;quot;%Y/%m/%d&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Write data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;write_delim()
+write_tsv()
+write_csv()
+write_csv2()
+write_excel_csv()
+write_excel_csv2()
+write_lines()
+write_rds()
+write_file()
+
+write_delim(x, path, delim = &amp;quot; &amp;quot;, na = &amp;quot;NA&amp;quot;, append = FALSE,
+            col_names = !append, quote_escape = &amp;quot;double&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tibble---advanced-data-frames&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;tibble - advanced data frames&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tibble)
+x&amp;lt;- tibble(a = c(1,2), b = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))
+
+x &amp;lt;- tribble(~a,~b,~c,
+            1,2,3,
+            &amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;)
+
+as_tibble(x)
+as.data.frame(x)
+
+print(x, n=2, width=5)
+
+x[1]          # get column by id
+x[&amp;#39;A&amp;#39;]        # get column by column name
+x$A           # get column
+
+x[1:5]        # get columns
+x[c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;)] # get columns
+
+x[[1]]        # get column as vector
+x[[&amp;#39;A&amp;#39;]]      # get column as vector
+
+x[row, column] # subset
+x[5, 10]       # get value row 5 and column 10
+x[1:5, 10:20]  # subset tibble
+x[1:3,]        # get 3 rows
+x[,1:3]        # get 3 columns&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tidyr---operations-with-tables&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;tidyr - operations with tables&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gather()
+spread()
+separate()
+extract()
+unite()
+expand()
+crossing()
+complete()
+
+drop_na()
+replace_na()
+
+fill()
+nest()
+unnest()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;magrittr---pipelines&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;magrittr - pipelines&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% f() %&amp;gt;% g() %&amp;gt;% h()
+df %&amp;gt;% f %&amp;gt;% g %&amp;gt;% h
+
+df %&amp;lt;&amp;gt;% f        # df &amp;lt;- df %&amp;gt;% f
+
+df %$% { a - b}  # to refer df columns by names
+
+df %T&amp;gt;% f        #  return df
+df %&amp;gt;% calculate %T&amp;gt;% print %T&amp;gt;% plot %&amp;gt;% calculate&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;purrr---functional-programming&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;purrr - functional programming&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;keep()       # true subset by result of logical function
+discard()    # false subset by result of logical function
+compact()    # remove empty elements
+
+f &amp;lt;- function(x) x%%2 == 0
+1:4 %&amp;gt;% keep(f)             # 2 4
+1:4 %&amp;gt;% discard(f)          # 1 3 
+1:4 %&amp;gt;% keep(negate(f))     # 1 3 
+
+1:4 %&amp;gt;% map(f)              # return logicals in list
+1:4 %&amp;gt;% map_lgl(f)          # return logicals in vector
+
+map()
+map_lgl()
+map_dbl()
+map_chr()
+map_call()
+map_at()
+map_if()
+map_depth()
+map_int()
+map_dfr()                   # return vector of input length
+
+lmap()
+lmap_at()
+lmap_if()
+
+pmap()
+pmap_chr()
+pmap_dbl()
+pmap_df()
+pmap_dfc()
+pmap_dfr()
+pmap_int()
+pmap_lgl()
+pmap_raw()
+
+# lambda function
+f &amp;lt;- function(x) x &amp;gt; 2
+1:4 %&amp;gt;% keep(f)                  # 3 4
+1:4 %&amp;gt;% keep(function(x) x &amp;gt; 2)  # 3 4
+1:4 %&amp;gt;% keep(~ .x &amp;gt; 2)           # 3 4
+
+list(1:3, 1:3, 1:3) %&amp;gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dplyr---data-manipulation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;dplyr - data manipulation&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stringr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;stringr&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;forcats&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;forcats&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;lubridate&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;lubridate&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;broom-modelr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;broom &amp;amp; modelr&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Genome Wide Associated Studies (GWAS)</title>
+      <link>/post/bioinformatics/gwas/gwas/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/gwas/gwas/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#snp-analysis-using-snpasoc-r-package&#34;&gt;SNP analysis using SNPasoc R package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gwas-using-plink&#34;&gt;GWAS using PLINK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;snp-analysis-using-snpasoc-r-package&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;SNP analysis using SNPasoc R package&lt;/h1&gt;
+&lt;p&gt;Example demonstrate an association test for an illness for one single SNP.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;SNPassoc&amp;quot;)
+library(&amp;quot;SNPassoc&amp;quot;)
+data(SNPs)
+head(SNPs)
+head(SNPs.info.pos)
+
+# select 6-40 SNP and create SNP object
+mySNP &amp;lt;- setupSNP(SNPs, 6:40, sep=&amp;quot;&amp;quot;)
+
+# casco - 1 for case, 0 for control)
+mySNP
+
+# association test
+res &amp;lt;- association(casco~sex+snp10001+blood.pre, data = mySNP,
+                     model.interaction = c(&amp;quot;dominant&amp;quot;,&amp;quot;codominant&amp;quot;))
+res&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;0 - control sample size&lt;br /&gt;
+% - percent for each variant&lt;br /&gt;
+1 - case sample size&lt;br /&gt;
+% - percent for each varian&lt;br /&gt;
+OR - odd ratio&lt;br /&gt;
+lower/upper - 95% confidence interval for odd ratio&lt;br /&gt;
+p-value of likelihood ratio test&lt;br /&gt;
+AIC - Akaike Information Criterion&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# association scan for SNPs - separately for all models
+res &amp;lt;- WGassociation(protein, data = mySNP, model = &amp;#39;all&amp;#39;) # same formula as protein~1,
+# p-values for dominant model
+dominant(res)
+# p-values for recessive model
+recessive(res)
+# complete statistics
+WGstats(res)
+summary(res)
+
+# Plot p-values for all models
+plot(res)
+
+# whole genome association - one log model
+resHapMap &amp;lt;- WGassociation(protein, data= mySNP, model=&amp;#39;log&amp;#39;)
+plot(resHapMap)
+
+Another examplw for all genome association
+# two population groups (CEU and YRI), 60 samples for each group
+data(HapMap)
+str(HapMap)
+str(HapMap.SNPs.pos)
+# SNP class object
+myHapMap &amp;lt;- setupSNP(HapMap, colSNPs=3:9307, sort=TRUE, info=HapMap.SNPs.pos, sep=&amp;quot;&amp;quot;)
+
+# association for dominant model
+myHapMapres &amp;lt;- WGassociation(group, data= myHapMap, model=&amp;quot;dominant&amp;quot;)
+
+head(myHapMapres)
+print(myHapMapres)
+# plot association for all chromosomes
+
+plot(myHapMapres, whole=TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gwas-using-plink&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;GWAS using PLINK&lt;/h1&gt;
+&lt;p&gt;The PLINK format of the GWAS data consists of two separate files, one containing the &lt;em&gt;SNP information&lt;/em&gt; (.ped)and the other containing the &lt;em&gt;mapping information&lt;/em&gt; (.map). For dependence analysis, it can be combined with the phenotype data separately.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal component analysis</title>
+      <link>/post/statistics/pca/pca/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/pca/pca/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#principal-component-analysis-of-iris-dataset&#34;&gt;Principal component analysis of iris dataset&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#split-data&#34;&gt;Split data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#principal-component-analysis&#34;&gt;Principal component analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prediction&#34;&gt;Prediction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-calculate-coordinates-for-test-data&#34;&gt;How to calculate coordinates for test data?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;principal-component-analysis-of-iris-dataset&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Principal component analysis of iris dataset&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(factoextra)
+df &amp;lt;- iris
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &amp;quot;setosa&amp;quot;,&amp;quot;versicolor&amp;quot;,..: 1 1 1 1 1 1 1 1 1 1 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+trainIndex &amp;lt;- caret::createDataPartition(df[,5], p=.8, list = FALSE, times = 1)
+# split data
+train &amp;lt;- df[trainIndex, ]
+test &amp;lt;- df[-trainIndex, ]
+
+# PCA
+pca &amp;lt;- prcomp(train[,-5], scale=TRUE)
+
+# eigenvalues on &amp;#39;scree plot&amp;#39;
+# percentage of variances explained by each principal component.
+factoextra::fviz_eig(pca, addlabels = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
+factoextra::fviz_pca_ind(pca, geom = &amp;#39;point&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;groups &amp;lt;- as.factor(train[,5])
+fviz_pca_ind(pca,
+             col.ind = groups, # color by groups
+             palette = c(&amp;#39;red&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;blue&amp;#39;),
+             addEllipses = TRUE, # Concentration ellipses
+             ellipse.type = &amp;quot;confidence&amp;quot;,
+             legend.title = &amp;quot;Groups&amp;quot;,
+             repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
+fviz_pca_var(pca,
+             col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
+             gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
+             repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = &amp;#39;point&amp;#39;,
+                col.var = &amp;#39;red&amp;#39;, # Variables color
+                col.ind = &amp;#39;grey&amp;#39;  # Individuals color
+                )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(factoextra)
+library(mlbench) # dataset
+
+data(PimaIndiansDiabetes)
+df &amp;lt;- PimaIndiansDiabetes
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   pregnant glucose pressure triceps insulin mass pedigree age diabetes
+## 1        6     148       72      35       0 33.6    0.627  50      pos
+## 2        1      85       66      29       0 26.6    0.351  31      neg
+## 3        8     183       64       0       0 23.3    0.672  32      pos
+## 4        1      89       66      23      94 28.1    0.167  21      neg
+## 5        0     137       40      35     168 43.1    2.288  33      pos
+## 6        5     116       74       0       0 25.6    0.201  30      neg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    768 obs. of  9 variables:
+##  $ pregnant: num  6 1 8 1 0 5 3 10 2 8 ...
+##  $ glucose : num  148 85 183 89 137 116 78 115 197 125 ...
+##  $ pressure: num  72 66 64 66 40 74 50 0 70 96 ...
+##  $ triceps : num  35 29 0 23 35 0 32 0 45 0 ...
+##  $ insulin : num  0 0 0 94 168 0 88 0 543 0 ...
+##  $ mass    : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
+##  $ pedigree: num  0.627 0.351 0.672 0.167 2.288 ...
+##  $ age     : num  50 31 32 21 33 30 26 29 53 54 ...
+##  $ diabetes: Factor w/ 2 levels &amp;quot;neg&amp;quot;,&amp;quot;pos&amp;quot;: 2 1 2 1 2 1 2 1 2 2 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;split-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Split data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trainIndex &amp;lt;- sample(nrow(df), nrow(df)*0.8)
+# split data
+train &amp;lt;- df[trainIndex, -ncol(df)]
+test &amp;lt;- df[-trainIndex, -ncol(df)]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Principal component analysis&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca &amp;lt;- prcomp(train, scale=T)
+
+# eigenvalues on &amp;#39;scree plot&amp;#39;
+# percentage of variances explained by each principal component.
+fviz_eig(pca, addlabels = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
+fviz_pca_ind(pca,
+             geom = &amp;#39;point&amp;#39;,
+             col.ind = &amp;quot;cos2&amp;quot;, # Color by the quality of representation
+             gradient.cols = c(&amp;quot;#00AFBB&amp;quot;, &amp;quot;#E7B800&amp;quot;, &amp;quot;#FC4E07&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
+fviz_pca_var(pca,
+             col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
+             gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
+             repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = &amp;#39;point&amp;#39;,
+                col.var = &amp;#39;red&amp;#39;, # Variables color
+                col.ind = &amp;#39;grey&amp;#39;  # Individuals color
+                )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Eigenvalues
+get_eigenvalue(pca)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       eigenvalue variance.percent cumulative.variance.percent
+## Dim.1  2.1484632        26.855791                    26.85579
+## Dim.2  1.7117918        21.397397                    48.25319
+## Dim.3  1.0560307        13.200383                    61.45357
+## Dim.4  0.8577135        10.721419                    72.17499
+## Dim.5  0.7827308         9.784135                    81.95912
+## Dim.6  0.6490472         8.113090                    90.07222
+## Dim.7  0.4246541         5.308177                    95.38039
+## Dim.8  0.3695686         4.619608                   100.00000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Results for Variables
+pca.var &amp;lt;- get_pca_var(pca)
+pca.var$coord          # Coordinates&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Dim.1      Dim.2       Dim.3        Dim.4       Dim.5
+## pregnant -0.2613362  0.7555770 -0.03411457  0.164119419  0.38787318
+## glucose  -0.5550955  0.1915545  0.53183488 -0.415232060 -0.33421050
+## pressure -0.5730576  0.1955417 -0.49970031  0.001917723 -0.21716148
+## triceps  -0.6082808 -0.4930349 -0.28918361  0.106775060  0.36003451
+## insulin  -0.5953969 -0.3664227  0.32796053 -0.298678115  0.43293986
+## mass     -0.6682581 -0.1438707 -0.33060384 -0.014819512 -0.35047480
+## pedigree -0.3747603 -0.2310328  0.46492858  0.741684330 -0.16588066
+## age      -0.3634878  0.7839270  0.07533503  0.086210125  0.07758022
+##                Dim.6       Dim.7       Dim.8
+## pregnant  0.17425048 -0.36905378  0.12529249
+## glucose   0.01137266 -0.20644065 -0.21322789
+## pressure -0.57136625 -0.07659026  0.06465123
+## triceps   0.09518077 -0.04786257 -0.38846870
+## insulin  -0.14977159  0.13459416  0.29408539
+## mass      0.50046583  0.06735177  0.21302317
+## pedigree -0.09760457 -0.02509684  0.04744906
+## age       0.02473193  0.46303034 -0.13856443&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.var$contrib        # Contributions to the PCs&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              Dim.1     Dim.2      Dim.3        Dim.4      Dim.5
+## pregnant  3.178860 33.350823  0.1102055  3.140347407 19.2206059
+## glucose  14.341925  2.143551 26.7841028 20.102011066 14.2701239
+## pressure 15.285112  2.233715 23.6451844  0.000428775  6.0249461
+## triceps  17.221867 14.200527  7.9190087  1.329221633 16.5605910
+## insulin  16.500048  7.843569 10.1851313 10.400747539 23.9465371
+## mass     20.785505  1.209188 10.3499741  0.025605047 15.6928259
+## pedigree  6.537012  3.118145 20.4689687 64.135127098  3.5154352
+## age       6.149670 35.900481  0.5374244  0.866511436  0.7689349
+##                Dim.6      Dim.7      Dim.8
+## pregnant  4.67812337 32.0733237  4.2477111
+## glucose   0.01992727 10.0358717 12.3024868
+## pressure 50.29824867  1.3813755  1.1309892
+## triceps   1.39579650  0.5394567 40.8335307
+## insulin   3.45607012  4.2659628 23.4019348
+## mass     38.58980271  1.0682250 12.2788742
+## pedigree  1.46779037  0.1483210  0.6092002
+## age       0.09424099 50.4874634  5.1952730&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.var$cos2           # Quality of representation &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Dim.1      Dim.2       Dim.3        Dim.4      Dim.5
+## pregnant 0.06829663 0.57089665 0.001163804 2.693518e-02 0.15044560
+## glucose  0.30813100 0.03669313 0.282848341 1.724177e-01 0.11169666
+## pressure 0.32839502 0.03823655 0.249700400 3.677661e-06 0.04715911
+## triceps  0.37000549 0.24308346 0.083627161 1.140091e-02 0.12962485
+## insulin  0.35449746 0.13426556 0.107558111 8.920862e-02 0.18743692
+## mass     0.44656894 0.02069878 0.109298901 2.196179e-04 0.12283258
+## pedigree 0.14044530 0.05337616 0.216158588 5.500956e-01 0.02751639
+## age      0.13212341 0.61454148 0.005675366 7.432186e-03 0.00601869
+##                 Dim.6        Dim.7       Dim.8
+## pregnant 0.0303632306 0.1362006927 0.015698209
+## glucose  0.0001293374 0.0426177435 0.045466134
+## pressure 0.3264593946 0.0058660682 0.004179781
+## triceps  0.0090593787 0.0022908253 0.150907928
+## insulin  0.0224315277 0.0181155871 0.086486214
+## mass     0.2504660493 0.0045362616 0.045378869
+## pedigree 0.0095266529 0.0006298513 0.002251413
+## age      0.0006116685 0.2143970968 0.019200100&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Results for individuals
+pca.ind &amp;lt;- get_pca_ind(pca)
+pca.ind$coord %&amp;gt;% head()        # Coordinates&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Dim.1       Dim.2      Dim.3       Dim.4      Dim.5        Dim.6
+## 72  -0.3669946 -0.56840272  0.3011660 -0.47509324  0.7579541  0.007199364
+## 752 -0.6216923 -1.11858347 -1.1355107 -0.57113207 -0.3016049  0.252958078
+## 551  0.9874862 -0.93348528 -0.6800219 -0.54448283 -0.1871258 -0.330097027
+## 531  0.4210481 -1.06864263  0.6917994  0.24507935 -0.2124609 -0.145927479
+## 170  0.2644303 -0.02563326 -0.3747252  0.03149040 -0.3520414 -1.156386621
+## 764 -1.7515825  1.74941478 -1.0179324  0.02774283  2.3889854  0.431141870
+##          Dim.7      Dim.8
+## 72  -0.7799567 -0.5294728
+## 752  0.1103204 -0.5529107
+## 551 -0.4434670 -0.7824037
+## 531 -0.3403009  0.2020358
+## 170 -0.1597602  0.4188356
+## 764  1.0485653 -0.7088242&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.ind$contrib %&amp;gt;% head()       # Contributions to the PCs&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           Dim.1        Dim.2      Dim.3        Dim.4       Dim.5
+## 72  0.010209939 3.073923e-02 0.01398836 0.0428594975 0.119537749
+## 752 0.029299124 1.190467e-01 0.19885548 0.0619387561 0.018927615
+## 551 0.073920645 8.290785e-02 0.07131829 0.0562934359 0.007285954
+## 531 0.013439008 1.086540e-01 0.07381004 0.0114051979 0.009392415
+## 170 0.005300614 6.251561e-05 0.02165614 0.0001882980 0.025787350
+## 764 0.232575992 2.911832e-01 0.15980597 0.0001461473 1.187534409
+##           Dim.6       Dim.7      Dim.8
+## 72  0.000013006 0.233312081 0.12354459
+## 752 0.016056557 0.004667754 0.13472450
+## 551 0.027342521 0.075425638 0.26977286
+## 531 0.005343545 0.044414265 0.01798843
+## 170 0.335553241 0.009788896 0.07730788
+## 764 0.046643993 0.421684107 0.22141831&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.ind$cos2 %&amp;gt;% head()           # Quality of representation &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Dim.1        Dim.2      Dim.3        Dim.4       Dim.5
+## 72  0.06019710 0.1444004010 0.04053852 1.008820e-01 0.256768635
+## 752 0.10372696 0.3357975532 0.34603753 8.754147e-02 0.024412791
+## 551 0.27405014 0.2448966943 0.12996122 8.331752e-02 0.009840908
+## 531 0.08519110 0.5487767729 0.22998053 2.886318e-02 0.021691462
+## 170 0.03731036 0.0003506023 0.07492606 5.291311e-04 0.066129394
+## 764 0.20927254 0.2087548895 0.07067877 5.249919e-05 0.389294326
+##            Dim.6       Dim.7      Dim.8
+## 72  2.316564e-05 0.271892389 0.12529777
+## 752 1.717267e-02 0.003266272 0.08204475
+## 551 3.062324e-02 0.055270156 0.17204011
+## 531 1.023305e-02 0.055648944 0.01961496
+## 170 7.135315e-01 0.013618977 0.09360397
+## 764 1.267919e-02 0.074996678 0.03427110&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prediction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Prediction&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- predict(pca, newdata = test)
+
+# Plot prediction
+
+plot &amp;lt;- fviz_pca_ind(pca, repel=T, geom = &amp;#39;point&amp;#39;)
+fviz_add(plot, p, color=&amp;#39;red&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-calculate-coordinates-for-test-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to calculate coordinates for test data?&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/&#34;&gt;http://www.sthda.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Processing of sequencing data in R</title>
+      <link>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#alignment-using&#34;&gt;Alignment using&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#get-fastq-from-sra-database&#34;&gt;Get fastq from SRA database&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;alignment-using&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Alignment using&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Rsubread) # sequence alignment
+
+fastq.files &amp;lt;- list.files(pattern = &amp;quot;.fastq.gz$&amp;quot;, full.names = TRUE)
+fastq.files
+
+# build index
+buildindex(basename=&amp;quot;mm10&amp;quot;, reference=&amp;quot;mm10.fa&amp;quot;)
+
+# alignment
+align(fastq.files, index=&amp;quot;chr1_mm10&amp;quot;)
+
+# parameters
+args(align)
+
+# check result
+bam.files &amp;lt;- list.files(pattern = &amp;quot;.BAM$&amp;quot;, full.names = TRUE)
+bam.files
+# properties of BAM files
+propmapped(files=bam.files)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-fastq-from-sra-database&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Get fastq from SRA database&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(SRAdb) # SRA database
+dir.create(&amp;quot;~/SRA&amp;quot;)
+setwd(&amp;quot;~/SRA&amp;quot;)
+
+## Create database
+sqlfile &amp;lt;-&amp;#39;SRAmetadb.sqlite&amp;#39;
+# load database [~3 Gb, 60 Gb on disc!!!]
+if(!file.exists(&amp;#39;SRAmetadb.sqlite&amp;#39;)) sqlfile &amp;lt;&amp;lt;- getSRAdbFile()
+# connect database
+sra_con &amp;lt;- dbConnect(SQLite(), sqlfile)
+
+## get info for SRA from created database
+sraInf &amp;lt;- getSRAinfo(&amp;quot;SRP045534&amp;quot;, sra_con, sraType=&amp;quot;sra&amp;quot;)
+sraInf
+
+# download SRA
+# get SRA using SRA info [~ 5 Gb]
+sapply(sraInf$run, function(x) try(getSRAfile(x, sra_con, fileType=&amp;quot;sra&amp;quot;), silent=TRUE))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;## extract FASTQ from SRA
+cd ~/SRA
+for sra in *.sra
+  do
+    fastq-dump $sra
+  done&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RNA-seq analysis in R</title>
+      <link>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(edgeR)
+library(limma)
+library(Glimma) 
+library(gplots)
+library(org.Mm.eg.db)
+library(RColorBrewer)
+
+# Preprocessing of expression data
+# dataset: https://figshare.com/s/1d788fd384d33e913a2a
+setwd(&amp;quot;~/data/&amp;quot;)
+
+# load data
+sampleinfo &amp;lt;- read.delim(&amp;quot;SampleInfo.txt&amp;quot;)
+seqdata &amp;lt;- read.delim(&amp;quot;GSE60450_Lactation-GenewiseCounts.txt&amp;quot;, stringsAsFactors = FALSE)
+head(seqdata)
+# format data
+# Remove first two columns from seqdata
+exp &amp;lt;- seqdata[,-(1:2)]
+
+# Store EntrezGeneID as rownames
+rownames(exp) &amp;lt;- seqdata[,1]
+head(exp)
+
+# make shorter sample names
+colnames(exp) &amp;lt;- substr(colnames(exp), start=1, stop=7)
+head(exp)
+
+# Counts per Million (CPM)
+myCPM &amp;lt;- edgeR::cpm(exp)
+# Have a look at the output
+head(myCPM)
+
+# TRUE if CPM &amp;gt; 0.5
+thresh &amp;lt;- myCPM &amp;gt; 0.5
+# logical matrix
+head(thresh)
+
+# How many genes with CPM &amp;gt; 0.5
+table(rowSums(thresh))
+
+# keep genes that have at least 2 TRUES in each row of thresh
+fltr &amp;lt;- rowSums(thresh) &amp;gt;= 2
+# Subset the rows of countdata to keep the more highly expressed genes
+exp.fltr &amp;lt;- exp[fltr,]
+summary(exp.fltr)
+dim(exp.fltr)
+
+# We will look at the first sample
+plot(myCPM[,1],countdata[,1])
+# Let us limit the x and y-axis so we can actually look to see what is happening at the smaller counts
+plot(myCPM[,1],countdata[,1],ylim=c(0,50),xlim=c(0,3))
+# Add a vertical line at 0.5 CPM
+abline(v=0.5)
+
+### Digital Gene Expression List from edgeR
+# Convert counts to DGEList object
+dgeObj &amp;lt;- edge::DGEList(exp.fltr)
+# have a look at dgeObj
+dgeObj
+# See what slots are stored in dgeObj
+names(dgeObj)
+# Library size information is stored in the samples slot
+dgeObj$samples
+
+# Library sizes and distribution plot
+dgeObj$samples$lib.size
+
+
+# The names argument tells the barplot to use the sample names on the x-axis
+# The las argument rotates the axis names
+barplot(dgeObj$samples$lib.size, names=colnames(dgeObj), las=2, main=&amp;quot;Barplot of library sizes&amp;quot;)
+
+# Get log2 counts per million
+logcounts &amp;lt;- cpm(dgeObj,log=TRUE)
+# Check distributions of samples using boxplots
+boxplot(logcounts, xlab=&amp;quot;&amp;quot;, ylab=&amp;quot;Log2 counts per million&amp;quot;, las=2,
+        main = &amp;quot;Boxplots of logCPMs (unnormalised)&amp;quot;)
+# Let&amp;#39;s add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(logcounts),col=&amp;quot;blue&amp;quot;)
+
+plotMDS(dgeObj)
+# We specify the option to let us plot two plots side-by-sde
+par(mfrow=c(1,2))
+# Let&amp;#39;s set up colour schemes for CellType
+# How many cell types and in what order are they stored?
+levels(sampleinfo$CellType)
+## Let&amp;#39;s choose purple for basal and orange for luminal
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+data.frame(sampleinfo$CellType, col.cell)
+
+# Redo the MDS with cell type colouring
+plotMDS(dgeObj,col=col.cell)
+# Let&amp;#39;s add a legend to the plot so we know which colours correspond to which cell type
+legend(&amp;quot;topleft&amp;quot;, fill=c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;), legend=levels(sampleinfo$CellType))
+# Add a title
+title(&amp;quot;Cell type&amp;quot;)
+
+# Similarly for status
+levels(sampleinfo$Status)
+col.status &amp;lt;- c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;)[sampleinfo$Status]
+col.status
+plotMDS(dgeObj, col=col.status)
+legend(&amp;quot;topleft&amp;quot;, fill=c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;),
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&amp;quot;Status&amp;quot;)
+
+# There is a sample info corrected file in your data directory
+# Old sampleinfo
+sampleinfo
+# I&amp;#39;m going to write over the sampleinfo object with the corrected sample info
+sampleinfo &amp;lt;- read.delim(&amp;quot;data/SampleInfo_Corrected.txt&amp;quot;)
+sampleinfo
+
+# Redo the MDSplot with corrected information
+par(mfrow=c(1,2))
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+col.status &amp;lt;- c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;)[sampleinfo$Status]
+
+
+plotMDS(dgeObj,col=col.cell)
+legend(&amp;quot;topleft&amp;quot;,fill=c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;),
+       legend=levels(sampleinfo$CellType))
+title(&amp;quot;Cell type&amp;quot;)
+
+
+plotMDS(dgeObj,col=col.status)
+legend(&amp;quot;topleft&amp;quot;,fill=c(&amp;quot;blue&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;dark green&amp;quot;), 
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&amp;quot;Status&amp;quot;)
+
+# Dimension 3 appears to separate pregnant samples from the rest. Dim4?
+plotMDS(dgeObj,dim=c(3,4))
+
+labels &amp;lt;- paste(sampleinfo$SampleName, sampleinfo$CellType, sampleinfo$Status)
+group &amp;lt;- paste(sampleinfo$CellType,sampleinfo$Status,sep=&amp;quot;.&amp;quot;)
+group &amp;lt;- factor(group)
+glMDSPlot(dgeObj, labels=labels, groups=group, folder=&amp;quot;mds&amp;quot;)
+
+# Hierarchical clustering with heatmaps
+
+# We estimate the variance for each row in the logcounts matrix
+var_genes &amp;lt;- apply(logcounts, 1, var)
+head(var_genes)
+# Get the gene names for the top 500 most variable genes
+select_var &amp;lt;- names(sort(var_genes, decreasing=TRUE))[1:500]
+head(select_var)
+# Subset logcounts matrix
+highly_variable_lcpm &amp;lt;- logcounts[select_var,]
+dim(highly_variable_lcpm)
+head(highly_variable_lcpm)
+
+## Get some nicer colours
+mypalette &amp;lt;- brewer.pal(11,&amp;quot;RdYlBu&amp;quot;)
+morecols &amp;lt;- colorRampPalette(mypalette)
+# Set up colour vector for celltype variable
+col.cell &amp;lt;- c(&amp;quot;purple&amp;quot;,&amp;quot;orange&amp;quot;)[sampleinfo$CellType]
+
+# Plot the heatmap
+heatmap.2(highly_variable_lcpm, 
+          col=rev(morecols(50)),
+          trace=&amp;quot;column&amp;quot;, 
+          main=&amp;quot;Top 500 most variable genes across samples&amp;quot;,
+          ColSideColors=col.cell,scale=&amp;quot;row&amp;quot;)
+
+# Save the heatmap
+png(file=&amp;quot;High_var_genes.heatmap.png&amp;quot;)
+heatmap.2(highly_variable_lcpm,col=rev(morecols(50)), trace=&amp;quot;none&amp;quot;,
+          main=&amp;quot;Top 500 most variable genes\nacross samples&amp;quot;, 
+          ColSideColors=col.cell,scale=&amp;quot;row&amp;quot;)
+dev.off()
+
+# Normalization for composition bias
+# Apply normalisation to DGEList object
+dgeObj &amp;lt;- calcNormFactors(dgeObj)
+
+dgeObj$samples
+
+par(mfrow=c(1,2))
+plotMD(logcounts,column = 7)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+plotMD(logcounts,column = 11)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+par(mfrow=c(1,2))
+plotMD(dgeObj,column = 7)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+plotMD(dgeObj,column = 11)
+abline(h=0,col=&amp;quot;grey&amp;quot;)
+
+save(group,dgeObj,sampleinfo,file=&amp;quot;Robjects/preprocessing.Rdata&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -2986,35 +3874,6 @@ boot(Auto, statistic.2, 1000)&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Bibiography&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;http://faculty.marshall.usc.edu/gareth-james/&#34;&gt;An Introduction to Statistical Learning by Gareth James&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;https://afit-r.github.io&#34;&gt;Air Forse Institute of Technology&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>R tips and coding tricks</title>
-      <link>/post/programming/r_tips_tricks/r_tips_tricks/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/programming/r_tips_tricks/r_tips_tricks/</guid>
-      <description>
-
-
-&lt;p&gt;Here you can find some simple interesting concepts for coding in R.&lt;/p&gt;
-&lt;div id=&#34;how-to-select-all-numeric-columns-in-a-data-frame&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;How to select all numeric columns in a data frame?&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df = data.frame(x = c(1:3),
-                y = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;),
-                z = c(0.1, 0.2, 0.3))
-df&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   x y   z
-## 1 1 A 0.1
-## 2 2 B 0.2
-## 3 3 C 0.3&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select all numeric columns
-df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   x   z
-## 1 1 0.1
-## 2 2 0.2
-## 3 3 0.3&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>

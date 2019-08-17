@@ -1,0 +1,88 @@
+---
+title: "Genome Wide Associated Studies (GWAS)"
+author: "Mark Goldberg"
+date: '2019-08-14'
+draft: false
+math: true
+tags: ["R", "GWAS"]
+categories: ["Bioinformatics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Genome Wide Associated Studies (GWAS)"
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#snp-analysis-using-snpasoc-r-package">SNP analysis using SNPasoc R package</a></li>
+<li><a href="#gwas-using-plink">GWAS using PLINK</a></li>
+</ul>
+</div>
+
+<div id="snp-analysis-using-snpasoc-r-package" class="section level1">
+<h1>SNP analysis using SNPasoc R package</h1>
+<p>Example demonstrate an association test for an illness for one single SNP.</p>
+<pre class="r"><code>install.packages(&quot;SNPassoc&quot;)
+library(&quot;SNPassoc&quot;)
+data(SNPs)
+head(SNPs)
+head(SNPs.info.pos)
+
+# select 6-40 SNP and create SNP object
+mySNP &lt;- setupSNP(SNPs, 6:40, sep=&quot;&quot;)
+
+# casco - 1 for case, 0 for control)
+mySNP
+
+# association test
+res &lt;- association(casco~sex+snp10001+blood.pre, data = mySNP,
+                     model.interaction = c(&quot;dominant&quot;,&quot;codominant&quot;))
+res</code></pre>
+<p>0 - control sample size<br />
+% - percent for each variant<br />
+1 - case sample size<br />
+% - percent for each varian<br />
+OR - odd ratio<br />
+lower/upper - 95% confidence interval for odd ratio<br />
+p-value of likelihood ratio test<br />
+AIC - Akaike Information Criterion</p>
+<pre class="r"><code># association scan for SNPs - separately for all models
+res &lt;- WGassociation(protein, data = mySNP, model = &#39;all&#39;) # same formula as protein~1,
+# p-values for dominant model
+dominant(res)
+# p-values for recessive model
+recessive(res)
+# complete statistics
+WGstats(res)
+summary(res)
+
+# Plot p-values for all models
+plot(res)
+
+# whole genome association - one log model
+resHapMap &lt;- WGassociation(protein, data= mySNP, model=&#39;log&#39;)
+plot(resHapMap)
+
+Another examplw for all genome association
+# two population groups (CEU and YRI), 60 samples for each group
+data(HapMap)
+str(HapMap)
+str(HapMap.SNPs.pos)
+# SNP class object
+myHapMap &lt;- setupSNP(HapMap, colSNPs=3:9307, sort=TRUE, info=HapMap.SNPs.pos, sep=&quot;&quot;)
+
+# association for dominant model
+myHapMapres &lt;- WGassociation(group, data= myHapMap, model=&quot;dominant&quot;)
+
+head(myHapMapres)
+print(myHapMapres)
+# plot association for all chromosomes
+
+plot(myHapMapres, whole=TRUE)</code></pre>
+</div>
+<div id="gwas-using-plink" class="section level1">
+<h1>GWAS using PLINK</h1>
+<p>The PLINK format of the GWAS data consists of two separate files, one containing the <em>SNP information</em> (.ped)and the other containing the <em>mapping information</em> (.map). For dependence analysis, it can be combined with the phenotype data separately.</p>
+</div>

@@ -1,0 +1,208 @@
+---
+title: "RNA-seq analysis in R"
+author: "Mark Goldberg"
+date: '2019-08-14'
+draft: false
+math: true
+tags: ["R", "RNA-seq"]
+categories: ["Bioinformatics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Analysis of RNA-seq in R."
+---
+
+
+
+<pre class="r"><code>library(edgeR)
+library(limma)
+library(Glimma) 
+library(gplots)
+library(org.Mm.eg.db)
+library(RColorBrewer)
+
+# Preprocessing of expression data
+# dataset: https://figshare.com/s/1d788fd384d33e913a2a
+setwd(&quot;~/data/&quot;)
+
+# load data
+sampleinfo &lt;- read.delim(&quot;SampleInfo.txt&quot;)
+seqdata &lt;- read.delim(&quot;GSE60450_Lactation-GenewiseCounts.txt&quot;, stringsAsFactors = FALSE)
+head(seqdata)
+# format data
+# Remove first two columns from seqdata
+exp &lt;- seqdata[,-(1:2)]
+
+# Store EntrezGeneID as rownames
+rownames(exp) &lt;- seqdata[,1]
+head(exp)
+
+# make shorter sample names
+colnames(exp) &lt;- substr(colnames(exp), start=1, stop=7)
+head(exp)
+
+# Counts per Million (CPM)
+myCPM &lt;- edgeR::cpm(exp)
+# Have a look at the output
+head(myCPM)
+
+# TRUE if CPM &gt; 0.5
+thresh &lt;- myCPM &gt; 0.5
+# logical matrix
+head(thresh)
+
+# How many genes with CPM &gt; 0.5
+table(rowSums(thresh))
+
+# keep genes that have at least 2 TRUES in each row of thresh
+fltr &lt;- rowSums(thresh) &gt;= 2
+# Subset the rows of countdata to keep the more highly expressed genes
+exp.fltr &lt;- exp[fltr,]
+summary(exp.fltr)
+dim(exp.fltr)
+
+# We will look at the first sample
+plot(myCPM[,1],countdata[,1])
+# Let us limit the x and y-axis so we can actually look to see what is happening at the smaller counts
+plot(myCPM[,1],countdata[,1],ylim=c(0,50),xlim=c(0,3))
+# Add a vertical line at 0.5 CPM
+abline(v=0.5)
+
+### Digital Gene Expression List from edgeR
+# Convert counts to DGEList object
+dgeObj &lt;- edge::DGEList(exp.fltr)
+# have a look at dgeObj
+dgeObj
+# See what slots are stored in dgeObj
+names(dgeObj)
+# Library size information is stored in the samples slot
+dgeObj$samples
+
+# Library sizes and distribution plot
+dgeObj$samples$lib.size
+
+
+# The names argument tells the barplot to use the sample names on the x-axis
+# The las argument rotates the axis names
+barplot(dgeObj$samples$lib.size, names=colnames(dgeObj), las=2, main=&quot;Barplot of library sizes&quot;)
+
+# Get log2 counts per million
+logcounts &lt;- cpm(dgeObj,log=TRUE)
+# Check distributions of samples using boxplots
+boxplot(logcounts, xlab=&quot;&quot;, ylab=&quot;Log2 counts per million&quot;, las=2,
+        main = &quot;Boxplots of logCPMs (unnormalised)&quot;)
+# Let&#39;s add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(logcounts),col=&quot;blue&quot;)
+
+plotMDS(dgeObj)
+# We specify the option to let us plot two plots side-by-sde
+par(mfrow=c(1,2))
+# Let&#39;s set up colour schemes for CellType
+# How many cell types and in what order are they stored?
+levels(sampleinfo$CellType)
+## Let&#39;s choose purple for basal and orange for luminal
+col.cell &lt;- c(&quot;purple&quot;,&quot;orange&quot;)[sampleinfo$CellType]
+data.frame(sampleinfo$CellType, col.cell)
+
+# Redo the MDS with cell type colouring
+plotMDS(dgeObj,col=col.cell)
+# Let&#39;s add a legend to the plot so we know which colours correspond to which cell type
+legend(&quot;topleft&quot;, fill=c(&quot;purple&quot;,&quot;orange&quot;), legend=levels(sampleinfo$CellType))
+# Add a title
+title(&quot;Cell type&quot;)
+
+# Similarly for status
+levels(sampleinfo$Status)
+col.status &lt;- c(&quot;blue&quot;,&quot;red&quot;,&quot;dark green&quot;)[sampleinfo$Status]
+col.status
+plotMDS(dgeObj, col=col.status)
+legend(&quot;topleft&quot;, fill=c(&quot;blue&quot;,&quot;red&quot;,&quot;dark green&quot;),
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&quot;Status&quot;)
+
+# There is a sample info corrected file in your data directory
+# Old sampleinfo
+sampleinfo
+# I&#39;m going to write over the sampleinfo object with the corrected sample info
+sampleinfo &lt;- read.delim(&quot;data/SampleInfo_Corrected.txt&quot;)
+sampleinfo
+
+# Redo the MDSplot with corrected information
+par(mfrow=c(1,2))
+col.cell &lt;- c(&quot;purple&quot;,&quot;orange&quot;)[sampleinfo$CellType]
+col.status &lt;- c(&quot;blue&quot;,&quot;red&quot;,&quot;dark green&quot;)[sampleinfo$Status]
+
+
+plotMDS(dgeObj,col=col.cell)
+legend(&quot;topleft&quot;,fill=c(&quot;purple&quot;,&quot;orange&quot;),
+       legend=levels(sampleinfo$CellType))
+title(&quot;Cell type&quot;)
+
+
+plotMDS(dgeObj,col=col.status)
+legend(&quot;topleft&quot;,fill=c(&quot;blue&quot;,&quot;red&quot;,&quot;dark green&quot;), 
+       legend=levels(sampleinfo$Status), cex=0.8)
+title(&quot;Status&quot;)
+
+# Dimension 3 appears to separate pregnant samples from the rest. Dim4?
+plotMDS(dgeObj,dim=c(3,4))
+
+labels &lt;- paste(sampleinfo$SampleName, sampleinfo$CellType, sampleinfo$Status)
+group &lt;- paste(sampleinfo$CellType,sampleinfo$Status,sep=&quot;.&quot;)
+group &lt;- factor(group)
+glMDSPlot(dgeObj, labels=labels, groups=group, folder=&quot;mds&quot;)
+
+# Hierarchical clustering with heatmaps
+
+# We estimate the variance for each row in the logcounts matrix
+var_genes &lt;- apply(logcounts, 1, var)
+head(var_genes)
+# Get the gene names for the top 500 most variable genes
+select_var &lt;- names(sort(var_genes, decreasing=TRUE))[1:500]
+head(select_var)
+# Subset logcounts matrix
+highly_variable_lcpm &lt;- logcounts[select_var,]
+dim(highly_variable_lcpm)
+head(highly_variable_lcpm)
+
+## Get some nicer colours
+mypalette &lt;- brewer.pal(11,&quot;RdYlBu&quot;)
+morecols &lt;- colorRampPalette(mypalette)
+# Set up colour vector for celltype variable
+col.cell &lt;- c(&quot;purple&quot;,&quot;orange&quot;)[sampleinfo$CellType]
+
+# Plot the heatmap
+heatmap.2(highly_variable_lcpm, 
+          col=rev(morecols(50)),
+          trace=&quot;column&quot;, 
+          main=&quot;Top 500 most variable genes across samples&quot;,
+          ColSideColors=col.cell,scale=&quot;row&quot;)
+
+# Save the heatmap
+png(file=&quot;High_var_genes.heatmap.png&quot;)
+heatmap.2(highly_variable_lcpm,col=rev(morecols(50)), trace=&quot;none&quot;,
+          main=&quot;Top 500 most variable genes\nacross samples&quot;, 
+          ColSideColors=col.cell,scale=&quot;row&quot;)
+dev.off()
+
+# Normalization for composition bias
+# Apply normalisation to DGEList object
+dgeObj &lt;- calcNormFactors(dgeObj)
+
+dgeObj$samples
+
+par(mfrow=c(1,2))
+plotMD(logcounts,column = 7)
+abline(h=0,col=&quot;grey&quot;)
+plotMD(logcounts,column = 11)
+abline(h=0,col=&quot;grey&quot;)
+
+par(mfrow=c(1,2))
+plotMD(dgeObj,column = 7)
+abline(h=0,col=&quot;grey&quot;)
+
+plotMD(dgeObj,column = 11)
+abline(h=0,col=&quot;grey&quot;)
+
+save(group,dgeObj,sampleinfo,file=&quot;Robjects/preprocessing.Rdata&quot;)</code></pre>

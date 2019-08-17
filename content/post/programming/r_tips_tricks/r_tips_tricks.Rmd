@@ -1,11 +1,16 @@
 ---
 title: "R tips and coding tricks"
-author: "Mark Boltengagen"
+author: "Mark Goldberg"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 draft: false
 math: true
-tags: ["R"]
-categories: ["R"]
+tags: ["GWAS"]
+categories: ["Biology"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Here you can find some simple interesting concepts for coding in R."
 ---
 
 Here you can find some simple interesting concepts for coding in R.

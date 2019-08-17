@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Practical example showing how to generate data set using given function, how to split data, buld spline model on train data and how to use test data to find optimal parameters of the model.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/statistics/splines/splines/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/statistics/splines/splines/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/statistics/splines/splines/">
+  <meta property="og:title" content="Spline model | Mark Goldberg">
+  <meta property="og:description" content="Practical example showing how to generate data set using given function, how to split data, buld spline model on train data and how to use test data to find optimal parameters of the model."><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-01T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-01T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Spline model | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/bioinformatics/"><span>Bioinformatics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Spline model</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-01 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 1, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/statistics/splines/splines/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/statistics/">Statistics</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/statistics/splines/splines/&amp;text=Spline%20model" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/splines/splines/&amp;t=Spline%20model" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Spline%20model&amp;body=/post/statistics/splines/splines/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/splines/splines/&amp;title=Spline%20model" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Spline%20model%20/post/statistics/splines/splines/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/splines/splines/&amp;title=Spline%20model" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#generate-dataset-from-a-given-function">Generate dataset from a given function</a></li>
+<li><a href="#split-data-for-train-and-test">Split data for train and test</a></li>
+<li><a href="#diagram-of-the-given-function-and-generated-datasets">Diagram of the given function and generated datasets</a></li>
+<li><a href="#build-a-model-using-splines">Build a model using splines</a></li>
+<li><a href="#diagram-of-mse-for-train-and-test-data">Diagram of MSE for train and test data</a></li>
+<li><a href="#build-optimal-model-and-plot-for-the-model">Build optimal model and plot for the model</a></li>
+<li><a href="#bibliograpy">Bibliograpy</a></li>
+</ul>
+</div>
+
+<p>In this example we will generate data from a given function and then build a model using splines and estimate quality of the model.</p>
+<div id="generate-dataset-from-a-given-function" class="section level2">
+<h2>Generate dataset from a given function</h2>
+<pre class="r"><code># parameters to generate a dataset
+n.all &lt;- 100             # number of observations
+train.percent &lt;- 0.85    # portion of the data for training
+res.sd &lt;- 1              # standard deviation of noise
+x.min &lt;- 5               # min limit of the data
+x.max &lt;- 105             # max limit of the data
+
+# generate x
+set.seed(1)       # to get reproducible results by randomizer
+x &lt;- runif(x.min, x.max, n = n.all)
+
+# noise from normal destibution
+set.seed(1)
+res &lt;- rnorm(mean = 0, sd = res.sd, n = n.all)
+
+# generate y using a given function
+y.func &lt;- function(x) {4 - 2e-02*x + 5.5e-03*x^2 - 4.9e-05*x^3}
+
+# add noise
+y &lt;- y.func(x) + res</code></pre>
+</div>
+<div id="split-data-for-train-and-test" class="section level2">
+<h2>Split data for train and test</h2>
+<pre class="r"><code># split dataset for training and test
+set.seed(1)
+# generate vector of chosen x for train data
+inTrain &lt;- sample(seq_along(x), size = train.percent*n.all)
+
+# train data set
+x.train &lt;- x[inTrain]
+y.train &lt;- y[inTrain]
+
+# test data set
+x.test &lt;- x[-inTrain]
+y.test &lt;- y[-inTrain]</code></pre>
+</div>
+<div id="diagram-of-the-given-function-and-generated-datasets" class="section level2">
+<h2>Diagram of the given function and generated datasets</h2>
+<pre class="r"><code># lines of generated data for plot
+x.line &lt;- seq(x.min, x.max, length = n.all)
+y.line &lt;- y.func(x.line)
+
+# PLOT
+# generate plot by train data
+par(mar = c(4, 4, 1, 1)) # reduce margins (optional)
+plot(x.train, y.train,
+     main = &#39;Generated data and original function&#39;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &#39;X&#39;, ylab = &#39;Y&#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add points of test data
+points(x.test, y.test, col = &#39;red&#39;, bg = &#39;red&#39;, pch = 21)
+
+# add the given function
+lines(x.line, y.line, lwd = 2, lty = 2)
+
+# add legend
+legend(&#39;topleft&#39;, legend = c(&#39;train&#39;, &#39;test&#39;, &#39;f(X)&#39;),
+       pch = c(16, 16, NA), 
+       col = c(grey(0.2), &#39;red&#39;, &#39;black&#39;),  
+       lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="build-a-model-using-splines" class="section level2">
+<h2>Build a model using splines</h2>
+<p>We will compair sevaral models with degree of freedoms (df) from 2 to 40, where 2 correspond to a linear model.</p>
+<pre class="r"><code>max.df &lt;- 40                       # max degree of freedom (df)
+# 
+tbl &lt;- data.frame(df = 2:max.df)   # data frame for writing errors
+tbl$MSE.train &lt;- 0                 # column 1: errors of train data
+tbl$MSE.test &lt;- 0                  # сcolumn 2: errors of test data
+
+# generate models using for cycle
+for (i in 2:max.df) {
+    mod &lt;- smooth.spline(x = x.train, y = y.train, df = i)
+    
+    # predicted values for train and test data using built model
+    y.model.train &lt;- predict(mod, data.frame(x = x.train))$y[, 1]
+    y.model.test &lt;- predict(mod, data.frame(x = x.test))$y[, 1]
+    
+    # MSE errors for train and test data
+    MSE &lt;- c(sum((y.train - y.model.train)^2) / length(x.train),
+             sum((y.test - y.model.test)^2) / length(x.test))
+    
+    # write errors to the previously created data frame
+    tbl[tbl$df == i, c(&#39;MSE.train&#39;, &#39;MSE.test&#39;)] &lt;- MSE
+}
+
+# view first rows of the table
+head(tbl, 4)</code></pre>
+<pre><code>##   df MSE.train MSE.test
+## 1  2 3.7188566 2.885166
+## 2  3 1.4463925 1.635813
+## 3  4 0.8938817 1.239533
+## 4  5 0.7668250 1.038918</code></pre>
+</div>
+<div id="diagram-of-mse-for-train-and-test-data" class="section level2">
+<h2>Diagram of MSE for train and test data</h2>
+<pre class="r"><code># plot MSE from our table
+plot(x = tbl$df, y = tbl$MSE.test,
+     main = &quot;Changes of MSE from degrees of freedom&quot;,
+     type = &#39;l&#39;, col = &#39;red&#39;, lwd = 2,
+     xlab = &#39;spline degree of freedom&#39;, ylab = &#39;MSE&#39;,
+     ylim = c(min(tbl$MSE.train, tbl$MSE.test), 
+              max(tbl$MSE.train, tbl$MSE.test)),
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add 
+points(x = tbl$df, y = tbl$MSE.test,
+       pch = 21, col = &#39;red&#39;, bg = &#39;red&#39;)
+lines(x = tbl$df, y = tbl$MSE.train, col = grey(0.3), lwd = 2)
+# minimal MSE
+abline(h = res.sd, lty = 2, col = grey(0.4), lwd = 2)
+
+# add legend
+legend(&#39;topright&#39;, legend = c(&#39;train&#39;, &#39;test&#39;),
+       pch = c(NA, 16), 
+       col = c(grey(0.2), &#39;red&#39;),  
+       lty = c(1, 1), lwd = c(2, 2), cex = 1.2)
+
+# df of minimal MSE for test data
+min.MSE.test &lt;- min(tbl$MSE.test)
+df.min.MSE.test &lt;- tbl[tbl$MSE.test == min.MSE.test, &#39;df&#39;]
+
+# optimal df for precise model and maximal simplicity
+df.my.MSE.test &lt;- 6
+my.MSE.test &lt;- tbl[tbl$df == df.my.MSE.test, &#39;MSE.test&#39;]
+
+# show the optimal solution
+abline(v = df.my.MSE.test, 
+       lty = 2, lwd = 2)
+points(x = df.my.MSE.test, y = my.MSE.test, 
+       pch = 15, col = &#39;blue&#39;)
+mtext(df.my.MSE.test, 
+      side = 1, line = -1, at = df.my.MSE.test, col = &#39;blue&#39;, cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="build-optimal-model-and-plot-for-the-model" class="section level2">
+<h2>Build optimal model and plot for the model</h2>
+<pre class="r"><code>mod.MSE.test &lt;- smooth.spline(x = x.train, y = y.train, df = df.my.MSE.test)
+
+# predict data for 250 x&#39;s to get smoothed curve
+x.model.plot &lt;- seq(x.min, x.max, length = 250)
+y.model.plot &lt;- predict(mod.MSE.test, data.frame(x = x.model.plot))$y[, 1]
+
+# plot train data
+par(mar = c(4, 4, 1, 1))
+plot(x.train, y.train,
+     main = &quot;Initial data and the best fit model&quot;,
+     col = grey(0.2), bg = grey(0.2), pch = 21,
+     xlab = &#39;X&#39;, ylab = &#39;Y&#39;, 
+     xlim = c(x.min, x.max),
+     ylim = c(min(y), max(y)), 
+     cex = 1.2, cex.lab = 1.2, cex.axis = 1.2)
+
+# add test data
+points(x.test, y.test, col = &#39;red&#39;, bg = &#39;red&#39;, pch = 21)
+
+# function
+lines(x.line, y.line,lwd = 2, lty = 2)
+
+# add model
+lines(x.model.plot, y.model.plot, lwd = 2, col = &#39;blue&#39;)
+
+# legend
+legend(&#39;topleft&#39;, legend = c(&#39;train&#39;, &#39;test&#39;, &#39;f(X)&#39;, &#39;model&#39;),
+       pch = c(16, 16, NA, NA), 
+       col = c(grey(0.2), &#39;red&#39;, &#39;black&#39;, &#39;blue&#39;),  
+       lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)</code></pre>
+<p><img src="/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="bibliograpy" class="section level2">
+<h2>Bibliograpy</h2>
+<p><a href="http://faculty.marshall.usc.edu/gareth-james/">An Introduction to Statistical Learning by Gareth James</a></p>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/splines/">Splines</a>
+  
+  <a class="badge badge-light" href="/tags/regression/">Regression</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/programming/r_tips_tricks/r_tips_tricks/">R tips and coding tricks</a></li>
+          
+          <li><a href="/post/statistics/markov_process/simple_markov_process/">Simple Markov process</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

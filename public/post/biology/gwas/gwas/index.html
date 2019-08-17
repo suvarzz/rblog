@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Theory of Genome-Wide Association Studies (GWAS)">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/biology/gwas/gwas/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/biology/gwas/gwas/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/biology/gwas/gwas/">
+  <meta property="og:title" content="Genome-Wide Association Studies (GWAS) | Mark Goldberg">
+  <meta property="og:description" content="Theory of Genome-Wide Association Studies (GWAS)"><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-14T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-14T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Genome-Wide Association Studies (GWAS) | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/bioinformatics/"><span>Bioinformatics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Genome-Wide Association Studies (GWAS)</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-14 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-14 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 14, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    26 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/biology/gwas/gwas/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/biology/">Biology</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/biology/gwas/gwas/&amp;text=Genome-Wide%20Association%20Studies%20%28GWAS%29" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/biology/gwas/gwas/&amp;t=Genome-Wide%20Association%20Studies%20%28GWAS%29" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Genome-Wide%20Association%20Studies%20%28GWAS%29&amp;body=/post/biology/gwas/gwas/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/biology/gwas/gwas/&amp;title=Genome-Wide%20Association%20Studies%20%28GWAS%29" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Genome-Wide%20Association%20Studies%20%28GWAS%29%20/post/biology/gwas/gwas/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/biology/gwas/gwas/&amp;title=Genome-Wide%20Association%20Studies%20%28GWAS%29" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#gwas">GWAS</a></li>
+<li><a href="#polygenic-score">Polygenic score</a><ul>
+<li><a href="#tools-for-prs-calculation">Tools for PRS calculation</a></li>
+</ul></li>
+<li><a href="#single-nucleotide-polymorphism">Single-nucleotide polymorphism</a><ul>
+<li><a href="#genetic-association">Genetic association</a></li>
+<li><a href="#expression-quantitative-trait-locus-eqtl">Expression quantitative trait locus (eQTL)</a></li>
+</ul></li>
+<li><a href="#snp-genotyping">SNP genotyping</a><ul>
+<li><a href="#expression-quantitative-trait-loci">Expression quantitative trait loci</a></li>
+<li><a href="#odds-ratio">Odds ratio</a></li>
+<li><a href="#risk-ratio">Risk ratio</a></li>
+<li><a href="#fev1fvc-ratio">FEV1/FVC ratio</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="gwas" class="section level1">
+<h1>GWAS</h1>
+<p>To correctly account for the large number of statistical tests in genome-wide studies, a significance level of 5 × 10^8 was shown to effectively control type-I error rate.</p>
+</div>
+<div id="polygenic-score" class="section level1">
+<h1>Polygenic score</h1>
+<p><strong>Polygenic score</strong> also known as <strong>genetic risk score</strong> and <strong>polygenic risc score</strong> is an individual‐level score that is calculated based on <em>variation in multiple genetic loci</em> and their <em>associated weights</em>, derived from GWAS (genetic markers, usually SNPs). Other words, the <strong>number of risk variants</strong> that a person carries, <strong>weighted by SNP effect sizes</strong> that are derived from an independent large‐scaled discovery GWAS.</p>
+<p>It serves as the best prediction for the <em>trait</em> that can be made when taking into account <em>variation in multiple genetic variants</em>.<br />
+Polygenic risc score (PRS) combines the effect sizes of multiple SNPs into a single aggregated score that can be used to predict disease risk.<br />
+The scores can be used in a (logistic) regression analysis to predict any trait that is expected to show genetic overlap with the trait of interest.<br />
+The prediction accuracy can be expressed with the (pseudo‐)<span class="math inline">\(R^2\)</span> measure of the regression analysis.<br />
+It is important to include at least a few MDS components as covariates in the regression analysis to control for population stratification.<br />
+To estimate how much variation is explained by the PRS, the <span class="math inline">\(R^2\)</span> of a model that includes only the covariates (e.g., MDS components) and the R 2 of a model that includes covariates + PRS will be compared. The increase in R 2 due to the PRS indicates the increase in prediction accuracy explained by genetic risk factors.</p>
+<p>The prediction accuracy of PRS depends mostly on the (co‐)heritability of the analysed traits, the number of SNPs, and the size of the discovery sample. The size of the target sample only affects the reliability of R 2 and typically a few thousand of subjects in the target sample are sufficient to achieve a significant R 2 if the (co‐)heritability of the trait(s) of interest and the sample size of the discovery sample used are sufficiently large.</p>
+<div id="tools-for-prs-calculation" class="section level2">
+<h2>Tools for PRS calculation</h2>
+<ul>
+<li><a href="https://sites.google.com/site/fdudbridge/software">POLYGENE script</a><br />
+</li>
+<li><a href="http://prsice.info/">PRSice</a> | <a href="https://github.com/MareesAT/GWA_tutorial/">Tutorial for PRsice</a><br />
+</li>
+<li>PLINK ‐‐score</li>
+</ul>
+<p><strong>Effect sizes</strong> are estimated for each marker’s association with the trait of interest.<br />
+These weights are then used to assign individualized polygenic scores in an independent replication sample. The estimated score, <span class="math inline">\(\hat {S}\)</span>, generally follows the form:<br />
+<span class="math inline">\(\hat S = \sum_{j=1}^{m} X_j \hat\beta_j\)</span>, where<br />
+<span class="math inline">\(\hat S\)</span> of an individual is equal to the weighted sum of the individual’s marker genotypes,<br />
+<span class="math inline">\(X_{j}\)</span>, at <span class="math inline">\(m\)</span> SNPs (Dudbridge, 2013 Plos genetics). Weights are estimated using regression analysis.</p>
+<p><strong>Naïve methods</strong><br />
+The simplest so-called “naïve” method of construction sets weights equal to the coefficient estimates from a regression of the trait on each genetic variant. The included SNPs may be selected using an algorithm that attempts to ensure that each marker is approximately independent. Failing to account for non-random association of genetic variants will typically reduce the score’s predictive accuracy. This is important because genetic variants are often correlated with other nearby variants, such that the weight of a causal variant will be attenuated if it is more strongly correlated with its neighbors than a null variant. This is called linkage disequilibrium, a common phenomenon that arises from the shared evolutionary history of neighboring genetic variants. Further restriction can be achieved by multiple-testing different sets of SNPs selected at various thresholds, such as all SNPs which are genome-wide statistically-significant hits or all SNPs p &lt; 0.05 or all SNPs with p &lt; 0.50, and the one with greatest performance used for further analysis; especially for highly polygenic traits, the best polygenic score will tend to use most or all SNPs. (Ware, E. B.; et al. (2017). “Heterogeneity in polygenic scores for common human traits”. BioRxiv. <a href="doi:10.1101/106062" class="uri">doi:10.1101/106062</a>.)</p>
+<p><strong>Bayesian methods</strong><br />
+Bayesian approaches, originally pioneered in concept in 2001, attempt to explicitly model preexisting genetic architecture, thereby accounting for the distribution of effect sizes with a prior that should improve the accuracy of a polygenic score. One of the most popular modern Bayesian methods uses “linkage disequilibrium prediction” (LDpred for short) to set the weight for each SNP equal to the average of its posterior distribution after linkage disequilibrium has been accounted for. LDpred tends to outperform simpler methods of pruning and thresholding, especially at large sample sizes; for example, its estimations have improved the predicted variance of a polygenic score for schizophrenia in a large data set from 20.1% to 25.3%. (Vilhjálmsson, 2015)</p>
+<p><strong>Penalized regression</strong><br />
+Penalized regression methods, such as LASSO and ridge regression, can also be used to improve the accuracy of polygenic scores. Penalized regression can be interpreted as placing informative prior probabilities on how many genetic variants are expected to affect a trait, and the distribution of their effect sizes. In other words, these methods in effect “penalize” the large coefficients in a regression model and shrink them conservatively. Ridge regression accomplishes this by shrinking the prediction with a term that penalizes the sum of the squared coefficients. LASSO accomplishes something similar by penalizing the sum of absolute coefficients. Bayesian counterparts exist for LASSO and ridge regression, and other priors have been suggested and used. They can perform better in some circumstances. A multi-dataset, multi-method study found that of 15 different methods compared across four datasets, minimum redundancy maximum relevance was the best performing method. Furthermore, variable selection methods tended to outperform other methods. Variable selection methods do not use all the available genomic variants present in a dataset, but attempt to select an optimal subset of variants to use. This leads to less overfitting but more bias (see bias-variance tradeoff).</p>
+<p><strong>Predictive validity</strong><br />
+The benefit of polygenic score is that they can be used to predict the future. This has large practical benefits for animal breeding because it increases the selection precision and allows for shorter generations, both of which speed up evolution. For humans, it can be used to predict future disease susceptibility and for embryo selection.</p>
+<p><a href="https://en.wikipedia.org/wiki/Polygenic_score">Wikipedia: Polygenic score</a></p>
+<p>Genetic correlation</p>
+<p><a href="">Genetic correlation</a></p>
+</div>
+</div>
+<div id="single-nucleotide-polymorphism" class="section level1">
+<h1>Single-nucleotide polymorphism</h1>
+<p>SNP is a substitution of a single nucleotide that occures at a specific position in the genome, where each variation is present to some appreciable degree within a population (e.g. &gt; 1%). SNPs underline differences in our susceptibility to a wide range of diseases. More than 335 million SNPs have been found across humans from multiple populations. A typical genome differs from the reference human genome at 4 to 5 million sites, most of which (more than 99.9%) consist of SNPs and short indels.</p>
+<p>single-nucleotide variant (SNV) is a variation in a single nucleotide without any limitations of frequency and may arise in somatic cells. A somatic single-nucleotide variation (e.g., caused by cancer) may also be called a single-nucleotide alteration.</p>
+<p>SNPs in the coding region are of two types: synonymous and nonsynonymous SNPs. Synonymous SNPs do not affect the protein sequence, while nonsynonymous SNPs change the amino acid sequence of protein. The nonsynonymous SNPs are of two types: missense and nonsense. missense – single change in the base results in change in amino acid of protein and its malfunction which leads to disease.<br />
+nonsense – point mutation in a sequence of DNA that results in a premature stop codon, or a nonsense codon in the transcribed mRNA, and in a truncated, incomplete, and usually nonfunctional protein product.</p>
+<p>Databases As there are for genes, bioinformatics databases exist for SNPs.</p>
+<p>dbSNP is a SNP database from the National Center for Biotechnology Information (NCBI). As of June 8, 2015, dbSNP listed 149,735,377 SNPs in humans.[35][36] Kaviar[37] is a compendium of SNPs from multiple data sources including dbSNP. SNPedia is a wiki-style database supporting personal genome annotation, interpretation and analysis. The OMIM database describes the association between polymorphisms and diseases (e.g., gives diseases in text form) dbSAP – single amino-acid polymorphism database for protein variation detection[38] The Human Gene Mutation Database provides gene mutations causing or associated with human inherited diseases and functional SNPs The International HapMap Project, where researchers are identifying Tag SNPs to be able to determine the collection of haplotypes present in each subject. GWAS Central allows users to visually interrogate the actual summary-level association data in one or more genome-wide association studies.</p>
+<p>SNPs that are not in protein-coding regions may still affect gene splicing, transcription factor binding, messenger RNA degradation, or the sequence of noncoding RNA. Gene expression affected by this type of SNP is referred to as an eSNP (expression SNP) and may be upstream or downstream from the gene.</p>
+<p><a href="https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism">Wiki: SNP</a></p>
+<p>Association studies can determine whether a genetic variant is associated with a disease or trait.[6] A tag SNP is a representative single-nucleotide polymorphism in a region of the genome with high linkage disequilibrium (the non-random association of alleles at two or more loci). Tag SNPs are useful in whole-genome SNP association studies, in which hundreds of thousands of SNPs across the entire genome are genotyped. Haplotype mapping: sets of alleles or DNA sequences can be clustered so that a single SNP can identify many linked SNPs. Linkage disequilibrium (LD), a term used in population genetics, indicates non-random association of alleles at two or more loci, not necessarily on the same chromosome. It refers to the phenomenon that SNP allele or DNA sequence that are close together in the genome tend to be inherited together. LD is affected by two parameters: 1) The distance between the SNPs [the larger the distance, the lower the LD]. 2) Recombination rate [the lower the recombination rate, the higher the LD].[7]</p>
+<div id="genetic-association" class="section level2">
+<h2>Genetic association</h2>
+<p><a href="https://en.wikipedia.org/wiki/Genetic_association">Wiki: Genetic association</a><br />
+Genetic association is when one or more genotypes within a population co-occur with a phenotypic trait more often than would be expected by chance occurrence.</p>
+<p>Studies of genetic association aim to test whether single-locus alleles or genotype frequencies (or more generally, multilocus haplotype frequencies) differ between two groups of individuals (usually diseased subjects and healthy controls). Genetic association studies today are based on the principle that genotypes can be compared “directly”, i.e. with the sequences of the actual genomes or exomes via whole genome sequencing or whole exome sequencing. Before 2010, DNA sequencing methods were used. Genetic association can be between phenotypes, such as visible characteristics such as flower colour or height, between a phenotype and a genetic polymorphism, such as a single nucleotide polymorphism (SNP), or between two genetic polymorphisms. Association between genetic polymorphisms occurs when there is non-random association of their alleles as a result of their proximity on the same chromosome; this is known as genetic linkage.</p>
+<p>Linkage disequilibrium (LD) is a term used in the study of population genetics for the non-random association of alleles at two or more loci, not necessarily on the same chromosome. It is not the same as linkage, which is the phenomenon whereby two or more loci on a chromosome have reduced recombination between them because of their physical proximity to each other. LD describes a situation in which some combinations of alleles or genetic markers occur more or less frequently in a population than would be expected from a random formation of haplotypes from alleles based on their frequencies.</p>
+<p>Genetic association studies are performed to determine whether a genetic variant is associated with a disease or trait: if association is present, a particular allele, genotype or haplotype of a polymorphism or polymorphisms will be seen more often than expected by chance in an individual carrying the trait. Thus, a person carrying one or two copies of a high-risk variant is at increased risk of developing the associated disease or having the associated trait.</p>
+</div>
+<div id="expression-quantitative-trait-locus-eqtl" class="section level2">
+<h2>Expression quantitative trait locus (eQTL)</h2>
+<p>SNP prediciton tools: SIFT This program provides insight into how a laboratory induced missense or nonsynonymous mutation will affect protein function based on physical properties of the amino acid and sequence homology. LIST[48] (Local Identity and Shared Taxa) estimates the potential deleteriousness of mutations resulted from altering their protein functions. It is based on the assumption that variations observed in species closely related to human are more significant when assessing conservation compared to those in distantly related species. SNAP2 SuSPect PolyPhen-2 PredictSNP MutationTaster: official website Variant Effect Predictor from the Ensembl project SNPViz[49] This program provides a 3D representation of the protein affected, highlighting the amino acid change so doctors can determine pathogenicity of the mutant protein. PROVEAN PhyreRisk is a database which maps variants to experimental and predicted protein structures.[50] Missense3D is a tool which provides a stereochemical report on the effect of missense variants on protein structure.[51]</p>
+</div>
+</div>
+<div id="snp-genotyping" class="section level1">
+<h1>SNP genotyping</h1>
+<p><strong>SNP genotyping</strong> is the measurement of genetic variations of single nucleotide polymorphisms (SNPs) between members of a species. It is a form of genotyping, which is the measurement of more general genetic variation.</p>
+<p>Probabilistic methods for variant calling are based on Bayes’ Theorem. In the context of variant calling, Bayes’ Theorem defines the probability of each genotype being the true genotype given the observed data, in terms of the prior probabilities of each possible genotype, and the probability distribution of the data given each possible genotype. The formula is:</p>
+<p><span class="math inline">\(P(G|D) = \frac{P(D|G)P(G)}{P(D)} = \frac {P(D|G)P(G)}{\sum_{i=1}^{n} P(D|G_i) P(G_i)\)</span> In the above equation:</p>
+<p><span class="math inline">\(D\)</span> refers to the observed data; that is, the aligned reads <span class="math inline">\(G\)</span> is the genotype whose probability is being calculated <span class="math inline">\(G_i\)</span> refers to the ith possible genotype, out of n possibilities Given the above framework, different software solutions for detecting SNVs vary based on how they calculate the prior probabilities {P(G)} P(G), the error model used to model the probabilities {P(D|G)} P(D|G), and the partitioning of the overall genotypes into separate sub-genotypes, whose probabilities can be individually estimated in this framework.</p>
+<p>Prior genotype probability estimation The calculation of prior probabilities depends on available data from the genome being studied, and the type of analysis being performed. For studies where good reference data containing frequencies of known mutations is available (for example, in studying human genome data), these known frequencies of genotypes in the population can be used to estimate priors. Given population wide allele frequencies, prior genotype probabilities can be calculated at each locus according to the Hardy Weinberg Equilibrium.[6] In the absence of such data, constant priors can be used, independent of the locus. These can be set using heuristically chosen values, possibly informed by the kind of variations being sought by the study. Alternatively, supervised machine-learning procedures have been investigated that seek to learn optimal prior values for individuals in a sample, using supplied NGS data from these individuals.</p>
+<p><a href="https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data">Wiki: SNV calling from NGS data</a></p>
+<p>Hardy–Weinberg principle - The Hardy–Weinberg principle, also known as the Hardy–Weinberg equilibrium, model, theorem, or law, states that allele and genotype frequencies in a population will remain constant from generation to generation in the absence of other evolutionary influences. These influences include genetic drift, mate choice, assortative mating, natural selection, sexual selection, mutation, gene flow, meiotic drive, genetic hitchhiking, population bottleneck, founder effect and inbreeding.</p>
+<p>In the simplest case of a single locus with two alleles denoted A and a with frequencies f(A) = p and f(a) = q, respectively, the expected genotype frequencies under random mating are f(AA) = p2 for the AA homozygotes, f(aa) = q2 for the aa homozygotes, and f(Aa) = 2pq for the heterozygotes. In the absence of selection, mutation, genetic drift, or other forces, allele frequencies p and q are constant between generations, so equilibrium is reached.</p>
+<p>The principle is named after G. H. Hardy and Wilhelm Weinberg, who first demonstrated it mathematically. Hardy’s paper was focused on debunking the then-commonly held view that a dominant allele would automatically tend to increase in frequency; today, confusion between dominance and selection is less common. Today, tests for Hardy-Weinberg genotype frequencies are used primarily to test for population stratification and other forms of non-random mating.</p>
+<p><a href="https://en.wikipedia.org/wiki/Hardy-Weinberg_principle">Wiki: Hardy-Weinberg principle</a></p>
+<div id="expression-quantitative-trait-loci" class="section level2">
+<h2>Expression quantitative trait loci</h2>
+<p>Expression quantitative trait loci (eQTLs) are genomic loci that explain all or a fraction of variation in expression levels of mRNAs.<br />
+Distant and local, trans- and cis-eQTLs, respectively Expression traits differ from most other classical complex traits in one important respect—the measured mRNA or protein trait is almost always the product of a single gene with a specific chromosomal location. eQTLs that map to the approximate location of their gene-of-origin are referred to as local eQTLs. In contrast, those that map far from the location of their gene of origin, often on different chromosomes, are referred to as distant eQTLs. Often, these two types of eQTLs are referred to as cis and trans, respectively, but these terms are best reserved for instances when the regulatory mechanism (cis vs. trans) of the underlying sequence has been established. The first genome-wide study of gene expression was carried out in yeast and published in 2002.[2] The initial wave of eQTL studies employed microarrays to measure genome-wide gene expression; more recent studies have employed massively parallel RNA sequencing. Many expression QTL studies were performed in plants and animals, including humans[3], non-human primates[4][5] and mice[6].</p>
+<p>Some cis eQTLs are detected in many tissue types but the majority of trans eQTLs are tissue-dependent (dynamic).[7] eQTLs may act in cis (locally) or trans (at a distance) to a gene.[8] The abundance of a gene transcript is directly modified by polymorphism in regulatory elements. Consequently, transcript abundance might be considered as a quantitative trait that can be mapped with considerable power. These have been named expression QTLs (eQTLs).[9] The combination of whole-genome genetic association studies and the measurement of global gene expression allows the systematic identification of eQTLs. By assaying gene expression and genetic variation simultaneously on a genome-wide basis in a large number of individuals, statistical genetic methods can be used to map the genetic factors that underpin individual differences in quantitative levels of expression of many thousands of transcripts.[10] Studies have shown that single nucleotide polymorphisms (SNPs) reproducibly associated with complex disorders [11] as well as certain pharmacologic phenotypes [12] are found to be significantly enriched for eQTLs, relative to frequency-matched control SNPs.<br />
+Detecting eQTLs Mapping eQTLs is done using standard QTL mapping methods that test the linkage between variation in expression and genetic polymorphisms. The only considerable difference is that eQTL studies can involve a million or more expression microtraits. Standard gene mapping software packages can be used, although it is often faster to use custom code such as QTL Reaper or the web-based eQTL mapping system GeneNetwork. GeneNetwork hosts many large eQTL mapping data sets and provide access to fast algorithms to map single loci and epistatic interactions. As is true in all QTL mapping studies, the final steps in defining DNA variants that cause variation in traits are usually difficult and require a second round of experimentation. This is especially the case for trans eQTLs that do not benefit from the strong prior probability that relevant variants are in the immediate vicinity of the parent gene. Statistical, graphical, and bioinformatic methods are used to evaluate positional candidate genes and entire systems of interactions.</p>
+<p>Clumping: This is a procedure in which only the most significant SNP (i.e., lowest p value) in each LD block is identified and selected for further analyses. This reduces the correlation between the remaining SNPs, while retaining SNPs with the strongest statistical evidence.</p>
+<p>Co‐heritability: This is a measure of the genetic relationship between disorders. The SNP‐based co‐heritability is the proportion of covariance between disorder pairs (e.g., schizophrenia and bipolar disorder) that is explained by SNPs.</p>
+<p>Gene: This is a sequence of nucleotides in the DNA that codes for a molecule (e.g., a protein)</p>
+<p>Heterozygosity: This is the carrying of two different alleles of a specific SNP. The heterozygosity rate of an individual is the proportion of heterozygous genotypes. High levels of heterozygosity within an individual might be an indication of low sample quality whereas low levels of heterozygosity may be due to inbreeding.</p>
+<p>Individual‐level missingness: This is the number of SNPs that is missing for a specific individual. High levels of missingness can be an indication of poor DNA quality or technical problems.</p>
+<p>Linkage disequilibrium (LD): This is a measure of non‐random association between alleles at different loci at the same chromosome in a given population. SNPs are in LD when the frequency of association of their alleles is higher than expected under random assortment. LD concerns patterns of correlations between SNPs.</p>
+<p>Minor allele frequency (MAF): This is the frequency of the least often occurring allele at a specific location. Most studies are underpowered to detect associations with SNPs with a low MAF and therefore exclude these SNPs.</p>
+<p>Population stratification: This is the presence of multiple subpopulations (e.g., individuals with different ethnic background) in a study. Because allele frequencies can differ between subpopulations, population stratification can lead to false positive associations and/or mask true associations. An excellent example of this is the chopstick gene, where a SNP, due to population stratification, accounted for nearly half of the variance in the capacity to eat with chopsticks (Hamer &amp; Sirota, 2000).</p>
+<p>Pruning: This is a method to select a subset of markers that are in approximate linkage equilibrium. In PLINK, this method uses the strength of LD between SNPs within a specific window (region) of the chromosome and selects only SNPs that are approximately uncorrelated, based on a user‐specified threshold of LD. In contrast to clumping, pruning does not take the p value of a SNP into account.</p>
+<p>Relatedness: This indicates how strongly a pair of individuals is genetically related. A conventional GWAS assumes that all subjects are unrelated (i.e., no pair of individuals is more closely related than second‐degree relatives). Without appropriate correction, the inclusion of relatives could lead to biased estimations of standard errors of SNP effect sizes. Note that specific tools for analysing family data have been developed.</p>
+<p>Sex discrepancy: This is the difference between the assigned sex and the sex determined based on the genotype. A discrepancy likely points to sample mix‐ups in the lab. Note, this test can only be conducted when SNPs on the sex chromosomes (X and Y) have been assessed.</p>
+<p>Single nucleotide polymorphism (SNP): This is a variation in a single nucleotide (i.e., A, C, G, or T) that occurs at a specific position in the genome. A SNP usually exists as two different forms (e.g., A vs. T). These different forms are called alleles. A SNP with two alleles has three different genotypes (e.g., AA, AT, and TT).</p>
+<p>SNP‐heritability: This is the fraction of phenotypic variance of a trait explained by all SNPs in the analysis.</p>
+<p>SNP‐level missingness: This is the number of individuals in the sample for whom information on a specific SNP is missing. SNPs with a high level of missingness can potentially lead to bias.</p>
+<p>Summary statistics: These are the results obtained after conducting a GWAS, including information on chromosome number, position of the SNP, SNP(rs)‐identifier, MAF, effect size (odds ratio/beta), standard error, and p value. Summary statistics of GWAS are often freely accessible or shared between researchers.</p>
+<p>The Hardy–Weinberg (dis)equilibrium (HWE) law: This concerns the relation between the allele and genotype frequencies. It assumes an indefinitely large population, with no selection, mutation, or migration. The law states that the genotype and the allele frequencies are constant over generations. Violation of the HWE law indicates that genotype frequencies are significantly different from expectations (e.g., if the frequency of allele A = 0.20 and the frequency of allele T = 0.80; the expected frequency of genotype AT is 2<em>0.2</em>0.8 = 0.32) and the observed frequency should not be significantly different. In GWAS, it is generally assumed that deviations from HWE are the result of genotyping errors. The HWE thresholds in cases are often less stringent than those in controls, as the violation of the HWE law in cases can be indicative of true genetic association with disease risk.</p>
+</div>
+<div id="odds-ratio" class="section level2">
+<h2>Odds ratio</h2>
+<p>An odds ratio (OR) is a statistic that quantifies the strength of the association between two events, A and B. The odds ratio is defined as the ratio of the odds of A in the presence of B and the odds of A in the absence of B, or equivalently (due to symmetry), the ratio of the odds of B in the presence of A and the odds of B in the absence of A. Two events are independent if and only if the OR equals 1: the odds of one event are the same in either the presence or absence of the other event. If the OR is greater than 1, then A and B are associated (correlated) in the sense that, compared to the absence of B, the presence of B raises the odds of A, and symmetrically the presence of A raises the odds of B. Conversely, if the OR is less than 1, then A and B are negatively correlated, and the presence of one event reduces the odds of the other event.<br />
+Note that the odds ratio is symmetric in the two events, and there is no causal direction implied (correlation does not imply causation): a positive OR does not establish that B causes A, or that A causes B.</p>
+<p>Two similar statistics that are often used to quantify associations are the risk ratio (RR) and the absolute risk reduction (ARR). Often, the parameter of greatest interest is actually the RR, which is the ratio of the probabilities analogous to the odds used in the OR. However, available data frequently do not allow for the computation of the RR or the ARR but do allow for the computation of the OR, as in case-control studies, as explained below. On the other hand, if one of the properties (A or B) is sufficiently rare (in epidemiology this is called the rare disease assumption), then the OR is approximately equal to the corresponding RR.</p>
+<p>The OR plays an important role in the logistic model.<br />
+Imagine there is a rare disease, afflicting, say, only one in many thousands of adults in a country. Imagine we suspect that being exposed to something (say, having had a particular sort of injury in childhood) makes one more likely to develop that disease in adulthood. The most informative thing to compute would be the risk ratio, RR. To do this in the ideal case, for all the adults in the population we would need to know whether they (a) had the exposure to the injury as children and (b) whether they developed the disease as adults. From this we would extract the following information: the total number of people exposed to the childhood injury, {N_{E},} {N_{E},} out of which {D_{E}} {D_{E}} developed the disease and {H_{E}} H_E stayed healthy; and the total number of people not exposed, {N_{N},} {N_{N},} out of which {D_{N}} D_N developed the disease and {H_{N}} {H_{N}} stayed healthy. Since {N_{E}=D_{E}+H_{E}} {N_{E}=D_{E}+H_{E}} and similarly for the {N_{N}} {N_{N}} numbers, we only have four independent numbers, which we can organize in a table:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Diseased</th>
+<th>Healthy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposed</td>
+<td><span class="math inline">\(D_E\)</span></td>
+<td><span class="math inline">\(H_E\)</span></td>
+</tr>
+<tr class="even">
+<td>Not exposed</td>
+<td><span class="math inline">\(D_N\)</span></td>
+<td><span class="math inline">\(H_N\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To avoid possible confusion, we emphasize that all these numbers refer to the entire population, and not to some sample of it.</p>
+<p>Now the risk of developing the disease given exposure is {D_{E}/N_{E}} D_{{E}}/N_{{E}} (where {N_{E}=D_{E}+H_{E}} {N_{E}=D_{E}+H_{E}}), and of developing the disease given non-exposure is {D_{N}/N_{N}.} {D_{N}/N_{N}.} The risk ratio, RR, is just the ratio of the two,</p>
+<p>{RR={},,} {RR={},,} which can be rewritten as {RR={}={}.} {RR={}={}.}<br />
+In contrast, the odds of developing the disease given exposure is {D_{E}/H_{E},,} {D_{E}/H_{E},,} and of developing the disease given non-exposure is {D_{N}/H_{N},.} {D_{N}/H_{N},.} The odds ratio, OR, is the ratio of the two,</p>
+<p>{OR={},,} {OR={},,} which can be rewritten as {OR={}={}.} {OR={}={}.}</p>
+<p>We may already note that if the disease is rare, then OR ≈ RR. Indeed, for a rare disease, we will have {D_{E}H_{E},} {D_{E}H_{E},} and so {D_{E}+H_{E}H_{E};} {D_{E}+H_{E}H_{E};} but then {D_{E}/(D_{E}+H_{E})D_{E}/H_{E},} {D_{E}/(D_{E}+H_{E})D_{E}/H_{E},} in other words, for the exposed population, the risk of developing the disease is approximately equal to the odds. Analogous reasoning shows that the risk is approximately equal to the odds for the non-exposed population as well; but then the ratio of the risks, which is RR, is approximately equal to the ratio of the odds, which is OR. Or, we could just notice that the rare disease assumption says that {N_{E}H_{E}} {N_{E}H_{E}} and {N_{N}H_{N},} {N_{N}H_{N},} from which it follows that {N_{E}/N_{N}H_{E}/H_{N},} {N_{E}/N_{N}H_{E}/H_{N},} in other words that the denominators in the final expressions for the RR and the OR are approximately the same. The numerators are exactly the same, and so, again, we conclude that OR ≈ RR. Returning to our hypothetical study, the problem we often face is that we may not have the data to estimate these four numbers. For example, we may not have the population-wide data on who did or did not have the childhood injury.</p>
+<p>Often we may overcome this problem by employing random sampling of the population: namely, if neither the disease nor the exposure to the injury are too rare in our population, then we can pick (say) a hundred people at random, and find out these four numbers in that sample; assuming the sample is representative enough of the population, then the RR computed for this sample will be a good estimate for the RR for the whole population.</p>
+<p>However, some diseases may be so rare that, in all likelihood, even a large random sample may not contain even a single diseased individual (or it may contain some, but too few to be statistically significant). This would make it impossible to compute the RR. But, we may nevertheless be able to estimate the OR, provided that, unlike the disease, the exposure to the childhood injury is not too rare. Of course, because the disease is rare, this is then also our estimate for the RR.</p>
+<p>Looking at the final expression for the OR: the fraction in the numerator, {D_{E}/D_{N},} {D_{E}/D_{N},} we can estimate by collecting all the known cases of the disease (presumably there must be some, or else we likely wouldn’t be doing the study in the first place), and seeing how many of the diseased people had the exposure, and how many did not. And the fraction in the denominator, {H_{E}/H_{N},} {H_{E}/H_{N},} is the odds that a healthy individual in the population was exposed to the childhood injury. Now note that this latter odds can indeed be estimated by random sampling of the population—provided, as we said, that the prevalence of the exposure to the childhood injury is not too small, so that a random sample of a manageable size would be likely to contain a fair number of individuals who have had the exposure. So here the disease is very rare, but the factor thought to contribute to it is not quite so rare; such situations are quite common in practice.</p>
+<p>Thus we can estimate the OR, and then, invoking the rare disease assumption again, we say that this is also a good approximation of the RR. Incidentally, the scenario described above is a paradigmatic example of a case-control study.[2]</p>
+<p>The same story could be told without ever mentioning the OR, like so: as soon as we have that {N_{E}H_{E}} N_{{E}}H_{{E}} and {N_{N}H_{N},} {N_{N}H_{N},} then we have that {N_{E}/N_{N}H_{E}/H_{N}.} {N_{E}/N_{N}H_{E}/H_{N}.} Thus if, by random sampling, we manage to estimate {H_{E}/H_{N},} {H_{E}/H_{N},} then, by rare disease assumption, that will be a good estimate of {N_{E}/N_{N},} {N_{E}/N_{N},} which is all we need (besides {D_{E}/D_{N},} {D_{E}/D_{N},} which we presumably already know by studying the few cases of the disease) to compute the RR. However, it is standard in the literature to explicitly report the OR and then claim that the RR is approximately equal to it.</p>
+<p><a href="https://en.wikipedia.org/wiki/Odds_ratio">Wiki: Odds ratio</a></p>
+</div>
+<div id="risk-ratio" class="section level2">
+<h2>Risk ratio</h2>
+<p>In epidemiology, risk ratio (RR) or relative risk is the ratio of the probability of an outcome in an exposed group to the probability of an outcome in an unexposed group. It is computed as <span class="math inline">\(I_e/I_u\)</span>, where <span class="math inline">\(I_{e}\)</span> is the incidence in the exposed group, and <span class="math inline">\(I_{u}\)</span> is the incidence in the unexposed group. Together with risk difference and odds ratio, risk ratio measures the association between the exposure and the outcome.<br />
+Risk ratio is used in the statistical analysis of the data of experimental, cohort and cross-sectional studies, to estimate the strength of the association between treatments or risk factors, and outcome. For example, it is used to compare the risk of an adverse outcome when receiving a medical treatment versus no treatment (or placebo), or when exposed to an environmental risk factor versus not exposed.</p>
+<p>Assuming the causal effect between the exposure and the outcome, values of RR can be interpreted as follows:</p>
+<p>RR = 1 means that exposure does not affect the outcome;<br />
+RR &lt; 1 means that the risk of the outcome is decreased by the exposure;<br />
+RR &gt; 1 means that the risk of the outcome is increased by the exposure.</p>
+</div>
+<div id="fev1fvc-ratio" class="section level2">
+<h2>FEV1/FVC ratio</h2>
+<p>The FEV1/FVC ratio, also called Tiffeneau-Pinelli index, is a calculated ratio used in the diagnosis of obstructive and restrictive lung disease. It represents the proportion of a person’s vital capacity that they are able to expire in the first second of forced expiration (FEV1) to the full, forced vital capacity (FVC).</p>
+<p>See also <a href="https://en.wikipedia.org/wiki/FEV1/FVC_ratio">Wiki: FVC ratio</a> for more metrics of lung capacity.<br />
+## Glossary</p>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/gwas/">GWAS</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/bioinformatics/gwas/gwas/">Genome Wide Associated Studies (GWAS)</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

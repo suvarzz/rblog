@@ -1,0 +1,257 @@
+---
+title: "R tidyverse package - reference"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "tidyverse"]
+categories: ["R"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "R tidyverse package - reference"
+---
+
+library(tidyverse)
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+
+# readr - read and write data
+## Read data
+```{r, eval=F}
+library(readr)
+read_delim()   # delim not specified
+read_tsv()     # tab-separated
+
+read_csv()     # comma-separated
+read_csv2()    # semicolon-separated
+read_table()   # space-sepatated (fixed length columns)
+read_table2() # space-separated (variable length columns)
+
+read_file()
+read_file_raw()
+read_log()
+
+read_csv_chunked()
+read_csv2_chunked()
+read_delim_chunked()
+read_lines_chunked()
+read_raw_chunked()
+
+read_delim(file, delim, quote = "\"", escape_backslash = FALSE,
+           escape_double = TRUE, col_names = TRUE, col_types = NULL,
+           locale = default_locale(), na = c("", "NA"), quoted_na = TRUE,
+           comment = "", trim_ws = FALSE, skip = 0, n_max = Inf,
+           guess_max = min(1000, n_max), progress = show_progress(),
+           skip_empty_rows = TRUE)
+
+col_types
+
+c | col_character()
+i | col_integer()
+n | col_number()
+d | col_double()
+l | col_logical()
+f | col_factor()
+d | col_date()
+t | col_time()
+? | col_guess()  # default
+_ - | cal_skip() # skip the column
+
+
+col_types = "clnt"
+col_types = cols(A = col_character())
+          = cols(A = col_factor(levels = c('a','b'))) # specify factor
+          = cols(A = col_factor(ordered = TRUE))      # order factor
+
+locale = locale(date_names = "en",
+                date_format = "%AD",
+                time_format = "%AT",
+                decimal_mark = ".",
+                grouping_mark = ",",
+                tz = "UTC",
+                encoding = "UTF-8",
+                asciify = FALSE)
+
+date_format(format = "%Y-%m-%d", tz = "UTC")
+time_format(format = "%H:%M:%S", tz = "UTC")
+
+%d   # day
+%m   # month (digits)
+%B   # month full name - Januar, ...
+%b   # month abbr. - Jan, Feb, ...
+%Y   # year 2006
+%y   # year 06
+%H   # 24 hours format
+%I   # 12 hours format
+%M   # minutes
+%p   # am/pm
+%S   # second
+%Z   # time zone as name 'Berlin'
+%z   # ime zone 'UTC'
+
+Preset values:
+%D   %m/%d/%y
+%x   %y/%m/%d
+%F   %Y-%m-%d
+%R   %H:%M
+%T   %H:%M:%S
+
+parse_character()
+parse_date()
+parse_datetime()
+parse_double()
+parse_factor()
+parse_guess()
+parse_number()
+parse_logical()
+parse_vector()
+
+parse_date(c("1975/02/05"), format = "%Y/%m/%d")
+```
+## Write data
+```{r, eval=F}
+write_delim()
+write_tsv()
+write_csv()
+write_csv2()
+write_excel_csv()
+write_excel_csv2()
+write_lines()
+write_rds()
+write_file()
+
+write_delim(x, path, delim = " ", na = "NA", append = FALSE,
+            col_names = !append, quote_escape = "double")
+
+```
+# tibble - advanced data frames
+```{r, eval=F}
+library(tibble)
+x<- tibble(a = c(1,2), b = c('A','B'))
+
+x <- tribble(~a,~b,~c,
+            1,2,3,
+            'A','B','C')
+
+as_tibble(x)
+as.data.frame(x)
+
+print(x, n=2, width=5)
+
+x[1]          # get column by id
+x['A']        # get column by column name
+x$A           # get column
+
+x[1:5]        # get columns
+x[c('A','B')] # get columns
+
+x[[1]]        # get column as vector
+x[['A']]      # get column as vector
+
+x[row, column] # subset
+x[5, 10]       # get value row 5 and column 10
+x[1:5, 10:20]  # subset tibble
+x[1:3,]        # get 3 rows
+x[,1:3]        # get 3 columns
+```
+
+# tidyr - operations with tables
+
+```{r, eval=F}
+gather()
+spread()
+separate()
+extract()
+unite()
+expand()
+crossing()
+complete()
+
+drop_na()
+replace_na()
+
+fill()
+nest()
+unnest()
+```
+
+# magrittr - pipelines
+
+```{r, eval=F}
+df %>% f() %>% g() %>% h()
+df %>% f %>% g %>% h
+
+df %<>% f        # df <- df %>% f
+
+df %$% { a - b}  # to refer df columns by names
+
+df %T>% f        #  return df
+df %>% calculate %T>% print %T>% plot %>% calculate
+```
+
+# purrr - functional programming
+```{r, eval=F}
+
+keep()       # true subset by result of logical function
+discard()    # false subset by result of logical function
+compact()    # remove empty elements
+
+f <- function(x) x%%2 == 0
+1:4 %>% keep(f)             # 2 4
+1:4 %>% discard(f)          # 1 3 
+1:4 %>% keep(negate(f))     # 1 3 
+
+1:4 %>% map(f)              # return logicals in list
+1:4 %>% map_lgl(f)          # return logicals in vector
+
+map()
+map_lgl()
+map_dbl()
+map_chr()
+map_call()
+map_at()
+map_if()
+map_depth()
+map_int()
+map_dfr()                   # return vector of input length
+
+lmap()
+lmap_at()
+lmap_if()
+
+pmap()
+pmap_chr()
+pmap_dbl()
+pmap_df()
+pmap_dfc()
+pmap_dfr()
+pmap_int()
+pmap_lgl()
+pmap_raw()
+
+# lambda function
+f <- function(x) x > 2
+1:4 %>% keep(f)                  # 3 4
+1:4 %>% keep(function(x) x > 2)  # 3 4
+1:4 %>% keep(~ .x > 2)           # 3 4
+
+list(1:3, 1:3, 1:3) %>% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6
+```
+
+# dplyr - data manipulation
+
+# stringr
+
+# forcats
+
+# lubridate
+
+# broom & modelr

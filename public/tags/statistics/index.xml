@@ -5,7 +5,7 @@
     <link>/tags/statistics/</link>
       <atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Statistics</title>
@@ -175,6 +175,351 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linear Regression (Math)</title>
+      <link>/post/statistics/linear_regression_math/linear_regression_math/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/linear_regression_math/linear_regression_math/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#simple-linear-regression&#34;&gt;Simple linear regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-find-coefficients-0-and-1&#34;&gt;How to find coefficients β0 and β1?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#matrix-form-for-multiple-regression&#34;&gt;Matrix form for multiple regression&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;simple-linear-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Simple linear regression&lt;/h2&gt;
+&lt;p&gt;Ordinary Least Squares (OLS) function:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(minimize\left\{SSE = sum_{i=1}^{n} (y_i - \hat y_i)^2 \right\}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Assumtions of OLS regression:&lt;br /&gt;
+* Linear relationship&lt;br /&gt;
+* Multivariathe normality&lt;br /&gt;
+* No autocorrelation&lt;br /&gt;
+* Homoscedastic (constant variance in residuals)&lt;br /&gt;
+* There are more observations (n) than features (p) (n &amp;gt; p)&lt;br /&gt;
+* No or little multicollinearity&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - expectd value of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, the same as &lt;span class=&#34;math inline&#34;&gt;\(E(Y|x)\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; - intercept&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; - slope&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2}\)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-find-coefficients-0-and-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to find coefficients β0 and β1?&lt;/h2&gt;
+&lt;p&gt;There are several ways to extimate coefficients of linear regression. Here we discuss the least squares approach. Other aproaches include &lt;strong&gt;maximul likelihood estimation&lt;/strong&gt;.&lt;br /&gt;
+To estimate &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; we should find &lt;strong&gt;minimum&lt;/strong&gt; of &lt;strong&gt;sum of squared residuals&lt;/strong&gt; (&lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt;)&lt;br /&gt;
+To find this minimum we should calculate derivatives of &lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt; with respect to &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and set them to 0:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\min_{\beta_0,\beta1} : SSR \implies \frac{\partial SSR}{\partial \beta_0} = \frac{\partial SSR}{\partial \beta_1} = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Here is the solution:&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(SSR = \displaystyle\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1x_i))^2 = \displaystyle\sum_{i=1}^{n} (y_i^2 - 2y_i \beta_0 - 2y_i \beta_1 x_i + \beta_0^2 + 2\beta_0\beta_1x_i + \beta_1^2x_i^2)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial\beta_0} = \displaystyle\sum_{i=1}^{n}(-2y_i + 2\beta_0 + 2\beta_1x_i)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\sum_{i=1}^{n} (-y_i + \hat\beta_0 + \hat\beta_1 x_i) = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\bar y = \frac{1}{n} \displaystyle\sum_{i=1}^{n} y_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar x = \frac{1}{n} \displaystyle\sum_{i=1}^{n} x_i \implies -n\bar y + n \hat\beta_0 + \hat\beta_1 n \hat x = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial \beta_1} = \displaystyle\sum_{i=1}^{n} (-2x_i y_i + 2\beta_0 x_i + 2\beta_1 x_i^2)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + \hat\beta_0 \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + (\bar y - \hat\beta_1 \bar x) \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} x_i(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} x_i (x_i - \bar x)} = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2} = \frac{Cov(x,y)}{Var(x)} = r_{xy} \frac{s_y}{s_x}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - estimated &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar y\)&lt;/span&gt; - averages of &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y_i\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(r_{xy}\)&lt;/span&gt; - sample correlation coefficient between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(s_x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_y\)&lt;/span&gt; - uncorrected sample standard deviations of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;math inline&#34;&gt;\(Var\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Cov\)&lt;/span&gt; - sample variance and sample covariance.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;matrix-form-for-multiple-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Matrix form for multiple regression&lt;/h2&gt;
+&lt;p&gt;We can write &lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt; in a matrix form:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y = \begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix}\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(b = \begin{bmatrix}\beta_1\\\beta_2\\\vdots\\\beta_n\end{bmatrix}\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(X = \begin{bmatrix}1 &amp;amp; x_{1,1} &amp;amp; x_{1,2} \dots &amp;amp; x_{1,k}\\1 &amp;amp; x_{2,1} &amp;amp; x_{2,2} \dots &amp;amp; x_{2,k}\\\vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots\\1 &amp;amp; x_{n,1} &amp;amp; x_{n,2} \dots &amp;amp; x_{n,k}\end{bmatrix}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y = Xb\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(X&amp;#39;Y = X&amp;#39;Xb\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((X&amp;#39;X)^{-1}X&amp;#39;Xb = (X&amp;#39;X)^{-1}X&amp;#39;Y\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b = (X&amp;#39;X)^{-1}X&amp;#39;Y\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((X&amp;#39;X)^{-1}X&amp;#39;X = I\)&lt;/span&gt; - identity matrix&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal component analysis</title>
+      <link>/post/statistics/pca/pca/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/pca/pca/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#principal-component-analysis-of-iris-dataset&#34;&gt;Principal component analysis of iris dataset&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#split-data&#34;&gt;Split data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#principal-component-analysis&#34;&gt;Principal component analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prediction&#34;&gt;Prediction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-calculate-coordinates-for-test-data&#34;&gt;How to calculate coordinates for test data?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sources&#34;&gt;Sources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;principal-component-analysis-of-iris-dataset&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Principal component analysis of iris dataset&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(factoextra)
+df &amp;lt;- iris
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &amp;quot;setosa&amp;quot;,&amp;quot;versicolor&amp;quot;,..: 1 1 1 1 1 1 1 1 1 1 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(caret)
+trainIndex &amp;lt;- caret::createDataPartition(df[,5], p=.8, list = FALSE, times = 1)
+# split data
+train &amp;lt;- df[trainIndex, ]
+test &amp;lt;- df[-trainIndex, ]
+
+# PCA
+pca &amp;lt;- prcomp(train[,-5], scale=TRUE)
+
+# eigenvalues on &amp;#39;scree plot&amp;#39;
+# percentage of variances explained by each principal component.
+factoextra::fviz_eig(pca, addlabels = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
+factoextra::fviz_pca_ind(pca, geom = &amp;#39;point&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;groups &amp;lt;- as.factor(train[,5])
+fviz_pca_ind(pca,
+             col.ind = groups, # color by groups
+             palette = c(&amp;#39;red&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;blue&amp;#39;),
+             addEllipses = TRUE, # Concentration ellipses
+             ellipse.type = &amp;quot;confidence&amp;quot;,
+             legend.title = &amp;quot;Groups&amp;quot;,
+             repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
+fviz_pca_var(pca,
+             col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
+             gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
+             repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = &amp;#39;point&amp;#39;,
+                col.var = &amp;#39;red&amp;#39;, # Variables color
+                col.ind = &amp;#39;grey&amp;#39;  # Individuals color
+                )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(factoextra)
+library(mlbench) # dataset
+
+data(PimaIndiansDiabetes)
+df &amp;lt;- PimaIndiansDiabetes
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   pregnant glucose pressure triceps insulin mass pedigree age diabetes
+## 1        6     148       72      35       0 33.6    0.627  50      pos
+## 2        1      85       66      29       0 26.6    0.351  31      neg
+## 3        8     183       64       0       0 23.3    0.672  32      pos
+## 4        1      89       66      23      94 28.1    0.167  21      neg
+## 5        0     137       40      35     168 43.1    2.288  33      pos
+## 6        5     116       74       0       0 25.6    0.201  30      neg&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    768 obs. of  9 variables:
+##  $ pregnant: num  6 1 8 1 0 5 3 10 2 8 ...
+##  $ glucose : num  148 85 183 89 137 116 78 115 197 125 ...
+##  $ pressure: num  72 66 64 66 40 74 50 0 70 96 ...
+##  $ triceps : num  35 29 0 23 35 0 32 0 45 0 ...
+##  $ insulin : num  0 0 0 94 168 0 88 0 543 0 ...
+##  $ mass    : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
+##  $ pedigree: num  0.627 0.351 0.672 0.167 2.288 ...
+##  $ age     : num  50 31 32 21 33 30 26 29 53 54 ...
+##  $ diabetes: Factor w/ 2 levels &amp;quot;neg&amp;quot;,&amp;quot;pos&amp;quot;: 2 1 2 1 2 1 2 1 2 2 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;split-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Split data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trainIndex &amp;lt;- sample(nrow(df), nrow(df)*0.8)
+# split data
+train &amp;lt;- df[trainIndex, -ncol(df)]
+test &amp;lt;- df[-trainIndex, -ncol(df)]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Principal component analysis&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca &amp;lt;- prcomp(train, scale=T)
+
+# eigenvalues on &amp;#39;scree plot&amp;#39;
+# percentage of variances explained by each principal component.
+fviz_eig(pca, addlabels = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
+fviz_pca_ind(pca,
+             geom = &amp;#39;point&amp;#39;,
+             col.ind = &amp;quot;cos2&amp;quot;, # Color by the quality of representation
+             gradient.cols = c(&amp;quot;#00AFBB&amp;quot;, &amp;quot;#E7B800&amp;quot;, &amp;quot;#FC4E07&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
+fviz_pca_var(pca,
+             col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
+             gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
+             repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
+fviz_pca_biplot(pca, repel = TRUE,
+                geom = &amp;#39;point&amp;#39;,
+                col.var = &amp;#39;red&amp;#39;, # Variables color
+                col.ind = &amp;#39;grey&amp;#39;  # Individuals color
+                )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Eigenvalues
+get_eigenvalue(pca)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       eigenvalue variance.percent cumulative.variance.percent
+## Dim.1  2.1484632        26.855791                    26.85579
+## Dim.2  1.7117918        21.397397                    48.25319
+## Dim.3  1.0560307        13.200383                    61.45357
+## Dim.4  0.8577135        10.721419                    72.17499
+## Dim.5  0.7827308         9.784135                    81.95912
+## Dim.6  0.6490472         8.113090                    90.07222
+## Dim.7  0.4246541         5.308177                    95.38039
+## Dim.8  0.3695686         4.619608                   100.00000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Results for Variables
+pca.var &amp;lt;- get_pca_var(pca)
+pca.var$coord          # Coordinates&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Dim.1      Dim.2       Dim.3        Dim.4       Dim.5
+## pregnant -0.2613362  0.7555770 -0.03411457  0.164119419  0.38787318
+## glucose  -0.5550955  0.1915545  0.53183488 -0.415232060 -0.33421050
+## pressure -0.5730576  0.1955417 -0.49970031  0.001917723 -0.21716148
+## triceps  -0.6082808 -0.4930349 -0.28918361  0.106775060  0.36003451
+## insulin  -0.5953969 -0.3664227  0.32796053 -0.298678115  0.43293986
+## mass     -0.6682581 -0.1438707 -0.33060384 -0.014819512 -0.35047480
+## pedigree -0.3747603 -0.2310328  0.46492858  0.741684330 -0.16588066
+## age      -0.3634878  0.7839270  0.07533503  0.086210125  0.07758022
+##                Dim.6       Dim.7       Dim.8
+## pregnant  0.17425048 -0.36905378  0.12529249
+## glucose   0.01137266 -0.20644065 -0.21322789
+## pressure -0.57136625 -0.07659026  0.06465123
+## triceps   0.09518077 -0.04786257 -0.38846870
+## insulin  -0.14977159  0.13459416  0.29408539
+## mass      0.50046583  0.06735177  0.21302317
+## pedigree -0.09760457 -0.02509684  0.04744906
+## age       0.02473193  0.46303034 -0.13856443&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.var$contrib        # Contributions to the PCs&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              Dim.1     Dim.2      Dim.3        Dim.4      Dim.5
+## pregnant  3.178860 33.350823  0.1102055  3.140347407 19.2206059
+## glucose  14.341925  2.143551 26.7841028 20.102011066 14.2701239
+## pressure 15.285112  2.233715 23.6451844  0.000428775  6.0249461
+## triceps  17.221867 14.200527  7.9190087  1.329221633 16.5605910
+## insulin  16.500048  7.843569 10.1851313 10.400747539 23.9465371
+## mass     20.785505  1.209188 10.3499741  0.025605047 15.6928259
+## pedigree  6.537012  3.118145 20.4689687 64.135127098  3.5154352
+## age       6.149670 35.900481  0.5374244  0.866511436  0.7689349
+##                Dim.6      Dim.7      Dim.8
+## pregnant  4.67812337 32.0733237  4.2477111
+## glucose   0.01992727 10.0358717 12.3024868
+## pressure 50.29824867  1.3813755  1.1309892
+## triceps   1.39579650  0.5394567 40.8335307
+## insulin   3.45607012  4.2659628 23.4019348
+## mass     38.58980271  1.0682250 12.2788742
+## pedigree  1.46779037  0.1483210  0.6092002
+## age       0.09424099 50.4874634  5.1952730&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.var$cos2           # Quality of representation &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               Dim.1      Dim.2       Dim.3        Dim.4      Dim.5
+## pregnant 0.06829663 0.57089665 0.001163804 2.693518e-02 0.15044560
+## glucose  0.30813100 0.03669313 0.282848341 1.724177e-01 0.11169666
+## pressure 0.32839502 0.03823655 0.249700400 3.677661e-06 0.04715911
+## triceps  0.37000549 0.24308346 0.083627161 1.140091e-02 0.12962485
+## insulin  0.35449746 0.13426556 0.107558111 8.920862e-02 0.18743692
+## mass     0.44656894 0.02069878 0.109298901 2.196179e-04 0.12283258
+## pedigree 0.14044530 0.05337616 0.216158588 5.500956e-01 0.02751639
+## age      0.13212341 0.61454148 0.005675366 7.432186e-03 0.00601869
+##                 Dim.6        Dim.7       Dim.8
+## pregnant 0.0303632306 0.1362006927 0.015698209
+## glucose  0.0001293374 0.0426177435 0.045466134
+## pressure 0.3264593946 0.0058660682 0.004179781
+## triceps  0.0090593787 0.0022908253 0.150907928
+## insulin  0.0224315277 0.0181155871 0.086486214
+## mass     0.2504660493 0.0045362616 0.045378869
+## pedigree 0.0095266529 0.0006298513 0.002251413
+## age      0.0006116685 0.2143970968 0.019200100&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Results for individuals
+pca.ind &amp;lt;- get_pca_ind(pca)
+pca.ind$coord %&amp;gt;% head()        # Coordinates&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Dim.1       Dim.2      Dim.3       Dim.4      Dim.5        Dim.6
+## 72  -0.3669946 -0.56840272  0.3011660 -0.47509324  0.7579541  0.007199364
+## 752 -0.6216923 -1.11858347 -1.1355107 -0.57113207 -0.3016049  0.252958078
+## 551  0.9874862 -0.93348528 -0.6800219 -0.54448283 -0.1871258 -0.330097027
+## 531  0.4210481 -1.06864263  0.6917994  0.24507935 -0.2124609 -0.145927479
+## 170  0.2644303 -0.02563326 -0.3747252  0.03149040 -0.3520414 -1.156386621
+## 764 -1.7515825  1.74941478 -1.0179324  0.02774283  2.3889854  0.431141870
+##          Dim.7      Dim.8
+## 72  -0.7799567 -0.5294728
+## 752  0.1103204 -0.5529107
+## 551 -0.4434670 -0.7824037
+## 531 -0.3403009  0.2020358
+## 170 -0.1597602  0.4188356
+## 764  1.0485653 -0.7088242&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.ind$contrib %&amp;gt;% head()       # Contributions to the PCs&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           Dim.1        Dim.2      Dim.3        Dim.4       Dim.5
+## 72  0.010209939 3.073923e-02 0.01398836 0.0428594975 0.119537749
+## 752 0.029299124 1.190467e-01 0.19885548 0.0619387561 0.018927615
+## 551 0.073920645 8.290785e-02 0.07131829 0.0562934359 0.007285954
+## 531 0.013439008 1.086540e-01 0.07381004 0.0114051979 0.009392415
+## 170 0.005300614 6.251561e-05 0.02165614 0.0001882980 0.025787350
+## 764 0.232575992 2.911832e-01 0.15980597 0.0001461473 1.187534409
+##           Dim.6       Dim.7      Dim.8
+## 72  0.000013006 0.233312081 0.12354459
+## 752 0.016056557 0.004667754 0.13472450
+## 551 0.027342521 0.075425638 0.26977286
+## 531 0.005343545 0.044414265 0.01798843
+## 170 0.335553241 0.009788896 0.07730788
+## 764 0.046643993 0.421684107 0.22141831&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca.ind$cos2 %&amp;gt;% head()           # Quality of representation &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Dim.1        Dim.2      Dim.3        Dim.4       Dim.5
+## 72  0.06019710 0.1444004010 0.04053852 1.008820e-01 0.256768635
+## 752 0.10372696 0.3357975532 0.34603753 8.754147e-02 0.024412791
+## 551 0.27405014 0.2448966943 0.12996122 8.331752e-02 0.009840908
+## 531 0.08519110 0.5487767729 0.22998053 2.886318e-02 0.021691462
+## 170 0.03731036 0.0003506023 0.07492606 5.291311e-04 0.066129394
+## 764 0.20927254 0.2087548895 0.07067877 5.249919e-05 0.389294326
+##            Dim.6       Dim.7      Dim.8
+## 72  2.316564e-05 0.271892389 0.12529777
+## 752 1.717267e-02 0.003266272 0.08204475
+## 551 3.062324e-02 0.055270156 0.17204011
+## 531 1.023305e-02 0.055648944 0.01961496
+## 170 7.135315e-01 0.013618977 0.09360397
+## 764 1.267919e-02 0.074996678 0.03427110&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prediction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Prediction&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- predict(pca, newdata = test)
+
+# Plot prediction
+
+plot &amp;lt;- fviz_pca_ind(pca, repel=T, geom = &amp;#39;point&amp;#39;)
+fviz_add(plot, p, color=&amp;#39;red&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-calculate-coordinates-for-test-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to calculate coordinates for test data?&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/&#34;&gt;http://www.sthda.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -1318,65 +1663,6 @@ groups[groups==1]&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://uc-r.github.io/hc_clustering&#34;&gt;UC Business Analytics R Programming Guide&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Linear Regression (Math)</title>
-      <link>/post/statistics/linear_regression_math/linear_regression_math/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/linear_regression_math/linear_regression_math/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#simple-linear-regression&#34;&gt;Simple linear regression&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-to-find-coefficients-0-and-1&#34;&gt;How to find coefficients β0 and β1?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix-form-for-multiple-regression&#34;&gt;Matrix form for multiple regression&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div id=&#34;simple-linear-regression&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Simple linear regression&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - expectd value of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, the same as &lt;span class=&#34;math inline&#34;&gt;\(E(Y|x)\)&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; - intercept&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; - slope&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2}\)&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;how-to-find-coefficients-0-and-1&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;How to find coefficients β0 and β1?&lt;/h2&gt;
-&lt;p&gt;There are several ways to extimate coefficients of linear regression. Here we discuss the least squares approach. Other aproaches include &lt;strong&gt;maximul likelihood estimation&lt;/strong&gt;.&lt;br /&gt;
-To estimate &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; we should find &lt;strong&gt;minimum&lt;/strong&gt; of &lt;strong&gt;sum of squared residuals&lt;/strong&gt; (&lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt;)&lt;br /&gt;
-To find this minimum we should calculate derivatives of &lt;span class=&#34;math inline&#34;&gt;\(SSR\)&lt;/span&gt; with respect to &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt; and set them to 0:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\min_{\beta_0,\beta1} : SSR \implies \frac{\partial SSR}{\partial \beta_0} = \frac{\partial SSR}{\partial \beta_1} = 0\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Here is the solution:&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(SSR = \displaystyle\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1x_i))^2 = \displaystyle\sum_{i=1}^{n} (y_i^2 - 2y_i \beta_0 - 2y_i \beta_1 x_i + \beta_0^2 + 2\beta_0\beta_1x_i + \beta_1^2x_i^2)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial\beta_0} = \displaystyle\sum_{i=1}^{n}(-2y_i + 2\beta_0 + 2\beta_1x_i)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\displaystyle\sum_{i=1}^{n} (-y_i + \hat\beta_0 + \hat\beta_1 x_i) = 0\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\bar y = \frac{1}{n} \displaystyle\sum_{i=1}^{n} y_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar x = \frac{1}{n} \displaystyle\sum_{i=1}^{n} x_i \implies -n\bar y + n \hat\beta_0 + \hat\beta_1 n \hat x = 0\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat \beta_0 = \bar y - \hat\beta_1 \bar x\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial SSR}{\partial \beta_1} = \displaystyle\sum_{i=1}^{n} (-2x_i y_i + 2\beta_0 x_i + 2\beta_1 x_i^2)\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + \hat\beta_0 \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(-\displaystyle\sum_{i=1}^{n} x_i y_i + (\bar y - \hat\beta_1 \bar x) \displaystyle\sum_{i=1}^{n} x_i + \hat\beta_1\displaystyle\sum_{i=1}^{n} x_i^2 = 0\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1 = \frac{\displaystyle\sum_{i=1}^{n} x_i(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} x_i (x_i - \bar x)} = \frac{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)(y_i-\bar y)}{\displaystyle\sum_{i=1}^{n} (x_i - \bar x)^2} = \frac{Cov(x,y)}{Var(x)} = r_{xy} \frac{s_y}{s_x}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - estimated &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar y\)&lt;/span&gt; - averages of &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y_i\)&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(r_{xy}\)&lt;/span&gt; - sample correlation coefficient between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(s_x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_y\)&lt;/span&gt; - uncorrected sample standard deviations of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;math inline&#34;&gt;\(Var\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Cov\)&lt;/span&gt; - sample variance and sample covariance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;matrix-form-for-multiple-regression&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Matrix form for multiple regression&lt;/h2&gt;
-&lt;p&gt;We can write &lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt; in a matrix form:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y = \begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix}\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(b = \begin{bmatrix}\beta_1\\\beta_2\\\vdots\\\beta_n\end{bmatrix}\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(X = \begin{bmatrix}1 &amp;amp; x_{1,1} &amp;amp; x_{1,2} \dots &amp;amp; x_{1,k}\\1 &amp;amp; x_{2,1} &amp;amp; x_{2,2} \dots &amp;amp; x_{2,k}\\\vdots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots\\1 &amp;amp; x_{n,1} &amp;amp; x_{n,2} \dots &amp;amp; x_{n,k}\end{bmatrix}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y = Xb\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(X&amp;#39;Y = X&amp;#39;Xb\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((X&amp;#39;X)^{-1}X&amp;#39;Xb = (X&amp;#39;X)^{-1}X&amp;#39;Y\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b = (X&amp;#39;X)^{-1}X&amp;#39;Y\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((X&amp;#39;X)^{-1}X&amp;#39;X = I\)&lt;/span&gt; - identity matrix&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

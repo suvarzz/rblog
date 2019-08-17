@@ -1,0 +1,208 @@
+---
+title: "RNA-seq analysis in R"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "RNA-seq"]
+categories: ["Bioinformatics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Analysis of RNA-seq in R."
+---
+
+```{r, eval=F}
+library(edgeR)
+library(limma)
+library(Glimma) 
+library(gplots)
+library(org.Mm.eg.db)
+library(RColorBrewer)
+
+# Preprocessing of expression data
+# dataset: https://figshare.com/s/1d788fd384d33e913a2a
+setwd("~/data/")
+
+# load data
+sampleinfo <- read.delim("SampleInfo.txt")
+seqdata <- read.delim("GSE60450_Lactation-GenewiseCounts.txt", stringsAsFactors = FALSE)
+head(seqdata)
+# format data
+# Remove first two columns from seqdata
+exp <- seqdata[,-(1:2)]
+
+# Store EntrezGeneID as rownames
+rownames(exp) <- seqdata[,1]
+head(exp)
+
+# make shorter sample names
+colnames(exp) <- substr(colnames(exp), start=1, stop=7)
+head(exp)
+
+# Counts per Million (CPM)
+myCPM <- edgeR::cpm(exp)
+# Have a look at the output
+head(myCPM)
+
+# TRUE if CPM > 0.5
+thresh <- myCPM > 0.5
+# logical matrix
+head(thresh)
+
+# How many genes with CPM > 0.5
+table(rowSums(thresh))
+
+# keep genes that have at least 2 TRUES in each row of thresh
+fltr <- rowSums(thresh) >= 2
+# Subset the rows of countdata to keep the more highly expressed genes
+exp.fltr <- exp[fltr,]
+summary(exp.fltr)
+dim(exp.fltr)
+
+# We will look at the first sample
+plot(myCPM[,1],countdata[,1])
+# Let us limit the x and y-axis so we can actually look to see what is happening at the smaller counts
+plot(myCPM[,1],countdata[,1],ylim=c(0,50),xlim=c(0,3))
+# Add a vertical line at 0.5 CPM
+abline(v=0.5)
+
+### Digital Gene Expression List from edgeR
+# Convert counts to DGEList object
+dgeObj <- edge::DGEList(exp.fltr)
+# have a look at dgeObj
+dgeObj
+# See what slots are stored in dgeObj
+names(dgeObj)
+# Library size information is stored in the samples slot
+dgeObj$samples
+
+# Library sizes and distribution plot
+dgeObj$samples$lib.size
+
+
+# The names argument tells the barplot to use the sample names on the x-axis
+# The las argument rotates the axis names
+barplot(dgeObj$samples$lib.size, names=colnames(dgeObj), las=2, main="Barplot of library sizes")
+
+# Get log2 counts per million
+logcounts <- cpm(dgeObj,log=TRUE)
+# Check distributions of samples using boxplots
+boxplot(logcounts, xlab="", ylab="Log2 counts per million", las=2,
+        main = "Boxplots of logCPMs (unnormalised)")
+# Let's add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(logcounts),col="blue")
+
+plotMDS(dgeObj)
+# We specify the option to let us plot two plots side-by-sde
+par(mfrow=c(1,2))
+# Let's set up colour schemes for CellType
+# How many cell types and in what order are they stored?
+levels(sampleinfo$CellType)
+## Let's choose purple for basal and orange for luminal
+col.cell <- c("purple","orange")[sampleinfo$CellType]
+data.frame(sampleinfo$CellType, col.cell)
+
+# Redo the MDS with cell type colouring
+plotMDS(dgeObj,col=col.cell)
+# Let's add a legend to the plot so we know which colours correspond to which cell type
+legend("topleft", fill=c("purple","orange"), legend=levels(sampleinfo$CellType))
+# Add a title
+title("Cell type")
+
+# Similarly for status
+levels(sampleinfo$Status)
+col.status <- c("blue","red","dark green")[sampleinfo$Status]
+col.status
+plotMDS(dgeObj, col=col.status)
+legend("topleft", fill=c("blue","red","dark green"),
+       legend=levels(sampleinfo$Status), cex=0.8)
+title("Status")
+
+# There is a sample info corrected file in your data directory
+# Old sampleinfo
+sampleinfo
+# I'm going to write over the sampleinfo object with the corrected sample info
+sampleinfo <- read.delim("data/SampleInfo_Corrected.txt")
+sampleinfo
+
+# Redo the MDSplot with corrected information
+par(mfrow=c(1,2))
+col.cell <- c("purple","orange")[sampleinfo$CellType]
+col.status <- c("blue","red","dark green")[sampleinfo$Status]
+
+
+plotMDS(dgeObj,col=col.cell)
+legend("topleft",fill=c("purple","orange"),
+       legend=levels(sampleinfo$CellType))
+title("Cell type")
+
+
+plotMDS(dgeObj,col=col.status)
+legend("topleft",fill=c("blue","red","dark green"), 
+       legend=levels(sampleinfo$Status), cex=0.8)
+title("Status")
+
+# Dimension 3 appears to separate pregnant samples from the rest. Dim4?
+plotMDS(dgeObj,dim=c(3,4))
+
+labels <- paste(sampleinfo$SampleName, sampleinfo$CellType, sampleinfo$Status)
+group <- paste(sampleinfo$CellType,sampleinfo$Status,sep=".")
+group <- factor(group)
+glMDSPlot(dgeObj, labels=labels, groups=group, folder="mds")
+
+# Hierarchical clustering with heatmaps
+
+# We estimate the variance for each row in the logcounts matrix
+var_genes <- apply(logcounts, 1, var)
+head(var_genes)
+# Get the gene names for the top 500 most variable genes
+select_var <- names(sort(var_genes, decreasing=TRUE))[1:500]
+head(select_var)
+# Subset logcounts matrix
+highly_variable_lcpm <- logcounts[select_var,]
+dim(highly_variable_lcpm)
+head(highly_variable_lcpm)
+
+## Get some nicer colours
+mypalette <- brewer.pal(11,"RdYlBu")
+morecols <- colorRampPalette(mypalette)
+# Set up colour vector for celltype variable
+col.cell <- c("purple","orange")[sampleinfo$CellType]
+
+# Plot the heatmap
+heatmap.2(highly_variable_lcpm, 
+          col=rev(morecols(50)),
+          trace="column", 
+          main="Top 500 most variable genes across samples",
+          ColSideColors=col.cell,scale="row")
+
+# Save the heatmap
+png(file="High_var_genes.heatmap.png")
+heatmap.2(highly_variable_lcpm,col=rev(morecols(50)), trace="none",
+          main="Top 500 most variable genes\nacross samples", 
+          ColSideColors=col.cell,scale="row")
+dev.off()
+
+# Normalization for composition bias
+# Apply normalisation to DGEList object
+dgeObj <- calcNormFactors(dgeObj)
+
+dgeObj$samples
+
+par(mfrow=c(1,2))
+plotMD(logcounts,column = 7)
+abline(h=0,col="grey")
+plotMD(logcounts,column = 11)
+abline(h=0,col="grey")
+
+par(mfrow=c(1,2))
+plotMD(dgeObj,column = 7)
+abline(h=0,col="grey")
+
+plotMD(dgeObj,column = 11)
+abline(h=0,col="grey")
+
+save(group,dgeObj,sampleinfo,file="Robjects/preprocessing.Rdata")
+```

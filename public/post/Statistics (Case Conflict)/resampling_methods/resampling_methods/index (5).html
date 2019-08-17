@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV).">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/statistics/resampling_methods/resampling_methods/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/statistics/resampling_methods/resampling_methods/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/statistics/resampling_methods/resampling_methods/">
+  <meta property="og:title" content="Resampling methods | Mark Goldberg">
+  <meta property="og:description" content="From the following examples we will learn wow to estimate model precision by cross-validation, validation sample and leave-one-out cross-validation (LOOCV)."><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-03T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-03T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Resampling methods | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/bioinformatics/"><span>Bioinformatics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Resampling methods</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-03 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-03 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 3, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/statistics/resampling_methods/resampling_methods/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/statistics/">Statistics</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/statistics/resampling_methods/resampling_methods/&amp;text=Resampling%20methods" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/resampling_methods/resampling_methods/&amp;t=Resampling%20methods" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Resampling%20methods&amp;body=/post/statistics/resampling_methods/resampling_methods/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/resampling_methods/resampling_methods/&amp;title=Resampling%20methods" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Resampling%20methods%20/post/statistics/resampling_methods/resampling_methods/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/resampling_methods/resampling_methods/&amp;title=Resampling%20methods" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#validation-approach">Validation approach</a></li>
+<li><a href="#leave-one-out-cross-validation-loocv">Leave-one-out cross-validation (LOOCV)</a></li>
+<li><a href="#k-fold-cross-validation">k-fold cross validation</a></li>
+<li><a href="#bootstrapping">Bootstrapping</a></li>
+<li><a href="#bibiography">Bibiography</a></li>
+</ul>
+</div>
+
+<div id="validation-approach" class="section level2">
+<h2>Validation approach</h2>
+<p><strong>Validation</strong> (hold-out) approach estimates the prediction error of our predictive models. This involves randomly dividing the available set of observations into two parts, a <strong>training set</strong> and a <strong>testing set</strong> (validation set). Our statistical model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The resulting validation set error rate (typically assessed using <strong>MSE</strong> in the case of a quantitative response) provides an estimate of the test error rate.<br />
+The drawback of the method is that the <strong>test error rate</strong> can vary depending on training set.</p>
+<p>Let’s buld <strong>polinomial models</strong> for first 10 degrees to predict <strong>mpg</strong> from <strong>horsepower</strong> dataset (<code>ISLR::Auto</code>), where <strong>mpg</strong> - miles per gallon and <strong>horsepower</strong> - engine horsepower.<br />
+Let’s buld models for train data using <strong>polynomial linear regression</strong> using vaious polinomial degrees and estimate MSE for each of these models using test data:<br />
+1. <strong>Linear</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)</span>.<br />
+2. <strong>Squared</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)</span>.<br />
+3. <strong>Cubic</strong>: <span class="math inline">\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)</span>.</p>
+<pre class="r"><code>library(&#39;ISLR&#39;)        # datasets Auto
+attach(Auto)</code></pre>
+<pre class="r"><code>set.seed(1)
+# split data into train (0.6) and test (0.4)
+inTrain &lt;- sample(nrow(Auto), nrow(Auto)*0.6)
+train &lt;- Auto[inTrain, ]
+test &lt;- Auto[!inTrain, ]
+
+# Buld polynomial models for first ten degrees
+models &lt;- lapply(1:10, function(n) {
+  fit.lm &lt;- lm(mpg ~ poly(horsepower, n), data=train)
+  })
+
+mse.vec &lt;- sapply(1:10, function(n) {
+  mean((mpg[-inTrain] - predict(models[[n]], Auto[-inTrain, ]))^2)
+})
+# create dataframe to store MSE of our models
+mse.df &lt;- data.frame(degree = 1:10, mse = NA)
+mse.df$mse &lt;- mse.vec
+plot(mse.df, type=&quot;o&quot;, main=&quot;MSE of spline regression models for degrees from 1 to 10&quot;)</code></pre>
+<p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>### PLOT with data and first three polynomial models
+par(mar = c(4, 4, 0.5, 1))
+plot(horsepower[inTrain], mpg[inTrain],
+     xlab = &#39;horsepower&#39;, ylab = &#39;mpg&#39;, pch = 21,
+     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
+# add test data
+points(horsepower[-inTrain], mpg[-inTrain],
+       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
+
+colors=c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;)
+x1 &lt;- data.frame(horsepower=seq(min(horsepower), max(horsepower), length = 200))
+for (i in 1:3) {
+    y2 &lt;- predict(models[[i]], newdata=x1)
+    lines(x1$horsepower, y2, col=colors[i], lwd=c(2,2,2))
+}
+legend(&#39;topright&#39;, lty=c(1,1,1),
+       col = c(&#39;black&#39;, &#39;blue&#39;, &#39;red&#39;, rgb(0, 0, 1, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4)),
+       legend = c(&#39;Linear model&#39;, &#39;Squared model&#39;, &#39;Cubic model&#39;, &#39;train data&#39;, &#39;test data&#39;),
+       lwd=c(2,2,2,NA,NA), pch=c(NA,NA,NA,16,16))</code></pre>
+<p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code># end PLOT</code></pre>
+<p>Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:</p>
+<pre class="r"><code>library(ggplot2)
+mse.df.2 &lt;- data.frame(sample = vector(&quot;integer&quot;, 100), 
+                       degree = vector(&quot;integer&quot;, 100), 
+                       mse = vector(&quot;double&quot;, 100))
+counter &lt;- 1
+
+for(i in 1:10) {
+  # random sample
+  set.seed(i)
+  sample &lt;- sample(c(TRUE, FALSE), nrow(Auto), replace = T, prob = c(0.6,0.4))
+  train &lt;- Auto[sample, ]
+  test &lt;- Auto[!sample, ]
+  
+  # modeling
+  for(j in 1:10) {
+    lm.fit &lt;- lm(mpg ~ poly(horsepower, j), data = train)
+    
+    # add degree &amp; mse values
+    mse.df.2[counter, 2] &lt;- j
+    mse.df.2[counter, 3] &lt;- mean((test$mpg - predict(lm.fit, test))^2)
+    
+    # add sample identifier
+    mse.df.2[counter, 1] &lt;- i
+    counter &lt;- counter + 1
+  }
+  next
+}
+
+ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
+  geom_line(show.legend = FALSE) +
+  geom_point(show.legend = FALSE) +
+  ylim(c(10, 30))</code></pre>
+<p><img src="/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-3-1.png" width="672" /> All ten curves indicate that there is not much benefit in including cubic or higher-order polynomial terms in the model.<br />
+However, MSE depends on train data subsets.<br />
+The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.<br />
+<strong>Cross-validation methods</strong> are used to overcome this drawback.</p>
+</div>
+<div id="leave-one-out-cross-validation-loocv" class="section level2">
+<h2>Leave-one-out cross-validation (LOOCV)</h2>
+<p>In the LOOCV method a single observation is used for the validation set, and the remaining <span class="math inline">\(n - 1\)</span> observations make up the training set.<br />
+Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. Note: we will use <code>glm</code> function for linear regression models and the <code>cv.glm</code> function from <code>boot</code> package, which provide necessary tools to perform resamping.</p>
+<pre class="r"><code># LOOCV
+library(&#39;boot&#39;)        # cross-validation
+# step 1: fit model
+glm.fit &lt;- glm(mpg ~ horsepower, data = Auto)
+# setp 2: perform LOOCV across entire data set
+loocv.err &lt;- cv.glm(Auto, glm.fit)
+
+str(loocv.err)</code></pre>
+<pre><code>## List of 4
+##  $ call : language cv.glm(data = Auto, glmfit = glm.fit)
+##  $ K    : num 392
+##  $ delta: num [1:2] 24.2 24.2
+##  $ seed : int [1:626] 403 392 -1703707781 1994959178 434562476 -1277611857 -1105401243 1020654108 526650482 -1538305299 ...</code></pre>
+<p><strong>call</strong>: the original function call.<br />
+<strong>K</strong>: the number of folds used. The LOOCV repeats validation with each of all of 392 observations.<br />
+<strong>delta</strong>: prediction error (MSE) estimated by the cross-validation.<br />
+<strong>seed</strong>: the values of the random seed used for the function call</p>
+<p>Let’s compare MSE estimated by <strong>LOOCV</strong> methods with MSE derived by <strong>simple validation</strong> approach (0.6/0.4) what we previously used.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code># get MSE for our 10 polynomial models, where degree is 1 (linear models). 
+mse &lt;- mse.df.2 %&gt;% filter(degree == 1) %&gt;% pull(mse)
+mse                 # all MSE from our 10 linear polynoms</code></pre>
+<pre><code>##  [1] 28.43298 26.38322 27.35615 27.40516 20.31488 24.31761 23.14485
+##  [8] 21.92717 25.64242 23.90127</code></pre>
+<pre class="r"><code>mean(mse)           # average MSE from our 10 linear polynoms</code></pre>
+<pre><code>## [1] 24.88257</code></pre>
+<pre class="r"><code>loocv.err$delta[1]  # LOOCV MSE</code></pre>
+<pre><code>## [1] 24.23151</code></pre>
+<p>As we can see, MSE derived by LOOCV is 24.2 and it is more precise but very close to the average MSE derived by avereging of our 10 polynomial linear models we made before (~24.9).</p>
+<p>Now we can apply LOOCV to estimate MSE for all 10 degrees of our polynomial regression models.</p>
+<pre class="r"><code># vector of LOOCV-errors
+n &lt;- 10 # max degree of polynom model
+cv.err.loocv &lt;- rep(NA, n)
+names(cv.err.loocv) &lt;- 1:n
+# repeat by powers of polynomes
+for (i in 1:n){
+  fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.loocv[i] &lt;- cv.glm(Auto, fit.glm)$delta[1]
+}
+# result
+cv.err.loocv</code></pre>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 24.23151 19.24821 19.33498 19.42443 19.03321 18.97864 18.83305 18.96115 
+##        9       10 
+## 19.06863 19.49093</code></pre>
+<p>Result is basically the same for this model as we got before but this result is more precise.<br />
+This LOOCV approach can be used with any kind of predictive modeling.</p>
+</div>
+<div id="k-fold-cross-validation" class="section level2">
+<h2>k-fold cross validation</h2>
+<p>library(‘GGally’) # matrix diagrams K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.<br />
+We will make 10-time validation.</p>
+<pre class="r"><code>n &lt;- 10 # max degree (number of polynom models)
+cv.err.k.fold &lt;- rep(NA, 10)
+names(cv.err.k.fold) &lt;- 1:10
+# repeat for power of polynomes
+for (i in 1:n){
+  fit.glm &lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
+  cv.err.k.fold[i] &lt;- cv.glm(Auto, fit.glm, K = 10)$delta[1]
+}
+# result
+cv.err.k.fold</code></pre>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 24.10371 19.34487 19.33756 19.71388 18.86019 19.02235 18.90377 19.18771 
+##        9       10 
+## 19.29985 19.08448</code></pre>
+<p><strong>k-fold cross validation</strong> computationally more effective than <strong>LOOCV</strong>.</p>
+</div>
+<div id="bootstrapping" class="section level2">
+<h2>Bootstrapping</h2>
+<p><strong>Bootstrapping</strong> repeatedly draws independent samples from our data set to create bootstrap data sets. This sample is performed with replacement, which means that the same observation can be sampled more than once.</p>
+<pre class="r"><code>n &lt;- nrow(Auto)
+statistic &lt;- function(data, index) {
+  # extract model coefficients
+  coef(lm(mpg ~ horsepower, data = data, subset = index))
+}
+statistic(Auto, 1:392)</code></pre>
+<pre><code>## (Intercept)  horsepower 
+##  39.9358610  -0.1578447</code></pre>
+<pre class="r"><code>set.seed(1)
+boot(Auto, statistic, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = statistic, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original        bias    std. error
+## t1* 39.9358610  0.0269563085 0.859851825
+## t2* -0.1578447 -0.0002906457 0.007402954</code></pre>
+<p>Bootstrap estimate for SE0 is 0.86, and that the bootstrap estimate for SE1is 0.0076. If we compare these to the standard errors provided by the summary function we see a difference (biased error).</p>
+<pre class="r"><code>summary(lm(mpg ~ horsepower, data = Auto))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ horsepower, data = Auto)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.5710  -3.2592  -0.3435   2.7630  16.9240 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 39.935861   0.717499   55.66   &lt;2e-16 ***
+## horsepower  -0.157845   0.006446  -24.49   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.906 on 390 degrees of freedom
+## Multiple R-squared:  0.6059, Adjusted R-squared:  0.6049 
+## F-statistic: 599.7 on 1 and 390 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Now we compair errors for polynomial model (degree=2) by bootstrap and non-bootstrap approach.</p>
+<pre class="r"><code>statistic.2 &lt;- function(data, index) {
+  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
+}
+set.seed(1)
+boot(Auto, statistic.2, 1000)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Auto, statistic = statistic.2, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##       original      bias    std. error
+## t1*   23.44592 0.003943212   0.2255528
+## t2* -120.13774 0.117312678   3.7008952
+## t3*   44.08953 0.047449584   4.3294215</code></pre>
+<pre class="r"><code>summary(lm(mpg ~ poly(horsepower, 2), data = Auto))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ poly(horsepower, 2), data = Auto)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.7135  -2.5943  -0.0859   2.2868  15.8961 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            23.4459     0.2209  106.13   &lt;2e-16 ***
+## poly(horsepower, 2)1 -120.1377     4.3739  -27.47   &lt;2e-16 ***
+## poly(horsepower, 2)2   44.0895     4.3739   10.08   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.374 on 389 degrees of freedom
+## Multiple R-squared:  0.6876, Adjusted R-squared:  0.686 
+## F-statistic:   428 on 2 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.</p>
+</div>
+<div id="bibiography" class="section level2">
+<h2>Bibiography</h2>
+<p><a href="http://faculty.marshall.usc.edu/gareth-james/">An Introduction to Statistical Learning by Gareth James</a><br />
+<a href="https://afit-r.github.io">Air Forse Institute of Technology</a></p>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/statistics/">Statistics</a>
+  
+  <a class="badge badge-light" href="/tags/resampling/">Resampling</a>
+  
+  <a class="badge badge-light" href="/tags/cross-validation/">Cross-validation</a>
+  
+  <a class="badge badge-light" href="/tags/bootstrap/">Bootstrap</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/statistics/markov_process/simple_markov_process/">Simple Markov process</a></li>
+          
+          <li><a href="/post/programming/r_tips_tricks/r_tips_tricks/">R tips and coding tricks</a></li>
+          
+          <li><a href="/post/statistics/splines/splines/">Spline model</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

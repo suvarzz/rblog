@@ -5,12 +5,273 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
+    
+    <item>
+      <title>R tidyverse package - reference</title>
+      <link>/post/programming/tidyverse_reference/tidyverse_reference/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/programming/tidyverse_reference/tidyverse_reference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#readr---read-and-write-data&#34;&gt;readr - read and write data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#read-data&#34;&gt;Read data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#write-data&#34;&gt;Write data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tibble---advanced-data-frames&#34;&gt;tibble - advanced data frames&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tidyr---operations-with-tables&#34;&gt;tidyr - operations with tables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#magrittr---pipelines&#34;&gt;magrittr - pipelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#purrr---functional-programming&#34;&gt;purrr - functional programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#dplyr---data-manipulation&#34;&gt;dplyr - data manipulation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#stringr&#34;&gt;stringr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#forcats&#34;&gt;forcats&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lubridate&#34;&gt;lubridate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#broom-modelr&#34;&gt;broom &amp;amp; modelr&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;library(tidyverse) ggplot2 tibble tidyr readr purrr dplyr stringr forcats&lt;/p&gt;
+&lt;div id=&#34;readr---read-and-write-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;readr - read and write data&lt;/h1&gt;
+&lt;div id=&#34;read-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Read data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(readr)
+read_delim()   # delim not specified
+read_tsv()     # tab-separated
+
+read_csv()     # comma-separated
+read_csv2()    # semicolon-separated
+read_table()   # space-sepatated (fixed length columns)
+read_table2() # space-separated (variable length columns)
+
+read_file()
+read_file_raw()
+read_log()
+
+read_csv_chunked()
+read_csv2_chunked()
+read_delim_chunked()
+read_lines_chunked()
+read_raw_chunked()
+
+read_delim(file, delim, quote = &amp;quot;\&amp;quot;&amp;quot;, escape_backslash = FALSE,
+           escape_double = TRUE, col_names = TRUE, col_types = NULL,
+           locale = default_locale(), na = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;), quoted_na = TRUE,
+           comment = &amp;quot;&amp;quot;, trim_ws = FALSE, skip = 0, n_max = Inf,
+           guess_max = min(1000, n_max), progress = show_progress(),
+           skip_empty_rows = TRUE)
+
+col_types
+
+c | col_character()
+i | col_integer()
+n | col_number()
+d | col_double()
+l | col_logical()
+f | col_factor()
+d | col_date()
+t | col_time()
+? | col_guess()  # default
+_ - | cal_skip() # skip the column
+
+
+col_types = &amp;quot;clnt&amp;quot;
+col_types = cols(A = col_character())
+          = cols(A = col_factor(levels = c(&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;))) # specify factor
+          = cols(A = col_factor(ordered = TRUE))      # order factor
+
+locale = locale(date_names = &amp;quot;en&amp;quot;,
+                date_format = &amp;quot;%AD&amp;quot;,
+                time_format = &amp;quot;%AT&amp;quot;,
+                decimal_mark = &amp;quot;.&amp;quot;,
+                grouping_mark = &amp;quot;,&amp;quot;,
+                tz = &amp;quot;UTC&amp;quot;,
+                encoding = &amp;quot;UTF-8&amp;quot;,
+                asciify = FALSE)
+
+date_format(format = &amp;quot;%Y-%m-%d&amp;quot;, tz = &amp;quot;UTC&amp;quot;)
+time_format(format = &amp;quot;%H:%M:%S&amp;quot;, tz = &amp;quot;UTC&amp;quot;)
+
+%d   # day
+%m   # month (digits)
+%B   # month full name - Januar, ...
+%b   # month abbr. - Jan, Feb, ...
+%Y   # year 2006
+%y   # year 06
+%H   # 24 hours format
+%I   # 12 hours format
+%M   # minutes
+%p   # am/pm
+%S   # second
+%Z   # time zone as name &amp;#39;Berlin&amp;#39;
+%z   # ime zone &amp;#39;UTC&amp;#39;
+
+Preset values:
+%D   %m/%d/%y
+%x   %y/%m/%d
+%F   %Y-%m-%d
+%R   %H:%M
+%T   %H:%M:%S
+
+parse_character()
+parse_date()
+parse_datetime()
+parse_double()
+parse_factor()
+parse_guess()
+parse_number()
+parse_logical()
+parse_vector()
+
+parse_date(c(&amp;quot;1975/02/05&amp;quot;), format = &amp;quot;%Y/%m/%d&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Write data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;write_delim()
+write_tsv()
+write_csv()
+write_csv2()
+write_excel_csv()
+write_excel_csv2()
+write_lines()
+write_rds()
+write_file()
+
+write_delim(x, path, delim = &amp;quot; &amp;quot;, na = &amp;quot;NA&amp;quot;, append = FALSE,
+            col_names = !append, quote_escape = &amp;quot;double&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tibble---advanced-data-frames&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;tibble - advanced data frames&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tibble)
+x&amp;lt;- tibble(a = c(1,2), b = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;))
+
+x &amp;lt;- tribble(~a,~b,~c,
+            1,2,3,
+            &amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;)
+
+as_tibble(x)
+as.data.frame(x)
+
+print(x, n=2, width=5)
+
+x[1]          # get column by id
+x[&amp;#39;A&amp;#39;]        # get column by column name
+x$A           # get column
+
+x[1:5]        # get columns
+x[c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;)] # get columns
+
+x[[1]]        # get column as vector
+x[[&amp;#39;A&amp;#39;]]      # get column as vector
+
+x[row, column] # subset
+x[5, 10]       # get value row 5 and column 10
+x[1:5, 10:20]  # subset tibble
+x[1:3,]        # get 3 rows
+x[,1:3]        # get 3 columns&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tidyr---operations-with-tables&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;tidyr - operations with tables&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gather()
+spread()
+separate()
+extract()
+unite()
+expand()
+crossing()
+complete()
+
+drop_na()
+replace_na()
+
+fill()
+nest()
+unnest()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;magrittr---pipelines&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;magrittr - pipelines&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% f() %&amp;gt;% g() %&amp;gt;% h()
+df %&amp;gt;% f %&amp;gt;% g %&amp;gt;% h
+
+df %&amp;lt;&amp;gt;% f        # df &amp;lt;- df %&amp;gt;% f
+
+df %$% { a - b}  # to refer df columns by names
+
+df %T&amp;gt;% f        #  return df
+df %&amp;gt;% calculate %T&amp;gt;% print %T&amp;gt;% plot %&amp;gt;% calculate&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;purrr---functional-programming&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;purrr - functional programming&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;keep()       # true subset by result of logical function
+discard()    # false subset by result of logical function
+compact()    # remove empty elements
+
+f &amp;lt;- function(x) x%%2 == 0
+1:4 %&amp;gt;% keep(f)             # 2 4
+1:4 %&amp;gt;% discard(f)          # 1 3 
+1:4 %&amp;gt;% keep(negate(f))     # 1 3 
+
+1:4 %&amp;gt;% map(f)              # return logicals in list
+1:4 %&amp;gt;% map_lgl(f)          # return logicals in vector
+
+map()
+map_lgl()
+map_dbl()
+map_chr()
+map_call()
+map_at()
+map_if()
+map_depth()
+map_int()
+map_dfr()                   # return vector of input length
+
+lmap()
+lmap_at()
+lmap_if()
+
+pmap()
+pmap_chr()
+pmap_dbl()
+pmap_df()
+pmap_dfc()
+pmap_dfr()
+pmap_int()
+pmap_lgl()
+pmap_raw()
+
+# lambda function
+f &amp;lt;- function(x) x &amp;gt; 2
+1:4 %&amp;gt;% keep(f)                  # 3 4
+1:4 %&amp;gt;% keep(function(x) x &amp;gt; 2)  # 3 4
+1:4 %&amp;gt;% keep(~ .x &amp;gt; 2)           # 3 4
+
+list(1:3, 1:3, 1:3) %&amp;gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dplyr---data-manipulation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;dplyr - data manipulation&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stringr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;stringr&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;forcats&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;forcats&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;lubridate&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;lubridate&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;broom-modelr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;broom &amp;amp; modelr&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>ANOVA</title>
@@ -1015,35 +1276,6 @@ FDR: 10%&lt;/p&gt;
 &lt;div id=&#34;sources&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Sources&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.sthda.com/english/wiki/one-sample-t-test-in-r&#34;&gt;One-Sample T-test in R&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>R tips and coding tricks</title>
-      <link>/post/programming/r_tips_tricks/r_tips_tricks/</link>
-      <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/programming/r_tips_tricks/r_tips_tricks/</guid>
-      <description>
-
-
-&lt;p&gt;Here you can find some simple interesting concepts for coding in R.&lt;/p&gt;
-&lt;div id=&#34;how-to-select-all-numeric-columns-in-a-data-frame&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;How to select all numeric columns in a data frame?&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df = data.frame(x = c(1:3),
-                y = c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;),
-                z = c(0.1, 0.2, 0.3))
-df&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   x y   z
-## 1 1 A 0.1
-## 2 2 B 0.2
-## 3 3 C 0.3&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select all numeric columns
-df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   x   z
-## 1 1 0.1
-## 2 2 0.2
-## 3 3 0.3&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>

@@ -5,7 +5,7 @@
     <link>/tags/regression/</link>
       <atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     <description>Regression</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Regression</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Linear Regression (Math)</title>
       <link>/post/statistics/linear_regression_math/linear_regression_math/</link>
-      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/post/statistics/linear_regression_math/linear_regression_math/</guid>
       <description>
 
@@ -29,6 +29,15 @@
 
 &lt;div id=&#34;simple-linear-regression&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Simple linear regression&lt;/h2&gt;
+&lt;p&gt;Ordinary Least Squares (OLS) function:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(minimize\left\{SSE = sum_{i=1}^{n} (y_i - \hat y_i)^2 \right\}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Assumtions of OLS regression:&lt;br /&gt;
+* Linear relationship&lt;br /&gt;
+* Multivariathe normality&lt;br /&gt;
+* No autocorrelation&lt;br /&gt;
+* Homoscedastic (constant variance in residuals)&lt;br /&gt;
+* There are more observations (n) than features (p) (n &amp;gt; p)&lt;br /&gt;
+* No or little multicollinearity&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y = \beta_0 + \beta_1 x\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat y\)&lt;/span&gt; - expectd value of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, the same as &lt;span class=&#34;math inline&#34;&gt;\(E(Y|x)\)&lt;/span&gt;&lt;br /&gt;
 &lt;span class=&#34;math inline&#34;&gt;\(\beta_0\)&lt;/span&gt; - intercept&lt;br /&gt;

@@ -1,0 +1,72 @@
+---
+title: "Processing of sequencing data in R"
+author: "Mark Goldberg"
+date: '2019-08-14'
+draft: false
+math: true
+tags: ["R", "RNA-seq"]
+categories: ["Bioinformatics"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "Processing of sequencing data in R."
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#alignment-using">Alignment using</a></li>
+<li><a href="#get-fastq-from-sra-database">Get fastq from SRA database</a></li>
+</ul>
+</div>
+
+<div id="alignment-using" class="section level1">
+<h1>Alignment using</h1>
+<pre class="r"><code>library(Rsubread) # sequence alignment
+
+fastq.files &lt;- list.files(pattern = &quot;.fastq.gz$&quot;, full.names = TRUE)
+fastq.files
+
+# build index
+buildindex(basename=&quot;mm10&quot;, reference=&quot;mm10.fa&quot;)
+
+# alignment
+align(fastq.files, index=&quot;chr1_mm10&quot;)
+
+# parameters
+args(align)
+
+# check result
+bam.files &lt;- list.files(pattern = &quot;.BAM$&quot;, full.names = TRUE)
+bam.files
+# properties of BAM files
+propmapped(files=bam.files)</code></pre>
+</div>
+<div id="get-fastq-from-sra-database" class="section level1">
+<h1>Get fastq from SRA database</h1>
+<pre class="r"><code>library(SRAdb) # SRA database
+dir.create(&quot;~/SRA&quot;)
+setwd(&quot;~/SRA&quot;)
+
+## Create database
+sqlfile &lt;-&#39;SRAmetadb.sqlite&#39;
+# load database [~3 Gb, 60 Gb on disc!!!]
+if(!file.exists(&#39;SRAmetadb.sqlite&#39;)) sqlfile &lt;&lt;- getSRAdbFile()
+# connect database
+sra_con &lt;- dbConnect(SQLite(), sqlfile)
+
+## get info for SRA from created database
+sraInf &lt;- getSRAinfo(&quot;SRP045534&quot;, sra_con, sraType=&quot;sra&quot;)
+sraInf
+
+# download SRA
+# get SRA using SRA info [~ 5 Gb]
+sapply(sraInf$run, function(x) try(getSRAfile(x, sra_con, fileType=&quot;sra&quot;), silent=TRUE))</code></pre>
+<pre class="bash"><code>## extract FASTQ from SRA
+cd ~/SRA
+for sra in *.sra
+  do
+    fastq-dump $sra
+  done</code></pre>
+</div>
