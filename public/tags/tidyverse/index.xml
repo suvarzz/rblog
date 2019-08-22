@@ -5,7 +5,7 @@
     <link>/tags/tidyverse/</link>
       <atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     <description>tidyverse</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>tidyverse</title>
@@ -13,10 +13,68 @@
     </image>
     
     <item>
+      <title>R graphic - reference</title>
+      <link>/post/r/r_graphic/r_graphic/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/r/r_graphic/r_graphic/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#ggplot2&#34;&gt;ggplot2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;ggplot2&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;ggplot2&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+
+df &amp;lt;- data.frame(x=c(1,2), y=c(3,4))
+
+ggplot(df, aes(x, y, other_aesthetics))
+
+ggplot() + aesthetics
+
+aesthetics:
+color = 
+geom_point
+geom_line
+geom_abline
+geom_area
+geom_bar
+geom_boxplot
+geom_vline
+geom_violin
+geom_curve
+geom_blank
+geom_count
+...
+
+ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point()
+
+# scatterplot 
+qplot(wt, mpg, data=mtcars, geom=&amp;#39;line&amp;#39;) + geom_point()
+qplot(wt, mpg, data=mtcars, geom=c(&amp;#39;line&amp;#39;, &amp;#39;point&amp;#39;))
+
+# boxplot
+qplot(as.factor(cyl), mpg, data=mtcars, geom=&amp;#39;boxplot&amp;#39;)
+qplot(as.factor(cyl), mpg, data=mtcars, geom=c(&amp;#39;boxplot&amp;#39;, &amp;#39;point&amp;#39;))
+
+# histogram
+qplot(mpg, data=mtcars, geom=&amp;quot;histogram&amp;quot;)
+
+qplot(mpg, data=mtcars,
+      geom=&amp;quot;histogram&amp;quot;) +
+      geom_vline(xintercept = median(mtcars$mpg), color=&amp;#39;red&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>R tidyverse package - reference</title>
-      <link>/post/programming/tidyverse_reference/tidyverse_reference/</link>
+      <link>/post/r/tidyverse_reference/tidyverse_reference/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/programming/tidyverse_reference/tidyverse_reference/</guid>
+      <guid>/post/r/tidyverse_reference/tidyverse_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

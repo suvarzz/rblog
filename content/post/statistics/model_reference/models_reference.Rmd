@@ -1,0 +1,61 @@
+---
+title: "Models - reference"
+author: "Mark Goldberg"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+draft: false
+math: true
+tags: ["R", "Regression"]
+categories: ["R", "Statistics"]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+# Linear regression
+
+```{r, eval=F}
+
+lm(y ~ x1 + x2 + x3)     # multiple linear regression
+
+lm(log(y) ~ x)           # log transformed
+lm(sqrt(y) ~ x)          # sqrt transformed
+lm( y ~ log(x))          # fields transformed
+llm(log(y) ~ log(x))     # everything is transformed
+
+lm(y ~ .)                # use all fields for regression model
+
+lm(y ~ x + 0)            # forced zero intercept
+
+lm(y ~ x*k)              # interaction of two variables
+
+lm(y ~ x + k + x:k)      # product of xkl but without interaction
+
+lm(y ~ (x + k + ... + l)^2) # all first order interactions
+
+lm(y ~ I(x1 + x2))       # sum of variables
+lm(y ~ I(x1^2))          # product of variables (not interation)
+
+lm(y ~ x + I(x^2) + I(x^3)) # polynomial regression
+lm(y ~ poly(x,3))           # same as previous
+
+# Forward/backward stepwise regression
+# improve model
+fit <- lm(y ~ x1 + x2)
+bwd.fit <- step(fit, direction = 'backward')
+fwd.fit <- step(fit, direction = 'forward', scope( ~ x1 + x2))
+```
+
+## Test linear moedel
+```{r, eval=F}
+plot(m)            # plot residuals
+car::outlier.test(m)
+dwtest(m)          # Durbin-Watson Test of the model residuals
+```
+
+# One-way ANOVA
+```{r, eval=F}
+oneway.test(x ~ f)
+aov(x ~ f)
+
+anova(m1, m2)      # compair two models
+```

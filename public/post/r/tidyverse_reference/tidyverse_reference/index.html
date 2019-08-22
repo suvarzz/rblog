@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="R tidyverse package - reference">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/r/tidyverse_reference/tidyverse_reference/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/r/tidyverse_reference/tidyverse_reference/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/r/tidyverse_reference/tidyverse_reference/">
+  <meta property="og:title" content="R tidyverse package - reference | Mark Goldberg">
+  <meta property="og:description" content="R tidyverse package - reference"><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-16T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-16T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>R tidyverse package - reference | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#R"><span>R</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/bioinformatics/"><span>Bioinformatics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">R tidyverse package - reference</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-16 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-16 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 16, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/r/tidyverse_reference/tidyverse_reference/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/r/tidyverse_reference/tidyverse_reference/&amp;text=R%20tidyverse%20package%20-%20reference" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/r/tidyverse_reference/tidyverse_reference/&amp;t=R%20tidyverse%20package%20-%20reference" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=R%20tidyverse%20package%20-%20reference&amp;body=/post/r/tidyverse_reference/tidyverse_reference/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/r/tidyverse_reference/tidyverse_reference/&amp;title=R%20tidyverse%20package%20-%20reference" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=R%20tidyverse%20package%20-%20reference%20/post/r/tidyverse_reference/tidyverse_reference/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/r/tidyverse_reference/tidyverse_reference/&amp;title=R%20tidyverse%20package%20-%20reference" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#readr---read-and-write-data">readr - read and write data</a><ul>
+<li><a href="#read-data">Read data</a></li>
+<li><a href="#write-data">Write data</a></li>
+</ul></li>
+<li><a href="#tibble---advanced-data-frames">tibble - advanced data frames</a></li>
+<li><a href="#tidyr---operations-with-tables">tidyr - operations with tables</a></li>
+<li><a href="#magrittr---pipelines">magrittr - pipelines</a></li>
+<li><a href="#purrr---functional-programming">purrr - functional programming</a></li>
+<li><a href="#dplyr---data-manipulation">dplyr - data manipulation</a></li>
+<li><a href="#stringr">stringr</a></li>
+<li><a href="#forcats">forcats</a></li>
+<li><a href="#lubridate">lubridate</a></li>
+<li><a href="#broom-modelr">broom &amp; modelr</a></li>
+</ul>
+</div>
+
+<p>library(tidyverse) ggplot2 tibble tidyr readr purrr dplyr stringr forcats</p>
+<div id="readr---read-and-write-data" class="section level1">
+<h1>readr - read and write data</h1>
+<div id="read-data" class="section level2">
+<h2>Read data</h2>
+<pre class="r"><code>library(readr)
+read_delim()   # delim not specified
+read_tsv()     # tab-separated
+
+read_csv()     # comma-separated
+read_csv2()    # semicolon-separated
+read_table()   # space-sepatated (fixed length columns)
+read_table2() # space-separated (variable length columns)
+
+read_file()
+read_file_raw()
+read_log()
+
+read_csv_chunked()
+read_csv2_chunked()
+read_delim_chunked()
+read_lines_chunked()
+read_raw_chunked()
+
+read_delim(file, delim, quote = &quot;\&quot;&quot;, escape_backslash = FALSE,
+           escape_double = TRUE, col_names = TRUE, col_types = NULL,
+           locale = default_locale(), na = c(&quot;&quot;, &quot;NA&quot;), quoted_na = TRUE,
+           comment = &quot;&quot;, trim_ws = FALSE, skip = 0, n_max = Inf,
+           guess_max = min(1000, n_max), progress = show_progress(),
+           skip_empty_rows = TRUE)
+
+col_types
+
+c | col_character()
+i | col_integer()
+n | col_number()
+d | col_double()
+l | col_logical()
+f | col_factor()
+d | col_date()
+t | col_time()
+? | col_guess()  # default
+_ - | cal_skip() # skip the column
+
+
+col_types = &quot;clnt&quot;
+col_types = cols(A = col_character())
+          = cols(A = col_factor(levels = c(&#39;a&#39;,&#39;b&#39;))) # specify factor
+          = cols(A = col_factor(ordered = TRUE))      # order factor
+
+locale = locale(date_names = &quot;en&quot;,
+                date_format = &quot;%AD&quot;,
+                time_format = &quot;%AT&quot;,
+                decimal_mark = &quot;.&quot;,
+                grouping_mark = &quot;,&quot;,
+                tz = &quot;UTC&quot;,
+                encoding = &quot;UTF-8&quot;,
+                asciify = FALSE)
+
+date_format(format = &quot;%Y-%m-%d&quot;, tz = &quot;UTC&quot;)
+time_format(format = &quot;%H:%M:%S&quot;, tz = &quot;UTC&quot;)
+
+%d   # day
+%m   # month (digits)
+%B   # month full name - Januar, ...
+%b   # month abbr. - Jan, Feb, ...
+%Y   # year 2006
+%y   # year 06
+%H   # 24 hours format
+%I   # 12 hours format
+%M   # minutes
+%p   # am/pm
+%S   # second
+%Z   # time zone as name &#39;Berlin&#39;
+%z   # ime zone &#39;UTC&#39;
+
+Preset values:
+%D   %m/%d/%y
+%x   %y/%m/%d
+%F   %Y-%m-%d
+%R   %H:%M
+%T   %H:%M:%S
+
+parse_character()
+parse_date()
+parse_datetime()
+parse_double()
+parse_factor()
+parse_guess()
+parse_number()
+parse_logical()
+parse_vector()
+
+parse_date(c(&quot;1975/02/05&quot;), format = &quot;%Y/%m/%d&quot;)</code></pre>
+</div>
+<div id="write-data" class="section level2">
+<h2>Write data</h2>
+<pre class="r"><code>write_delim()
+write_tsv()
+write_csv()
+write_csv2()
+write_excel_csv()
+write_excel_csv2()
+write_lines()
+write_rds()
+write_file()
+
+write_delim(x, path, delim = &quot; &quot;, na = &quot;NA&quot;, append = FALSE,
+            col_names = !append, quote_escape = &quot;double&quot;)</code></pre>
+</div>
+</div>
+<div id="tibble---advanced-data-frames" class="section level1">
+<h1>tibble - advanced data frames</h1>
+<pre class="r"><code>library(tibble)
+x&lt;- tibble(a = c(1,2), b = c(&#39;A&#39;,&#39;B&#39;))
+
+x &lt;- tribble(~a,~b,~c,
+            1,2,3,
+            &#39;A&#39;,&#39;B&#39;,&#39;C&#39;)
+
+as_tibble(x)
+as.data.frame(x)
+
+print(x, n=2, width=5)
+
+x[1]          # get column by id
+x[&#39;A&#39;]        # get column by column name
+x$A           # get column
+
+x[1:5]        # get columns
+x[c(&#39;A&#39;,&#39;B&#39;)] # get columns
+
+x[[1]]        # get column as vector
+x[[&#39;A&#39;]]      # get column as vector
+
+x[row, column] # subset
+x[5, 10]       # get value row 5 and column 10
+x[1:5, 10:20]  # subset tibble
+x[1:3,]        # get 3 rows
+x[,1:3]        # get 3 columns</code></pre>
+</div>
+<div id="tidyr---operations-with-tables" class="section level1">
+<h1>tidyr - operations with tables</h1>
+<pre class="r"><code>gather()
+spread()
+separate()
+extract()
+unite()
+expand()
+crossing()
+complete()
+
+drop_na()
+replace_na()
+
+fill()
+nest()
+unnest()</code></pre>
+</div>
+<div id="magrittr---pipelines" class="section level1">
+<h1>magrittr - pipelines</h1>
+<pre class="r"><code>df %&gt;% f() %&gt;% g() %&gt;% h()
+df %&gt;% f %&gt;% g %&gt;% h
+
+df %&lt;&gt;% f        # df &lt;- df %&gt;% f
+
+df %$% { a - b}  # to refer df columns by names
+
+df %T&gt;% f        #  return df
+df %&gt;% calculate %T&gt;% print %T&gt;% plot %&gt;% calculate</code></pre>
+</div>
+<div id="purrr---functional-programming" class="section level1">
+<h1>purrr - functional programming</h1>
+<pre class="r"><code>keep()       # true subset by result of logical function
+discard()    # false subset by result of logical function
+compact()    # remove empty elements
+
+f &lt;- function(x) x%%2 == 0
+1:4 %&gt;% keep(f)             # 2 4
+1:4 %&gt;% discard(f)          # 1 3 
+1:4 %&gt;% keep(negate(f))     # 1 3 
+
+1:4 %&gt;% map(f)              # return logicals in list
+1:4 %&gt;% map_lgl(f)          # return logicals in vector
+
+map()
+map_lgl()
+map_dbl()
+map_chr()
+map_call()
+map_at()
+map_if()
+map_depth()
+map_int()
+map_dfr()                   # return vector of input length
+
+lmap()
+lmap_at()
+lmap_if()
+
+pmap()
+pmap_chr()
+pmap_dbl()
+pmap_df()
+pmap_dfc()
+pmap_dfr()
+pmap_int()
+pmap_lgl()
+pmap_raw()
+
+# lambda function
+f &lt;- function(x) x &gt; 2
+1:4 %&gt;% keep(f)                  # 3 4
+1:4 %&gt;% keep(function(x) x &gt; 2)  # 3 4
+1:4 %&gt;% keep(~ .x &gt; 2)           # 3 4
+
+list(1:3, 1:3, 1:3) %&gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6</code></pre>
+</div>
+<div id="dplyr---data-manipulation" class="section level1">
+<h1>dplyr - data manipulation</h1>
+</div>
+<div id="stringr" class="section level1">
+<h1>stringr</h1>
+</div>
+<div id="forcats" class="section level1">
+<h1>forcats</h1>
+</div>
+<div id="lubridate" class="section level1">
+<h1>lubridate</h1>
+</div>
+<div id="broom-modelr" class="section level1">
+<h1>broom &amp; modelr</h1>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/bioinformatics/gwas/gwas/">Genome Wide Associated Studies (GWAS)</a></li>
+          
+          <li><a href="/post/statistics/pca/pca/">Principal component analysis</a></li>
+          
+          <li><a href="/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/">Processing of sequencing data in R</a></li>
+          
+          <li><a href="/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/">RNA-seq analysis in R</a></li>
+          
+          <li><a href="/post/statistics/anova/anova/">ANOVA</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

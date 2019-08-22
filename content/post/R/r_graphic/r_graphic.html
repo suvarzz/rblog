@@ -1,0 +1,64 @@
+---
+title: "R graphic - reference"
+author: "Mark Goldberg"
+date: '2019-08-17'
+draft: false
+math: true
+tags: ["R", "tidyverse"]
+categories: ["R"]
+#bibliography: [bib.bib]
+output:
+  blogdown::html_page:
+    toc: true
+summary: "R graphic - reference"
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#ggplot2">ggplot2</a></li>
+</ul>
+</div>
+
+<div id="ggplot2" class="section level1">
+<h1>ggplot2</h1>
+<pre class="r"><code>library(ggplot2)
+
+df &lt;- data.frame(x=c(1,2), y=c(3,4))
+
+ggplot(df, aes(x, y, other_aesthetics))
+
+ggplot() + aesthetics
+
+aesthetics:
+color = 
+geom_point
+geom_line
+geom_abline
+geom_area
+geom_bar
+geom_boxplot
+geom_vline
+geom_violin
+geom_curve
+geom_blank
+geom_count
+...
+
+ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point()
+
+# scatterplot 
+qplot(wt, mpg, data=mtcars, geom=&#39;line&#39;) + geom_point()
+qplot(wt, mpg, data=mtcars, geom=c(&#39;line&#39;, &#39;point&#39;))
+
+# boxplot
+qplot(as.factor(cyl), mpg, data=mtcars, geom=&#39;boxplot&#39;)
+qplot(as.factor(cyl), mpg, data=mtcars, geom=c(&#39;boxplot&#39;, &#39;point&#39;))
+
+# histogram
+qplot(mpg, data=mtcars, geom=&quot;histogram&quot;)
+
+qplot(mpg, data=mtcars,
+      geom=&quot;histogram&quot;) +
+      geom_vline(xintercept = median(mtcars$mpg), color=&#39;red&#39;)</code></pre>
+</div>

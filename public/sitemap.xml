@@ -13,13 +13,64 @@
   </url>
   
   <url>
-    <loc>/categories/biology/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/post/r/dplyr_tutorial/dplyr_tutorial/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/r/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/r/r_graphic/r_graphic/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/dplyr/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/biology/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -31,48 +82,13 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/programming/</loc>
+    <loc>/post/r/tidyverse_reference/tidyverse_reference/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
+    <loc>/post/r/r_tips_tricks/r_tips_tricks/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/programming/tidyverse_reference/tidyverse_reference/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/programming/r_tips_tricks/r_tips_tricks/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
-    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -184,11 +200,6 @@
   </url>
   
   <url>
-    <loc>/post/statistics/dplyr_tutorial/dplyr_tutorial/</loc>
-    <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/exploratory-analysis/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -201,12 +212,6 @@
   
   <url>
     <loc>/tags/hierarchical/</loc>
-    <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/dplyr/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

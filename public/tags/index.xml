@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Tags</title>
@@ -13,26 +13,34 @@
     </image>
     
     <item>
-      <title>GWAS</title>
-      <link>/tags/gwas/</link>
-      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/gwas/</guid>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/r/</guid>
+      <title>dplyr</title>
+      <link>/tags/dplyr/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/dplyr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tidyverse</title>
       <link>/tags/tidyverse/</link>
-      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GWAS</title>
+      <link>/tags/gwas/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/gwas/</guid>
       <description></description>
     </item>
     
@@ -97,14 +105,6 @@
       <link>/tags/hierarchical/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
       <guid>/tags/hierarchical/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dplyr</title>
-      <link>/tags/dplyr/</link>
-      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/dplyr/</guid>
       <description></description>
     </item>
     
