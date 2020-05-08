@@ -39,3 +39,8 @@
   name = "Contact"
   url = "#contact"
   weight = 80
+
+[[main]]
+  name = "Books"
+  url = "https://suvarzz.github.io/rbook/"
+  weight = 90
