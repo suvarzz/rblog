@@ -5,7 +5,7 @@
     <link>/categories/statistics/</link>
       <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Statistics</title>
@@ -175,6 +175,69 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Models - reference</title>
+      <link>/post/statistics/model_reference/models_reference/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/model_reference/models_reference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#linear-regression&#34;&gt;Linear regression&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#test-linear-moedel&#34;&gt;Test linear moedel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-way-anova&#34;&gt;One-way ANOVA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;linear-regression&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Linear regression&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lm(y ~ x1 + x2 + x3)     # multiple linear regression
+
+lm(log(y) ~ x)           # log transformed
+lm(sqrt(y) ~ x)          # sqrt transformed
+lm( y ~ log(x))          # fields transformed
+llm(log(y) ~ log(x))     # everything is transformed
+
+lm(y ~ .)                # use all fields for regression model
+
+lm(y ~ x + 0)            # forced zero intercept
+
+lm(y ~ x*k)              # interaction of two variables
+
+lm(y ~ x + k + x:k)      # product of xkl but without interaction
+
+lm(y ~ (x + k + ... + l)^2) # all first order interactions
+
+lm(y ~ I(x1 + x2))       # sum of variables
+lm(y ~ I(x1^2))          # product of variables (not interation)
+
+lm(y ~ x + I(x^2) + I(x^3)) # polynomial regression
+lm(y ~ poly(x,3))           # same as previous
+
+# Forward/backward stepwise regression
+# improve model
+fit &amp;lt;- lm(y ~ x1 + x2)
+bwd.fit &amp;lt;- step(fit, direction = &amp;#39;backward&amp;#39;)
+fwd.fit &amp;lt;- step(fit, direction = &amp;#39;forward&amp;#39;, scope( ~ x1 + x2))&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;test-linear-moedel&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Test linear moedel&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(m)            # plot residuals
+car::outlier.test(m)
+dwtest(m)          # Durbin-Watson Test of the model residuals&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-way-anova&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;One-way ANOVA&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;oneway.test(x ~ f)
+aov(x ~ f)
+
+anova(m1, m2)      # compair two models&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -1194,6 +1257,88 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>k-means</title>
+      <link>/post/statistics/k_means/k_means/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/k_means/k_means/</guid>
+      <description>
+
+
+&lt;div id=&#34;k-means-cluster-analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;K-means cluster analysis&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)
+df &amp;lt;- datasets::iris
+head(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are 3 species:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unique(df$Species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] setosa     versicolor virginica 
+## Levels: setosa versicolor virginica&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We try to predict them by &lt;em&gt;Petal.Lenght&lt;/em&gt;and &lt;em&gt;Petal.Width&lt;/em&gt; variables using k-means clustering.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot Petal.Length ~ Petal.Width data
+plot(df$Petal.Length ~ df$Petal.Width)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Find number of clusters using wss
+wss &amp;lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
+for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df[, 3:4], i)$withinss)
+plot(1:15, wss, type=&amp;quot;b&amp;quot;, xlab=&amp;quot;Number of Clusters&amp;quot;, ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make k-means with 3 clasters
+ncl &amp;lt;- 3
+cl &amp;lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
+cl&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## K-means clustering with 3 clusters of sizes 48, 50, 52
+## 
+## Cluster means:
+##   Petal.Length Petal.Width
+## 1     5.595833    2.037500
+## 2     1.462000    0.246000
+## 3     4.269231    1.342308
+## 
+## Clustering vector:
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [71] 3 3 3 3 3 3 3 1 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1
+## [106] 1 3 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 3 1
+## [141] 1 1 1 1 1 1 1 1 1 1
+## 
+## Within cluster sum of squares by cluster:
+## [1] 16.29167  2.02200 13.05769
+##  (between_SS / total_SS =  94.3 %)
+## 
+## Available components:
+## 
+## [1] &amp;quot;cluster&amp;quot;      &amp;quot;centers&amp;quot;      &amp;quot;totss&amp;quot;        &amp;quot;withinss&amp;quot;    
+## [5] &amp;quot;tot.withinss&amp;quot; &amp;quot;betweenss&amp;quot;    &amp;quot;size&amp;quot;         &amp;quot;iter&amp;quot;        
+## [9] &amp;quot;ifault&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compair result of clustering with real data (3 species of iris are in analysis)
+table(cl$cluster, df$Species)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    
+##     setosa versicolor virginica
+##   1      0          2        46
+##   2     50          0         0
+##   3      0         48         4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot data
+clusters &amp;lt;- split.data.frame(df, cl$cluster)
+xlim &amp;lt;- c(min(df$Petal.Width), max(df$Petal.Width))
+ylim &amp;lt;- c(min(df$Petal.Length), max(df$Petal.Length))
+col &amp;lt;- c(&amp;#39;red&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;blue&amp;#39;)
+plot(0, xlab=&amp;#39;Petal width&amp;#39;, ylab=&amp;#39;Petal length&amp;#39;, xlim=xlim, ylim=ylim)
+for ( i in 1:ncl ) {
+  points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Learning Vector Quantization</title>
       <link>/post/statistics/lvq/lvq/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
@@ -1309,88 +1454,6 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;support-vector-machine&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Support Vector Machine&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;Type of problem&lt;/em&gt;: regression, supervised classification.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>k-means</title>
-      <link>/post/statistics/k_means/k_means/</link>
-      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/k_means/k_means/</guid>
-      <description>
-
-
-&lt;div id=&#34;k-means-cluster-analysis&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;K-means cluster analysis&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)
-df &amp;lt;- datasets::iris
-head(df)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There are 3 species:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unique(df$Species)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] setosa     versicolor virginica 
-## Levels: setosa versicolor virginica&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We try to predict them by &lt;em&gt;Petal.Lenght&lt;/em&gt;and &lt;em&gt;Petal.Width&lt;/em&gt; variables using k-means clustering.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot Petal.Length ~ Petal.Width data
-plot(df$Petal.Length ~ df$Petal.Width)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Find number of clusters using wss
-wss &amp;lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
-for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df[, 3:4], i)$withinss)
-plot(1:15, wss, type=&amp;quot;b&amp;quot;, xlab=&amp;quot;Number of Clusters&amp;quot;, ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make k-means with 3 clasters
-ncl &amp;lt;- 3
-cl &amp;lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
-cl&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## K-means clustering with 3 clusters of sizes 48, 50, 52
-## 
-## Cluster means:
-##   Petal.Length Petal.Width
-## 1     5.595833    2.037500
-## 2     1.462000    0.246000
-## 3     4.269231    1.342308
-## 
-## Clustering vector:
-##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-##  [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-##  [71] 3 3 3 3 3 3 3 1 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1
-## [106] 1 3 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 3 1
-## [141] 1 1 1 1 1 1 1 1 1 1
-## 
-## Within cluster sum of squares by cluster:
-## [1] 16.29167  2.02200 13.05769
-##  (between_SS / total_SS =  94.3 %)
-## 
-## Available components:
-## 
-## [1] &amp;quot;cluster&amp;quot;      &amp;quot;centers&amp;quot;      &amp;quot;totss&amp;quot;        &amp;quot;withinss&amp;quot;    
-## [5] &amp;quot;tot.withinss&amp;quot; &amp;quot;betweenss&amp;quot;    &amp;quot;size&amp;quot;         &amp;quot;iter&amp;quot;        
-## [9] &amp;quot;ifault&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compair result of clustering with real data (3 species of iris are in analysis)
-table(cl$cluster, df$Species)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    
-##     setosa versicolor virginica
-##   1      0          2        46
-##   2     50          0         0
-##   3      0         48         4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot data
-clusters &amp;lt;- split.data.frame(df, cl$cluster)
-xlim &amp;lt;- c(min(df$Petal.Width), max(df$Petal.Width))
-ylim &amp;lt;- c(min(df$Petal.Length), max(df$Petal.Length))
-col &amp;lt;- c(&amp;#39;red&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;blue&amp;#39;)
-plot(0, xlab=&amp;#39;Petal width&amp;#39;, ylab=&amp;#39;Petal length&amp;#39;, xlim=xlim, ylim=ylim)
-for ( i in 1:ncl ) {
-  points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

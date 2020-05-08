@@ -80,7 +80,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.0594877d8baaf22700543a9e5a932841.css">
+  <link rel="stylesheet" href="/css/academic.min.207d2fa846964502b40beec011eea285.css">
 
   
 
@@ -127,9 +127,9 @@
   <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2019-08-17T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2020-05-07T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-08-17T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2020-05-07T00:00:00&#43;00:00">
   
 
   
@@ -460,8 +460,8 @@
 
 
 
-<meta content="2019-08-17 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-<meta content="2019-08-17 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+<meta content="2020-05-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2020-05-07 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -474,7 +474,7 @@
     
       
     
-    <time>Aug 17, 2019</time>
+    <time>May 7, 2020</time>
   </span>
   
 
@@ -483,7 +483,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    10 min read
   </span>
   
 
@@ -619,11 +619,16 @@
 
 <div id="TOC">
 <ul>
-<li><a href="#select-columns-filter-rows">Select columns &amp; filter rows</a></li>
+<li><a href="#select-columns">Select columns</a></li>
+<li><a href="#filter-rows-by-condition">Filter rows by condition</a></li>
+<li><a href="#slice-rows-by-index">Slice rows by index</a></li>
 <li><a href="#adding-rows-and-columns">Adding rows and columns</a></li>
 <li><a href="#remove-duplicates">Remove duplicates</a></li>
 <li><a href="#grouping-and-aggregation">grouping and aggregation</a></li>
 <li><a href="#operations-on-several-data-frames">Operations on several data frames</a><ul>
+<li><a href="#join-functions">Join functions</a></li>
+</ul></li>
+<li><a href="#miscellaneous">Miscellaneous</a><ul>
 <li><a href="#adding-rows-and-columns-1">Adding rows and columns</a></li>
 <li><a href="#remove-duplicates-1">Remove duplicates</a></li>
 <li><a href="#select">Select</a></li>
@@ -636,7 +641,6 @@
 </ul></li>
 <li><a href="#nested-if_else">Nested If_Else</a></li>
 <li><a href="#if-family-of-functions">if() Family of Functions</a></li>
-<li><a href="#todo">TODO</a></li>
 <li><a href="#vectorize-functions-to-columns">Vectorize functions to columns</a><ul>
 <li><a href="#how-to">How to …</a><ul>
 <li><a href="#convert-empty-spaces-to-na">Convert empty spaces to NA</a></li>
@@ -647,8 +651,8 @@
 </ul>
 </div>
 
-<div id="select-columns-filter-rows" class="section level1">
-<h1>Select columns &amp; filter rows</h1>
+<div id="select-columns" class="section level1">
+<h1>Select columns</h1>
 <pre class="r"><code># Select columns
 select(A,B)                      # select columns by name
 select(c(A,B))                   # select multiple columns by name
@@ -674,9 +678,11 @@ select(C, B, A, everything())    # reordrer columns
 select(C, B, A)                  # the same as previous
 
 # Rename columns
-rename(A=X)                      # rename column A as X
-
-# Filter rows
+rename(A=X)                      # rename column A as X</code></pre>
+</div>
+<div id="filter-rows-by-condition" class="section level1">
+<h1>Filter rows by condition</h1>
+<pre class="r"><code># Filter rows
 filter(A==1)                     # rows where column A is equal to 1
 filter(A&gt;1 &amp; B&lt;2)                # multiple condition
 
@@ -688,6 +694,17 @@ filter(grepl(&quot;a&quot;, A))            # filter rorws by grep values in colu
 
 filter(is.na(A))                 # filter rows if column A contains &#39;NA&#39;
 filter(!is.na(A))                # filter &#39;NA&#39;</code></pre>
+</div>
+<div id="slice-rows-by-index" class="section level1">
+<h1>Slice rows by index</h1>
+<pre class="r"><code>slice(1L)            # first row
+slice(2:5)           # 2-5 rows
+slice(n())           # last row
+
+# Indices must be either all positive or all negative
+slice(5:n())         # from 5th to the last rows
+slice(-5:-n())       # 1-4 rows
+slice(1:4)           # 1-4 rows</code></pre>
 </div>
 <div id="adding-rows-and-columns" class="section level1">
 <h1>Adding rows and columns</h1>
@@ -727,22 +744,81 @@ arrange(A, B)                    # sort by A &amp; B
 
 group_by(A)                      # group rows by A column
 group_by(A = as.factor(A))       # group rows by A column
-group_by(A = cut(A, 3))          # group by 3 ranges from A
-
-
-inner_join(x, y, by = )
+group_by(A = cut(A, 3))          # group by 3 ranges from A</code></pre>
+<div id="join-functions" class="section level2">
+<h2>Join functions</h2>
+<pre class="r"><code>inner_join(x, y, by = )
 left_join(x, y, by = )
 right_join(x, y, by = )
 full_join(x, y, by = )
 semi_join(x, y, by = )
-anti_join(x, y, by = )
-
-# Miscellaneous
-df %&gt;% na_if(&quot;&quot;)            # Convert empty spaces to &#39;NA&#39;
+anti_join(x, y, by = )</code></pre>
+<pre class="r"><code>library(dplyr)
+a &lt;- data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), x2=c(1,2,3))
+b &lt;- data.frame(x1=c(&#39;A&#39;,&#39;B&#39;,&#39;D&#39;), x3=c(&#39;T&#39;,&#39;F&#39;,&#39;T&#39;))
+a</code></pre>
+<pre><code>##   x1 x2
+## 1  A  1
+## 2  B  2
+## 3  C  3</code></pre>
+<pre class="r"><code>b</code></pre>
+<pre><code>##   x1 x3
+## 1  A  T
+## 2  B  F
+## 3  D  T</code></pre>
+<pre class="r"><code># Retain only rows in both sets.
+dplyr::inner_join(a, b, by=&#39;x1&#39;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2 x3
+## 1  A  1  T
+## 2  B  2  F</code></pre>
+<pre class="r"><code># Join matching rows from b to a
+dplyr::left_join(a, b, by=&#39;x1&#39;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2   x3
+## 1  A  1    T
+## 2  B  2    F
+## 3  C  3 &lt;NA&gt;</code></pre>
+<pre class="r"><code># Join matching rows from a to b.
+dplyr::right_join(a, b, by=&#39;x1&#39;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2 x3
+## 1  A  1  T
+## 2  B  2  F
+## 3  D NA  T</code></pre>
+<pre class="r"><code># Retain all values, all rows
+dplyr::full_join(a, b, by = &quot;x1&quot;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2   x3
+## 1  A  1    T
+## 2  B  2    F
+## 3  C  3 &lt;NA&gt;
+## 4  D NA    T</code></pre>
+<pre class="r"><code># All rows in a that have a match in b.
+dplyr::semi_join(a, b, by = &quot;x1&quot;)</code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2
+## 1  A  1
+## 2  B  2</code></pre>
+<pre class="r"><code># All rows in a that do not have a match in b.
+dplyr::anti_join(a, b, by = &quot;x1&quot;)   </code></pre>
+<pre><code>## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>##   x1 x2
+## 1  C  3</code></pre>
+</div>
+</div>
+<div id="miscellaneous" class="section level1">
+<h1>Miscellaneous</h1>
+<pre class="r"><code>df %&gt;% na_if(&quot;&quot;)            # Convert empty spaces to &#39;NA&#39;
 
 sample_frac(df, size=0.8)   # Randomly select fraction of rows
 sample_n(10)                # Randomly select number of rows</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
 <pre class="r"><code># toy data
 df &lt;- data.frame(&quot;Age&quot; = c(10,15,10,15), &quot;Name&quot; = c(&quot;A&quot;,&quot;B&quot;, &quot;C&quot;, &quot;B&quot;), &quot;Gender&quot;=c(1,0,1,0))
 df</code></pre>
@@ -885,8 +961,13 @@ select(df, Age, everything())        # reorder variables, that Age will be in th
 <div id="summarize" class="section level2">
 <h2>Summarize</h2>
 <p>summarize(df, avg = mean(Age), m = median(Age))</p>
-<p>summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function</p>
-<p>summarise summarize_all # Allply funs to every column summarize_at # Apply funs to specific columns summarize_if # Apply funs to all cols of one type</p>
+<p>summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions
+summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns
+summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function</p>
+<p>summarise
+summarize_all # Allply funs to every column
+summarize_at # Apply funs to specific columns
+summarize_if # Apply funs to all cols of one type</p>
 </div>
 <div id="sort" class="section level2">
 <h2>Sort</h2>
@@ -927,28 +1008,48 @@ select(df, Age, everything())        # reorder variables, that Age will be in th
 </div>
 <div id="combine-data" class="section level2">
 <h2>Combine data</h2>
-<p>intersect(x, y) # Rows that appear in both x and y. union(x, y) # Rows that appear in either or both x and y. setdiff(x, y) # Rows that appear in x but not y.</p>
+<p>intersect(x, y) # Rows that appear in both x and y.
+union(x, y) # Rows that appear in either or both x and y.
+setdiff(x, y) # Rows that appear in x but not y.</p>
 </div>
 <div id="by-is-a-common-variable-primary-key-to-join-by." class="section level2">
 <h2>‘by’ is a common variable (primary key) to join by.</h2>
-<p>inner_join(x, y, by = ) left_join(x, y, by = ) right_join(x, y, by = ) full_join(x, y, by = ) semi_join(x, y, by = ) anti_join(x, y, by = )</p>
-<p>if_else(condition, true, false, missing = NULL) mydf =data.frame(x = c(1:5,NA))</p>
+<p>inner_join(x, y, by = )
+left_join(x, y, by = )
+right_join(x, y, by = )
+full_join(x, y, by = )
+semi_join(x, y, by = )
+anti_join(x, y, by = )</p>
+<p>if_else(condition, true, false, missing = NULL)
+mydf =data.frame(x = c(1:5,NA))</p>
 </div>
 </div>
 <div id="nested-if_else" class="section level1">
 <h1>Nested If_Else</h1>
-<p>mydf %&gt;% mutate(newvar= if_else(is.na(x),“I am missing”, if_else(x==1,“I am one”, if_else(x==2,“I am two”, if_else(x==3,“I am three”,“Others”))))) #TODO bind_rows() bind_cols() ntile()</p>
+<p>mydf %&gt;% mutate(newvar= if_else(is.na(x),“I am missing”,
+if_else(x==1,“I am one”,
+if_else(x==2,“I am two”,
+if_else(x==3,“I am three”,“Others”)))))
+#TODO
+bind_rows()
+bind_cols()
+ntile()</p>
 </div>
 <div id="if-family-of-functions" class="section level1">
 <h1>if() Family of Functions</h1>
-</div>
-<div id="todo" class="section level1">
-<h1>TODO</h1>
-<p>select_if mutate_if pull()</p>
+<p>#TODO
+select_if
+mutate_if
+pull()</p>
 </div>
 <div id="vectorize-functions-to-columns" class="section level1">
 <h1>Vectorize functions to columns</h1>
-<p>mutate transmute mutate_all mutate_at add_column rename</p>
+<p>mutate
+transmute
+mutate_all
+mutate_at
+add_column
+rename</p>
 <div id="how-to" class="section level2">
 <h2>How to …</h2>
 <div id="convert-empty-spaces-to-na" class="section level3">
@@ -962,10 +1063,11 @@ df %&gt;% na_if(&quot;&quot;)              # &quot;a&quot; &quot;b&quot; NA  &qu
 <pre class="r"><code>df &lt;- data.frame(A=seq(1:10), B=seq(.1,1,.1))
 df %&gt;% sample_frac(size=0.3)   # Randomly select fraction of rows</code></pre>
 <pre><code>##   A   B
-## 1 9 0.9
-## 2 2 0.2
-## 3 5 0.5</code></pre>
-<p>sample_n(df, size, …) # Randomly select size rows slice(df # select rows by position</p>
+## 1 1 0.1
+## 2 5 0.5
+## 3 8 0.8</code></pre>
+<p>sample_n(df, size, …) # Randomly select size rows
+slice(df # select rows by position</p>
 </div>
 </div>
 <div id="sources" class="section level2">
@@ -1088,15 +1190,15 @@ df %&gt;% sample_frac(size=0.3)   # Randomly select fraction of rows</code></pre
         <h3>Related</h3>
         <ul>
           
+          <li><a href="/post/statistics/model_reference/models_reference/">Models - reference</a></li>
+          
+          <li><a href="/post/bioinformatics/hi-c/hi-c/">Processing of sequencing data in R</a></li>
+          
           <li><a href="/post/r/r_graphic/r_graphic/">R graphic - reference</a></li>
           
           <li><a href="/post/r/tidyverse_reference/tidyverse_reference/">R tidyverse package - reference</a></li>
           
           <li><a href="/post/bioinformatics/gwas/gwas/">Genome Wide Associated Studies (GWAS)</a></li>
-          
-          <li><a href="/post/statistics/pca/pca/">Principal component analysis</a></li>
-          
-          <li><a href="/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/">Processing of sequencing data in R</a></li>
           
         </ul>
       </div>
@@ -1261,7 +1363,7 @@ df %&gt;% sample_frac(size=0.3)   # Randomly select fraction of rows</code></pre
   
 
   <p class="powered-by">
-    &copy; 2019 &middot; 
+    © 2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -5,12 +5,75 @@
     <link>/tags/regression/</link>
       <atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     <description>Regression</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Regression</title>
       <link>/tags/regression/</link>
     </image>
+    
+    <item>
+      <title>Models - reference</title>
+      <link>/post/statistics/model_reference/models_reference/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/model_reference/models_reference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#linear-regression&#34;&gt;Linear regression&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#test-linear-moedel&#34;&gt;Test linear moedel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-way-anova&#34;&gt;One-way ANOVA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;linear-regression&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Linear regression&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lm(y ~ x1 + x2 + x3)     # multiple linear regression
+
+lm(log(y) ~ x)           # log transformed
+lm(sqrt(y) ~ x)          # sqrt transformed
+lm( y ~ log(x))          # fields transformed
+llm(log(y) ~ log(x))     # everything is transformed
+
+lm(y ~ .)                # use all fields for regression model
+
+lm(y ~ x + 0)            # forced zero intercept
+
+lm(y ~ x*k)              # interaction of two variables
+
+lm(y ~ x + k + x:k)      # product of xkl but without interaction
+
+lm(y ~ (x + k + ... + l)^2) # all first order interactions
+
+lm(y ~ I(x1 + x2))       # sum of variables
+lm(y ~ I(x1^2))          # product of variables (not interation)
+
+lm(y ~ x + I(x^2) + I(x^3)) # polynomial regression
+lm(y ~ poly(x,3))           # same as previous
+
+# Forward/backward stepwise regression
+# improve model
+fit &amp;lt;- lm(y ~ x1 + x2)
+bwd.fit &amp;lt;- step(fit, direction = &amp;#39;backward&amp;#39;)
+fwd.fit &amp;lt;- step(fit, direction = &amp;#39;forward&amp;#39;, scope( ~ x1 + x2))&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;test-linear-moedel&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Test linear moedel&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(m)            # plot residuals
+car::outlier.test(m)
+dwtest(m)          # Durbin-Watson Test of the model residuals&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-way-anova&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;One-way ANOVA&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;oneway.test(x ~ f)
+aov(x ~ f)
+
+anova(m1, m2)      # compair two models&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Linear Regression (Math)</title>

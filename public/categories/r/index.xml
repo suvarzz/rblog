@@ -5,7 +5,7 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>R</title>
@@ -15,17 +15,22 @@
     <item>
       <title>Dplyr - reference</title>
       <link>/post/r/dplyr_tutorial/dplyr_tutorial/</link>
-      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
       <guid>/post/r/dplyr_tutorial/dplyr_tutorial/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#select-columns-filter-rows&#34;&gt;Select columns &amp;amp; filter rows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#select-columns&#34;&gt;Select columns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#filter-rows-by-condition&#34;&gt;Filter rows by condition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#slice-rows-by-index&#34;&gt;Slice rows by index&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#adding-rows-and-columns&#34;&gt;Adding rows and columns&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#remove-duplicates&#34;&gt;Remove duplicates&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#grouping-and-aggregation&#34;&gt;grouping and aggregation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#operations-on-several-data-frames&#34;&gt;Operations on several data frames&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#join-functions&#34;&gt;Join functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#miscellaneous&#34;&gt;Miscellaneous&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#adding-rows-and-columns-1&#34;&gt;Adding rows and columns&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#remove-duplicates-1&#34;&gt;Remove duplicates&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#select&#34;&gt;Select&lt;/a&gt;&lt;/li&gt;
@@ -38,7 +43,6 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#nested-if_else&#34;&gt;Nested If_Else&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#if-family-of-functions&#34;&gt;if() Family of Functions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#todo&#34;&gt;TODO&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#vectorize-functions-to-columns&#34;&gt;Vectorize functions to columns&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#how-to&#34;&gt;How to …&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#convert-empty-spaces-to-na&#34;&gt;Convert empty spaces to NA&lt;/a&gt;&lt;/li&gt;
@@ -49,8 +53,8 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id=&#34;select-columns-filter-rows&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Select columns &amp;amp; filter rows&lt;/h1&gt;
+&lt;div id=&#34;select-columns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Select columns&lt;/h1&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Select columns
 select(A,B)                      # select columns by name
 select(c(A,B))                   # select multiple columns by name
@@ -76,9 +80,11 @@ select(C, B, A, everything())    # reordrer columns
 select(C, B, A)                  # the same as previous
 
 # Rename columns
-rename(A=X)                      # rename column A as X
-
-# Filter rows
+rename(A=X)                      # rename column A as X&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;filter-rows-by-condition&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Filter rows by condition&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Filter rows
 filter(A==1)                     # rows where column A is equal to 1
 filter(A&amp;gt;1 &amp;amp; B&amp;lt;2)                # multiple condition
 
@@ -90,6 +96,17 @@ filter(grepl(&amp;quot;a&amp;quot;, A))            # filter rorws by grep values
 
 filter(is.na(A))                 # filter rows if column A contains &amp;#39;NA&amp;#39;
 filter(!is.na(A))                # filter &amp;#39;NA&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;slice-rows-by-index&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Slice rows by index&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slice(1L)            # first row
+slice(2:5)           # 2-5 rows
+slice(n())           # last row
+
+# Indices must be either all positive or all negative
+slice(5:n())         # from 5th to the last rows
+slice(-5:-n())       # 1-4 rows
+slice(1:4)           # 1-4 rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;adding-rows-and-columns&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Adding rows and columns&lt;/h1&gt;
@@ -129,22 +146,81 @@ arrange(A, B)                    # sort by A &amp;amp; B
 
 group_by(A)                      # group rows by A column
 group_by(A = as.factor(A))       # group rows by A column
-group_by(A = cut(A, 3))          # group by 3 ranges from A
-
-
-inner_join(x, y, by = )
+group_by(A = cut(A, 3))          # group by 3 ranges from A&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;join-functions&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Join functions&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;inner_join(x, y, by = )
 left_join(x, y, by = )
 right_join(x, y, by = )
 full_join(x, y, by = )
 semi_join(x, y, by = )
-anti_join(x, y, by = )
-
-# Miscellaneous
-df %&amp;gt;% na_if(&amp;quot;&amp;quot;)            # Convert empty spaces to &amp;#39;NA&amp;#39;
+anti_join(x, y, by = )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+a &amp;lt;- data.frame(x1=c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;), x2=c(1,2,3))
+b &amp;lt;- data.frame(x1=c(&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;D&amp;#39;), x3=c(&amp;#39;T&amp;#39;,&amp;#39;F&amp;#39;,&amp;#39;T&amp;#39;))
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2
+## 1  A  1
+## 2  B  2
+## 3  C  3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;b&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x3
+## 1  A  T
+## 2  B  F
+## 3  D  T&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Retain only rows in both sets.
+dplyr::inner_join(a, b, by=&amp;#39;x1&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2 x3
+## 1  A  1  T
+## 2  B  2  F&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Join matching rows from b to a
+dplyr::left_join(a, b, by=&amp;#39;x1&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2   x3
+## 1  A  1    T
+## 2  B  2    F
+## 3  C  3 &amp;lt;NA&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Join matching rows from a to b.
+dplyr::right_join(a, b, by=&amp;#39;x1&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2 x3
+## 1  A  1  T
+## 2  B  2  F
+## 3  D NA  T&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Retain all values, all rows
+dplyr::full_join(a, b, by = &amp;quot;x1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2   x3
+## 1  A  1    T
+## 2  B  2    F
+## 3  C  3 &amp;lt;NA&amp;gt;
+## 4  D NA    T&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# All rows in a that have a match in b.
+dplyr::semi_join(a, b, by = &amp;quot;x1&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2
+## 1  A  1
+## 2  B  2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# All rows in a that do not have a match in b.
+dplyr::anti_join(a, b, by = &amp;quot;x1&amp;quot;)   &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Column `x1` joining factors with different levels, coercing to
+## character vector&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   x1 x2
+## 1  C  3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;miscellaneous&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Miscellaneous&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% na_if(&amp;quot;&amp;quot;)            # Convert empty spaces to &amp;#39;NA&amp;#39;
 
 sample_frac(df, size=0.8)   # Randomly select fraction of rows
 sample_n(10)                # Randomly select number of rows&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# toy data
 df &amp;lt;- data.frame(&amp;quot;Age&amp;quot; = c(10,15,10,15), &amp;quot;Name&amp;quot; = c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;, &amp;quot;C&amp;quot;, &amp;quot;B&amp;quot;), &amp;quot;Gender&amp;quot;=c(1,0,1,0))
 df&lt;/code&gt;&lt;/pre&gt;
@@ -287,8 +363,13 @@ select(df, Age, everything())        # reorder variables, that Age will be in th
 &lt;div id=&#34;summarize&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Summarize&lt;/h2&gt;
 &lt;p&gt;summarize(df, avg = mean(Age), m = median(Age))&lt;/p&gt;
-&lt;p&gt;summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function&lt;/p&gt;
-&lt;p&gt;summarise summarize_all # Allply funs to every column summarize_at # Apply funs to specific columns summarize_if # Apply funs to all cols of one type&lt;/p&gt;
+&lt;p&gt;summarise_at(df, vars(Gender, Age), funs(n(), mean, median)) # multiple functions
+summarise_if(df, is.numeric, funs(n(),mean,median)) # for all numeric columns
+summarise_at(df, vars(Gender,Age), function(x) var(x - mean(x))) # custom function&lt;/p&gt;
+&lt;p&gt;summarise
+summarize_all # Allply funs to every column
+summarize_at # Apply funs to specific columns
+summarize_if # Apply funs to all cols of one type&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;sort&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Sort&lt;/h2&gt;
@@ -329,28 +410,48 @@ select(df, Age, everything())        # reorder variables, that Age will be in th
 &lt;/div&gt;
 &lt;div id=&#34;combine-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Combine data&lt;/h2&gt;
-&lt;p&gt;intersect(x, y) # Rows that appear in both x and y. union(x, y) # Rows that appear in either or both x and y. setdiff(x, y) # Rows that appear in x but not y.&lt;/p&gt;
+&lt;p&gt;intersect(x, y) # Rows that appear in both x and y.
+union(x, y) # Rows that appear in either or both x and y.
+setdiff(x, y) # Rows that appear in x but not y.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;by-is-a-common-variable-primary-key-to-join-by.&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;‘by’ is a common variable (primary key) to join by.&lt;/h2&gt;
-&lt;p&gt;inner_join(x, y, by = ) left_join(x, y, by = ) right_join(x, y, by = ) full_join(x, y, by = ) semi_join(x, y, by = ) anti_join(x, y, by = )&lt;/p&gt;
-&lt;p&gt;if_else(condition, true, false, missing = NULL) mydf =data.frame(x = c(1:5,NA))&lt;/p&gt;
+&lt;p&gt;inner_join(x, y, by = )
+left_join(x, y, by = )
+right_join(x, y, by = )
+full_join(x, y, by = )
+semi_join(x, y, by = )
+anti_join(x, y, by = )&lt;/p&gt;
+&lt;p&gt;if_else(condition, true, false, missing = NULL)
+mydf =data.frame(x = c(1:5,NA))&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;nested-if_else&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Nested If_Else&lt;/h1&gt;
-&lt;p&gt;mydf %&amp;gt;% mutate(newvar= if_else(is.na(x),“I am missing”, if_else(x==1,“I am one”, if_else(x==2,“I am two”, if_else(x==3,“I am three”,“Others”))))) #TODO bind_rows() bind_cols() ntile()&lt;/p&gt;
+&lt;p&gt;mydf %&amp;gt;% mutate(newvar= if_else(is.na(x),“I am missing”,
+if_else(x==1,“I am one”,
+if_else(x==2,“I am two”,
+if_else(x==3,“I am three”,“Others”)))))
+#TODO
+bind_rows()
+bind_cols()
+ntile()&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;if-family-of-functions&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;if() Family of Functions&lt;/h1&gt;
-&lt;/div&gt;
-&lt;div id=&#34;todo&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;TODO&lt;/h1&gt;
-&lt;p&gt;select_if mutate_if pull()&lt;/p&gt;
+&lt;p&gt;#TODO
+select_if
+mutate_if
+pull()&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;vectorize-functions-to-columns&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Vectorize functions to columns&lt;/h1&gt;
-&lt;p&gt;mutate transmute mutate_all mutate_at add_column rename&lt;/p&gt;
+&lt;p&gt;mutate
+transmute
+mutate_all
+mutate_at
+add_column
+rename&lt;/p&gt;
 &lt;div id=&#34;how-to&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;How to …&lt;/h2&gt;
 &lt;div id=&#34;convert-empty-spaces-to-na&#34; class=&#34;section level3&#34;&gt;
@@ -364,15 +465,79 @@ df %&amp;gt;% na_if(&amp;quot;&amp;quot;)              # &amp;quot;a&amp;quot; &
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- data.frame(A=seq(1:10), B=seq(.1,1,.1))
 df %&amp;gt;% sample_frac(size=0.3)   # Randomly select fraction of rows&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   A   B
-## 1 9 0.9
-## 2 2 0.2
-## 3 5 0.5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;sample_n(df, size, …) # Randomly select size rows slice(df # select rows by position&lt;/p&gt;
+## 1 1 0.1
+## 2 5 0.5
+## 3 8 0.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sample_n(df, size, …) # Randomly select size rows
+slice(df # select rows by position&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;sources&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Sources&lt;/h2&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Models - reference</title>
+      <link>/post/statistics/model_reference/models_reference/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/statistics/model_reference/models_reference/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#linear-regression&#34;&gt;Linear regression&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#test-linear-moedel&#34;&gt;Test linear moedel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-way-anova&#34;&gt;One-way ANOVA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;linear-regression&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Linear regression&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lm(y ~ x1 + x2 + x3)     # multiple linear regression
+
+lm(log(y) ~ x)           # log transformed
+lm(sqrt(y) ~ x)          # sqrt transformed
+lm( y ~ log(x))          # fields transformed
+llm(log(y) ~ log(x))     # everything is transformed
+
+lm(y ~ .)                # use all fields for regression model
+
+lm(y ~ x + 0)            # forced zero intercept
+
+lm(y ~ x*k)              # interaction of two variables
+
+lm(y ~ x + k + x:k)      # product of xkl but without interaction
+
+lm(y ~ (x + k + ... + l)^2) # all first order interactions
+
+lm(y ~ I(x1 + x2))       # sum of variables
+lm(y ~ I(x1^2))          # product of variables (not interation)
+
+lm(y ~ x + I(x^2) + I(x^3)) # polynomial regression
+lm(y ~ poly(x,3))           # same as previous
+
+# Forward/backward stepwise regression
+# improve model
+fit &amp;lt;- lm(y ~ x1 + x2)
+bwd.fit &amp;lt;- step(fit, direction = &amp;#39;backward&amp;#39;)
+fwd.fit &amp;lt;- step(fit, direction = &amp;#39;forward&amp;#39;, scope( ~ x1 + x2))&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;test-linear-moedel&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Test linear moedel&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(m)            # plot residuals
+car::outlier.test(m)
+dwtest(m)          # Durbin-Watson Test of the model residuals&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-way-anova&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;One-way ANOVA&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;oneway.test(x ~ f)
+aov(x ~ f)
+
+anova(m1, m2)      # compair two models&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>

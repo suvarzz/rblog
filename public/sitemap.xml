@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -13,37 +13,88 @@
   </url>
   
   <url>
+    <loc>/categories/bioinformatics/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/bioinformatics/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dplyr/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/r/dplyr_tutorial/dplyr_tutorial/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/model_reference/models_reference/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/bioinformatics/hi-c/hi-c/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/r/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rna-seq/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -52,33 +103,18 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/dplyr/</loc>
-    <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/tidyverse/</loc>
     <lastmod>2019-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/biology/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/gwas/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -89,17 +125,6 @@
   <url>
     <loc>/post/r/r_tips_tricks/r_tips_tricks/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/bioinformatics/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/bioinformatics/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -125,18 +150,11 @@
   <url>
     <loc>/tags/math/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/pca/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -150,32 +168,13 @@
   </url>
   
   <url>
-    <loc>/tags/rna-seq/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/statistics/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/statistics/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -186,7 +185,6 @@
   <url>
     <loc>/tags/clustering/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -202,7 +200,6 @@
   <url>
     <loc>/tags/exploratory-analysis/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -213,7 +210,11 @@
   <url>
     <loc>/tags/hierarchical/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/caret/</loc>
+    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -227,6 +228,16 @@
   </url>
   
   <url>
+    <loc>/tags/k-means/</loc>
+    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/statistics/k_means/k_means/</loc>
+    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/statistics/lvq/lvq/</loc>
     <lastmod>2019-08-08T00:00:00+00:00</lastmod>
   </url>
@@ -234,7 +245,6 @@
   <url>
     <loc>/tags/machine-learning/</loc>
     <lastmod>2019-08-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -248,32 +258,13 @@
   </url>
   
   <url>
-    <loc>/tags/caret/</loc>
-    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/k-means/</loc>
-    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/statistics/k_means/k_means/</loc>
-    <lastmod>2019-08-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/classification/</loc>
     <lastmod>2019-08-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/dimentionality-reduction/</loc>
     <lastmod>2019-08-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -284,7 +275,6 @@
   <url>
     <loc>/tags/neural-network/</loc>
     <lastmod>2019-08-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -293,14 +283,13 @@
   </url>
   
   <url>
-    <loc>/post/statistics/umap/umap/</loc>
+    <loc>/tags/tsne/</loc>
     <lastmod>2019-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/tsne/</loc>
+    <loc>/post/statistics/umap/umap/</loc>
     <lastmod>2019-08-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -311,7 +300,6 @@
   <url>
     <loc>/tags/logistic-regression/</loc>
     <lastmod>2019-08-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -322,7 +310,6 @@
   <url>
     <loc>/tags/hypothesis-testing/</loc>
     <lastmod>2019-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -338,19 +325,16 @@
   <url>
     <loc>/tags/bootstrap/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/cross-validation/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/resampling/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -361,7 +345,6 @@
   <url>
     <loc>/tags/hopfield/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -370,39 +353,33 @@
   </url>
   
   <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2019-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/python/</loc>
     <lastmod>2019-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/epigenetics/</loc>
-    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/categories/python/</loc>
+    <lastmod>2019-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/epigenetics/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/epigenetics/</loc>
+    <lastmod>2019-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/markov-process/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/pcg/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -423,13 +400,11 @@
   <url>
     <loc>/tags/splines/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/trx/</loc>
     <lastmod>2019-08-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -440,7 +415,6 @@
   <url>
     <loc>/authors/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -454,17 +428,7 @@
   </url>
   
   <url>
-    <loc>/post/statistics/ridge_regression/ridge_regression/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-  </url>
-  
-  <url>
     <loc>/publication_types/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

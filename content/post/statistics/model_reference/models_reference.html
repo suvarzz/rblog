@@ -1,0 +1,67 @@
+---
+title: "Models - reference"
+author: "Mark Goldberg"
+date: '2020-05-07'
+draft: false
+math: true
+tags: ["R", "Regression"]
+categories: ["R", "Statistics"]
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#linear-regression">Linear regression</a><ul>
+<li><a href="#test-linear-moedel">Test linear moedel</a></li>
+</ul></li>
+<li><a href="#one-way-anova">One-way ANOVA</a></li>
+</ul>
+</div>
+
+<div id="linear-regression" class="section level1">
+<h1>Linear regression</h1>
+<pre class="r"><code>lm(y ~ x1 + x2 + x3)     # multiple linear regression
+
+lm(log(y) ~ x)           # log transformed
+lm(sqrt(y) ~ x)          # sqrt transformed
+lm( y ~ log(x))          # fields transformed
+llm(log(y) ~ log(x))     # everything is transformed
+
+lm(y ~ .)                # use all fields for regression model
+
+lm(y ~ x + 0)            # forced zero intercept
+
+lm(y ~ x*k)              # interaction of two variables
+
+lm(y ~ x + k + x:k)      # product of xkl but without interaction
+
+lm(y ~ (x + k + ... + l)^2) # all first order interactions
+
+lm(y ~ I(x1 + x2))       # sum of variables
+lm(y ~ I(x1^2))          # product of variables (not interation)
+
+lm(y ~ x + I(x^2) + I(x^3)) # polynomial regression
+lm(y ~ poly(x,3))           # same as previous
+
+# Forward/backward stepwise regression
+# improve model
+fit &lt;- lm(y ~ x1 + x2)
+bwd.fit &lt;- step(fit, direction = &#39;backward&#39;)
+fwd.fit &lt;- step(fit, direction = &#39;forward&#39;, scope( ~ x1 + x2))</code></pre>
+<div id="test-linear-moedel" class="section level2">
+<h2>Test linear moedel</h2>
+<pre class="r"><code>plot(m)            # plot residuals
+car::outlier.test(m)
+dwtest(m)          # Durbin-Watson Test of the model residuals</code></pre>
+</div>
+</div>
+<div id="one-way-anova" class="section level1">
+<h1>One-way ANOVA</h1>
+<pre class="r"><code>oneway.test(x ~ f)
+aov(x ~ f)
+
+anova(m1, m2)      # compair two models</code></pre>
+</div>

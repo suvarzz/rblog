@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Mark Goldberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Elbow method Average silhouette method Gap statistic method Using NbCLust Sources   Elbow method The basic idea is to find minimal the total intra-cluster variation or total Within-cluster Sum ofSquares (WSS).
+Plot number of clusters ~ WSS show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn’t improve much better the total WSS.
+The optimal number of clusters can be defined as follow:">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/statistics/determin_number_clusters/determin_number_clusters/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.207d2fa846964502b40beec011eea285.css">
+
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-144846434-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+
+  
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/statistics/determin_number_clusters/determin_number_clusters/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Mark Goldberg">
+  <meta property="og:url" content="/post/statistics/determin_number_clusters/determin_number_clusters/">
+  <meta property="og:title" content="Determining the optimal number of clusters | Mark Goldberg">
+  <meta property="og:description" content="Elbow method Average silhouette method Gap statistic method Using NbCLust Sources   Elbow method The basic idea is to find minimal the total intra-cluster variation or total Within-cluster Sum ofSquares (WSS).
+Plot number of clusters ~ WSS show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn’t improve much better the total WSS.
+The optimal number of clusters can be defined as follow:"><meta property="og:image" content="/img/logo.png">
+  <meta property="twitter:image" content="/img/logo.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-09T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-08-09T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Determining the optimal number of clusters | Mark Goldberg</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Mark Goldberg</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#intro"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>News</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#R"><span>R</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post/statistics/"><span>Math</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/biology/"><span>Biology</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/bioinformatics/"><span>Bioinformatics</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Determining the optimal number of clusters</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 9, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/statistics/determin_number_clusters/determin_number_clusters/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/statistics/">Statistics</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/statistics/determin_number_clusters/determin_number_clusters/&amp;text=Determining%20the%20optimal%20number%20of%20clusters" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/statistics/determin_number_clusters/determin_number_clusters/&amp;t=Determining%20the%20optimal%20number%20of%20clusters" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Determining%20the%20optimal%20number%20of%20clusters&amp;body=/post/statistics/determin_number_clusters/determin_number_clusters/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/statistics/determin_number_clusters/determin_number_clusters/&amp;title=Determining%20the%20optimal%20number%20of%20clusters" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Determining%20the%20optimal%20number%20of%20clusters%20/post/statistics/determin_number_clusters/determin_number_clusters/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/statistics/determin_number_clusters/determin_number_clusters/&amp;title=Determining%20the%20optimal%20number%20of%20clusters" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#elbow-method">Elbow method</a></li>
+<li><a href="#average-silhouette-method">Average silhouette method</a></li>
+<li><a href="#gap-statistic-method">Gap statistic method</a></li>
+<li><a href="#using-nbclust">Using NbCLust</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+
+<div id="elbow-method" class="section level2">
+<h2>Elbow method</h2>
+<p>The basic idea is to find <strong>minimal the total intra-cluster variation</strong> or <strong>total Within-cluster Sum ofSquares</strong> (WSS).<br />
+Plot number of clusters ~ <em>WSS</em> show how WSS is reduced with increase of number of clusters. The optimal number of clusters is when adding another cluster doesn’t improve much better the total WSS.<br />
+The optimal number of clusters can be defined as follow:<br />
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)<br />
+2. For each k calculate the total within-cluster sum of squares (wss).<br />
+3. Plot k ~ wss 4. The location of a bend (knee) in the plot is generally considered as an indicator of the optimal number of clusters.</p>
+</div>
+<div id="average-silhouette-method" class="section level2">
+<h2>Average silhouette method</h2>
+<p>**Average silhouette method determines how well each object lies within its cluster. A high average silhouette width indicates a good clustering.<br />
+The optimal number of clusters is detected by maximal the average slhouette.</p>
+<p>The optimal number of clusters can be defined as follow:<br />
+1. Compute clustering algorithm (e.g k-means) for different number of clusters (e.g k is from 1 to 10)<br />
+2. For each k, calculate the average silhouette of observations (aso).<br />
+3. Plot k ~ aso<br />
+4. The location of the maximum is considered as the optimal number of clusters.</p>
+</div>
+<div id="gap-statistic-method" class="section level2">
+<h2>Gap statistic method</h2>
+<p>The <strong>gap statistic</strong> compares the <strong>total within intra-cluster variation</strong> for different values of k with their expected values under null reference distribution of the data. The estimate of the optimal clusters will be value that maximize the gap statistic (i.e, that yields the largest gap statistic).</p>
+<pre class="r"><code>library(factoextra)
+
+# normalized data
+df &lt;- scale(iris[, -5])
+head(df)</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width
+## [1,]   -0.8976739  1.01560199    -1.335752   -1.311052
+## [2,]   -1.1392005 -0.13153881    -1.335752   -1.311052
+## [3,]   -1.3807271  0.32731751    -1.392399   -1.311052
+## [4,]   -1.5014904  0.09788935    -1.279104   -1.311052
+## [5,]   -1.0184372  1.24503015    -1.335752   -1.311052
+## [6,]   -0.5353840  1.93331463    -1.165809   -1.048667</code></pre>
+<pre class="r"><code># Elbow method
+fviz_nbclust(df, kmeans, method = &quot;wss&quot;) +
+    labs(subtitle = &quot;Elbow method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code># Silhouette method
+fviz_nbclust(df, kmeans, method = &quot;silhouette&quot;)+
+    labs(subtitle = &quot;Silhouette method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code># Gap statistic
+set.seed(123)
+fviz_nbclust(df, kmeans, nstart = 25,  method = &quot;gap_stat&quot;, nboot = 50)+
+  labs(subtitle = &quot;Gap statistic method&quot;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png" width="672" /> As we can see from these examples, the <strong>Elbow method</strong> predicts 2-3 clusters, <strong>Silhouette method</strong> predicts 2 and the <strong>Gap statistic method</strong> predicts 2 clusters. As we know, <code>iris</code> data contains 3 clusters of different <code>Species</code> and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.</p>
+</div>
+<div id="using-nbclust" class="section level2">
+<h2>Using NbCLust</h2>
+<pre class="r"><code>library(NbClust)
+res &lt;- NbClust(data = df,                 # matrix or data frame
+               distance = &quot;euclidean&quot;,    # distance
+               method = &quot;kmeans&quot;,        # method
+               min.nc = 2, max.nc = 10)   # min and max number of clusters to test</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre><code>## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## </code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre><code>## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 11 proposed 2 as the best number of clusters 
+## * 10 proposed 3 as the best number of clusters 
+## * 1 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 1 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  2 
+##  
+##  
+## *******************************************************************</code></pre>
+<pre class="r"><code>res$Best.nc[,1:5]</code></pre>
+<pre><code>##                     KL       CH Hartigan    CCC    Scott
+## Number_clusters 3.0000   2.0000   3.0000 3.0000   3.0000
+## Value_Index     5.1669 251.3493  54.2213 5.1886 131.6411</code></pre>
+<pre class="r"><code># Example with iris data
+data &lt;- iris[, -5]
+# distance matrix
+diss_matrix &lt;-  dist(data, method = &quot;euclidean&quot;) # here method is the distance method
+res &lt;- NbClust(data,                    # matrix or data frame
+               diss = diss_matrix,      # distance matrix
+               distance = NULL,         # if set, diss musnt be NULL
+               min.nc = 2, max.nc = 10, # min and max number of clusters to test
+               method = &quot;complete&quot;,     # clustering method
+               index = &quot;alllong&quot;)       # all indexes; can be selected</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre><code>## *** : The Hubert index is a graphical method of determining the number of clusters.
+##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+##                 significant increase of the value of the measure i.e the significant peak in Hubert
+##                 index second differences plot. 
+## </code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre><code>## *** : The D index is a graphical method of determining the number of clusters. 
+##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+##                 second differences plot) that corresponds to a significant increase of the value of
+##                 the measure. 
+##  
+## ******************************************************************* 
+## * Among all indices:                                                
+## * 2 proposed 2 as the best number of clusters 
+## * 15 proposed 3 as the best number of clusters 
+## * 6 proposed 4 as the best number of clusters 
+## * 1 proposed 6 as the best number of clusters 
+## * 3 proposed 10 as the best number of clusters 
+## 
+##                    ***** Conclusion *****                            
+##  
+## * According to the majority rule, the best number of clusters is  3 
+##  
+##  
+## *******************************************************************</code></pre>
+<pre class="r"><code># indeces first 5 methods
+head(res$All.index[,1:7])</code></pre>
+<pre><code>##        KL       CH Hartigan     CCC     Scott  Marriot    TrCovW
+## 2  1.9652 280.8392 240.7478 30.4441  933.9084 977604.0 6868.5401
+## 3  5.3598 485.9050  68.8363 35.8668 1210.7629 347351.8  304.1791
+## 4 54.0377 495.1816  16.4167 35.6036 1346.7582 249402.3  135.7432
+## 5  0.0263 414.3925  51.1371 33.0698 1387.9419 296129.2  121.5044
+## 6  7.1653 455.4931  16.8076 33.9870 1506.5585 193380.9   96.9908
+## 7  0.5308 423.7198  20.2960 32.9063 1560.0089 184311.4   93.2005</code></pre>
+<pre class="r"><code># optimal number of clusters
+best.result &lt;- t(res$Best.nc)
+best.result</code></pre>
+<pre><code>##            Number_clusters Value_Index
+## KL                       4     54.0377
+## CH                       4    495.1816
+## Hartigan                 3    171.9115
+## CCC                      3     35.8668
+## Scott                    3    276.8545
+## Marriot                  3 532302.6940
+## TrCovW                   3   6564.3610
+## TraceW                   3    117.0760
+## Friedman                 4    151.3607
+## Rubin                    6    -33.9014
+## Cindex                   3      0.3163
+## DB                       3      0.7025
+## Silhouette               2      0.5160
+## Duda                     4      0.5932
+## PseudoT2                 4     32.9134
+## Beale                    3      1.8840
+## Ratkowsky                3      0.4922
+## Ball                     3     87.7349
+## PtBiserial               3      0.7203
+## Gap                      3      0.1343
+## Frey                     1          NA
+## McClain                  2      0.4228
+## Gamma                    4      0.9261
+## Gplus                   10     52.7862
+## Tau                      3   2649.8405
+## Dunn                    10      0.1543
+## Hubert                   0      0.0000
+## SDindex                  3      1.6226
+## Dindex                   0      0.0000
+## SDbw                    10      0.0303</code></pre>
+<pre class="r"><code># density plot of all best results
+library(magrittr)
+best.result %&gt;%
+  .[,1] %&gt;%
+  na.omit() %&gt;%
+  as.vector() %&gt;%
+  density(.) %&gt;% 
+  plot(., xlab=&#39;k, klusters&#39;, main=&#39;Optimal number of clusters&#39;)</code></pre>
+<p><img src="/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Es we can see the most of methods predict k=3 for clustering <code>iris</code> data.<br />
+If you try k-means method, you will get optimal between 2 and 3.</p>
+</div>
+<div id="sources" class="section level2">
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.datanovia.com/en/lessons/determining-the-optimal-number-of-clusters-3-must-know-methods/">Cluster Validataion Essentials by Alboukadel Kassambara</a><br />
+</li>
+<li><a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">Tibshirani R at al. Estimating the number of clusters in a data set via the gap statistic. J.R.Statist.Soc.B, 2001</a><br />
+</li>
+<li>[NbClust: An R Package for Determining the Relevant Number of Clusters in a Data] Set(<a href="https://cran.r-project.org/web/packages/NbClust/NbClust.pdf" class="uri">https://cran.r-project.org/web/packages/NbClust/NbClust.pdf</a>)</li>
+</ul>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/clustering/">Clustering</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hubf35e96ec2f6be37cf8c4f36be371ec7_39026_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Mark Goldberg</a></h5>
+      <h6 class="card-subtitle">Researcher</h6>
+      <p class="card-text" itemprop="description">My research interests include epigenetics and computational biology.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://telegram.me/@suvarlab" target="_blank" rel="noopener">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/">Differential expression analysis</a></li>
+          
+          <li><a href="/post/statistics/k_means/k_means/">k-means</a></li>
+          
+          <li><a href="/post/statistics/hierarchical_cluster/hierarchical_cluser/">Hierarchical cluster analysis</a></li>
+          
+          <li><a href="/post/statistics/anova/anova/">ANOVA</a></li>
+          
+          <li><a href="/post/statistics/exploration/exploration/">Exploratory analysis in R</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "suvar-1" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="https://suvar-1.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

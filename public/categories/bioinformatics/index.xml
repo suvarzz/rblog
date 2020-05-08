@@ -5,12 +5,181 @@
     <link>/categories/bioinformatics/</link>
       <atom:link href="/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
     <description>Bioinformatics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo.png</url>
       <title>Bioinformatics</title>
       <link>/categories/bioinformatics/</link>
     </image>
+    
+    <item>
+      <title>Processing of sequencing data in R</title>
+      <link>/post/bioinformatics/hi-c/hi-c/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/bioinformatics/hi-c/hi-c/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#using-straw-tool-to-extract-contact-matrix-from-.hic-files&#34;&gt;Using straw tool to extract contact matrix from .hic files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#hic-pro-pipeline&#34;&gt;HiC-Pro pipeline&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#multihic-compare-for-compare-of-2-hi-c-datasets-rao-et-al.2017&#34;&gt;multiHiC compare for compare of 2 Hi-C datasets (Rao et al. 2017)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#joint-normalization-of-hi-c&#34;&gt;Joint normalization of Hi-C&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#difference-detection&#34;&gt;Difference detection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Workflow from Stansfield et al., Current Protocols in Bioinformatics, 2019&lt;/p&gt;
+&lt;p&gt;Hi-C workflow steps:&lt;br /&gt;
+1. mapping reads&lt;br /&gt;
+2. assigning fragments&lt;br /&gt;
+3. filtering fragments&lt;br /&gt;
+4. binning&lt;br /&gt;
+5. bin-level filtering&lt;br /&gt;
+6. balancing (normalization) of individual matrices&lt;/p&gt;
+&lt;p&gt;Paired-end reads of Hi-C experiments are mapped using the single-end mode to map each read (of the pair) independently.&lt;br /&gt;
+The theoretical maximum resolution of Hi-C sequencing is set by the restriction enzyme used to cut the DNA. However, most Hi-C datasets are not sequenced deeply enough to reach this theoretical maximum, and typically one of a few fixed-size resolutions are chosen for analyzing the data, including 1 Mb, 100 kb, 50 kb, 40 kb, 20 kb, 10 kb, and 5 kb.&lt;br /&gt;
+Two of the more popular pipelines for aligning Hi-C data are &lt;strong&gt;juicer&lt;/strong&gt; (Durand, Shamim, &amp;amp; Aiden, 2016) and &lt;strong&gt;HiC-Pro&lt;/strong&gt; (Servant et al., 2015).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/aidenlab/juicer/wiki&#34;&gt;&lt;strong&gt;juicer&lt;/strong&gt;&lt;/a&gt; takes fastq files and aligns the data into .hic sparse contact maps. Alignment is based on BWA. Contact maps can be extracted from .hic files using juicer or the command line tool &lt;strong&gt;straw&lt;/strong&gt;.&lt;/p&gt;
+&lt;div id=&#34;using-straw-tool-to-extract-contact-matrix-from-.hic-files&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Using straw tool to extract contact matrix from .hic files&lt;/h2&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;&amp;lt;NONE/VC/VC_SQRT/KR&amp;gt; &amp;lt;hicFile(s)&amp;gt; &amp;lt;chr1&amp;gt;[:x1:x2] &amp;lt;chr2&amp;gt;[:y1:y2] &amp;lt;BP/FRAG&amp;gt; &amp;lt;binsize&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;VC - vanilla coverage normalization&lt;br /&gt;
+VC_SQRT - square root of vanilla coverage normalization&lt;br /&gt;
+KR - Knight-Ruiz (KR) normalization&lt;br /&gt;
+BP/FRAG - base pare or fragment size. Typically we use BP.&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;mkdir ~/GEO
+cd ~/GEO
+# download .hic file [9 Gb]
+wget ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE63nnn/GSE63525/suppl/GSE63525_K562_combined_30.hic
+# extract raw matrix for 22 chromosome at 500-kb resolution
+straw NONE GSE63525_K562_combined_30.hic 22 22 BP 500000 &amp;gt; K562.chHCT116_r22.500 kb.txt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;txt file is in the sparse upper-triangular matrix format, containing 3 columns:&lt;br /&gt;
+1. start of interaction&lt;br /&gt;
+2. end of interaction&lt;br /&gt;
+3. frequency (IF)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;hic-pro-pipeline&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;HiC-Pro pipeline&lt;/h2&gt;
+&lt;p&gt;Output 2 files (.matrix and .bed):&lt;br /&gt;
+* The .matrix is plain-text 3-column sparse upper-triangular matrix with the columns &lt;span class=&#34;math inline&#34;&gt;\(bin_i\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(bin_j\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(counts_ij\)&lt;/span&gt;.&lt;br /&gt;
+* The .bed file contains the genomic coordinates for each &lt;span class=&#34;math inline&#34;&gt;\(bin_i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(bin_j\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sparse2full&lt;/code&gt; - convert sparse upper-triangular matrix to full contact matrix.&lt;br /&gt;
+&lt;code&gt;hicpro2bedpe&lt;/code&gt; - convert alignments by HiC-Pro into BEDPE format.&lt;br /&gt;
+&lt;code&gt;hicpro2bedpe&lt;/code&gt; - input .matrix and .bed and convert into sparse upper-triangular matrix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multihic-compare-for-compare-of-2-hi-c-datasets-rao-et-al.2017&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;multiHiC compare for compare of 2 Hi-C datasets (Rao et al. 2017)&lt;/h2&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;mkdir ~/GEO
+cd ~/GEO
+# download .hic files from
+wget ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2795nnn/GSM2795535/suppl/GSM2795535_Rao-2017-HIC001_30.hic
+wget ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2795nnn/GSM2795536/suppl/GSM2795536_Rao-2017-HIC002_30.hic
+wget ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2809nnn/GSM2809539/suppl/GSM2809539_Rao-2017-HIC008_30.hic
+wget ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2809nnn/GSM2809540/suppl/GSM2809540_Rao-2017-HIC009_30.hic
+
+# convert .hic to sparse contact matrix for each of 22 chromosomes
+for i in {1,2,8,9}
+   do
+     mkdir HIC00${i}
+     for j in {1..22}
+       do
+         straw NONE *_Rao-2017-HIC00${i}_30.hic $j $j BP 100000 &amp;gt; HIC00${i}/HIC00${i}.NONE.chr${j}.100000.txt
+       done
+   done&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(readr)
+library(data.table)
+library(dplyr)
+library(edgeR)
+library(BiocParallel)
+library(HiCcompare)
+library(multiHiCcompare)
+
+
+options(scipen = 10) # output fixed numbers
+
+# Set up parameters for reading in data
+chr &amp;lt;- paste0(&amp;#39;chr&amp;#39;, c(1:22))     # Chromosome names
+samples &amp;lt;- paste0(&amp;#39;HIC00&amp;#39;, c(1,2,8,9)) # Sample names
+res &amp;lt;- 100000                          # Data resolution
+
+# Read data
+sample_list &amp;lt;- list()
+chr_list &amp;lt;- list()
+wd &amp;lt;- &amp;#39;/home/suvar/GEO/&amp;#39;
+for(j in 1:length(samples)) {
+  for (i in 1:length(chr)) {
+    chr_list[[i]] &amp;lt;- read_tsv(paste0(wd, samples[j], &amp;#39;/&amp;#39;,
+    samples[j], &amp;#39;.NONE.&amp;#39;, chr[i], &amp;#39;.&amp;#39;, res, &amp;#39;.txt&amp;#39;),
+    col_names = FALSE) %&amp;gt;% as.data.table()
+    # Add column indicating the chromosome
+    chr_list[[i]] &amp;lt;- cbind(i, chr_list[[i]])
+    colnames(chr_list[[i]]) &amp;lt;- c(&amp;#39;chr&amp;#39;, &amp;#39;region1&amp;#39;, &amp;#39;region2&amp;#39;, &amp;#39;IF&amp;#39;)
+  }
+  sample_list[[j]] &amp;lt;- chr_list
+  chr_list &amp;lt;- list()
+}
+
+# Collapse separate chromosome lists into one table per sample
+sample_list &amp;lt;- lapply(sample_list, rbindlist)
+  
+sample_list[[1]]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;joint-normalization-of-hi-c&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Joint normalization of Hi-C&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(pander)
+# Create a Hicexp object for use by multiHiCcompare (~10 min)
+# Four objects are assigned into two groups
+rao2017 &amp;lt;- make_hicexp(data_list = sample_list, groups = c(1,1,2,2))
+rao2017 # class(rao2017)
+
+# view the IF information
+hic_table(rao2017)
+
+# MD plots before normalization
+MD_hicexp(rao2017, plot.chr = 1, plot.loess = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Normalize (~2 min)
+rao2017 &amp;lt;- fastlo(rao2017) # cyclic loesss normalisation is also available
+
+# Plot normalization results
+MD_hicexp(rao2017, plot.chr = 1, plot.loess = TRUE)
+
+# Print normalized IFs
+pander::pandoc.table(head(hic_table(rao2017)))
+
+library(BiocParallel)
+# Check how many cores are available
+numCores &amp;lt;- parallel::detectCores()
+# Set the number of cores at least one less than the total number
+
+if(Sys.info()[&amp;#39;sysname&amp;#39;] == &amp;#39;Windows&amp;#39;) {
+  # Windows settings
+  register(SnowParam(workers = numCores-1),
+  default = TRUE)
+  }else {
+  # Unix settings
+  register(MulticoreParam(workers = numCores-1),
+  default = TRUE)
+  }&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;difference-detection&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Difference detection&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Perform exact test (~10 min)
+# May use &amp;quot;parallel = TRUE&amp;quot; option to speed up computations
+rao2017 &amp;lt;- hic_exactTest(rao2017, parallel = TRUE)
+# Plot a composite MD plot with the results of a comparison
+MD_composite(rao2017,plot.chr = 1)
+# Print results as a data frame
+pander::pandoc.table(head(results(rao2017)))
+
+# Save the Hicexp object
+save(rao2017, file = paste0(wd,&amp;#39;rao2017.RDA&amp;#39;))
+# To start the downstream analysis
+# without re-running multiHiCcompare load the saved file
+# load(paste0(wd,&amp;#39;rao2017.RDA&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Genome Wide Associated Studies (GWAS)</title>
