@@ -41,6 +41,6 @@
   weight = 80
 
 [[main]]
-  name = "Books"
+  name = "Rbook"
   url = "https://suvarzz.github.io/rbook/"
   weight = 90
