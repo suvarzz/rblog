@@ -60,6 +60,6 @@
 
 [[main]]
   name = "Bioinformatics"
-  url = "https://suvarzz.github.io/rbook/bioinformatics"
+  url = "https://suvarzz.github.io/bioinfbook"
   parent = "books"
   weight = 3
