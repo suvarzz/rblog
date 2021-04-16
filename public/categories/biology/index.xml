@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Biology | Mark Goldberg</title>
-    <link>/categories/biology/</link>
-      <atom:link href="/categories/biology/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/categories/biology/</link>
+      <atom:link href="https://suvar.netlify.com/categories/biology/index.xml" rel="self" type="application/rss+xml" />
     <description>Biology</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Biology</title>
-      <link>/categories/biology/</link>
+      <link>https://suvar.netlify.com/categories/biology/</link>
     </image>
     
     <item>
       <title>R tips and coding tricks</title>
-      <link>/post/r/r_tips_tricks/r_tips_tricks/</link>
+      <link>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_tips_tricks/r_tips_tricks/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -48,9 +48,9 @@ df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Genome-Wide Association Studies (GWAS)</title>
-      <link>/post/biology/gwas/gwas/</link>
+      <link>https://suvar.netlify.com/post/biology/gwas/gwas/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/biology/gwas/gwas/</guid>
+      <guid>https://suvar.netlify.com/post/biology/gwas/gwas/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

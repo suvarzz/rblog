@@ -41,6 +41,25 @@
   weight = 80
 
 [[main]]
+  name = "Books"
+  url = ""
+  identifier = "books"
+  weight = 90
+
+[[main]]
   name = "Rbook"
   url = "https://suvarzz.github.io/rbook/"
-  weight = 90
+  parent = "books"
+  weight = 1
+
+[[main]]
+  name = "Statistics"
+  url = "https://suvarzz.github.io/rbook/statistics"
+  parent = "books"
+  weight = 2
+
+[[main]]
+  name = "Bioinformatics"
+  url = "https://suvarzz.github.io/rbook/bioinformatics"
+  parent = "books"
+  weight = 3

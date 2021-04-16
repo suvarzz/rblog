@@ -2,261 +2,221 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | Mark Goldberg</title>
-    <link>/tags/</link>
-      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/</link>
+      <atom:link href="https://suvar.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Tags</title>
-      <link>/tags/</link>
+      <link>https://suvar.netlify.com/tags/</link>
     </image>
     
     <item>
       <title>dplyr</title>
-      <link>/tags/dplyr/</link>
+      <link>https://suvar.netlify.com/tags/dplyr/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/dplyr/</guid>
+      <guid>https://suvar.netlify.com/tags/dplyr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://suvar.netlify.com/tags/r/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/r/</guid>
+      <guid>https://suvar.netlify.com/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Regression</title>
-      <link>/tags/regression/</link>
+      <link>https://suvar.netlify.com/tags/regression/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/regression/</guid>
+      <guid>https://suvar.netlify.com/tags/regression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RNA-seq</title>
-      <link>/tags/rna-seq/</link>
+      <link>https://suvar.netlify.com/tags/rna-seq/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/rna-seq/</guid>
+      <guid>https://suvar.netlify.com/tags/rna-seq/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tidyverse</title>
-      <link>/tags/tidyverse/</link>
+      <link>https://suvar.netlify.com/tags/tidyverse/</link>
       <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/tidyverse/</guid>
+      <guid>https://suvar.netlify.com/tags/tidyverse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GWAS</title>
-      <link>/tags/gwas/</link>
+      <link>https://suvar.netlify.com/tags/gwas/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/gwas/</guid>
+      <guid>https://suvar.netlify.com/tags/gwas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Math</title>
-      <link>/tags/math/</link>
+      <link>https://suvar.netlify.com/tags/math/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/math/</guid>
+      <guid>https://suvar.netlify.com/tags/math/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PCA</title>
-      <link>/tags/pca/</link>
+      <link>https://suvar.netlify.com/tags/pca/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/pca/</guid>
+      <guid>https://suvar.netlify.com/tags/pca/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Statistics</title>
-      <link>/tags/statistics/</link>
+      <link>https://suvar.netlify.com/tags/statistics/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/statistics/</guid>
+      <guid>https://suvar.netlify.com/tags/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clustering</title>
-      <link>/tags/clustering/</link>
+      <link>https://suvar.netlify.com/tags/clustering/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/clustering/</guid>
+      <guid>https://suvar.netlify.com/tags/clustering/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exploratory analysis</title>
-      <link>/tags/exploratory-analysis/</link>
+      <link>https://suvar.netlify.com/tags/exploratory-analysis/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/exploratory-analysis/</guid>
+      <guid>https://suvar.netlify.com/tags/exploratory-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hierarchical</title>
-      <link>/tags/hierarchical/</link>
+      <link>https://suvar.netlify.com/tags/hierarchical/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/hierarchical/</guid>
+      <guid>https://suvar.netlify.com/tags/hierarchical/</guid>
       <description></description>
     </item>
     
     <item>
       <title>caret</title>
-      <link>/tags/caret/</link>
+      <link>https://suvar.netlify.com/tags/caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/caret/</guid>
+      <guid>https://suvar.netlify.com/tags/caret/</guid>
       <description></description>
     </item>
     
     <item>
       <title>k-means</title>
-      <link>/tags/k-means/</link>
+      <link>https://suvar.netlify.com/tags/k-means/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/k-means/</guid>
+      <guid>https://suvar.netlify.com/tags/k-means/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
+      <link>https://suvar.netlify.com/tags/machine-learning/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/machine-learning/</guid>
+      <guid>https://suvar.netlify.com/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Classification</title>
-      <link>/tags/classification/</link>
+      <link>https://suvar.netlify.com/tags/classification/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/classification/</guid>
+      <guid>https://suvar.netlify.com/tags/classification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dimentionality reduction</title>
-      <link>/tags/dimentionality-reduction/</link>
+      <link>https://suvar.netlify.com/tags/dimentionality-reduction/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/dimentionality-reduction/</guid>
+      <guid>https://suvar.netlify.com/tags/dimentionality-reduction/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Neural Network</title>
-      <link>/tags/neural-network/</link>
+      <link>https://suvar.netlify.com/tags/neural-network/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/neural-network/</guid>
+      <guid>https://suvar.netlify.com/tags/neural-network/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tSNE</title>
-      <link>/tags/tsne/</link>
+      <link>https://suvar.netlify.com/tags/tsne/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/tsne/</guid>
+      <guid>https://suvar.netlify.com/tags/tsne/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Logistic regression</title>
-      <link>/tags/logistic-regression/</link>
+      <link>https://suvar.netlify.com/tags/logistic-regression/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/logistic-regression/</guid>
+      <guid>https://suvar.netlify.com/tags/logistic-regression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hypothesis testing</title>
-      <link>/tags/hypothesis-testing/</link>
+      <link>https://suvar.netlify.com/tags/hypothesis-testing/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/hypothesis-testing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bootstrap</title>
-      <link>/tags/bootstrap/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/bootstrap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cross-validation</title>
-      <link>/tags/cross-validation/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/cross-validation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Resampling</title>
-      <link>/tags/resampling/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/resampling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hopfield </title>
-      <link>/tags/hopfield/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/hopfield/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/python/</guid>
+      <guid>https://suvar.netlify.com/tags/hypothesis-testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Epigenetics</title>
-      <link>/tags/epigenetics/</link>
+      <link>https://suvar.netlify.com/tags/epigenetics/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/epigenetics/</guid>
+      <guid>https://suvar.netlify.com/tags/epigenetics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markov process</title>
-      <link>/tags/markov-process/</link>
+      <link>https://suvar.netlify.com/tags/markov-process/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/markov-process/</guid>
+      <guid>https://suvar.netlify.com/tags/markov-process/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PcG</title>
-      <link>/tags/pcg/</link>
+      <link>https://suvar.netlify.com/tags/pcg/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/pcg/</guid>
+      <guid>https://suvar.netlify.com/tags/pcg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Splines</title>
-      <link>/tags/splines/</link>
+      <link>https://suvar.netlify.com/tags/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/splines/</guid>
+      <guid>https://suvar.netlify.com/tags/splines/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trx</title>
-      <link>/tags/trx/</link>
+      <link>https://suvar.netlify.com/tags/trx/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/trx/</guid>
+      <guid>https://suvar.netlify.com/tags/trx/</guid>
       <description></description>
     </item>
     

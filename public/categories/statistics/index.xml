@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics | Mark Goldberg</title>
-    <link>/categories/statistics/</link>
-      <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/categories/statistics/</link>
+      <atom:link href="https://suvar.netlify.com/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Statistics</title>
-      <link>/categories/statistics/</link>
+      <link>https://suvar.netlify.com/categories/statistics/</link>
     </image>
     
     <item>
       <title>Statistical learning - topics</title>
-      <link>/post/statistics/statistical_learning_topics/</link>
+      <link>https://suvar.netlify.com/post/statistics/statistical_learning_topics/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/statistical_learning_topics/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/statistical_learning_topics/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -36,7 +36,7 @@
 &lt;h1&gt;Statistics&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Correlation&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hypothesis_testing/hypothesis_testing/&#34;&gt;Hypothesis testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/&#34;&gt;Hypothesis testing&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;variation-analysis&#34; class=&#34;section level1&#34;&gt;
@@ -45,11 +45,11 @@
 &lt;div id=&#34;unsupervised-learning&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Unsupervised Learning&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Principal Component Analysis&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;
@@ -72,20 +72,20 @@
 &lt;div id=&#34;supervised-classification&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Supervised Classification&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/naive_bayes/naive_bayes&#34;&gt;Naïve Bayes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes&#34;&gt;Naïve Bayes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Multinomial logistic regression&lt;/li&gt;
 &lt;li&gt;Ordinal logistic regression&lt;/li&gt;
 &lt;li&gt;Linear &amp;amp; Quadratic Discriminant Analysis&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/svm/svm&#34;&gt;Support Vector Machines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/svm/svm&#34;&gt;Support Vector Machines&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Random Forests and Boosting&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;estimation-of-model-parameters&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Estimation of model parameters&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/model_evaluation_metrics/model_evaluation_metrics&#34;&gt;Model evaluation metrics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/resampling_methods/resampling_methods&#34;&gt;Resampling Methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics&#34;&gt;Model evaluation metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/resampling_methods/resampling_methods&#34;&gt;Resampling Methods&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;time-series&#34; class=&#34;section level1&#34;&gt;
@@ -102,9 +102,9 @@
 &lt;ul&gt;
 &lt;li&gt;Neural Network for Regression&lt;/li&gt;
 &lt;li&gt;Neural Network for Classification&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/lvq/lvq&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/lvq/lvq&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Feedforward Deep Learning with Keras &amp;amp; Tensorflow&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description>
@@ -112,9 +112,9 @@
     
     <item>
       <title>tSNE</title>
-      <link>/post/statistics/tsne/tsne/</link>
+      <link>https://suvar.netlify.com/post/statistics/tsne/tsne/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/tsne/tsne/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/tsne/tsne/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -140,7 +140,7 @@ names(colors) = unique(iris$Species)
 # plot tSNE
 plot(tsne_iris, t=&amp;#39;n&amp;#39;)
 points(tsne_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;barnes-hut-t-distributed-stochastic-neighbor-embedding&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Barnes-Hut t-Distributed Stochastic Neighbor Embedding&lt;/h2&gt;
@@ -161,7 +161,7 @@ names(rtsne)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot tsne
 plot(rtsne[[&amp;#39;Y&amp;#39;]], t=&amp;#39;n&amp;#39;)
 points(rtsne[[&amp;#39;Y&amp;#39;]], col=colors[iris_unique$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;compare-with-principal-component-analysis-pca&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Compare with Principal Component Analysis (PCA)&lt;/h2&gt;
@@ -171,7 +171,7 @@ pca_iris = princomp(iris[,1:4])$scores[,1:2]
 # plot PCA
 plot(pca_iris, t=&amp;#39;n&amp;#39;)
 points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
@@ -181,9 +181,9 @@ points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Models - reference</title>
-      <link>/post/statistics/model_reference/models_reference/</link>
+      <link>https://suvar.netlify.com/post/statistics/model_reference/models_reference/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/model_reference/models_reference/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/model_reference/models_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -244,9 +244,9 @@ anova(m1, m2)      # compair two models&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Linear Regression (Math)</title>
-      <link>/post/statistics/linear_regression_math/linear_regression_math/</link>
+      <link>https://suvar.netlify.com/post/statistics/linear_regression_math/linear_regression_math/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/linear_regression_math/linear_regression_math/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/linear_regression_math/linear_regression_math/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -312,9 +312,9 @@ To find this minimum we should calculate derivatives of &lt;span class=&#34;math
     
     <item>
       <title>Principal component analysis</title>
-      <link>/post/statistics/pca/pca/</link>
+      <link>https://suvar.netlify.com/post/statistics/pca/pca/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/pca/pca/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/pca/pca/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -361,10 +361,10 @@ pca &amp;lt;- prcomp(train[,-5], scale=TRUE)
 # eigenvalues on &amp;#39;scree plot&amp;#39;
 # percentage of variances explained by each principal component.
 factoextra::fviz_eig(pca, addlabels = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
 factoextra::fviz_pca_ind(pca, geom = &amp;#39;point&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;groups &amp;lt;- as.factor(train[,5])
 fviz_pca_ind(pca,
              col.ind = groups, # color by groups
@@ -373,20 +373,20 @@ fviz_pca_ind(pca,
              ellipse.type = &amp;quot;confidence&amp;quot;,
              legend.title = &amp;quot;Groups&amp;quot;,
              repel = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
 fviz_pca_var(pca,
              col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
              gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
              repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
 fviz_pca_biplot(pca, repel = TRUE,
                 geom = &amp;#39;point&amp;#39;,
                 col.var = &amp;#39;red&amp;#39;, # Variables color
                 col.ind = &amp;#39;grey&amp;#39;  # Individuals color
                 )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
 library(factoextra)
 library(mlbench) # dataset
@@ -426,26 +426,26 @@ test &amp;lt;- df[-trainIndex, -ncol(df)]&lt;/code&gt;&lt;/pre&gt;
 # eigenvalues on &amp;#39;scree plot&amp;#39;
 # percentage of variances explained by each principal component.
 fviz_eig(pca, addlabels = T)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals
 fviz_pca_ind(pca,
              geom = &amp;#39;point&amp;#39;,
              col.ind = &amp;quot;cos2&amp;quot;, # Color by the quality of representation
              gradient.cols = c(&amp;quot;#00AFBB&amp;quot;, &amp;quot;#E7B800&amp;quot;, &amp;quot;#FC4E07&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of variables
 fviz_pca_var(pca,
              col.var = &amp;#39;contrib&amp;#39;,    # color by contributions to the PC 
              gradient.cols = c(&amp;#39;#00AFBB&amp;#39;, &amp;#39;#E7B800&amp;#39;, &amp;#39;#FC4E07&amp;#39;),
              repel = T)          # avoid text overlapping&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph of individuals and variables
 fviz_pca_biplot(pca, repel = TRUE,
                 geom = &amp;#39;point&amp;#39;,
                 col.var = &amp;#39;red&amp;#39;, # Variables color
                 col.ind = &amp;#39;grey&amp;#39;  # Individuals color
                 )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-5-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Eigenvalues
 get_eigenvalue(pca)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##       eigenvalue variance.percent cumulative.variance.percent
@@ -572,7 +572,7 @@ pca.ind$coord %&amp;gt;% head()        # Coordinates&lt;/code&gt;&lt;/pre&gt;
 
 plot &amp;lt;- fviz_pca_ind(pca, repel=T, geom = &amp;#39;point&amp;#39;)
 fviz_add(plot, p, color=&amp;#39;red&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/pca/pca_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/pca/pca_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;how-to-calculate-coordinates-for-test-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;How to calculate coordinates for test data?&lt;/h2&gt;
@@ -589,9 +589,9 @@ fviz_add(plot, p, color=&amp;#39;red&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Determining the optimal number of clusters</title>
-      <link>/post/statistics/determin_number_clusters/determin_number_clusters/</link>
+      <link>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -641,16 +641,16 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Elbow method
 fviz_nbclust(df, kmeans, method = &amp;quot;wss&amp;quot;) +
     labs(subtitle = &amp;quot;Elbow method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Silhouette method
 fviz_nbclust(df, kmeans, method = &amp;quot;silhouette&amp;quot;)+
     labs(subtitle = &amp;quot;Silhouette method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Gap statistic
 set.seed(123)
 fviz_nbclust(df, kmeans, nstart = 25,  method = &amp;quot;gap_stat&amp;quot;, nboot = 50)+
   labs(subtitle = &amp;quot;Gap statistic method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;using-nbclust&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Using NbCLust&lt;/h2&gt;
@@ -659,13 +659,13 @@ res &amp;lt;- NbClust(data = df,                 # matrix or data frame
                distance = &amp;quot;euclidean&amp;quot;,    # distance
                method = &amp;quot;kmeans&amp;quot;,        # method
                min.nc = 2, max.nc = 10)   # min and max number of clusters to test&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -699,13 +699,13 @@ res &amp;lt;- NbClust(data,                    # matrix or data frame
                min.nc = 2, max.nc = 10, # min and max number of clusters to test
                method = &amp;quot;complete&amp;quot;,     # clustering method
                index = &amp;quot;alllong&amp;quot;)       # all indexes; can be selected&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -776,7 +776,7 @@ best.result %&amp;gt;%
   as.vector() %&amp;gt;%
   density(.) %&amp;gt;% 
   plot(., xlab=&amp;#39;k, klusters&amp;#39;, main=&amp;#39;Optimal number of clusters&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Es we can see the most of methods predict k=3 for clustering &lt;code&gt;iris&lt;/code&gt; data.&lt;br /&gt;
 If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
 &lt;/div&gt;
@@ -795,9 +795,9 @@ If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
     
     <item>
       <title>Differential expression analysis</title>
-      <link>/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -850,23 +850,23 @@ head(data) # First few rows&lt;/code&gt;&lt;/pre&gt;
 
 # Check the behavior of the data
 hist(data, col = &amp;quot;gray&amp;quot;, main=&amp;quot;GSE5583 - Histogram&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Log2 transformation (why?)
 data2 = log2(data)
 
 # Check the behavior of the data after log-transformation
 hist(data2, col = &amp;quot;gray&amp;quot;, main=&amp;quot;GSE5583 (log2) - Histogram&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Boxplot
 boxplot(data2, col=c(&amp;quot;darkgreen&amp;quot;, &amp;quot;darkgreen&amp;quot;, &amp;quot;darkgreen&amp;quot;,
                      &amp;quot;darkred&amp;quot;, &amp;quot;darkred&amp;quot;, &amp;quot;darkred&amp;quot;),
         main=&amp;quot;GSE5583 - boxplots&amp;quot;, las=2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Hierarchical clustering of the &amp;quot;samples&amp;quot; based on
 # the correlation coefficients of the expression values
 hc = hclust(as.dist(1-cor(data2)))
 plot(hc, main=&amp;quot;GSE5583 - Hierarchical Clustering&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#######################################
 # Differential expression (DE) analysis
 #######################################
@@ -893,14 +893,14 @@ plot(ko.mean ~ wt.mean, xlab = &amp;quot;WT&amp;quot;, ylab = &amp;quot;KO&amp;q
      main = &amp;quot;GSE5583 - Scatter&amp;quot;, xlim = c(0, limit), ylim = c(0, limit))
 # Diagonal line
 abline(0, 1, col = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compute fold-change (biological significance)
 # Difference between the means of the conditions
 fold = wt.mean - ko.mean
 
 # Histogram of the fold differences
 hist(fold, col = &amp;quot;gray&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-6.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-6.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compute statistical significance (using t-test)
 pvalue = NULL # Empty list for the p-values
 tstat = NULL # Empty list of the t test statistics
@@ -922,7 +922,7 @@ head(pvalue)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.5449730 0.3253745 0.3287830 0.1892376 0.6928410 0.7180077&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Histogram of p-values (-log10)
 hist(-log10(pvalue), col = &amp;quot;gray&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-7.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-7.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Volcano: put the biological significance (fold-change)
 # and statistical significance (p-value) in one plot
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano&amp;quot;)
@@ -932,7 +932,7 @@ pvalue_cutoff = 0.01
 abline(v = fold_cutoff, col = &amp;quot;blue&amp;quot;, lwd = 3)
 abline(v = -fold_cutoff, col = &amp;quot;red&amp;quot;, lwd = 3)
 abline(h = -log10(pvalue_cutoff), col = &amp;quot;green&amp;quot;, lwd = 3)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-8.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-8.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Screen for the genes that satisfy the filtering criteria
 
 # Fold-change filter for &amp;quot;biological&amp;quot; significance
@@ -969,7 +969,7 @@ dim(filtered)&lt;/code&gt;&lt;/pre&gt;
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano #2&amp;quot;)
 points (fold[filter_combined], -log10(pvalue[filter_combined]),
         pch = 16, col = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-9.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-9.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Highlighting up-regulated in red and down-regulated in blue
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano #3&amp;quot;)
 points (fold[filter_combined &amp;amp; fold &amp;lt; 0],
@@ -978,21 +978,21 @@ points (fold[filter_combined &amp;amp; fold &amp;lt; 0],
 points (fold[filter_combined &amp;amp; fold &amp;gt; 0],
         -log10(pvalue[filter_combined &amp;amp; fold &amp;gt; 0]),
         pch = 16, col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-10.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-10.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cluster the rows (genes) &amp;amp; columns (samples) by correlation
 rowv = as.dendrogram(hclust(as.dist(1-cor(t(filtered)))))
 colv = as.dendrogram(hclust(as.dist(1-cor(filtered))))
 
 # Generate a heatmap
 heatmap(filtered, Rowv=rowv, Colv=colv, cexCol=0.7)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-11.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-11.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gplots)
 
 # Enhanced heatmap
 heatmap.2(filtered, Rowv=rowv, Colv=colv, cexCol=0.7,
           col = rev(redblue(256)), scale = &amp;quot;row&amp;quot;,
           trace=&amp;quot;none&amp;quot;, density.info=&amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Save the heatmap to a PDF file
 pdf (&amp;quot;GSE5583_DE_Heatmap.pdf&amp;quot;)
 heatmap.2(filtered, Rowv=rowv, Colv=colv, cexCol=0.7,
@@ -1063,9 +1063,9 @@ dim(cor.filtered)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Exploratory analysis in R</title>
-      <link>/post/statistics/exploration/exploration/</link>
+      <link>https://suvar.netlify.com/post/statistics/exploration/exploration/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/exploration/exploration/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/exploration/exploration/</guid>
       <description>
 
 
@@ -1115,7 +1115,7 @@ head(df, n=5) # first rows&lt;/code&gt;&lt;/pre&gt;
 cor.mx &amp;lt;- cor(df)
 # correlation plot ordered correlation coefficients
 corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
@@ -1137,8 +1137,8 @@ control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, num
 ##            0            0            0            0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Scatterplot Matrices
 pairs(iris[, -5], bg = c(&amp;quot;yellow&amp;quot;, &amp;quot;green&amp;quot;, &amp;quot;black&amp;quot;)[iris$Species], pch = 21)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
-&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
+&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;https://suvar.netlify.com/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Can we remove outliers&lt;/p&gt;
 &lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
 &lt;/div&gt;
@@ -1153,9 +1153,9 @@ pairs(iris[, -5], bg = c(&amp;quot;yellow&amp;quot;, &amp;quot;green&amp;quot;, 
     
     <item>
       <title>Compare Models And Select The Best Using The Caret R Package</title>
-      <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
+      <link>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/compare_models_caret/compare_models_caret/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1224,10 +1224,10 @@ summary(results)&lt;/code&gt;&lt;/pre&gt;
 ## SVM 0.25171233 0.3670435 0.4590164 0.4500126 0.5211405 0.6457055    0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# boxplots of results
 bwplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dot plots of results
 dotplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
@@ -1238,9 +1238,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Gradient Boosting Machine</title>
-      <link>/post/statistics/gbm/gbm/</link>
+      <link>https://suvar.netlify.com/post/statistics/gbm/gbm/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/gbm/gbm/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/gbm/gbm/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1258,9 +1258,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>k-means</title>
-      <link>/post/statistics/k_means/k_means/</link>
+      <link>https://suvar.netlify.com/post/statistics/k_means/k_means/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/k_means/k_means/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/k_means/k_means/</guid>
       <description>
 
 
@@ -1283,12 +1283,12 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We try to predict them by &lt;em&gt;Petal.Lenght&lt;/em&gt;and &lt;em&gt;Petal.Width&lt;/em&gt; variables using k-means clustering.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot Petal.Length ~ Petal.Width data
 plot(df$Petal.Length ~ df$Petal.Width)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Find number of clusters using wss
 wss &amp;lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
 for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df[, 3:4], i)$withinss)
 plot(1:15, wss, type=&amp;quot;b&amp;quot;, xlab=&amp;quot;Number of Clusters&amp;quot;, ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make k-means with 3 clasters
 ncl &amp;lt;- 3
 cl &amp;lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
@@ -1333,16 +1333,16 @@ plot(0, xlab=&amp;#39;Petal width&amp;#39;, ylab=&amp;#39;Petal length&amp;#39;,
 for ( i in 1:ncl ) {
   points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Learning Vector Quantization</title>
-      <link>/post/statistics/lvq/lvq/</link>
+      <link>https://suvar.netlify.com/post/statistics/lvq/lvq/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/lvq/lvq/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/lvq/lvq/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1416,9 +1416,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Naive Bayes</title>
-      <link>/post/statistics/naive_bayes/naive_bayes/</link>
+      <link>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/naive_bayes/naive_bayes/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1440,9 +1440,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Support Vector Machine</title>
-      <link>/post/statistics/svm/svm/</link>
+      <link>https://suvar.netlify.com/post/statistics/svm/svm/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/svm/svm/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/svm/svm/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1460,9 +1460,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>How to split data into train and test subsets?</title>
-      <link>/post/statistics/split_data_ways/split_data_ways/</link>
+      <link>https://suvar.netlify.com/post/statistics/split_data_ways/split_data_ways/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/split_data_ways/split_data_ways/</guid>
       <description>
 
 
@@ -1514,9 +1514,9 @@ test  &amp;lt;- dplyr::anti_join(iris, train, by = &amp;#39;id&amp;#39;)&lt;/cod
     
     <item>
       <title>Neuralnet R</title>
-      <link>/post/statistics/neuralnet_r/neuralnet_r/</link>
+      <link>https://suvar.netlify.com/post/statistics/neuralnet_r/neuralnet_r/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/neuralnet_r/neuralnet_r/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/neuralnet_r/neuralnet_r/</guid>
       <description>
 
 
@@ -1697,7 +1697,7 @@ caret::confusionMatrix(t)&lt;/code&gt;&lt;/pre&gt;
 ## &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot NN
 plot(nn, rep=&amp;#39;best&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/neuralnet_r/neuralnet_r_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/neuralnet_r/neuralnet_r_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# compair predicted and actual values
 test$predicted &amp;lt;- ifelse(pred&amp;gt;0.5, 1, 0)
 test&lt;/code&gt;&lt;/pre&gt;
@@ -1726,9 +1726,9 @@ test&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Uniform Manifold Approximation and Projection (UMAP)</title>
-      <link>/post/statistics/umap/umap/</link>
+      <link>https://suvar.netlify.com/post/statistics/umap/umap/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/umap/umap/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/umap/umap/</guid>
       <description>
 
 
@@ -1764,7 +1764,7 @@ plot(subset(mx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      ylim=c(min(mx[,2]), max(mx[,2])))
 points(subset(mx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(mx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# generate test data by adding noise to original data
 iris.wnoise = dat + matrix(rnorm(150*40, 0, 0.1), ncol=4)
 colnames(iris.wnoise) = colnames(dat)
@@ -1786,7 +1786,7 @@ plot(subset(pmx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      ylim=c(min(pmx[,2]), max(pmx[,2])))
 points(subset(pmx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(pmx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There are two strategies for tuning: via configuration objects (1) and via additional arguments (2).&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;code&gt;umap.defaults&lt;/code&gt; - configuration object.&lt;/li&gt;
@@ -1803,7 +1803,7 @@ plot(subset(mx2, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      main=&amp;quot;Another UMAP visualization (different seed)&amp;quot;)
 points(subset(mx2, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(mx2, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Additional arguments &lt;code&gt;iris.umap.3 = umap(iris.data, random_state=123)&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -1818,9 +1818,9 @@ points(subset(mx2, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&am
     
     <item>
       <title>Hierarchical cluster analysis</title>
-      <link>/post/statistics/hierarchical_cluster/hierarchical_cluser/</link>
+      <link>https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hierarchical_cluster/hierarchical_cluser/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1867,7 +1867,7 @@ for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df, centers=i)$withinss)
 plot(1:15, wss, type=&amp;quot;b&amp;quot;,
      xlab=&amp;quot;Number of Clusters&amp;quot;,
      ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; This diagram shows that 4 number of clusers is optimal for this dataset.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; This diagram shows that 4 number of clusers is optimal for this dataset.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;choosing-the-best-clustering-model&#34; class=&#34;section level2&#34;&gt;
@@ -1902,7 +1902,7 @@ plot(hc1, hang = -1, cex = 0.6)
 
 # show 4 clusers
 rect.hclust(hc1, k=4, border=&amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# group data by clusters
 groups &amp;lt;- cutree(hc1, k=3)
 names(groups[groups == 1])&lt;/code&gt;&lt;/pre&gt;
@@ -1920,7 +1920,7 @@ names(hc1)&lt;/code&gt;&lt;/pre&gt;
 hc3 &amp;lt;- cluster::agnes(df, method=&amp;#39;ward&amp;#39;)
 # plot slaster
 cluster::pltree(hc3, hang = -1, cex = 0.6)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split into groups
 groups &amp;lt;- cutree(as.hclust(hc3), k = 4)
 groups[groups==1]&lt;/code&gt;&lt;/pre&gt;
@@ -1938,9 +1938,9 @@ groups[groups==1]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Logistic regression</title>
-      <link>/post/statistics/logistic_regression/logistic_regression/</link>
+      <link>https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/logistic_regression/logistic_regression/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -2054,7 +2054,7 @@ legend(&amp;#39;bottomright&amp;#39;, lty=c(1,1,1,1),
        col = c(&amp;#39;black&amp;#39;, &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;green&amp;#39;, &amp;#39;red&amp;#39;),
        legend = c(&amp;#39;actual data&amp;#39;, &amp;#39;predicted&amp;#39;, &amp;#39;Logistic function&amp;#39;, &amp;#39;Decision p&amp;#39;, &amp;#39;Decision bound&amp;#39;),
        lwd=c(NA,NA,1,1,1), pch=c(19,19,NA,NA,NA), bty = &amp;#39;n&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;logistic-regression&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Logistic regression&lt;/h2&gt;
@@ -2265,7 +2265,7 @@ text(x[p.vector == 0.5], y[p.vector == 0.5], &amp;#39;p = 0.5&amp;#39;, pos = 4)
 # point for probability 0.2
 points(x[p.vector == 0.2], y[p.vector == 0.2], pch = 16)
 text(x[p.vector == 0.2], y[p.vector == 0.2], &amp;#39;p = 0.2&amp;#39;, pos = 4)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;predict &amp;lt;- factor(ifelse(p.lda$posterior[, &amp;#39;Yes&amp;#39;] &amp;gt; 0.2, 2, 1),
                       levels = c(1, 2),
                       labels = c(&amp;#39;No&amp;#39;, &amp;#39;Yes&amp;#39;))
@@ -2294,9 +2294,9 @@ sum(diag(conf.m)) / sum(conf.m)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Hypothesis testing</title>
-      <link>/post/statistics/hypothesis_testing/hypothesis_testing/</link>
+      <link>https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -2605,9 +2605,9 @@ FDR: 10%&lt;/p&gt;
     
     <item>
       <title>Model evaluation metrics</title>
-      <link>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</link>
+      <link>https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -2683,356 +2683,10 @@ An ROC graph depicts relative tradeoffs between benefits (true positives) and co
     </item>
     
     <item>
-      <title>Resampling methods</title>
-      <link>/post/statistics/resampling_methods/resampling_methods/</link>
-      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/resampling_methods/resampling_methods/</guid>
-      <description>
-
-&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#validation-approach&#34;&gt;Validation approach&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#leave-one-out-cross-validation-loocv&#34;&gt;Leave-one-out cross-validation (LOOCV)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#k-fold-cross-validation&#34;&gt;k-fold cross validation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bootstrapping&#34;&gt;Bootstrapping&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bibiography&#34;&gt;Bibiography&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div id=&#34;validation-approach&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Validation approach&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Validation&lt;/strong&gt; (hold-out) approach estimates the prediction error of our predictive models. This involves randomly dividing the available set of observations into two parts, a &lt;strong&gt;training set&lt;/strong&gt; and a &lt;strong&gt;testing set&lt;/strong&gt; (validation set). Our statistical model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The resulting validation set error rate (typically assessed using &lt;strong&gt;MSE&lt;/strong&gt; in the case of a quantitative response) provides an estimate of the test error rate.&lt;br /&gt;
-The drawback of the method is that the &lt;strong&gt;test error rate&lt;/strong&gt; can vary depending on training set.&lt;/p&gt;
-&lt;p&gt;Let’s buld &lt;strong&gt;polinomial models&lt;/strong&gt; for first 10 degrees to predict &lt;strong&gt;mpg&lt;/strong&gt; from &lt;strong&gt;horsepower&lt;/strong&gt; dataset (&lt;code&gt;ISLR::Auto&lt;/code&gt;), where &lt;strong&gt;mpg&lt;/strong&gt; - miles per gallon and &lt;strong&gt;horsepower&lt;/strong&gt; - engine horsepower.&lt;br /&gt;
-Let’s buld models for train data using &lt;strong&gt;polynomial linear regression&lt;/strong&gt; using vaious polinomial degrees and estimate MSE for each of these models using test data:&lt;br /&gt;
-1. &lt;strong&gt;Linear&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower\)&lt;/span&gt;.&lt;br /&gt;
-2. &lt;strong&gt;Squared&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2\)&lt;/span&gt;.&lt;br /&gt;
-3. &lt;strong&gt;Cubic&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(\hat{mpg} = \hat{\beta}_0 + \hat{\beta}_1 \cdot horsepower + \hat{\beta}_2 \cdot horsepower^2 + \hat{\beta}_3 \cdot horsepower^3\)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;#39;ISLR&amp;#39;)        # datasets Auto
-attach(Auto)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
-# split data into train (0.6) and test (0.4)
-inTrain &amp;lt;- sample(nrow(Auto), nrow(Auto)*0.6)
-train &amp;lt;- Auto[inTrain, ]
-test &amp;lt;- Auto[!inTrain, ]
-
-# Buld polynomial models for first ten degrees
-models &amp;lt;- lapply(1:10, function(n) {
-  fit.lm &amp;lt;- lm(mpg ~ poly(horsepower, n), data=train)
-  })
-
-mse.vec &amp;lt;- sapply(1:10, function(n) {
-  mean((mpg[-inTrain] - predict(models[[n]], Auto[-inTrain, ]))^2)
-})
-# create dataframe to store MSE of our models
-mse.df &amp;lt;- data.frame(degree = 1:10, mse = NA)
-mse.df$mse &amp;lt;- mse.vec
-plot(mse.df, type=&amp;quot;o&amp;quot;, main=&amp;quot;MSE of spline regression models for degrees from 1 to 10&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;### PLOT with data and first three polynomial models
-par(mar = c(4, 4, 0.5, 1))
-plot(horsepower[inTrain], mpg[inTrain],
-     xlab = &amp;#39;horsepower&amp;#39;, ylab = &amp;#39;mpg&amp;#39;, pch = 21,
-     col = rgb(0, 0, 1, alpha = 0.4), bg = rgb(0, 0, 1, alpha = 0.4))
-# add test data
-points(horsepower[-inTrain], mpg[-inTrain],
-       pch = 21, col = rgb(1, 0, 0, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4))
-
-colors=c(&amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;)
-x1 &amp;lt;- data.frame(horsepower=seq(min(horsepower), max(horsepower), length = 200))
-for (i in 1:3) {
-    y2 &amp;lt;- predict(models[[i]], newdata=x1)
-    lines(x1$horsepower, y2, col=colors[i], lwd=c(2,2,2))
-}
-legend(&amp;#39;topright&amp;#39;, lty=c(1,1,1),
-       col = c(&amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;red&amp;#39;, rgb(0, 0, 1, alpha = 0.4), bg = rgb(1, 0, 0, alpha = 0.4)),
-       legend = c(&amp;#39;Linear model&amp;#39;, &amp;#39;Squared model&amp;#39;, &amp;#39;Cubic model&amp;#39;, &amp;#39;train data&amp;#39;, &amp;#39;test data&amp;#39;),
-       lwd=c(2,2,2,NA,NA), pch=c(NA,NA,NA,16,16))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# end PLOT&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Lets calculate MSE for these spline regression with dergees from 1 to 10 for 10 different training data subsets:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
-mse.df.2 &amp;lt;- data.frame(sample = vector(&amp;quot;integer&amp;quot;, 100), 
-                       degree = vector(&amp;quot;integer&amp;quot;, 100), 
-                       mse = vector(&amp;quot;double&amp;quot;, 100))
-counter &amp;lt;- 1
-
-for(i in 1:10) {
-  # random sample
-  set.seed(i)
-  sample &amp;lt;- sample(c(TRUE, FALSE), nrow(Auto), replace = T, prob = c(0.6,0.4))
-  train &amp;lt;- Auto[sample, ]
-  test &amp;lt;- Auto[!sample, ]
-  
-  # modeling
-  for(j in 1:10) {
-    lm.fit &amp;lt;- lm(mpg ~ poly(horsepower, j), data = train)
-    
-    # add degree &amp;amp; mse values
-    mse.df.2[counter, 2] &amp;lt;- j
-    mse.df.2[counter, 3] &amp;lt;- mean((test$mpg - predict(lm.fit, test))^2)
-    
-    # add sample identifier
-    mse.df.2[counter, 1] &amp;lt;- i
-    counter &amp;lt;- counter + 1
-  }
-  next
-}
-
-ggplot(mse.df.2, aes(degree, mse, color = factor(sample))) +
-  geom_line(show.legend = FALSE) +
-  geom_point(show.legend = FALSE) +
-  ylim(c(10, 30))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/resampling_methods/resampling_methods_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; All ten curves indicate that there is not much benefit in including cubic or higher-order polynomial terms in the model.&lt;br /&gt;
-However, MSE depends on train data subsets.&lt;br /&gt;
-The train data contains subset of the observations which can lead to the overestimation of validation set error rate in compair with the test error rate for the model fit on the entire data set.&lt;br /&gt;
-&lt;strong&gt;Cross-validation methods&lt;/strong&gt; are used to overcome this drawback.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;leave-one-out-cross-validation-loocv&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Leave-one-out cross-validation (LOOCV)&lt;/h2&gt;
-&lt;p&gt;In the LOOCV method a single observation is used for the validation set, and the remaining &lt;span class=&#34;math inline&#34;&gt;\(n - 1\)&lt;/span&gt; observations make up the training set.&lt;br /&gt;
-Since the validation observation was not used in the fitting process, the estimate error provides an approximately unbiased estimate for the test error. The validation is repated by subsetting one different observation each time, calculating MSE for this observation each time. The average MSE is calculated in the end. Note: we will use &lt;code&gt;glm&lt;/code&gt; function for linear regression models and the &lt;code&gt;cv.glm&lt;/code&gt; function from &lt;code&gt;boot&lt;/code&gt; package, which provide necessary tools to perform resamping.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# LOOCV
-library(&amp;#39;boot&amp;#39;)        # cross-validation
-# step 1: fit model
-glm.fit &amp;lt;- glm(mpg ~ horsepower, data = Auto)
-# setp 2: perform LOOCV across entire data set
-loocv.err &amp;lt;- cv.glm(Auto, glm.fit)
-
-str(loocv.err)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## List of 4
-##  $ call : language cv.glm(data = Auto, glmfit = glm.fit)
-##  $ K    : num 392
-##  $ delta: num [1:2] 24.2 24.2
-##  $ seed : int [1:626] 403 392 -1703707781 1994959178 434562476 -1277611857 -1105401243 1020654108 526650482 -1538305299 ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;call&lt;/strong&gt;: the original function call.&lt;br /&gt;
-&lt;strong&gt;K&lt;/strong&gt;: the number of folds used. The LOOCV repeats validation with each of all of 392 observations.&lt;br /&gt;
-&lt;strong&gt;delta&lt;/strong&gt;: prediction error (MSE) estimated by the cross-validation.&lt;br /&gt;
-&lt;strong&gt;seed&lt;/strong&gt;: the values of the random seed used for the function call&lt;/p&gt;
-&lt;p&gt;Let’s compare MSE estimated by &lt;strong&gt;LOOCV&lt;/strong&gt; methods with MSE derived by &lt;strong&gt;simple validation&lt;/strong&gt; approach (0.6/0.4) what we previously used.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;dplyr&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:stats&amp;#39;:
-## 
-##     filter, lag&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
-## 
-##     intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get MSE for our 10 polynomial models, where degree is 1 (linear models). 
-mse &amp;lt;- mse.df.2 %&amp;gt;% filter(degree == 1) %&amp;gt;% pull(mse)
-mse                 # all MSE from our 10 linear polynoms&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] 28.43298 26.38322 27.35615 27.40516 20.31488 24.31761 23.14485
-##  [8] 21.92717 25.64242 23.90127&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(mse)           # average MSE from our 10 linear polynoms&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 24.88257&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;loocv.err$delta[1]  # LOOCV MSE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 24.23151&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As we can see, MSE derived by LOOCV is 24.2 and it is more precise but very close to the average MSE derived by avereging of our 10 polynomial linear models we made before (~24.9).&lt;/p&gt;
-&lt;p&gt;Now we can apply LOOCV to estimate MSE for all 10 degrees of our polynomial regression models.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# vector of LOOCV-errors
-n &amp;lt;- 10 # max degree of polynom model
-cv.err.loocv &amp;lt;- rep(NA, n)
-names(cv.err.loocv) &amp;lt;- 1:n
-# repeat by powers of polynomes
-for (i in 1:n){
-  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.loocv[i] &amp;lt;- cv.glm(Auto, fit.glm)$delta[1]
-}
-# result
-cv.err.loocv&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5        6        7        8 
-## 24.23151 19.24821 19.33498 19.42443 19.03321 18.97864 18.83305 18.96115 
-##        9       10 
-## 19.06863 19.49093&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Result is basically the same for this model as we got before but this result is more precise.&lt;br /&gt;
-This LOOCV approach can be used with any kind of predictive modeling.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;k-fold-cross-validation&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;k-fold cross validation&lt;/h2&gt;
-&lt;p&gt;library(‘GGally’) # matrix diagrams K-times cross-validation is a compromize between sample validation and LOOCV. It is computationally more effective than LOOCV but not so presize.&lt;br /&gt;
-We will make 10-time validation.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- 10 # max degree (number of polynom models)
-cv.err.k.fold &amp;lt;- rep(NA, 10)
-names(cv.err.k.fold) &amp;lt;- 1:10
-# repeat for power of polynomes
-for (i in 1:n){
-  fit.glm &amp;lt;- glm(mpg ~ poly(horsepower, i), data = Auto)
-  cv.err.k.fold[i] &amp;lt;- cv.glm(Auto, fit.glm, K = 10)$delta[1]
-}
-# result
-cv.err.k.fold&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        1        2        3        4        5        6        7        8 
-## 24.10371 19.34487 19.33756 19.71388 18.86019 19.02235 18.90377 19.18771 
-##        9       10 
-## 19.29985 19.08448&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;k-fold cross validation&lt;/strong&gt; computationally more effective than &lt;strong&gt;LOOCV&lt;/strong&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bootstrapping&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Bootstrapping&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Bootstrapping&lt;/strong&gt; repeatedly draws independent samples from our data set to create bootstrap data sets. This sample is performed with replacement, which means that the same observation can be sampled more than once.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- nrow(Auto)
-statistic &amp;lt;- function(data, index) {
-  # extract model coefficients
-  coef(lm(mpg ~ horsepower, data = data, subset = index))
-}
-statistic(Auto, 1:392)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## (Intercept)  horsepower 
-##  39.9358610  -0.1578447&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
-boot(Auto, statistic, 1000)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Auto, statistic = statistic, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##       original        bias    std. error
-## t1* 39.9358610  0.0269563085 0.859851825
-## t2* -0.1578447 -0.0002906457 0.007402954&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Bootstrap estimate for SE0 is 0.86, and that the bootstrap estimate for SE1is 0.0076. If we compare these to the standard errors provided by the summary function we see a difference (biased error).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(mpg ~ horsepower, data = Auto))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Call:
-## lm(formula = mpg ~ horsepower, data = Auto)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -13.5710  -3.2592  -0.3435   2.7630  16.9240 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept) 39.935861   0.717499   55.66   &amp;lt;2e-16 ***
-## horsepower  -0.157845   0.006446  -24.49   &amp;lt;2e-16 ***
-## ---
-## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
-## 
-## Residual standard error: 4.906 on 390 degrees of freedom
-## Multiple R-squared:  0.6059, Adjusted R-squared:  0.6049 
-## F-statistic: 599.7 on 1 and 390 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we compair errors for polynomial model (degree=2) by bootstrap and non-bootstrap approach.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;statistic.2 &amp;lt;- function(data, index) {
-  coef(lm(mpg ~ poly(horsepower, 2), data = data, subset = index))
-}
-set.seed(1)
-boot(Auto, statistic.2, 1000)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Auto, statistic = statistic.2, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##       original      bias    std. error
-## t1*   23.44592 0.003943212   0.2255528
-## t2* -120.13774 0.117312678   3.7008952
-## t3*   44.08953 0.047449584   4.3294215&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(mpg ~ poly(horsepower, 2), data = Auto))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Call:
-## lm(formula = mpg ~ poly(horsepower, 2), data = Auto)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -14.7135  -2.5943  -0.0859   2.2868  15.8961 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept)            23.4459     0.2209  106.13   &amp;lt;2e-16 ***
-## poly(horsepower, 2)1 -120.1377     4.3739  -27.47   &amp;lt;2e-16 ***
-## poly(horsepower, 2)2   44.0895     4.3739   10.08   &amp;lt;2e-16 ***
-## ---
-## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
-## 
-## Residual standard error: 4.374 on 389 degrees of freedom
-## Multiple R-squared:  0.6876, Adjusted R-squared:  0.686 
-## F-statistic:   428 on 2 and 389 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Better correspondence between the bootstrap estimates and the standard estimates suggest a better model fit.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bibiography&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Bibiography&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://faculty.marshall.usc.edu/gareth-james/&#34;&gt;An Introduction to Statistical Learning by Gareth James&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://afit-r.github.io&#34;&gt;Air Forse Institute of Technology&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hopfield Neural Network</title>
-      <link>/post/statistics/hopfield_network/hopfield_network/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hopfield_network/hopfield_network/</guid>
-      <description>
-
-
-&lt;p&gt;Here is an example of python code.&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
-
-# Patterns
-x1 = [1, -1, -1, -1, 1, -1, -1, -1, 1]
-x2 = [-1, -1, 1, -1, 1, -1, 1, -1, -1]
-
-L = []
-L.append(x1)
-L.append(x2)
-
-# Function to find weight from list of vectors (lists)
-def wts(l):
-    # length of the first element in input list
-    # Would be great to check that all elements have the same length
-    ln = len(l[1])
-    # Weight matrix filled with zeros
-    W = np.zeros((ln, ln))
-    # add x @ x.T for all vectors in input list
-    for i in range(len(l)):
-        L[i] = np.reshape(np.array(L[i]), (ln, 1))
-        W = W + L[i] @ L[i].T
-    # fill main diagonal with zeros
-    np.fill_diagonal(W, 0)
-    return W
-
-W = wts(L)
-
-### TEST
-# test vector
-t = (-1, -1, 1, -1, 1, -1, -1, 1, -1)
-
-def wvec(vec, W):
-    vec = np.reshape(np.array(vec), (len(vec), 1))
-    vec = W @ vec
-    vec = np.ndarray.round(np.tanh(vec))
-    return vec
-
-vec = wvec(t, W)
-
-for i in L:
-    if np.array_equal(vec, i):
-        print(&amp;quot;Pattern detected&amp;quot;, i)
-    else:
-        print(&amp;quot;Pattern not detected&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Pattern not detected
-## Pattern detected [[-1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [-1]]&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Simple Markov process</title>
-      <link>/post/statistics/markov_process/simple_markov_process/</link>
+      <link>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/markov_process/simple_markov_process/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</guid>
       <description>
 
 
@@ -3132,9 +2786,9 @@ sm&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Spline model</title>
-      <link>/post/statistics/splines/splines/</link>
+      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/splines/splines/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -3216,7 +2870,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
        lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build a model using splines&lt;/h2&gt;
@@ -3290,7 +2944,7 @@ points(x = df.my.MSE.test, y = my.MSE.test,
        pch = 15, col = &amp;#39;blue&amp;#39;)
 mtext(df.my.MSE.test, 
       side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
@@ -3324,7 +2978,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
        lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliograpy&lt;/h2&gt;

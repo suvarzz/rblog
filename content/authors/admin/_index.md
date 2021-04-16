@@ -15,7 +15,7 @@ interests:
 - Long-distance running
 name: Mark Goldberg
 organizations:
-- name: Oxford Brookes University
+- name: Dresden Technical University
   url: ""
 role: Researcher
 social:
@@ -34,4 +34,4 @@ user_groups:
 - Visitors
 ---
 
-Mark Goldberg is a researcher of epigenetic processes in invertebrates at Oxford Brookes University. His research interests include epigenetics, computational biology and single-cell technologies.
+Mark Goldberg is a researcher of epigenetic processes in invertebrates at Dresden Technical University. His research interests include epigenetics, computational biology and single-cell technologies.

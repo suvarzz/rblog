@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Exploratory analysis | Mark Goldberg</title>
-    <link>/tags/exploratory-analysis/</link>
-      <atom:link href="/tags/exploratory-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/exploratory-analysis/</link>
+      <atom:link href="https://suvar.netlify.com/tags/exploratory-analysis/index.xml" rel="self" type="application/rss+xml" />
     <description>Exploratory analysis</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Exploratory analysis</title>
-      <link>/tags/exploratory-analysis/</link>
+      <link>https://suvar.netlify.com/tags/exploratory-analysis/</link>
     </image>
     
     <item>
       <title>Exploratory analysis in R</title>
-      <link>/post/statistics/exploration/exploration/</link>
+      <link>https://suvar.netlify.com/post/statistics/exploration/exploration/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/exploration/exploration/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/exploration/exploration/</guid>
       <description>
 
 
@@ -66,7 +66,7 @@ head(df, n=5) # first rows&lt;/code&gt;&lt;/pre&gt;
 cor.mx &amp;lt;- cor(df)
 # correlation plot ordered correlation coefficients
 corrplot::corrplot.mixed(cor.mx, order=&amp;quot;hclust&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(cor.mx)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##              Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
@@ -88,8 +88,8 @@ control &amp;lt;- caret::trainControl(method=&amp;quot;repeatedcv&amp;quot;, num
 ##            0            0            0            0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Scatterplot Matrices
 pairs(iris[, -5], bg = c(&amp;quot;yellow&amp;quot;, &amp;quot;green&amp;quot;, &amp;quot;black&amp;quot;)[iris$Species], pch = 21)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
-&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/exploration/exploration_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt; How to choose variables with the best correlation? Can we sort them by importance?&lt;/p&gt;
+&lt;p&gt;Can we exclude data based on low correlation? This can be also done by dimentionality reduction methods such as &lt;a href=&#34;https://suvar.netlify.com/posts/statistics/pca/pca/&#34;&gt;PCA&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Can we remove outliers&lt;/p&gt;
 &lt;p&gt;Do we need to remove duplicated data (rows, columns)&lt;/p&gt;
 &lt;/div&gt;

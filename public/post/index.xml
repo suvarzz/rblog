@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | Mark Goldberg</title>
-    <link>/post/</link>
-      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/post/</link>
+      <atom:link href="https://suvar.netlify.com/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Posts</title>
-      <link>/post/</link>
+      <link>https://suvar.netlify.com/post/</link>
     </image>
     
     <item>
       <title>Bioinformatics</title>
-      <link>/post/bioinformatics/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Math</title>
-      <link>/post/statistics/</link>
+      <link>https://suvar.netlify.com/post/statistics/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>/post/r/</link>
+      <link>https://suvar.netlify.com/post/r/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/r/</guid>
+      <guid>https://suvar.netlify.com/post/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Biology</title>
-      <link>/post/biology/</link>
+      <link>https://suvar.netlify.com/post/biology/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/biology/</guid>
+      <guid>https://suvar.netlify.com/post/biology/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Books</title>
-      <link>/post/books/</link>
+      <link>https://suvar.netlify.com/post/books/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/post/books/</guid>
+      <guid>https://suvar.netlify.com/post/books/</guid>
       <description></description>
     </item>
     

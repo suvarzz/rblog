@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming | Mark Goldberg</title>
-    <link>/post/r/</link>
-      <atom:link href="/post/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/post/r/</link>
+      <atom:link href="https://suvar.netlify.com/post/r/index.xml" rel="self" type="application/rss+xml" />
     <description>Programming</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Programming</title>
-      <link>/post/r/</link>
+      <link>https://suvar.netlify.com/post/r/</link>
     </image>
     
     <item>
       <title>Dplyr - reference</title>
-      <link>/post/r/dplyr_tutorial/dplyr_tutorial/</link>
+      <link>https://suvar.netlify.com/post/r/dplyr_tutorial/dplyr_tutorial/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/r/dplyr_tutorial/dplyr_tutorial/</guid>
+      <guid>https://suvar.netlify.com/post/r/dplyr_tutorial/dplyr_tutorial/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -481,9 +481,9 @@ slice(df # select rows by position&lt;/p&gt;
     
     <item>
       <title>R graphic - reference</title>
-      <link>/post/r/r_graphic/r_graphic/</link>
+      <link>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</link>
       <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_graphic/r_graphic/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -539,9 +539,9 @@ qplot(mpg, data=mtcars,
     
     <item>
       <title>R tidyverse package - reference</title>
-      <link>/post/r/tidyverse_reference/tidyverse_reference/</link>
+      <link>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/tidyverse_reference/tidyverse_reference/</guid>
+      <guid>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -800,9 +800,9 @@ list(1:3, 1:3, 1:3) %&amp;gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6&lt;/code&g
     
     <item>
       <title>R tips and coding tricks</title>
-      <link>/post/r/r_tips_tricks/r_tips_tricks/</link>
+      <link>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_tips_tricks/r_tips_tricks/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

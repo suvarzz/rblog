@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>k-means | Mark Goldberg</title>
-    <link>/tags/k-means/</link>
-      <atom:link href="/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/k-means/</link>
+      <atom:link href="https://suvar.netlify.com/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
     <description>k-means</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>k-means</title>
-      <link>/tags/k-means/</link>
+      <link>https://suvar.netlify.com/tags/k-means/</link>
     </image>
     
     <item>
       <title>k-means</title>
-      <link>/post/statistics/k_means/k_means/</link>
+      <link>https://suvar.netlify.com/post/statistics/k_means/k_means/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/k_means/k_means/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/k_means/k_means/</guid>
       <description>
 
 
@@ -39,12 +39,12 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We try to predict them by &lt;em&gt;Petal.Lenght&lt;/em&gt;and &lt;em&gt;Petal.Width&lt;/em&gt; variables using k-means clustering.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot Petal.Length ~ Petal.Width data
 plot(df$Petal.Length ~ df$Petal.Width)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Find number of clusters using wss
 wss &amp;lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
 for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df[, 3:4], i)$withinss)
 plot(1:15, wss, type=&amp;quot;b&amp;quot;, xlab=&amp;quot;Number of Clusters&amp;quot;, ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make k-means with 3 clasters
 ncl &amp;lt;- 3
 cl &amp;lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
@@ -89,7 +89,7 @@ plot(0, xlab=&amp;#39;Petal width&amp;#39;, ylab=&amp;#39;Petal length&amp;#39;,
 for ( i in 1:ncl ) {
   points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

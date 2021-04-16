@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tSNE | Mark Goldberg</title>
-    <link>/tags/tsne/</link>
-      <atom:link href="/tags/tsne/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/tsne/</link>
+      <atom:link href="https://suvar.netlify.com/tags/tsne/index.xml" rel="self" type="application/rss+xml" />
     <description>tSNE</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>tSNE</title>
-      <link>/tags/tsne/</link>
+      <link>https://suvar.netlify.com/tags/tsne/</link>
     </image>
     
     <item>
       <title>tSNE</title>
-      <link>/post/statistics/tsne/tsne/</link>
+      <link>https://suvar.netlify.com/post/statistics/tsne/tsne/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/tsne/tsne/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/tsne/tsne/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -42,7 +42,7 @@ names(colors) = unique(iris$Species)
 # plot tSNE
 plot(tsne_iris, t=&amp;#39;n&amp;#39;)
 points(tsne_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;barnes-hut-t-distributed-stochastic-neighbor-embedding&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Barnes-Hut t-Distributed Stochastic Neighbor Embedding&lt;/h2&gt;
@@ -63,7 +63,7 @@ names(rtsne)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot tsne
 plot(rtsne[[&amp;#39;Y&amp;#39;]], t=&amp;#39;n&amp;#39;)
 points(rtsne[[&amp;#39;Y&amp;#39;]], col=colors[iris_unique$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;compare-with-principal-component-analysis-pca&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Compare with Principal Component Analysis (PCA)&lt;/h2&gt;
@@ -73,7 +73,7 @@ pca_iris = princomp(iris[,1:4])$scores[,1:2]
 # plot PCA
 plot(pca_iris, t=&amp;#39;n&amp;#39;)
 points(pca_iris, col=colors[iris$Species])&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;

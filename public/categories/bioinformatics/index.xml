@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bioinformatics | Mark Goldberg</title>
-    <link>/categories/bioinformatics/</link>
-      <atom:link href="/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/categories/bioinformatics/</link>
+      <atom:link href="https://suvar.netlify.com/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
     <description>Bioinformatics</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Bioinformatics</title>
-      <link>/categories/bioinformatics/</link>
+      <link>https://suvar.netlify.com/categories/bioinformatics/</link>
     </image>
     
     <item>
       <title>Processing of sequencing data in R</title>
-      <link>/post/bioinformatics/hi-c/hi-c/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/hi-c/hi-c/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/hi-c/hi-c/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/hi-c/hi-c/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -183,9 +183,9 @@ save(rao2017, file = paste0(wd,&amp;#39;rao2017.RDA&amp;#39;))
     
     <item>
       <title>Genome Wide Associated Studies (GWAS)</title>
-      <link>/post/bioinformatics/gwas/gwas/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/gwas/gwas/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/gwas/gwas/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/gwas/gwas/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -265,9 +265,9 @@ plot(myHapMapres, whole=TRUE)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Processing of sequencing data in R</title>
-      <link>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/processing_sequencing_data_in_r/rna_seq_analysis_in_r/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -331,9 +331,9 @@ for sra in *.sra
     
     <item>
       <title>RNA-seq analysis in R</title>
-      <link>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/rna_seq_in_r/rna_seq_analysis_in_r/</guid>
       <description>
 
 

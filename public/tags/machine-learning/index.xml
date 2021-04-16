@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine Learning | Mark Goldberg</title>
-    <link>/tags/machine-learning/</link>
-      <atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/machine-learning/</link>
+      <atom:link href="https://suvar.netlify.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
+      <link>https://suvar.netlify.com/tags/machine-learning/</link>
     </image>
     
     <item>
       <title>Statistical learning - topics</title>
-      <link>/post/statistics/statistical_learning_topics/</link>
+      <link>https://suvar.netlify.com/post/statistics/statistical_learning_topics/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/statistical_learning_topics/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/statistical_learning_topics/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -36,7 +36,7 @@
 &lt;h1&gt;Statistics&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Correlation&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hypothesis_testing/hypothesis_testing/&#34;&gt;Hypothesis testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/&#34;&gt;Hypothesis testing&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;variation-analysis&#34; class=&#34;section level1&#34;&gt;
@@ -45,11 +45,11 @@
 &lt;div id=&#34;unsupervised-learning&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Unsupervised Learning&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/&#34;&gt;Hierarchical Cluster Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means/&#34;&gt;K-means Cluster Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Principal Component Analysis&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/umap/umap/&#34;&gt;Uniform Manifold Approximation and Projection (UMAP)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/tsne/tsne/&#34;&gt;t-Distributed Stochastic Neighbor Embedding (tSNE)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;supervised-regression&#34; class=&#34;section level1&#34;&gt;
@@ -72,20 +72,20 @@
 &lt;div id=&#34;supervised-classification&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Supervised Classification&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/naive_bayes/naive_bayes&#34;&gt;Naïve Bayes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes&#34;&gt;Naïve Bayes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/logistic_regression/logistic_regression&#34;&gt;Logistic Regression&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Multinomial logistic regression&lt;/li&gt;
 &lt;li&gt;Ordinal logistic regression&lt;/li&gt;
 &lt;li&gt;Linear &amp;amp; Quadratic Discriminant Analysis&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/svm/svm&#34;&gt;Support Vector Machines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/svm/svm&#34;&gt;Support Vector Machines&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Random Forests and Boosting&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;estimation-of-model-parameters&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Estimation of model parameters&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/model_evaluation_metrics/model_evaluation_metrics&#34;&gt;Model evaluation metrics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/resampling_methods/resampling_methods&#34;&gt;Resampling Methods&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics&#34;&gt;Model evaluation metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/resampling_methods/resampling_methods&#34;&gt;Resampling Methods&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;time-series&#34; class=&#34;section level1&#34;&gt;
@@ -102,9 +102,9 @@
 &lt;ul&gt;
 &lt;li&gt;Neural Network for Regression&lt;/li&gt;
 &lt;li&gt;Neural Network for Classification&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/lvq/lvq&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/lvq/lvq&#34;&gt;Learning Vector Quantization&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Feedforward Deep Learning with Keras &amp;amp; Tensorflow&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://suvar.netlify.com/post/statistics/hopfield_network/hopfield_network&#34;&gt;Hopfield Neural Network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description>
@@ -112,9 +112,9 @@
     
     <item>
       <title>Compare Models And Select The Best Using The Caret R Package</title>
-      <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
+      <link>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/compare_models_caret/compare_models_caret/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -183,10 +183,10 @@ summary(results)&lt;/code&gt;&lt;/pre&gt;
 ## SVM 0.25171233 0.3670435 0.4590164 0.4500126 0.5211405 0.6457055    0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# boxplots of results
 bwplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dot plots of results
 dotplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
@@ -197,9 +197,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Gradient Boosting Machine</title>
-      <link>/post/statistics/gbm/gbm/</link>
+      <link>https://suvar.netlify.com/post/statistics/gbm/gbm/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/gbm/gbm/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/gbm/gbm/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -217,9 +217,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Learning Vector Quantization</title>
-      <link>/post/statistics/lvq/lvq/</link>
+      <link>https://suvar.netlify.com/post/statistics/lvq/lvq/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/lvq/lvq/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/lvq/lvq/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -293,9 +293,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Naive Bayes</title>
-      <link>/post/statistics/naive_bayes/naive_bayes/</link>
+      <link>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/naive_bayes/naive_bayes/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -317,9 +317,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Support Vector Machine</title>
-      <link>/post/statistics/svm/svm/</link>
+      <link>https://suvar.netlify.com/post/statistics/svm/svm/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/svm/svm/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/svm/svm/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -337,9 +337,9 @@ caret::confusionMatrix(test$Species, predict)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Model evaluation metrics</title>
-      <link>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</link>
+      <link>https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/model_evaluation_metrics/model_evaluation_metrics/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -411,72 +411,6 @@ An ROC graph depicts relative tradeoffs between benefits (true positives) and co
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hopfield Neural Network</title>
-      <link>/post/statistics/hopfield_network/hopfield_network/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hopfield_network/hopfield_network/</guid>
-      <description>
-
-
-&lt;p&gt;Here is an example of python code.&lt;/p&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
-
-# Patterns
-x1 = [1, -1, -1, -1, 1, -1, -1, -1, 1]
-x2 = [-1, -1, 1, -1, 1, -1, 1, -1, -1]
-
-L = []
-L.append(x1)
-L.append(x2)
-
-# Function to find weight from list of vectors (lists)
-def wts(l):
-    # length of the first element in input list
-    # Would be great to check that all elements have the same length
-    ln = len(l[1])
-    # Weight matrix filled with zeros
-    W = np.zeros((ln, ln))
-    # add x @ x.T for all vectors in input list
-    for i in range(len(l)):
-        L[i] = np.reshape(np.array(L[i]), (ln, 1))
-        W = W + L[i] @ L[i].T
-    # fill main diagonal with zeros
-    np.fill_diagonal(W, 0)
-    return W
-
-W = wts(L)
-
-### TEST
-# test vector
-t = (-1, -1, 1, -1, 1, -1, -1, 1, -1)
-
-def wvec(vec, W):
-    vec = np.reshape(np.array(vec), (len(vec), 1))
-    vec = W @ vec
-    vec = np.ndarray.round(np.tanh(vec))
-    return vec
-
-vec = wvec(t, W)
-
-for i in L:
-    if np.array_equal(vec, i):
-        print(&amp;quot;Pattern detected&amp;quot;, i)
-    else:
-        print(&amp;quot;Pattern not detected&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Pattern not detected
-## Pattern detected [[-1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [ 1]
-##  [-1]
-##  [-1]]&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

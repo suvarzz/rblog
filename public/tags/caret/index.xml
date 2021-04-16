@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>caret | Mark Goldberg</title>
-    <link>/tags/caret/</link>
-      <atom:link href="/tags/caret/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/caret/</link>
+      <atom:link href="https://suvar.netlify.com/tags/caret/index.xml" rel="self" type="application/rss+xml" />
     <description>caret</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>caret</title>
-      <link>/tags/caret/</link>
+      <link>https://suvar.netlify.com/tags/caret/</link>
     </image>
     
     <item>
       <title>Compare Models And Select The Best Using The Caret R Package</title>
-      <link>/post/statistics/compare_models_caret/compare_models_caret/</link>
+      <link>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/compare_models_caret/compare_models_caret/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -85,10 +85,10 @@ summary(results)&lt;/code&gt;&lt;/pre&gt;
 ## SVM 0.25171233 0.3670435 0.4590164 0.4500126 0.5211405 0.6457055    0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# boxplots of results
 bwplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dot plots of results
 dotplot(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/compare_models_caret/compare_models_caret_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliography&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliography&lt;/h2&gt;
@@ -99,9 +99,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Naive Bayes</title>
-      <link>/post/statistics/naive_bayes/naive_bayes/</link>
+      <link>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/naive_bayes/naive_bayes/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/naive_bayes/naive_bayes/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -123,9 +123,9 @@ dotplot(results)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Support Vector Machine</title>
-      <link>/post/statistics/svm/svm/</link>
+      <link>https://suvar.netlify.com/post/statistics/svm/svm/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/svm/svm/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/svm/svm/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

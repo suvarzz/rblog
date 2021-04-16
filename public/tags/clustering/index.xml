@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Clustering | Mark Goldberg</title>
-    <link>/tags/clustering/</link>
-      <atom:link href="/tags/clustering/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/clustering/</link>
+      <atom:link href="https://suvar.netlify.com/tags/clustering/index.xml" rel="self" type="application/rss+xml" />
     <description>Clustering</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Clustering</title>
-      <link>/tags/clustering/</link>
+      <link>https://suvar.netlify.com/tags/clustering/</link>
     </image>
     
     <item>
       <title>Determining the optimal number of clusters</title>
-      <link>/post/statistics/determin_number_clusters/determin_number_clusters/</link>
+      <link>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -66,16 +66,16 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Elbow method
 fviz_nbclust(df, kmeans, method = &amp;quot;wss&amp;quot;) +
     labs(subtitle = &amp;quot;Elbow method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Silhouette method
 fviz_nbclust(df, kmeans, method = &amp;quot;silhouette&amp;quot;)+
     labs(subtitle = &amp;quot;Silhouette method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Gap statistic
 set.seed(123)
 fviz_nbclust(df, kmeans, nstart = 25,  method = &amp;quot;gap_stat&amp;quot;, nboot = 50)+
   labs(subtitle = &amp;quot;Gap statistic method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;using-nbclust&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Using NbCLust&lt;/h2&gt;
@@ -84,13 +84,13 @@ res &amp;lt;- NbClust(data = df,                 # matrix or data frame
                distance = &amp;quot;euclidean&amp;quot;,    # distance
                method = &amp;quot;kmeans&amp;quot;,        # method
                min.nc = 2, max.nc = 10)   # min and max number of clusters to test&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -124,13 +124,13 @@ res &amp;lt;- NbClust(data,                    # matrix or data frame
                min.nc = 2, max.nc = 10, # min and max number of clusters to test
                method = &amp;quot;complete&amp;quot;,     # clustering method
                index = &amp;quot;alllong&amp;quot;)       # all indexes; can be selected&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -201,7 +201,7 @@ best.result %&amp;gt;%
   as.vector() %&amp;gt;%
   density(.) %&amp;gt;% 
   plot(., xlab=&amp;#39;k, klusters&amp;#39;, main=&amp;#39;Optimal number of clusters&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Es we can see the most of methods predict k=3 for clustering &lt;code&gt;iris&lt;/code&gt; data.&lt;br /&gt;
 If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
 &lt;/div&gt;
@@ -220,9 +220,9 @@ If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
     
     <item>
       <title>Differential expression analysis</title>
-      <link>/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -275,23 +275,23 @@ head(data) # First few rows&lt;/code&gt;&lt;/pre&gt;
 
 # Check the behavior of the data
 hist(data, col = &amp;quot;gray&amp;quot;, main=&amp;quot;GSE5583 - Histogram&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Log2 transformation (why?)
 data2 = log2(data)
 
 # Check the behavior of the data after log-transformation
 hist(data2, col = &amp;quot;gray&amp;quot;, main=&amp;quot;GSE5583 (log2) - Histogram&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Boxplot
 boxplot(data2, col=c(&amp;quot;darkgreen&amp;quot;, &amp;quot;darkgreen&amp;quot;, &amp;quot;darkgreen&amp;quot;,
                      &amp;quot;darkred&amp;quot;, &amp;quot;darkred&amp;quot;, &amp;quot;darkred&amp;quot;),
         main=&amp;quot;GSE5583 - boxplots&amp;quot;, las=2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Hierarchical clustering of the &amp;quot;samples&amp;quot; based on
 # the correlation coefficients of the expression values
 hc = hclust(as.dist(1-cor(data2)))
 plot(hc, main=&amp;quot;GSE5583 - Hierarchical Clustering&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-4.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#######################################
 # Differential expression (DE) analysis
 #######################################
@@ -318,14 +318,14 @@ plot(ko.mean ~ wt.mean, xlab = &amp;quot;WT&amp;quot;, ylab = &amp;quot;KO&amp;q
      main = &amp;quot;GSE5583 - Scatter&amp;quot;, xlim = c(0, limit), ylim = c(0, limit))
 # Diagonal line
 abline(0, 1, col = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-5.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compute fold-change (biological significance)
 # Difference between the means of the conditions
 fold = wt.mean - ko.mean
 
 # Histogram of the fold differences
 hist(fold, col = &amp;quot;gray&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-6.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-6.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compute statistical significance (using t-test)
 pvalue = NULL # Empty list for the p-values
 tstat = NULL # Empty list of the t test statistics
@@ -347,7 +347,7 @@ head(pvalue)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.5449730 0.3253745 0.3287830 0.1892376 0.6928410 0.7180077&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Histogram of p-values (-log10)
 hist(-log10(pvalue), col = &amp;quot;gray&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-7.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-7.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Volcano: put the biological significance (fold-change)
 # and statistical significance (p-value) in one plot
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano&amp;quot;)
@@ -357,7 +357,7 @@ pvalue_cutoff = 0.01
 abline(v = fold_cutoff, col = &amp;quot;blue&amp;quot;, lwd = 3)
 abline(v = -fold_cutoff, col = &amp;quot;red&amp;quot;, lwd = 3)
 abline(h = -log10(pvalue_cutoff), col = &amp;quot;green&amp;quot;, lwd = 3)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-8.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-8.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Screen for the genes that satisfy the filtering criteria
 
 # Fold-change filter for &amp;quot;biological&amp;quot; significance
@@ -394,7 +394,7 @@ dim(filtered)&lt;/code&gt;&lt;/pre&gt;
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano #2&amp;quot;)
 points (fold[filter_combined], -log10(pvalue[filter_combined]),
         pch = 16, col = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-9.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-9.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Highlighting up-regulated in red and down-regulated in blue
 plot(fold, -log10(pvalue), main = &amp;quot;GSE5583 - Volcano #3&amp;quot;)
 points (fold[filter_combined &amp;amp; fold &amp;lt; 0],
@@ -403,21 +403,21 @@ points (fold[filter_combined &amp;amp; fold &amp;lt; 0],
 points (fold[filter_combined &amp;amp; fold &amp;gt; 0],
         -log10(pvalue[filter_combined &amp;amp; fold &amp;gt; 0]),
         pch = 16, col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-10.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-10.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cluster the rows (genes) &amp;amp; columns (samples) by correlation
 rowv = as.dendrogram(hclust(as.dist(1-cor(t(filtered)))))
 colv = as.dendrogram(hclust(as.dist(1-cor(filtered))))
 
 # Generate a heatmap
 heatmap(filtered, Rowv=rowv, Colv=colv, cexCol=0.7)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-11.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-1-11.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gplots)
 
 # Enhanced heatmap
 heatmap.2(filtered, Rowv=rowv, Colv=colv, cexCol=0.7,
           col = rev(redblue(256)), scale = &amp;quot;row&amp;quot;,
           trace=&amp;quot;none&amp;quot;, density.info=&amp;quot;none&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/bioinformatics/differential_expression_analysis/diferential_expression_analysis_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Save the heatmap to a PDF file
 pdf (&amp;quot;GSE5583_DE_Heatmap.pdf&amp;quot;)
 heatmap.2(filtered, Rowv=rowv, Colv=colv, cexCol=0.7,
@@ -488,9 +488,9 @@ dim(cor.filtered)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>k-means</title>
-      <link>/post/statistics/k_means/k_means/</link>
+      <link>https://suvar.netlify.com/post/statistics/k_means/k_means/</link>
       <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/k_means/k_means/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/k_means/k_means/</guid>
       <description>
 
 
@@ -513,12 +513,12 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We try to predict them by &lt;em&gt;Petal.Lenght&lt;/em&gt;and &lt;em&gt;Petal.Width&lt;/em&gt; variables using k-means clustering.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot Petal.Length ~ Petal.Width data
 plot(df$Petal.Length ~ df$Petal.Width)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Find number of clusters using wss
 wss &amp;lt;- (nrow(df[, 3:4])-1)*sum(apply(df[, 3:4],2,var))
 for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df[, 3:4], i)$withinss)
 plot(1:15, wss, type=&amp;quot;b&amp;quot;, xlab=&amp;quot;Number of Clusters&amp;quot;, ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt; More than 3 clusters give no obvious advantages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Make k-means with 3 clasters
 ncl &amp;lt;- 3
 cl &amp;lt;- stats::kmeans(df[, 3:4], ncl, nstart = 20)
@@ -563,16 +563,16 @@ plot(0, xlab=&amp;#39;Petal width&amp;#39;, ylab=&amp;#39;Petal length&amp;#39;,
 for ( i in 1:ncl ) {
   points(clusters[[i]]$Petal.Length ~ clusters[[i]]$Petal.Width, col=col[i], xlim=xlim, ylim=ylim)
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/k_means/k_means_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Hierarchical cluster analysis</title>
-      <link>/post/statistics/hierarchical_cluster/hierarchical_cluser/</link>
+      <link>https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/</link>
       <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hierarchical_cluster/hierarchical_cluser/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -619,7 +619,7 @@ for (i in 2:15) wss[i] &amp;lt;- sum(kmeans(df, centers=i)$withinss)
 plot(1:15, wss, type=&amp;quot;b&amp;quot;,
      xlab=&amp;quot;Number of Clusters&amp;quot;,
      ylab=&amp;quot;Within groups sum of squares&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; This diagram shows that 4 number of clusers is optimal for this dataset.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; This diagram shows that 4 number of clusers is optimal for this dataset.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;choosing-the-best-clustering-model&#34; class=&#34;section level2&#34;&gt;
@@ -654,7 +654,7 @@ plot(hc1, hang = -1, cex = 0.6)
 
 # show 4 clusers
 rect.hclust(hc1, k=4, border=&amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# group data by clusters
 groups &amp;lt;- cutree(hc1, k=3)
 names(groups[groups == 1])&lt;/code&gt;&lt;/pre&gt;
@@ -672,7 +672,7 @@ names(hc1)&lt;/code&gt;&lt;/pre&gt;
 hc3 &amp;lt;- cluster::agnes(df, method=&amp;#39;ward&amp;#39;)
 # plot slaster
 cluster::pltree(hc3, hang = -1, cex = 0.6)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/hierarchical_cluster/hierarchical_cluser_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# split into groups
 groups &amp;lt;- cutree(as.hclust(hc3), k = 4)
 groups[groups==1]&lt;/code&gt;&lt;/pre&gt;

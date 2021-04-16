@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dimentionality reduction | Mark Goldberg</title>
-    <link>/tags/dimentionality-reduction/</link>
-      <atom:link href="/tags/dimentionality-reduction/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/dimentionality-reduction/</link>
+      <atom:link href="https://suvar.netlify.com/tags/dimentionality-reduction/index.xml" rel="self" type="application/rss+xml" />
     <description>Dimentionality reduction</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Dimentionality reduction</title>
-      <link>/tags/dimentionality-reduction/</link>
+      <link>https://suvar.netlify.com/tags/dimentionality-reduction/</link>
     </image>
     
     <item>
       <title>Uniform Manifold Approximation and Projection (UMAP)</title>
-      <link>/post/statistics/umap/umap/</link>
+      <link>https://suvar.netlify.com/post/statistics/umap/umap/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/umap/umap/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/umap/umap/</guid>
       <description>
 
 
@@ -52,7 +52,7 @@ plot(subset(mx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      ylim=c(min(mx[,2]), max(mx[,2])))
 points(subset(mx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(mx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# generate test data by adding noise to original data
 iris.wnoise = dat + matrix(rnorm(150*40, 0, 0.1), ncol=4)
 colnames(iris.wnoise) = colnames(dat)
@@ -74,7 +74,7 @@ plot(subset(pmx, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      ylim=c(min(pmx[,2]), max(pmx[,2])))
 points(subset(pmx, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(pmx, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There are two strategies for tuning: via configuration objects (1) and via additional arguments (2).&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;code&gt;umap.defaults&lt;/code&gt; - configuration object.&lt;/li&gt;
@@ -91,7 +91,7 @@ plot(subset(mx2, lbls == &amp;#39;setosa&amp;#39;), col = &amp;#39;red&amp;#39;,
      main=&amp;quot;Another UMAP visualization (different seed)&amp;quot;)
 points(subset(mx2, lbls == &amp;#39;virginica&amp;#39;), col = &amp;#39;green&amp;#39;)
 points(subset(mx2, lbls == &amp;#39;versicolor&amp;#39;), col = &amp;#39;blue&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/umap/umap_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Additional arguments &lt;code&gt;iris.umap.3 = umap(iris.data, random_state=123)&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;

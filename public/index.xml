@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mark Goldberg</title>
-    <link>/</link>
-      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/</link>
+      <atom:link href="https://suvar.netlify.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Mark Goldberg</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>Mark Goldberg</title>
-      <link>/</link>
+      <link>https://suvar.netlify.com/</link>
     </image>
     
     <item>
       <title>Posts</title>
-      <link>/post/</link>
+      <link>https://suvar.netlify.com/post/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/</guid>
+      <guid>https://suvar.netlify.com/post/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Publications</title>
-      <link>/publication/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/</guid>
+      <link>https://suvar.netlify.com/publication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://suvar.netlify.com/publication/</guid>
       <description></description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | Mark Goldberg</title>
-    <link>/categories/r/</link>
-      <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/categories/r/</link>
+      <atom:link href="https://suvar.netlify.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>R</title>
-      <link>/categories/r/</link>
+      <link>https://suvar.netlify.com/categories/r/</link>
     </image>
     
     <item>
       <title>Dplyr - reference</title>
-      <link>/post/r/dplyr_tutorial/dplyr_tutorial/</link>
+      <link>https://suvar.netlify.com/post/r/dplyr_tutorial/dplyr_tutorial/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/r/dplyr_tutorial/dplyr_tutorial/</guid>
+      <guid>https://suvar.netlify.com/post/r/dplyr_tutorial/dplyr_tutorial/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -481,9 +481,9 @@ slice(df # select rows by position&lt;/p&gt;
     
     <item>
       <title>Models - reference</title>
-      <link>/post/statistics/model_reference/models_reference/</link>
+      <link>https://suvar.netlify.com/post/statistics/model_reference/models_reference/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/model_reference/models_reference/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/model_reference/models_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -544,9 +544,9 @@ anova(m1, m2)      # compair two models&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>R graphic - reference</title>
-      <link>/post/r/r_graphic/r_graphic/</link>
+      <link>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</link>
       <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_graphic/r_graphic/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -602,9 +602,9 @@ qplot(mpg, data=mtcars,
     
     <item>
       <title>R tidyverse package - reference</title>
-      <link>/post/r/tidyverse_reference/tidyverse_reference/</link>
+      <link>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/tidyverse_reference/tidyverse_reference/</guid>
+      <guid>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -863,9 +863,9 @@ list(1:3, 1:3, 1:3) %&amp;gt;% pmap_dbl(~ .1 + .2 + .3) # 0.6 0.6 0.6&lt;/code&g
     
     <item>
       <title>ANOVA</title>
-      <link>/post/statistics/anova/anova/</link>
+      <link>https://suvar.netlify.com/post/statistics/anova/anova/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/anova/anova/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/anova/anova/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -969,9 +969,9 @@ res&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Determining the optimal number of clusters</title>
-      <link>/post/statistics/determin_number_clusters/determin_number_clusters/</link>
+      <link>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1021,16 +1021,16 @@ head(df)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Elbow method
 fviz_nbclust(df, kmeans, method = &amp;quot;wss&amp;quot;) +
     labs(subtitle = &amp;quot;Elbow method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Silhouette method
 fviz_nbclust(df, kmeans, method = &amp;quot;silhouette&amp;quot;)+
     labs(subtitle = &amp;quot;Silhouette method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Gap statistic
 set.seed(123)
 fviz_nbclust(df, kmeans, nstart = 25,  method = &amp;quot;gap_stat&amp;quot;, nboot = 50)+
   labs(subtitle = &amp;quot;Gap statistic method&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-1-3.png&#34; width=&#34;672&#34; /&gt; As we can see from these examples, the &lt;strong&gt;Elbow method&lt;/strong&gt; predicts 2-3 clusters, &lt;strong&gt;Silhouette method&lt;/strong&gt; predicts 2 and the &lt;strong&gt;Gap statistic method&lt;/strong&gt; predicts 2 clusters. As we know, &lt;code&gt;iris&lt;/code&gt; data contains 3 clusters of different &lt;code&gt;Species&lt;/code&gt; and two of them is generally dificult to distinguish. This situation we can see from the shown diagrams. Unfortunately there is no method to exactly predict number of clusters. As researchers we should try to find if number of clusters have natural sense.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;using-nbclust&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Using NbCLust&lt;/h2&gt;
@@ -1039,13 +1039,13 @@ res &amp;lt;- NbClust(data = df,                 # matrix or data frame
                distance = &amp;quot;euclidean&amp;quot;,    # distance
                method = &amp;quot;kmeans&amp;quot;,        # method
                min.nc = 2, max.nc = 10)   # min and max number of clusters to test&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -1079,13 +1079,13 @@ res &amp;lt;- NbClust(data,                    # matrix or data frame
                min.nc = 2, max.nc = 10, # min and max number of clusters to test
                method = &amp;quot;complete&amp;quot;,     # clustering method
                index = &amp;quot;alllong&amp;quot;)       # all indexes; can be selected&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The Hubert index is a graphical method of determining the number of clusters.
 ##                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
 ##                 significant increase of the value of the measure i.e the significant peak in Hubert
 ##                 index second differences plot. 
 ## &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## *** : The D index is a graphical method of determining the number of clusters. 
 ##                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
 ##                 second differences plot) that corresponds to a significant increase of the value of
@@ -1156,7 +1156,7 @@ best.result %&amp;gt;%
   as.vector() %&amp;gt;%
   density(.) %&amp;gt;% 
   plot(., xlab=&amp;#39;k, klusters&amp;#39;, main=&amp;#39;Optimal number of clusters&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/determin_number_clusters/determin_number_clusters_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Es we can see the most of methods predict k=3 for clustering &lt;code&gt;iris&lt;/code&gt; data.&lt;br /&gt;
 If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
 &lt;/div&gt;
@@ -1175,9 +1175,9 @@ If you try k-means method, you will get optimal between 2 and 3.&lt;/p&gt;
     
     <item>
       <title>How to split data into train and test subsets?</title>
-      <link>/post/statistics/split_data_ways/split_data_ways/</link>
+      <link>https://suvar.netlify.com/post/statistics/split_data_ways/split_data_ways/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/split_data_ways/split_data_ways/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/split_data_ways/split_data_ways/</guid>
       <description>
 
 
@@ -1229,9 +1229,9 @@ test  &amp;lt;- dplyr::anti_join(iris, train, by = &amp;#39;id&amp;#39;)&lt;/cod
     
     <item>
       <title>Hypothesis testing</title>
-      <link>/post/statistics/hypothesis_testing/hypothesis_testing/</link>
+      <link>https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/</link>
       <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/hypothesis_testing/hypothesis_testing/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1540,9 +1540,9 @@ FDR: 10%&lt;/p&gt;
     
     <item>
       <title>Simple Markov process</title>
-      <link>/post/statistics/markov_process/simple_markov_process/</link>
+      <link>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/markov_process/simple_markov_process/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/markov_process/simple_markov_process/</guid>
       <description>
 
 
@@ -1642,9 +1642,9 @@ sm&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Spline model</title>
-      <link>/post/statistics/splines/splines/</link>
+      <link>https://suvar.netlify.com/post/statistics/splines/splines/</link>
       <pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/statistics/splines/splines/</guid>
+      <guid>https://suvar.netlify.com/post/statistics/splines/splines/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1726,7 +1726,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;),  
        lty = c(0, 0, 2), lwd = c(1, 1, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-a-model-using-splines&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build a model using splines&lt;/h2&gt;
@@ -1800,7 +1800,7 @@ points(x = df.my.MSE.test, y = my.MSE.test,
        pch = 15, col = &amp;#39;blue&amp;#39;)
 mtext(df.my.MSE.test, 
       side = 1, line = -1, at = df.my.MSE.test, col = &amp;#39;blue&amp;#39;, cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;build-optimal-model-and-plot-for-the-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Build optimal model and plot for the model&lt;/h2&gt;
@@ -1834,7 +1834,7 @@ legend(&amp;#39;topleft&amp;#39;, legend = c(&amp;#39;train&amp;#39;, &amp;#39;t
        pch = c(16, 16, NA, NA), 
        col = c(grey(0.2), &amp;#39;red&amp;#39;, &amp;#39;black&amp;#39;, &amp;#39;blue&amp;#39;),  
        lty = c(0, 0, 2, 1), lwd = c(1, 1, 2, 2), cex = 1.2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://suvar.netlify.com/post/statistics/splines/splines_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bibliograpy&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bibliograpy&lt;/h2&gt;

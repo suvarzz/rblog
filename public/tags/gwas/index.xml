@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GWAS | Mark Goldberg</title>
-    <link>/tags/gwas/</link>
-      <atom:link href="/tags/gwas/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/gwas/</link>
+      <atom:link href="https://suvar.netlify.com/tags/gwas/index.xml" rel="self" type="application/rss+xml" />
     <description>GWAS</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>GWAS</title>
-      <link>/tags/gwas/</link>
+      <link>https://suvar.netlify.com/tags/gwas/</link>
     </image>
     
     <item>
       <title>R tips and coding tricks</title>
-      <link>/post/r/r_tips_tricks/r_tips_tricks/</link>
+      <link>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_tips_tricks/r_tips_tricks/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_tips_tricks/r_tips_tricks/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -48,9 +48,9 @@ df[sapply(df,is.numeric)]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Genome Wide Associated Studies (GWAS)</title>
-      <link>/post/bioinformatics/gwas/gwas/</link>
+      <link>https://suvar.netlify.com/post/bioinformatics/gwas/gwas/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/bioinformatics/gwas/gwas/</guid>
+      <guid>https://suvar.netlify.com/post/bioinformatics/gwas/gwas/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -130,9 +130,9 @@ plot(myHapMapres, whole=TRUE)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Genome-Wide Association Studies (GWAS)</title>
-      <link>/post/biology/gwas/gwas/</link>
+      <link>https://suvar.netlify.com/post/biology/gwas/gwas/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/biology/gwas/gwas/</guid>
+      <guid>https://suvar.netlify.com/post/biology/gwas/gwas/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

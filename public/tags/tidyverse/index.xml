@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tidyverse | Mark Goldberg</title>
-    <link>/tags/tidyverse/</link>
-      <atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://suvar.netlify.com/tags/tidyverse/</link>
+      <atom:link href="https://suvar.netlify.com/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     <description>tidyverse</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Sat, 17 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/logo.png</url>
+      <url>https://suvar.netlify.com/img/logo.png</url>
       <title>tidyverse</title>
-      <link>/tags/tidyverse/</link>
+      <link>https://suvar.netlify.com/tags/tidyverse/</link>
     </image>
     
     <item>
       <title>R graphic - reference</title>
-      <link>/post/r/r_graphic/r_graphic/</link>
+      <link>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</link>
       <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/r_graphic/r_graphic/</guid>
+      <guid>https://suvar.netlify.com/post/r/r_graphic/r_graphic/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -72,9 +72,9 @@ qplot(mpg, data=mtcars,
     
     <item>
       <title>R tidyverse package - reference</title>
-      <link>/post/r/tidyverse_reference/tidyverse_reference/</link>
+      <link>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</link>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/r/tidyverse_reference/tidyverse_reference/</guid>
+      <guid>https://suvar.netlify.com/post/r/tidyverse_reference/tidyverse_reference/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
