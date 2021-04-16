@@ -47,14 +47,14 @@
   weight = 90
 
 [[main]]
-  name = "Rbook"
-  url = "https://suvarzz.github.io/rbook/"
+  name = "Statistics"
+  url = "https://suvarzz.github.io/statbook"
   parent = "books"
   weight = 1
 
 [[main]]
-  name = "Statistics"
-  url = "https://suvarzz.github.io/statbook"
+  name = "Rbook"
+  url = "https://suvarzz.github.io/rbook/"
   parent = "books"
   weight = 2
 
