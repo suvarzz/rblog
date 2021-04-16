@@ -54,7 +54,7 @@
 
 [[main]]
   name = "Statistics"
-  url = "https://suvarzz.github.io/rbook/statistics"
+  url = "https://suvarzz.github.io/statbook"
   parent = "books"
   weight = 2
 
