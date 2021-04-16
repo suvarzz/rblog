@@ -59,7 +59,7 @@
   weight = 2
 
 [[main]]
-  name = "Bioinformatics"
+  name = "Bioinfbook"
   url = "https://suvarzz.github.io/bioinfbook"
   parent = "books"
   weight = 3

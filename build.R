@@ -6,9 +6,9 @@
 blogdown::install_hugo()
 blogdown::update_hugo()
 
-setwd("/mnt/data1/gits/web/rblog")
+setwd("/mnt/data1/gits/github/rblog")
 
-blogdown::serve_site()
+#blogdown::serve_site()
 #blogdown::hugo_build()
 blogdown::build_site()
 system('hugo server -D')
